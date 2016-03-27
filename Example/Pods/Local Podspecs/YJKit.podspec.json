@@ -1,0 +1,25 @@
+{
+  "name": "YJKit",
+  "version": "0.1.0",
+  "summary": "A short description of YJKit.",
+  "description": "",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/YJKit",
+  "license": "MIT",
+  "authors": {
+    "huang-kun": "jack-huang-developer@foxmail.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/YJKit.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "YJKit": [
+      "Pod/Assets/*.png"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+PODS:
+  - YJKit (0.1.0)
+
+DEPENDENCIES:
+  - YJKit (from `../`)
+
+EXTERNAL SOURCES:
+  YJKit:
+    :path: ../
+
+SPEC CHECKSUMS:
+  YJKit: a52de9817cdf2a44fe61586c2452a2b2eff7b260
+
+COCOAPODS: 0.39.0
