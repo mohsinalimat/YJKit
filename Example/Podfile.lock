@@ -1,5 +1,5 @@
 PODS:
-  - YJKit (0.1.0)
+  - YJKit (0.0.1)
 
 DEPENDENCIES:
   - YJKit (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  YJKit: a52de9817cdf2a44fe61586c2452a2b2eff7b260
+  YJKit: a3b029ab95a41159ca4bfab5a6019ae58aa2e544
 
 COCOAPODS: 0.39.0
