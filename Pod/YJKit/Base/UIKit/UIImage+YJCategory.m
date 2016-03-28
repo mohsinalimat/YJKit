@@ -12,11 +12,11 @@
 
 @implementation UIImage (YJCategory)
 
-+ (nonnull UIImage *)imageNamed:(NSString *)name inBundle:(nullable NSBundle *)bundle {
-    return [self imageNamed:name orientation:UIImageOrientationUp inBundle:bundle];
++ (nonnull UIImage *)imageNamed:(NSString *)name scaledInBundle:(nullable NSBundle *)bundle {
+    return [self imageNamed:name orientation:UIImageOrientationUp scaledInBundle:bundle];
 }
 
-+ (nonnull UIImage *)imageNamed:(NSString *)name orientation:(UIImageOrientation)orientation inBundle:(nullable NSBundle *)bundle {
++ (nonnull UIImage *)imageNamed:(NSString *)name orientation:(UIImageOrientation)orientation scaledInBundle:(nullable NSBundle *)bundle {
     if (!name.length) return nil;
     if (!bundle) bundle = [NSBundle mainBundle];
     NSString *key = _yj_cachedKeyForUIImageName(name, orientation);

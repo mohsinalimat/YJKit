@@ -59,6 +59,8 @@ static NSString *_yj_pathForScaledResouceForNSBundle(id object, NSString *name, 
     BOOL objectIsClass = object_isClass(object);
     if (objectIsClass && !dir.length) return nil;
     if (!name.length) return [object pathForResource:name ofType:ext inDirectory:dir];
+    if ([name containsString:@"."]) return [object pathForResource:name ofType:nil inDirectory:dir];
+    if ([name containsString:@"@"]) return [object pathForResource:name ofType:ext inDirectory:dir];
     NSArray *preferredScales = objectIsClass ? [object preferredScales] : [[object class] preferredScales];
     for (int i = 0; i < preferredScales.count; i++) {
         NSString *scaledName = [NSString stringWithFormat:@"%@@%@x", name, preferredScales[i]];
