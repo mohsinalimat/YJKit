@@ -6,7 +6,7 @@
 //  Copyright © 2016年 Jack Huang. All rights reserved.
 //
 
-@import UIKit;
+#import <UIKit/UIImage.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

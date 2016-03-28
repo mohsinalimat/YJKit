@@ -6,7 +6,6 @@
 //  Copyright © 2016年 Jack Huang. All rights reserved.
 //
 
-@import UIKit;
 #import <objc/runtime.h>
 #import "NSBundle+YJCategory.h"
 

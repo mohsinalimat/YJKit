@@ -7,7 +7,6 @@
 //
 
 #import "YJViewController.h"
-#import "YJGeometryViewController.h"
 
 @interface YJViewController ()
 
@@ -19,10 +18,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [[YJGeometryViewController alloc] init];
-    [self.window makeKeyAndVisible];
+    
 }
 
 - (void)didReceiveMemoryWarning

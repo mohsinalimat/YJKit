@@ -6,8 +6,8 @@
 //  Copyright © 2016年 Jack Huang. All rights reserved.
 //
 
-@import Foundation;
-@import UIKit;
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #if __has_include(<YJKit/YJKit.h>)
 #import <YJKit/YJMacros.h>

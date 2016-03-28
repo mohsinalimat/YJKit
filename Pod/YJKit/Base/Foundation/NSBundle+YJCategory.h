@@ -6,7 +6,7 @@
 //  Copyright © 2016年 Jack Huang. All rights reserved.
 //
 
-@import Foundation;
+#import <Foundation/NSBundle.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
