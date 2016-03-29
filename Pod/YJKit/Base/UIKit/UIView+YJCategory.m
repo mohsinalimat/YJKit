@@ -7,6 +7,7 @@
 //
 
 #import "UIView+YJCategory.h"
+#import "UIScreen+YJCategory.h"
 
 @implementation UIView (YJCategory)
 
@@ -62,6 +63,38 @@
     self.frame = frame;
 }
 
+- (void)setTopInPixel:(CGFloat)topInPixel {
+    self.top = topInPixel / kYJScreenScale;
+}
+
+- (void)setLeftInPixel:(CGFloat)leftInPixel {
+    self.left = leftInPixel / kYJScreenScale;
+}
+
+- (void)setBottomInPixel:(CGFloat)bottomInPixel {
+    self.bottom = bottomInPixel / kYJScreenScale;
+}
+
+- (void)setRightInPixel:(CGFloat)rightInPixel {
+    self.right = rightInPixel / kYJScreenScale;
+}
+
+- (void)setCenterXInPixel:(CGFloat)centerXInPixel {
+    self.centerX = centerXInPixel / kYJScreenScale;
+}
+
+- (void)setCenterYInPixel:(CGFloat)centerYInPixel {
+    self.centerY = centerYInPixel / kYJScreenScale;
+}
+
+- (void)setOriginInPixel:(CGPoint)originInPixel {
+    self.origin = (CGPoint){ originInPixel.x / kYJScreenScale, originInPixel.y / kYJScreenScale };
+}
+
+- (void)setSizeInPixel:(CGSize)sizeInPixel {
+    self.size = (CGSize){ sizeInPixel.width / kYJScreenScale, sizeInPixel.height / kYJScreenScale };
+}
+
 #pragma mark * Getter
 
 - (CGFloat)top { return self.frame.origin.y; }
@@ -72,5 +105,14 @@
 - (CGFloat)centerY { return self.center.y; }
 - (CGPoint)origin { return self.frame.origin; }
 - (CGSize)size { return self.frame.size; }
+
+- (CGFloat)topInPixel { return self.top * kYJScreenScale; }
+- (CGFloat)leftInPixel { return self.left * kYJScreenScale; }
+- (CGFloat)bottomInPixel { return self.bottom * kYJScreenScale; }
+- (CGFloat)rightInPixel { return self.right * kYJScreenScale; }
+- (CGFloat)centerXInPixel { return self.centerX * kYJScreenScale; }
+- (CGFloat)centerYInPixel { return self.centerY * kYJScreenScale; }
+- (CGPoint)originInPixel { return (CGPoint){ self.origin.x * kYJScreenScale, self.origin.y * kYJScreenScale }; }
+- (CGSize)sizeInPixel { return (CGSize){ self.size.width * kYJScreenScale, self.size.height * kYJScreenScale }; }
 
 @end

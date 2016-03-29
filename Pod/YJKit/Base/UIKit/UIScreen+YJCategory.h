@@ -47,10 +47,10 @@ CGFloat YJScreenScale();
 /// The pixel size of the screen.
 @property (nonatomic, readonly) CGSize sizeInPixel;
 
-/// The value defines the display resolution of the device screen.
+/// The display resolution of the device screen.
 @property (nonatomic, readonly) UIScreenDisplayResolution displayResolution;
 
-/// The value defines the display aspect ratio of the device screen.
+/// The display aspect ratio of the device screen.
 @property (nonatomic, readonly) UIScreenDisplayAspectRatio displayAspectRatio;
 
 @end

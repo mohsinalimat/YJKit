@@ -19,4 +19,13 @@
 @property (nonatomic) CGPoint origin;   // self.frame.origin
 @property (nonatomic) CGSize size;      // self.frame.size
 
+@property (nonatomic) CGFloat topInPixel;
+@property (nonatomic) CGFloat leftInPixel;
+@property (nonatomic) CGFloat bottomInPixel;
+@property (nonatomic) CGFloat rightInPixel;
+@property (nonatomic) CGFloat centerXInPixel;
+@property (nonatomic) CGFloat centerYInPixel;
+@property (nonatomic) CGPoint originInPixel;
+@property (nonatomic) CGSize sizeInPixel;
+
 @end

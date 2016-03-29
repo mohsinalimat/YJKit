@@ -56,31 +56,31 @@ typedef enum {
  */
 typedef unsigned int CGRectPositionOptions;
 
-/// Retuns a rect which has the same top edge position as "sameWithRect" parameter.
+/// Returns a rect which has the same top edge position as "sameWithRect" parameter.
 CG_INLINE CGRect CGRectSetEqualTopToRect(CGRect rect, CGRect sameWithRect) {
     rect.origin.y = sameWithRect.origin.y;
     return rect;
 }
 
-/// Retuns a rect which has the same left edge position as "sameWithRect" parameter.
+/// Returns a rect which has the same left edge position as "sameWithRect" parameter.
 CG_INLINE CGRect CGRectSetEqualLeftToRect(CGRect rect, CGRect sameWithRect) {
     rect.origin.x = sameWithRect.origin.x;
     return rect;
 }
 
-/// Retuns a rect which has the same bottom edge position as "sameWithRect" parameter.
+/// Returns a rect which has the same bottom edge position as "sameWithRect" parameter.
 CG_INLINE CGRect CGRectSetEqualBottomToRect(CGRect rect, CGRect sameWithRect) {
     rect.origin.y = sameWithRect.origin.y + sameWithRect.size.height - rect.size.height;
     return rect;
 }
 
-/// Retuns a rect which has the same right edge position as "sameWithRect" parameter.
+/// Returns a rect which has the same right edge position as "sameWithRect" parameter.
 CG_INLINE CGRect CGRectSetEqualRightToRect(CGRect rect, CGRect sameWithRect) {
     rect.origin.x = sameWithRect.origin.x + sameWithRect.size.width - rect.size.width;
     return rect;
 }
 
-/// Retuns a rect which has the same center position as "sameWithRect" parameter.
+/// Returns a rect which has the same center position as "sameWithRect" parameter.
 CG_INLINE CGRect CGRectSetEqualCenterToRect(CGRect rect, CGRect sameWithRect) {
     rect.origin.x = sameWithRect.origin.x + sameWithRect.size.width / 2 - rect.size.width / 2;
     rect.origin.y = sameWithRect.origin.y + sameWithRect.size.height / 2 - rect.size.height / 2;
@@ -94,7 +94,7 @@ CG_INLINE CGRect CGRectSetEqualCenterToRect(CGRect rect, CGRect sameWithRect) {
  *  @param inSize        The target size for originalSize to fit or fill into.
  *  @param scaleRule     The option for scaling. Passing 0 will not trigger any resizing effect.
  *
- *  @return Retuns a new size that fits or fills in the target size.
+ *  @return Returns a new size that fits or fills in the target size.
  */
 CGSize CGSizeScaleToSize(CGSize originalSize, CGSize inSize, CGSizeScaleRule scaleRule);
 
