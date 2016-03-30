@@ -6,7 +6,6 @@
 //  Copyright © 2016年 Jack Huang. All rights reserved.
 //
 
-#import <objc/runtime.h>
 #import "NSBundle+YJCategory.h"
 
 @implementation NSBundle (YJCategory)
@@ -56,7 +55,10 @@
 
 static NSString *_yj_pathForScaledResouceForNSBundle(id object, NSString *name, NSString *ext, NSString *dir) {
     NSString *path = nil;
-    BOOL objectIsClass = object_isClass(object);
+    BOOL objectIsClass;
+    if (object == [NSBundle class]) objectIsClass = YES;
+    else if ([object class] == [NSBundle class]) objectIsClass = NO;
+    else return nil;
     if (objectIsClass && !dir.length) return nil;
     if (!name.length) return [object pathForResource:name ofType:ext inDirectory:dir];
     if ([name containsString:@"."]) return [object pathForResource:name ofType:nil inDirectory:dir];
