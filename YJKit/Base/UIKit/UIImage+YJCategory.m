@@ -47,11 +47,16 @@ static NSString *_yj_cachedKeyForUIImageName(NSString *name, UIImageOrientation 
 #pragma mark - resizing
 
 - (UIImage *)resizedImageForSize:(CGSize)size {
-    UIGraphicsBeginImageContextWithOptions(size, YES, self.scale);
+    UIGraphicsBeginImageContextWithOptions(size, NO, self.scale);
     [self drawInRect:(CGRect){CGPointZero, size}];
     UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return resizedImage;
+}
+
+- (UIImage *)resizedImageByMultiplier:(CGFloat)multiplier {
+    CGSize newSize = (CGSize){self.size.width * multiplier, self.size.height * multiplier};
+    return [self resizedImageForSize:newSize];
 }
 
 - (UIImage *)resizedImageForWidth:(CGFloat)width {

@@ -8,6 +8,7 @@
 
 #import "YJImageViewController.h"
 #import "UIImageView+YJCategory.h"
+#import "UIImage+YJCategory.h"
 
 @interface YJImageViewController ()
 
@@ -29,7 +30,7 @@
 
 - (NSUInteger)randomYJContentMode {
     NSUInteger count = [self yjContentModes].count;
-    NSUInteger index = arc4random_uniform(count);
+    NSUInteger index = arc4random_uniform((u_int32_t)count);
     return [[self yjContentModes][index] unsignedIntegerValue];
 }
 

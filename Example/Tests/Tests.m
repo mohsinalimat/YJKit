@@ -65,5 +65,8 @@
     XCTAssert(d==30, @"");
 }
 
+- (void)testYJImage {
+}
+
 @end
 
