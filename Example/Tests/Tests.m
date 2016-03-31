@@ -65,7 +65,11 @@
     XCTAssert(d==30, @"");
 }
 
-- (void)testYJImage {
+- (void)testRGBColor {
+    UIColor *whiteColor = RGBColor(0xffffff, 1);
+    UIColor *blackColor = [UIColor colorWithHex:0x0 alpha:1.0];
+    XCTAssert([whiteColor isEqualToRGBColor:[UIColor whiteColor]]);
+    XCTAssert([blackColor isEqualToRGBColor:[UIColor blackColor]]);
 }
 
 @end
