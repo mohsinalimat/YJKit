@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#ifndef RGBColor
 #define RGBColor(hexValue, alphaValue) [UIColor colorWithHex:hexValue alpha:alphaValue];
+#endif
 
 @interface UIColor (YJCategory)
 
