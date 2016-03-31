@@ -9,6 +9,8 @@
 #ifndef YJMacros_h
 #define YJMacros_h
 
+#pragma mark - weakify & strongify
+
 #define _weak_cast(x) x##_weak_
 
 #ifndef weakify
@@ -29,6 +31,16 @@
             #define strongify(object) autoreleasepool {} __strong __typeof__(_weak_cast(object)) object = _weak_cast(object);
         #endif
     #endif
+#endif
+
+#pragma mark - Radians & Degrees
+
+#ifndef RadiansInDegrees
+    #define RadiansInDegrees(degrees) (degrees) * M_PI / 180
+#endif
+
+#ifndef DegreesInRadians
+    #define DegreesInRadians(radians) (radians) * 180 / M_PI
 #endif
 
 #endif /* YJMacros_h */

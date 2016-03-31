@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		063F9C9DB9A791780C8C00CA /* Pods_YJKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E1997338DB78A2D33924E0E /* Pods_YJKit_Example.framework */; };
+		3204F0BE1CACA82E006282DF /* YJImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0BD1CACA82E006282DF /* YJImageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		3204F0C01CACA98D006282DF /* Octocat.png in Resources */ = {isa = PBXBuildFile; fileRef = 3204F0BF1CACA98D006282DF /* Octocat.png */; settings = {ASSET_TAGS = (); }; };
 		320A97EF1CA9493800485B9A /* AFTCameraUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 320A97EE1CA9493800485B9A /* AFTCameraUI.bundle */; settings = {ASSET_TAGS = (); }; };
+		324E98BE1CABC75F00CFB8D3 /* YJGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 324E98BD1CABC75F00CFB8D3 /* YJGridViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3268A1D41CA83F5300B71E50 /* YJGeometryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3268A1D31CA83F5300B71E50 /* YJGeometryViewController.m */; settings = {ASSET_TAGS = (); }; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -37,7 +40,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3204F0BC1CACA82E006282DF /* YJImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJImageViewController.h; sourceTree = "<group>"; };
+		3204F0BD1CACA82E006282DF /* YJImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJImageViewController.m; sourceTree = "<group>"; };
+		3204F0BF1CACA98D006282DF /* Octocat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Octocat.png; sourceTree = "<group>"; };
 		320A97EE1CA9493800485B9A /* AFTCameraUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AFTCameraUI.bundle; sourceTree = "<group>"; };
+		324E98BC1CABC75F00CFB8D3 /* YJGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJGridViewController.h; sourceTree = "<group>"; };
+		324E98BD1CABC75F00CFB8D3 /* YJGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJGridViewController.m; sourceTree = "<group>"; };
 		3268A1D21CA83F5300B71E50 /* YJGeometryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJGeometryViewController.h; sourceTree = "<group>"; };
 		3268A1D31CA83F5300B71E50 /* YJGeometryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJGeometryViewController.m; sourceTree = "<group>"; };
 		4BC9A54197A7444256C8F7C3 /* Pods-YJKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YJKit_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YJKit_Example/Pods-YJKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,8 +145,13 @@
 				6003F59D195388D20070C39A /* YJAppDelegate.m */,
 				6003F5A5195388D20070C39A /* YJViewController.h */,
 				6003F5A6195388D20070C39A /* YJViewController.m */,
+				324E98BC1CABC75F00CFB8D3 /* YJGridViewController.h */,
+				324E98BD1CABC75F00CFB8D3 /* YJGridViewController.m */,
+				3204F0BC1CACA82E006282DF /* YJImageViewController.h */,
+				3204F0BD1CACA82E006282DF /* YJImageViewController.m */,
 				3268A1D21CA83F5300B71E50 /* YJGeometryViewController.h */,
 				3268A1D31CA83F5300B71E50 /* YJGeometryViewController.m */,
+				3204F0BF1CACA98D006282DF /* Octocat.png */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				320A97EE1CA9493800485B9A /* AFTCameraUI.bundle */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -284,6 +297,7 @@
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				320A97EF1CA9493800485B9A /* AFTCameraUI.bundle in Resources */,
+				3204F0C01CACA98D006282DF /* Octocat.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +411,8 @@
 			files = (
 				6003F59E195388D20070C39A /* YJAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* YJViewController.m in Sources */,
+				324E98BE1CABC75F00CFB8D3 /* YJGridViewController.m in Sources */,
+				3204F0BE1CACA82E006282DF /* YJImageViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				3268A1D41CA83F5300B71E50 /* YJGeometryViewController.m in Sources */,
 			);

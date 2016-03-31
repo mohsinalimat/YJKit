@@ -36,6 +36,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (nonnull UIImage *)imageNamed:(NSString *)name orientation:(UIImageOrientation)orientation scaledInBundle:(nullable NSBundle *)bundle;
 
+
+
+- (UIImage *)resizedImageForWidth:(CGFloat)width;
+- (UIImage *)resizedImageForHeight:(CGFloat)height;
+
+- (UIImage *)resizedImageForWidthInPixel:(CGFloat)widthInPixel;
+- (UIImage *)resizedImageForHeightInPixel:(CGFloat)heightInPixel;
+
 @end
 
 NS_ASSUME_NONNULL_END

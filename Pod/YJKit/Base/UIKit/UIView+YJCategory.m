@@ -115,4 +115,54 @@
 - (CGPoint)originInPixel { return (CGPoint){ self.origin.x * kYJScreenScale, self.origin.y * kYJScreenScale }; }
 - (CGSize)sizeInPixel { return (CGSize){ self.size.width * kYJScreenScale, self.size.height * kYJScreenScale }; }
 
+#pragma mark - Springs & Struts
+
+CGFloat YJGridLengthInContainerLength(CGFloat containerLength, NSUInteger gridCount, CGFloat padding) {
+    return containerLength / gridCount - padding * (gridCount + 1) / gridCount;
+}
+
+CGFloat YJGridWidthInContainerWidth(CGFloat containerWidth, NSUInteger gridCount, CGFloat padding) {
+    return YJGridLengthInContainerLength(containerWidth, gridCount, padding);
+}
+
+CGFloat YJGridHeightInContainerHeight(CGFloat containerHeight, NSUInteger gridCount, CGFloat padding) {
+    return YJGridLengthInContainerLength(containerHeight, gridCount, padding);
+}
+
+CGFloat YJGridOffsetAtIndex(NSUInteger index, CGFloat gridLength, CGFloat padding) {
+    return padding + index * (gridLength + padding);
+}
+
+CGFloat YJGridOffsetXAtIndex(NSUInteger index, CGFloat gridWidth, CGFloat padding) {
+    return YJGridOffsetAtIndex(index, gridWidth, padding);
+}
+
+CGFloat YJGridOffsetYAtIndex(NSUInteger index, CGFloat gridHeight, CGFloat padding) {
+    return YJGridOffsetAtIndex(index, gridHeight, padding);
+}
+
+NSUInteger YJGridCountInContainerLength(CGFloat containerLength, CGFloat gridLength, CGFloat padding) {
+    return (containerLength + padding) / (gridLength + padding);
+}
+
+NSUInteger YJGridCountInContainerWidth(CGFloat containerWidth, CGFloat gridWidth, CGFloat padding) {
+    return YJGridCountInContainerLength(containerWidth, gridWidth, padding);
+}
+
+NSUInteger YJGridCountInContainerHeight(CGFloat containerHeight, CGFloat gridHeight, CGFloat padding) {
+    return YJGridCountInContainerLength(containerHeight, gridHeight, padding);
+}
+
+CGFloat YJGridPaddingInContainerLength(CGFloat containerLength, CGFloat gridLength, NSUInteger gridCount) {
+    return (containerLength - gridLength * gridCount) / (gridCount + 1);
+}
+
+CGFloat YJGridPaddingInContainerWidth(CGFloat containerWidth, CGFloat gridWidth, NSUInteger gridCount) {
+    return YJGridPaddingInContainerLength(containerWidth, gridWidth, gridCount);
+}
+
+CGFloat YJGridPaddingInContainerHeight(CGFloat containerHeight, CGFloat gridHeight, NSUInteger gridCount) {
+    return YJGridPaddingInContainerLength(containerHeight, gridHeight, gridCount);
+}
+
 @end

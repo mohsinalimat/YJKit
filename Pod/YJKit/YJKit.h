@@ -17,6 +17,7 @@
 #import <YJKit/UIImage+YJCategory.h>
 #import <YJKit/UIDevice+YJCategory.h>
 #import <YJKit/UIScreen+YJCategory.h>
+#import <YJKit/UIImageView+YJCategory.h>
 #import <YJKit/CGGeometry_YJExtension.h>
 #else
 #import "YJMacros.h"
@@ -26,5 +27,6 @@
 #import "UIImage+YJCategory.h"
 #import "UIDevice+YJCategory.h"
 #import "UIScreen+YJCategory.h"
+#import "UIImageView+YJCategory.h"
 #import "CGGeometry_YJExtension.h"
 #endif

@@ -8,6 +8,8 @@
 
 #import "YJAppDelegate.h"
 #import "YJGeometryViewController.h"
+#import "YJGridViewController.h"
+#import "YJImageViewController.h"
 
 @implementation YJAppDelegate
 
@@ -16,7 +18,7 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [[YJGeometryViewController alloc] init];
+    self.window.rootViewController = [[YJImageViewController alloc] init];
     [self.window makeKeyAndVisible];
     return YES;
 }

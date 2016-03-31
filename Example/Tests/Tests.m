@@ -58,5 +58,12 @@
     XCTAssert(image3 != nil, @"");
 }
 
+- (void)testYJMacros {
+    CGFloat r = RadiansInDegrees(30);
+    XCTAssert(sinf(r)==0.5, @"");
+    CGFloat d = DegreesInRadians(r);
+    XCTAssert(d==30, @"");
+}
+
 @end
 

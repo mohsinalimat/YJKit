@@ -13,6 +13,8 @@
 		127C735FF7A5C5D1002D40575B3B1E8E /* Pods-YJKit_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AD98301172672F5E4EB6F3BDD269E6F5 /* Pods-YJKit_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C9F5B1C6D1F240C1DEBDA79E474A52B /* UIImage+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7DAC436617C982D15FF608FEEE375A /* UIImage+YJCategory.m */; };
 		2250554299D9250D385FC269639B2AC8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D1723945F41EAE25D1EF7ED04C7BD0 /* UIKit.framework */; };
+		3204F0D11CACB4A6006282DF /* UIImageView+YJCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 3204F0CF1CACB4A6006282DF /* UIImageView+YJCategory.h */; settings = {ASSET_TAGS = (); }; };
+		3204F0D21CACB4A6006282DF /* UIImageView+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0D01CACB4A6006282DF /* UIImageView+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
 		323F9FA6637504BE2817C73CCA542C33 /* YJMemoryCache.h in Headers */ = {isa = PBXBuildFile; fileRef = DB0B41E3B5651AD80C8D25E80F8B21B9 /* YJMemoryCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		33599E105D42CC25DE527FAA461B96A9 /* YJMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 106F3BFBDBDF5A85D8C157A6C3B83392 /* YJMemoryCache.m */; };
 		3A3732C66754F687FC56D636DDC895FD /* CGGeometry_YJExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F73CFA30E7AD538A2D839282B90E1F0 /* CGGeometry_YJExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -72,6 +74,8 @@
 		29346FAE2B947C1DB03628DFF4BD9CEC /* AVCaptureSession+YJCategory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AVCaptureSession+YJCategory.m"; sourceTree = "<group>"; };
 		2D56F6F0D6E1FAC5D9023770DCD0D1A4 /* Pods-YJKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-YJKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		2E3082098CA8153A33668A4F64FD8A86 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3204F0CF1CACB4A6006282DF /* UIImageView+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YJCategory.h"; sourceTree = "<group>"; };
+		3204F0D01CACB4A6006282DF /* UIImageView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YJCategory.m"; sourceTree = "<group>"; };
 		33AEB6510CD4BA77019B391B324F89D8 /* Pods-YJKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-YJKit_Example.modulemap"; sourceTree = "<group>"; };
 		387B1A101B80D80EA2A7C39BEFA4FAE4 /* YJKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "YJKit-dummy.m"; sourceTree = "<group>"; };
 		42010C65BDD8A3D3C9CF1EF93152AB11 /* YJKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YJKit.h; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 				268F871559AE5F5ED088D0344FBD6906 /* UIScreen+YJCategory.m */,
 				2516E1048576EAB36F92CEAC1FAF909B /* UIView+YJCategory.h */,
 				939C085EAFB325DD992338F08D368F17 /* UIView+YJCategory.m */,
+				3204F0CF1CACB4A6006282DF /* UIImageView+YJCategory.h */,
+				3204F0D01CACB4A6006282DF /* UIImageView+YJCategory.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -347,6 +353,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3204F0D11CACB4A6006282DF /* UIImageView+YJCategory.h in Headers */,
 				BE5D279A946D43C0DD4707E1103C6151 /* Pods-YJKit_Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -475,6 +482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD122DF9B549FDE2E42F309E3AC0211B /* Pods-YJKit_Example-dummy.m in Sources */,
+				3204F0D21CACB4A6006282DF /* UIImageView+YJCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
