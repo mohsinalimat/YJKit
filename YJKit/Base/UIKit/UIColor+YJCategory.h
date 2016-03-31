@@ -12,11 +12,18 @@
 #define RGBColor(hexValue, alphaValue) [UIColor colorWithHex:hexValue alpha:alphaValue];
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIColor (YJCategory)
 
 + (UIColor *)colorWithHex:(UInt32)hex;
 + (UIColor *)colorWithHex:(UInt32)hex alpha:(CGFloat)alpha;
 
++ (nullable UIColor *)colorWithHexString:(NSString *)hexString;
++ (nullable UIColor *)colorWithHexString:(NSString *)hexString alpha:(CGFloat)alpha;
+
 - (BOOL)isEqualToRGBColor:(UIColor *)color;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -22,6 +22,18 @@
                            alpha:alpha];
 }
 
++ (nullable UIColor *)colorWithHexString:(NSString *)hexString {
+    return [self colorWithHexString:hexString alpha:1.0];
+}
+
++ (nullable UIColor *)colorWithHexString:(NSString *)hexString alpha:(CGFloat)alpha {
+    if (!hexString || hexString.length == 0 || hexString.length > 8 || ![hexString hasPrefix:@"0x"]) return nil;
+    if (![[hexString stringByTrimmingCharactersInSet:[NSCharacterSet alphanumericCharacterSet]] isEqualToString:@""]) return nil;
+    unsigned int hex = 0;
+    if (![[NSScanner scannerWithString:hexString] scanHexInt:&hex]) return nil;
+    return [UIColor colorWithHex:hex alpha:alpha];
+}
+
 - (BOOL)isEqualToRGBColor:(UIColor *)color {
     CGFloat r1, g1, b1, a1;
     CGFloat r2, g2, b2, a2;
