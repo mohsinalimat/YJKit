@@ -7,24 +7,57 @@
 //
 
 #import "YJViewController.h"
+#import "YJGeometryViewController.h"
+#import "YJGridViewController.h"
+#import "YJImageViewController.h"
 
-@interface YJViewController ()
-
+@interface YJViewController () <UITableViewDelegate, UITableViewDataSource>
 @end
 
 @implementation YJViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
+    self.title = @"YJKitDemo";
+    [(UITableView *)self.view reloadData];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSArray <NSString *> *)controllerClassNames {
+    return @[@"YJGridViewController",
+             @"YJImageViewController",
+             @"YJGeometryViewController",
+             ];
+}
+
+- (void)loadView {
+    UITableView *tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
+    tableView.backgroundColor = [UIColor whiteColor];
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    self.view = tableView;
+}
+
+#pragma mark - table view
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self controllerClassNames].count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"YJCell"];
+    if (!cell) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"YJCell"];
+    cell.textLabel.text = [self controllerClassNames][indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *className = [self controllerClassNames][indexPath.row];
+    Class controllerClass = NSClassFromString(className);
+    UIViewController *controller = [[controllerClass alloc] init];
+    controller.title = className;
+    controller.edgesForExtendedLayout = UIRectEdgeNone;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 @end
