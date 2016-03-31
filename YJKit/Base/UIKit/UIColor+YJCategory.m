@@ -38,7 +38,7 @@
     CGFloat r1, g1, b1, a1;
     CGFloat r2, g2, b2, a2;
     [self getRed:&r1 green:&g1 blue:&b1 alpha:&a1];
-    [self getRed:&r2 green:&g2 blue:&b2 alpha:&a2];
+    [color getRed:&r2 green:&g2 blue:&b2 alpha:&a2];
     return (r1 == r2 && g1 == g2 && b1 == b2 && a1 == a2) ? YES : NO;
 }
 
