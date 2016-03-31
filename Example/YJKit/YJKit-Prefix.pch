@@ -11,5 +11,6 @@
 #endif
 
 #ifdef __OBJC__
-    #import <YJKit/YJKit.h>
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
 #endif

@@ -7,6 +7,7 @@
 //
 
 #import "YJGridViewController.h"
+#import "UIView+YJCategory.h"
 
 @interface YJGridViewController ()
 @property (nonatomic, strong) UIView *horizontalBar;

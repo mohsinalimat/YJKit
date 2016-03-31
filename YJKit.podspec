@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '6.0'
   s.requires_arc = true
 
-  s.source_files = 'Pod/YJKit/**/*'
-  s.public_header_files = 'Pod/YJKit/**/*.h'
+  s.source_files = 'YJKit/**/*'
+  s.public_header_files = 'YJKit/**/*.h'
   s.frameworks = 'UIKit', 'Foundation', 'CoreGraphics', 'AVFoundation'
 end

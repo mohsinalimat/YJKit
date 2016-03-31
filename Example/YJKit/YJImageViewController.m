@@ -7,6 +7,7 @@
 //
 
 #import "YJImageViewController.h"
+#import "UIImageView+YJCategory.h"
 
 @interface YJImageViewController ()
 
@@ -18,6 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    imageView.yj_contentMode = YJViewContentModeScaleAspectFit | YJViewContentModeTop;
     imageView.image = [UIImage imageNamed:@"Octocat.png"];
     [self.view addSubview:imageView];
 }

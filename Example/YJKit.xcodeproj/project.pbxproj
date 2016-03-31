@@ -7,9 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		063F9C9DB9A791780C8C00CA /* Pods_YJKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E1997338DB78A2D33924E0E /* Pods_YJKit_Example.framework */; };
 		3204F0BE1CACA82E006282DF /* YJImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0BD1CACA82E006282DF /* YJImageViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3204F0C01CACA98D006282DF /* Octocat.png in Resources */ = {isa = PBXBuildFile; fileRef = 3204F0BF1CACA98D006282DF /* Octocat.png */; settings = {ASSET_TAGS = (); }; };
+		3204F0D41CACBF1C006282DF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3204F0D31CACBF1C006282DF /* LaunchScreen.xib */; settings = {ASSET_TAGS = (); }; };
+		3204F0F11CACC2BA006282DF /* AVCaptureSession+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0D81CACC2BA006282DF /* AVCaptureSession+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
+		3204F0F21CACC2BA006282DF /* NSBundle+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0DC1CACC2BA006282DF /* NSBundle+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
+		3204F0F31CACC2BA006282DF /* CGGeometry_YJExtension.c in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0DE1CACC2BA006282DF /* CGGeometry_YJExtension.c */; settings = {ASSET_TAGS = (); }; };
+		3204F0F41CACC2BA006282DF /* UIDevice+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0E21CACC2BA006282DF /* UIDevice+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
+		3204F0F51CACC2BA006282DF /* UIImage+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0E41CACC2BA006282DF /* UIImage+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
+		3204F0F61CACC2BA006282DF /* UIImageView+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0E61CACC2BA006282DF /* UIImageView+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
+		3204F0F71CACC2BA006282DF /* UIScreen+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0E81CACC2BA006282DF /* UIScreen+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
+		3204F0F81CACC2BA006282DF /* UIView+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0EA1CACC2BA006282DF /* UIView+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
+		3204F0F91CACC2BA006282DF /* YJMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0EE1CACC2BA006282DF /* YJMemoryCache.m */; settings = {ASSET_TAGS = (); }; };
 		320A97EF1CA9493800485B9A /* AFTCameraUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 320A97EE1CA9493800485B9A /* AFTCameraUI.bundle */; settings = {ASSET_TAGS = (); }; };
 		324E98BE1CABC75F00CFB8D3 /* YJGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 324E98BD1CABC75F00CFB8D3 /* YJGridViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3268A1D41CA83F5300B71E50 /* YJGeometryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3268A1D31CA83F5300B71E50 /* YJGeometryViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -26,7 +35,6 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		89AFD4B1D15013BD72C53E20 /* Pods_YJKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 975A5547746BDE3ADF6034D1 /* Pods_YJKit_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,12 +51,32 @@
 		3204F0BC1CACA82E006282DF /* YJImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJImageViewController.h; sourceTree = "<group>"; };
 		3204F0BD1CACA82E006282DF /* YJImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJImageViewController.m; sourceTree = "<group>"; };
 		3204F0BF1CACA98D006282DF /* Octocat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Octocat.png; sourceTree = "<group>"; };
+		3204F0D31CACBF1C006282DF /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		3204F0D71CACC2BA006282DF /* AVCaptureSession+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVCaptureSession+YJCategory.h"; sourceTree = "<group>"; };
+		3204F0D81CACC2BA006282DF /* AVCaptureSession+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVCaptureSession+YJCategory.m"; sourceTree = "<group>"; };
+		3204F0DB1CACC2BA006282DF /* NSBundle+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+YJCategory.h"; sourceTree = "<group>"; };
+		3204F0DC1CACC2BA006282DF /* NSBundle+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+YJCategory.m"; sourceTree = "<group>"; };
+		3204F0DE1CACC2BA006282DF /* CGGeometry_YJExtension.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CGGeometry_YJExtension.c; sourceTree = "<group>"; };
+		3204F0DF1CACC2BA006282DF /* CGGeometry_YJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGGeometry_YJExtension.h; sourceTree = "<group>"; };
+		3204F0E11CACC2BA006282DF /* UIDevice+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+YJCategory.h"; sourceTree = "<group>"; };
+		3204F0E21CACC2BA006282DF /* UIDevice+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+YJCategory.m"; sourceTree = "<group>"; };
+		3204F0E31CACC2BA006282DF /* UIImage+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+YJCategory.h"; sourceTree = "<group>"; };
+		3204F0E41CACC2BA006282DF /* UIImage+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YJCategory.m"; sourceTree = "<group>"; };
+		3204F0E51CACC2BA006282DF /* UIImageView+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YJCategory.h"; sourceTree = "<group>"; };
+		3204F0E61CACC2BA006282DF /* UIImageView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YJCategory.m"; sourceTree = "<group>"; };
+		3204F0E71CACC2BA006282DF /* UIScreen+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScreen+YJCategory.h"; sourceTree = "<group>"; };
+		3204F0E81CACC2BA006282DF /* UIScreen+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+YJCategory.m"; sourceTree = "<group>"; };
+		3204F0E91CACC2BA006282DF /* UIView+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YJCategory.h"; sourceTree = "<group>"; };
+		3204F0EA1CACC2BA006282DF /* UIView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YJCategory.m"; sourceTree = "<group>"; };
+		3204F0EB1CACC2BA006282DF /* YJMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMacros.h; sourceTree = "<group>"; };
+		3204F0ED1CACC2BA006282DF /* YJMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMemoryCache.h; sourceTree = "<group>"; };
+		3204F0EE1CACC2BA006282DF /* YJMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJMemoryCache.m; sourceTree = "<group>"; };
+		3204F0F01CACC2BA006282DF /* YJKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJKit.h; sourceTree = "<group>"; };
 		320A97EE1CA9493800485B9A /* AFTCameraUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AFTCameraUI.bundle; sourceTree = "<group>"; };
 		324E98BC1CABC75F00CFB8D3 /* YJGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJGridViewController.h; sourceTree = "<group>"; };
 		324E98BD1CABC75F00CFB8D3 /* YJGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJGridViewController.m; sourceTree = "<group>"; };
 		3268A1D21CA83F5300B71E50 /* YJGeometryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJGeometryViewController.h; sourceTree = "<group>"; };
 		3268A1D31CA83F5300B71E50 /* YJGeometryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJGeometryViewController.m; sourceTree = "<group>"; };
-		4BC9A54197A7444256C8F7C3 /* Pods-YJKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YJKit_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YJKit_Example/Pods-YJKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* YJKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YJKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -68,12 +96,7 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		7071809FD0F377F12A927A9B /* Pods-YJKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YJKit_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-YJKit_Example/Pods-YJKit_Example.release.xcconfig"; sourceTree = "<group>"; };
-		975A5547746BDE3ADF6034D1 /* Pods_YJKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YJKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9BA1BE30F3C49FF958D8EA21 /* Pods-YJKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YJKit_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YJKit_Tests/Pods-YJKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		9E1997338DB78A2D33924E0E /* Pods_YJKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YJKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4E3619C885051E572C0483E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		A5BACDE3448356D21757FFDD /* Pods-YJKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YJKit_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YJKit_Tests/Pods-YJKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D6627507F47E9F7BBE78AB52 /* YJKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = YJKit.podspec; path = ../YJKit.podspec; sourceTree = "<group>"; };
 		E90B7132355AB3B4DF313D99 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,7 +109,6 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				063F9C9DB9A791780C8C00CA /* Pods_YJKit_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,22 +119,105 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				89AFD4B1D15013BD72C53E20 /* Pods_YJKit_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3204F0D51CACC2BA006282DF /* YJKit */ = {
+			isa = PBXGroup;
+			children = (
+				3204F0D61CACC2BA006282DF /* AVFoundation */,
+				3204F0D91CACC2BA006282DF /* Base */,
+				3204F0EC1CACC2BA006282DF /* Cache */,
+				3204F0EF1CACC2BA006282DF /* Utility */,
+				3204F0F01CACC2BA006282DF /* YJKit.h */,
+			);
+			name = YJKit;
+			path = ../YJKit;
+			sourceTree = "<group>";
+		};
+		3204F0D61CACC2BA006282DF /* AVFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				3204F0D71CACC2BA006282DF /* AVCaptureSession+YJCategory.h */,
+				3204F0D81CACC2BA006282DF /* AVCaptureSession+YJCategory.m */,
+			);
+			path = AVFoundation;
+			sourceTree = "<group>";
+		};
+		3204F0D91CACC2BA006282DF /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				3204F0DA1CACC2BA006282DF /* Foundation */,
+				3204F0DD1CACC2BA006282DF /* Quartz */,
+				3204F0E01CACC2BA006282DF /* UIKit */,
+				3204F0EB1CACC2BA006282DF /* YJMacros.h */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		3204F0DA1CACC2BA006282DF /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				3204F0DB1CACC2BA006282DF /* NSBundle+YJCategory.h */,
+				3204F0DC1CACC2BA006282DF /* NSBundle+YJCategory.m */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		3204F0DD1CACC2BA006282DF /* Quartz */ = {
+			isa = PBXGroup;
+			children = (
+				3204F0DE1CACC2BA006282DF /* CGGeometry_YJExtension.c */,
+				3204F0DF1CACC2BA006282DF /* CGGeometry_YJExtension.h */,
+			);
+			path = Quartz;
+			sourceTree = "<group>";
+		};
+		3204F0E01CACC2BA006282DF /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				3204F0E11CACC2BA006282DF /* UIDevice+YJCategory.h */,
+				3204F0E21CACC2BA006282DF /* UIDevice+YJCategory.m */,
+				3204F0E31CACC2BA006282DF /* UIImage+YJCategory.h */,
+				3204F0E41CACC2BA006282DF /* UIImage+YJCategory.m */,
+				3204F0E51CACC2BA006282DF /* UIImageView+YJCategory.h */,
+				3204F0E61CACC2BA006282DF /* UIImageView+YJCategory.m */,
+				3204F0E71CACC2BA006282DF /* UIScreen+YJCategory.h */,
+				3204F0E81CACC2BA006282DF /* UIScreen+YJCategory.m */,
+				3204F0E91CACC2BA006282DF /* UIView+YJCategory.h */,
+				3204F0EA1CACC2BA006282DF /* UIView+YJCategory.m */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		3204F0EC1CACC2BA006282DF /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				3204F0ED1CACC2BA006282DF /* YJMemoryCache.h */,
+				3204F0EE1CACC2BA006282DF /* YJMemoryCache.m */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		3204F0EF1CACC2BA006282DF /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
+				3204F0D51CACC2BA006282DF /* YJKit */,
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* Example for YJKit */,
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				F5A6F22B93778738C167AE37 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,8 +237,6 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				9E1997338DB78A2D33924E0E /* Pods_YJKit_Example.framework */,
-				975A5547746BDE3ADF6034D1 /* Pods_YJKit_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -167,6 +270,7 @@
 				6003F596195388D20070C39A /* InfoPlist.strings */,
 				6003F599195388D20070C39A /* main.m */,
 				6003F59B195388D20070C39A /* YJKit-Prefix.pch */,
+				3204F0D31CACBF1C006282DF /* LaunchScreen.xib */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -200,17 +304,6 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		F5A6F22B93778738C167AE37 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				4BC9A54197A7444256C8F7C3 /* Pods-YJKit_Example.debug.xcconfig */,
-				7071809FD0F377F12A927A9B /* Pods-YJKit_Example.release.xcconfig */,
-				9BA1BE30F3C49FF958D8EA21 /* Pods-YJKit_Tests.debug.xcconfig */,
-				A5BACDE3448356D21757FFDD /* Pods-YJKit_Tests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -218,12 +311,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "YJKit_Example" */;
 			buildPhases = (
-				2A9EF4AF9C28BCA837E58A7C /* Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				BDB4C19D5635240CEF9D359B /* Embed Pods Frameworks */,
-				D4A990A18D69E782AAE55E87 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -294,6 +384,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3204F0D41CACBF1C006282DF /* LaunchScreen.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				320A97EF1CA9493800485B9A /* AFTCameraUI.bundle in Resources */,
@@ -312,21 +403,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2A9EF4AF9C28BCA837E58A7C /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		39049A90F04111A897300CDA /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -342,21 +418,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YJKit_Tests/Pods-YJKit_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BDB4C19D5635240CEF9D359B /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YJKit_Example/Pods-YJKit_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		BDCD9FBD8D3AD5256E74FF15 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -370,21 +431,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YJKit_Tests/Pods-YJKit_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D4A990A18D69E782AAE55E87 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YJKit_Example/Pods-YJKit_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F09A66A021CD1227A83AE751 /* Check Pods Manifest.lock */ = {
@@ -409,12 +455,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3204F0F41CACC2BA006282DF /* UIDevice+YJCategory.m in Sources */,
+				3204F0F71CACC2BA006282DF /* UIScreen+YJCategory.m in Sources */,
+				3204F0F11CACC2BA006282DF /* AVCaptureSession+YJCategory.m in Sources */,
+				3204F0F51CACC2BA006282DF /* UIImage+YJCategory.m in Sources */,
 				6003F59E195388D20070C39A /* YJAppDelegate.m in Sources */,
+				3204F0F81CACC2BA006282DF /* UIView+YJCategory.m in Sources */,
+				3204F0F91CACC2BA006282DF /* YJMemoryCache.m in Sources */,
 				6003F5A7195388D20070C39A /* YJViewController.m in Sources */,
 				324E98BE1CABC75F00CFB8D3 /* YJGridViewController.m in Sources */,
 				3204F0BE1CACA82E006282DF /* YJImageViewController.m in Sources */,
+				3204F0F61CACC2BA006282DF /* UIImageView+YJCategory.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				3268A1D41CA83F5300B71E50 /* YJGeometryViewController.m in Sources */,
+				3204F0F21CACC2BA006282DF /* NSBundle+YJCategory.m in Sources */,
+				3204F0F31CACC2BA006282DF /* CGGeometry_YJExtension.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,7 +586,6 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4BC9A54197A7444256C8F7C3 /* Pods-YJKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -547,7 +601,6 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7071809FD0F377F12A927A9B /* Pods-YJKit_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -563,7 +616,6 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9BA1BE30F3C49FF958D8EA21 /* Pods-YJKit_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -587,7 +639,6 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A5BACDE3448356D21757FFDD /* Pods-YJKit_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
