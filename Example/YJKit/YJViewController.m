@@ -27,6 +27,7 @@
     return @[@"YJGridViewController",
              @"YJImageViewController",
              @"YJGeometryViewController",
+             @"YJBlockViewController",
              ];
 }
 

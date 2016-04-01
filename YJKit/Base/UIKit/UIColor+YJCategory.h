@@ -22,6 +22,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable UIColor *)colorWithHexString:(NSString *)hexString;
 + (nullable UIColor *)colorWithHexString:(NSString *)hexString alpha:(CGFloat)alpha;
 
+/**
+ *  Compare color objects whether they have same red, green, blue and alpha value.
+ *  @param color The UIColor object.
+ *  @return The result of comparison.
+ */
 - (BOOL)isEqualToRGBColor:(UIColor *)color;
 
 @end

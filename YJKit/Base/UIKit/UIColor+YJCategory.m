@@ -5,7 +5,7 @@
 //  Created by Jack Huang on 16/3/31.
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
-//  Source Code: https://github.com/mattquiros/UIColorHexColor
+//  Reference: https://github.com/mattquiros/UIColorHexColor
 
 #import "UIColor+YJCategory.h"
 

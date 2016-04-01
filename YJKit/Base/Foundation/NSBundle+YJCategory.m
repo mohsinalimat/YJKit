@@ -5,6 +5,7 @@
 //  Created by Jack Huang on 16/3/20.
 //  Copyright © 2016年 Jack Huang. All rights reserved.
 //
+//  Reference: https://github.com/ibireme/YYKit
 
 #import "NSBundle+YJCategory.h"
 

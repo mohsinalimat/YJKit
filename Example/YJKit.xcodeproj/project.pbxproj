@@ -23,6 +23,11 @@
 		320A97EF1CA9493800485B9A /* AFTCameraUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 320A97EE1CA9493800485B9A /* AFTCameraUI.bundle */; settings = {ASSET_TAGS = (); }; };
 		324E98BE1CABC75F00CFB8D3 /* YJGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 324E98BD1CABC75F00CFB8D3 /* YJGridViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3268A1D41CA83F5300B71E50 /* YJGeometryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3268A1D31CA83F5300B71E50 /* YJGeometryViewController.m */; settings = {ASSET_TAGS = (); }; };
+		32B37D0C1CAE8CAD009AA2A0 /* YJBlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B37D0B1CAE8CAD009AA2A0 /* YJBlockViewController.m */; settings = {ASSET_TAGS = (); }; };
+		32B37D0F1CAE97A9009AA2A0 /* UIControl+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B37D0E1CAE97A9009AA2A0 /* UIControl+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
+		32B37D121CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B37D111CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
+		32B37D151CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B37D141CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
+		32B37D181CAEA649009AA2A0 /* UIAlertView+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B37D171CAEA649009AA2A0 /* UIAlertView+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -80,6 +85,16 @@
 		324E98BD1CABC75F00CFB8D3 /* YJGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJGridViewController.m; sourceTree = "<group>"; };
 		3268A1D21CA83F5300B71E50 /* YJGeometryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJGeometryViewController.h; sourceTree = "<group>"; };
 		3268A1D31CA83F5300B71E50 /* YJGeometryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJGeometryViewController.m; sourceTree = "<group>"; };
+		32B37D0A1CAE8CAD009AA2A0 /* YJBlockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBlockViewController.h; sourceTree = "<group>"; };
+		32B37D0B1CAE8CAD009AA2A0 /* YJBlockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBlockViewController.m; sourceTree = "<group>"; };
+		32B37D0D1CAE97A9009AA2A0 /* UIControl+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+YJCategory.h"; sourceTree = "<group>"; };
+		32B37D0E1CAE97A9009AA2A0 /* UIControl+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+YJCategory.m"; sourceTree = "<group>"; };
+		32B37D101CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+YJCategory.h"; sourceTree = "<group>"; };
+		32B37D111CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+YJCategory.m"; sourceTree = "<group>"; };
+		32B37D131CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+YJCategory.h"; sourceTree = "<group>"; };
+		32B37D141CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+YJCategory.m"; sourceTree = "<group>"; };
+		32B37D161CAEA649009AA2A0 /* UIAlertView+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+YJCategory.h"; sourceTree = "<group>"; };
+		32B37D171CAEA649009AA2A0 /* UIAlertView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+YJCategory.m"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* YJKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YJKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -194,6 +209,14 @@
 				3204F0EA1CACC2BA006282DF /* UIView+YJCategory.m */,
 				3204F0FA1CAD5645006282DF /* UIColor+YJCategory.h */,
 				3204F0FB1CAD5645006282DF /* UIColor+YJCategory.m */,
+				32B37D0D1CAE97A9009AA2A0 /* UIControl+YJCategory.h */,
+				32B37D0E1CAE97A9009AA2A0 /* UIControl+YJCategory.m */,
+				32B37D101CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.h */,
+				32B37D111CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.m */,
+				32B37D131CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.h */,
+				32B37D141CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.m */,
+				32B37D161CAEA649009AA2A0 /* UIAlertView+YJCategory.h */,
+				32B37D171CAEA649009AA2A0 /* UIAlertView+YJCategory.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -259,6 +282,8 @@
 				3204F0BD1CACA82E006282DF /* YJImageViewController.m */,
 				3268A1D21CA83F5300B71E50 /* YJGeometryViewController.h */,
 				3268A1D31CA83F5300B71E50 /* YJGeometryViewController.m */,
+				32B37D0A1CAE8CAD009AA2A0 /* YJBlockViewController.h */,
+				32B37D0B1CAE8CAD009AA2A0 /* YJBlockViewController.m */,
 				3204F0BF1CACA98D006282DF /* Octocat.png */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				320A97EE1CA9493800485B9A /* AFTCameraUI.bundle */,
@@ -409,16 +434,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32B37D121CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.m in Sources */,
+				32B37D151CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.m in Sources */,
+				32B37D0F1CAE97A9009AA2A0 /* UIControl+YJCategory.m in Sources */,
 				3204F0F41CACC2BA006282DF /* UIDevice+YJCategory.m in Sources */,
 				3204F0F71CACC2BA006282DF /* UIScreen+YJCategory.m in Sources */,
 				3204F0F11CACC2BA006282DF /* AVCaptureSession+YJCategory.m in Sources */,
 				3204F0F51CACC2BA006282DF /* UIImage+YJCategory.m in Sources */,
+				32B37D0C1CAE8CAD009AA2A0 /* YJBlockViewController.m in Sources */,
 				6003F59E195388D20070C39A /* YJAppDelegate.m in Sources */,
 				3204F0F81CACC2BA006282DF /* UIView+YJCategory.m in Sources */,
 				3204F0F91CACC2BA006282DF /* YJMemoryCache.m in Sources */,
 				6003F5A7195388D20070C39A /* YJViewController.m in Sources */,
 				3204F0FC1CAD5645006282DF /* UIColor+YJCategory.m in Sources */,
 				324E98BE1CABC75F00CFB8D3 /* YJGridViewController.m in Sources */,
+				32B37D181CAEA649009AA2A0 /* UIAlertView+YJCategory.m in Sources */,
 				3204F0BE1CACA82E006282DF /* YJImageViewController.m in Sources */,
 				3204F0F61CACC2BA006282DF /* UIImageView+YJCategory.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
