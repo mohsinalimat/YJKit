@@ -2,8 +2,8 @@
 //  CGGeometry_YJExtension.c
 //  YJKit
 //
-//  Created by Jack Huang on 16/3/24.
-//  Copyright © 2016年 Jack Huang. All rights reserved.
+//  Created by huang-kun on 16/3/24.
+//  Copyright © 2016年 huang-kun. All rights reserved.
 //
 
 #include "CGGeometry_YJExtension.h"
