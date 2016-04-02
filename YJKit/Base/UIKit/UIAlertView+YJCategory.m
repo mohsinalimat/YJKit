@@ -5,6 +5,7 @@
 //  Created by huang-kun on 16/4/1.
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
+//  Reference: http://www.cocoawithlove.com/2009/05/variable-argument-lists-in-cocoa.html
 
 #import <objc/runtime.h>
 #import "UIAlertView+YJCategory.h"
@@ -43,12 +44,11 @@ static void *YJAlertViewAssociatedDelegateKey = &YJAlertViewAssociatedDelegateKe
     NSMutableArray *titles = @[].mutableCopy;
     va_list args;
     va_start(args, otherButtonTitles);
-    static BOOL canAdd = NO;
+    BOOL canAdd = NO;
     for (NSString *arg = otherButtonTitles; arg != nil; arg = va_arg(args, NSString*)) {
         if (canAdd) [titles addObject:arg];
         canAdd = YES;
     }
-    canAdd = NO;
     va_end(args);
     switch (titles.count) {
         case 0: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, nil];
@@ -67,12 +67,11 @@ static void *YJAlertViewAssociatedDelegateKey = &YJAlertViewAssociatedDelegateKe
     NSMutableArray *titles = @[].mutableCopy;
     va_list args;
     va_start(args, otherButtonTitles);
-    static BOOL canAdd = NO;
+    BOOL canAdd = NO;
     for (NSString *arg = otherButtonTitles; arg != nil; arg = va_arg(args, NSString*)) {
         if (canAdd) [titles addObject:arg];
         canAdd = YES;
     }
-    canAdd = NO;
     va_end(args);
     switch (titles.count) {
         case 0: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, nil];
