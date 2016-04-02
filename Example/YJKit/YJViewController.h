@@ -2,8 +2,8 @@
 //  YJViewController.h
 //  YJKit
 //
-//  Created by huang-kun on 03/27/2016.
-//  Copyright (c) 2016 huang-kun. All rights reserved.
+//  Created by Jack Huang on 03/27/2016.
+//  Copyright (c) 2016 Jack Huang. All rights reserved.
 //
 
 @import UIKit;

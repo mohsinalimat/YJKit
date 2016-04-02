@@ -1,6 +1,6 @@
 # YJKit
 
-[![CI Status](http://img.shields.io/travis/huang-kun/YJKit.svg?style=flat)](https://travis-ci.org/huang-kun/YJKit)
+[![CI Status](http://img.shields.io/travis/Jack Huang/YJKit.svg?style=flat)](https://travis-ci.org/Jack Huang/YJKit)
 [![Version](https://img.shields.io/cocoapods/v/YJKit.svg?style=flat)](http://cocoapods.org/pods/YJKit)
 [![License](https://img.shields.io/cocoapods/l/YJKit.svg?style=flat)](http://cocoapods.org/pods/YJKit)
 [![Platform](https://img.shields.io/cocoapods/p/YJKit.svg?style=flat)](http://cocoapods.org/pods/YJKit)
@@ -22,7 +22,7 @@ pod "YJKit"
 
 ## Author
 
-huang-kun, jack-huang-developer@foxmail.com
+Jack Huang, jack-huang-developer@foxmail.com
 
 ## License
 

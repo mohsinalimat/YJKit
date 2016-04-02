@@ -3,15 +3,19 @@
 //  YJKit
 //
 //  Created by Jack Huang on 16/4/1.
-//  Copyright © 2016年 huang-kun. All rights reserved.
+//  Copyright © 2016年 Jack Huang. All rights reserved.
 //
 
 #import "YJBlockViewController.h"
 #import "UIControl+YJCategory.h"
+#import "UIGestureRecognizer+YJCategory.h"
+#import "UIBarButtonItem+YJCategory.h"
+#import "UIAlertView+YJCategory.h"
+
 #import "YJMacros.h"
 
 @interface YJBlockViewController ()
-
+@property (nonatomic, strong) UIButton *presentButton;
 @end
 
 @implementation YJBlockViewController
@@ -20,23 +24,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    [button setTitle:@"button" forState:UIControlStateNormal];
+    [button setTitle:@"Present" forState:UIControlStateNormal];
     [button sizeToFit];
     button.center = self.view.center;
     [self.view addSubview:button];
+    self.presentButton = button;
     
     @weakify(self)
     [button addActionForControlEvents:UIControlEventTouchUpInside actionBlock:^(UIControl *sender) {
         @strongify(self)
-        NSLog(@"Button Title: %@", [(UIButton *)sender titleForState:UIControlStateNormal]);
-        NSLog(@"%@", self.class);
+        YJBlockViewController *bvc = [[YJBlockViewController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:bvc];
+        @weakify(bvc)
+        bvc.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Dismiss" style:UIBarButtonItemStyleDone actionBlock:^(UIBarButtonItem * _Nonnull barButtonItem) {
+            @strongify(bvc)
+            [bvc dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [self presentViewController:nav animated:YES completion:nil];
     }];
-    
-    [button addActionForControlEvents:UIControlEventTouchDown actionBlock:^(UIControl *sender) {
-        @strongify(self)
-        NSLog(@"2 - Button Title: %@", [(UIButton *)sender titleForState:UIControlStateNormal]);
-        NSLog(@"2 - %@", self.class);
-    }];
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    self.presentButton.center = self.view.center;
 }
 
 - (void)didReceiveMemoryWarning {
