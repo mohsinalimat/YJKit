@@ -13,13 +13,13 @@
 static void *YJAlertViewAssociatedDelegateKey = &YJAlertViewAssociatedDelegateKey;
 
 @interface _YJAlertViewDelegate : NSObject <UIAlertViewDelegate>
-@property (nonatomic, copy) void(^actionBlock)(NSInteger);
+@property (nonatomic, copy) void(^actionHandler)(NSInteger);
 @end
 
 @implementation _YJAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (self.actionBlock) self.actionBlock(buttonIndex);
+    if (self.actionHandler) self.actionHandler(buttonIndex);
 }
 
 @end
@@ -38,9 +38,9 @@ static void *YJAlertViewAssociatedDelegateKey = &YJAlertViewAssociatedDelegateKe
     return objc_getAssociatedObject(self, YJAlertViewAssociatedDelegateKey);
 }
 
-- (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message actionBlock:(nullable void(^)(NSInteger buttonIndex))actionBlock cancelButtonTitle:(nullable NSString *)cancelButtonTitle otherButtonTitles:(nullable NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION {
+- (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message actionHandler:(nullable void(^)(NSInteger buttonIndex))actionHandler cancelButtonTitle:(nullable NSString *)cancelButtonTitle otherButtonTitles:(nullable NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION {
     self.yj_delegate = [[_YJAlertViewDelegate alloc] init];
-    if (actionBlock) self.yj_delegate.actionBlock = actionBlock;
+    if (actionHandler) self.yj_delegate.actionHandler = actionHandler;
     NSMutableArray *titles = @[].mutableCopy;
     va_list args;
     va_start(args, otherButtonTitles);
@@ -85,8 +85,8 @@ static void *YJAlertViewAssociatedDelegateKey = &YJAlertViewAssociatedDelegateKe
     return nil;
 }
 
-- (void)setActionBlock:(void(^)(NSInteger buttonIndex))actionBlock {
-    if (actionBlock) self.yj_delegate.actionBlock = actionBlock;
+- (void)setActionHandler:(void(^)(NSInteger buttonIndex))actionHandler {
+    if (actionHandler) self.yj_delegate.actionHandler = actionHandler;
 }
 
 @end

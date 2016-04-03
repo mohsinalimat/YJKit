@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIGestureRecognizer (YJCategory)
 
-- (instancetype)initWithActionBlock:(nullable void(^)(UIGestureRecognizer *gestureRecognizer))actionBlock;
+- (instancetype)initWithActionHandler:(nullable void(^)(UIGestureRecognizer *gestureRecognizer))actionHandler;
 
-- (void)addActionBlock:(void(^)(UIGestureRecognizer *gestureRecognizer))actionBlock;
+- (void)addActionHandler:(void(^)(UIGestureRecognizer *gestureRecognizer))actionHandler;
 
 @end
 

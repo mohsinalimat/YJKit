@@ -74,5 +74,9 @@
     XCTAssert(randomColor);
 }
 
+- (void)testYJActionHandler {
+    
+}
+
 @end
 

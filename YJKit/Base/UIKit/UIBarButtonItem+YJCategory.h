@@ -10,15 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^YJBarButtonItemActionBlock)(UIBarButtonItem *barButtonItem);
+typedef void(^YJBarButtonItemActionHandler)(UIBarButtonItem *barButtonItem);
 
 @interface UIBarButtonItem (YJCategory)
 
 - (instancetype)initWithTitle:(nullable NSString *)title
                         style:(UIBarButtonItemStyle)style
-                  actionBlock:(nullable void(^)(UIBarButtonItem *barButtonItem))actionBlock;
+                  actionHandler:(nullable void(^)(UIBarButtonItem *barButtonItem))actionHandler;
 
-@property (nullable, nonatomic, copy) YJBarButtonItemActionBlock actionBlock;
+@property (nullable, nonatomic, copy) YJBarButtonItemActionHandler actionHandler;
 
 @end
 

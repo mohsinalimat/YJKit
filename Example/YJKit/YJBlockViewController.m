@@ -7,12 +7,6 @@
 //
 
 #import "YJBlockViewController.h"
-#import "UIControl+YJCategory.h"
-#import "UIGestureRecognizer+YJCategory.h"
-#import "UIBarButtonItem+YJCategory.h"
-#import "UIAlertView+YJCategory.h"
-
-#import "YJMacros.h"
 
 @interface YJBlockViewController ()
 @property (nonatomic, strong) UIButton *presentButton;
@@ -31,17 +25,28 @@
     self.presentButton = button;
     
     @weakify(self)
-    [button addActionForControlEvents:UIControlEventTouchUpInside actionBlock:^(UIControl *sender) {
+    [button addActionForControlEvents:UIControlEventTouchUpInside actionHandler:^(UIControl *sender) {
         @strongify(self)
         YJBlockViewController *bvc = [[YJBlockViewController alloc] init];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:bvc];
         @weakify(bvc)
-        bvc.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Dismiss" style:UIBarButtonItemStyleDone actionBlock:^(UIBarButtonItem * _Nonnull barButtonItem) {
+        bvc.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Dismiss" style:UIBarButtonItemStyleDone actionHandler:^(UIBarButtonItem * _Nonnull barButtonItem) {
             @strongify(bvc)
             [bvc dismissViewControllerAnimated:YES completion:nil];
         }];
         [self presentViewController:nav animated:YES completion:nil];
     }];
+    
+    [button addObserverForKeyPath:@"hidden" valueChangeHandler:^(id object, id oldValue, id newValue) {
+        NSLog(@"hidden changed");
+    }];
+    
+    [button addObserverForKeyPath:@"hidden" valueChangeHandler:^(id object, id oldValue, id newValue) {
+        NSLog(@"hidden changed again");
+    }];
+    
+    button.hidden = YES;
+    button.hidden = NO;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -49,23 +54,14 @@
     self.presentButton.center = self.view.center;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     // Dispose of any resources that can be recreated.
+    [self.presentButton removeObserverForKeyPath:@"hidden"];
 }
 
 - (void)dealloc {
     NSLog(@"%@ dealloc", self.class);
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

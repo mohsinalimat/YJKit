@@ -5,7 +5,7 @@
 //  Created by huang-kun on 16/4/1.
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
-//  Reference: https://github.com/lavoy/ALActionBlocks 
+//  Reference: https://github.com/lavoy/ALActionBlocks
 
 #import <objc/runtime.h>
 #import "UIControl+YJCategory.h"
@@ -13,25 +13,25 @@
 static void *YJControlAssociatedTargetsKey = &YJControlAssociatedTargetsKey;
 
 @interface _YJControlTarget : NSObject
-@property (nonatomic, copy) void(^actionBlock)(UIControl *);
+@property (nonatomic, copy) void(^actionHandler)(UIControl *);
 @property (nonatomic) UIControlEvents events;
-- (instancetype)initWithControlEvents:(UIControlEvents)events actionBlock:(void(^)(UIControl *sender))actionBlock;
+- (instancetype)initWithControlEvents:(UIControlEvents)events actionHandler:(void(^)(UIControl *sender))actionHandler;
 - (void)yj_performActionFromControl:(UIControl *)sender;
 @end
 
 @implementation _YJControlTarget
 
-- (instancetype)initWithControlEvents:(UIControlEvents)events actionBlock:(void(^)(UIControl *sender))actionBlock {
+- (instancetype)initWithControlEvents:(UIControlEvents)events actionHandler:(void(^)(UIControl *sender))actionHandler {
     self = [super init];
     if (self) {
         _events = events;
-        _actionBlock = [actionBlock copy];
+        _actionHandler = [actionHandler copy];
     }
     return self;
 }
 
 - (void)yj_performActionFromControl:(UIControl *)sender {
-    if (self.actionBlock) self.actionBlock(sender);
+    if (self.actionHandler) self.actionHandler(sender);
 }
 
 @end
@@ -55,8 +55,8 @@ static void *YJControlAssociatedTargetsKey = &YJControlAssociatedTargetsKey;
     return targets;
 }
 
-- (void)addActionForControlEvents:(UIControlEvents)events actionBlock:(void(^)(UIControl *sender))actionBlock {
-    _YJControlTarget *target = [[_YJControlTarget alloc] initWithControlEvents:events actionBlock:actionBlock];
+- (void)addActionForControlEvents:(UIControlEvents)events actionHandler:(void(^)(UIControl *sender))actionHandler {
+    _YJControlTarget *target = [[_YJControlTarget alloc] initWithControlEvents:events actionHandler:actionHandler];
     [self.yj_targets addObject:target];
     [self addTarget:target action:@selector(yj_performActionFromControl:) forControlEvents:events];
 }
