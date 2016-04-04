@@ -20,11 +20,11 @@ static NSString *_yj_cachedKeyForUIImageName(NSString *name, UIImageOrientation 
     return [NSString stringWithFormat:@"%@_%@", name, @(orientation)];
 }
 
-+ (nonnull UIImage *)imageNamed:(NSString *)name scaledInBundle:(nullable NSBundle *)bundle {
++ (nullable UIImage *)imageNamed:(NSString *)name scaledInBundle:(nullable NSBundle *)bundle {
     return [self imageNamed:name orientation:UIImageOrientationUp scaledInBundle:bundle];
 }
 
-+ (nonnull UIImage *)imageNamed:(NSString *)name orientation:(UIImageOrientation)orientation scaledInBundle:(nullable NSBundle *)bundle {
++ (nullable UIImage *)imageNamed:(NSString *)name orientation:(UIImageOrientation)orientation scaledInBundle:(nullable NSBundle *)bundle {
     if (!name.length) return nil;
     if (!bundle) bundle = [NSBundle mainBundle];
     NSString *key = _yj_cachedKeyForUIImageName(name, orientation);

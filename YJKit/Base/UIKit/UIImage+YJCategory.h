@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return Returns the matched image object that also cached in memory. The result can be nil.
  */
-+ (nonnull UIImage *)imageNamed:(NSString *)name scaledInBundle:(nullable NSBundle *)bundle;
++ (nullable UIImage *)imageNamed:(NSString *)name scaledInBundle:(nullable NSBundle *)bundle;
 
 
 /**
@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return Returns the matched image object that also cached in memory. The result can be nil.
  */
-+ (nonnull UIImage *)imageNamed:(NSString *)name orientation:(UIImageOrientation)orientation scaledInBundle:(nullable NSBundle *)bundle;
++ (nullable UIImage *)imageNamed:(NSString *)name orientation:(UIImageOrientation)orientation scaledInBundle:(nullable NSBundle *)bundle;
 
 /**
  *  Get a resized image from original image.
