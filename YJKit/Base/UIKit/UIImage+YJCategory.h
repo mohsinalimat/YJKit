@@ -36,13 +36,39 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (nonnull UIImage *)imageNamed:(NSString *)name orientation:(UIImageOrientation)orientation scaledInBundle:(nullable NSBundle *)bundle;
 
-
+/**
+ *  Get a resized image from original image.
+ *  @param multiplier The multiple of current image width and height.
+ *  @return Returns a resized image for specific condition.
+ */
 - (UIImage *)resizedImageByMultiplier:(CGFloat)multiplier;
 
+/**
+ *  Get a resized image from original image.
+ *  @param width The final width of resized image.
+ *  @return Returns a resized image for specific condition.
+ */
 - (UIImage *)resizedImageForWidth:(CGFloat)width;
+
+/**
+ *  Get a resized image from original image.
+ *  @param height The final height of resized image.
+ *  @return Returns a resized image for specific condition.
+ */
 - (UIImage *)resizedImageForHeight:(CGFloat)height;
 
+/**
+ *  Get a resized image from original image.
+ *  @param widthInPixel The final width measured in pixel of resized image.
+ *  @return Returns a resized image for specific condition.
+ */
 - (UIImage *)resizedImageForWidthInPixel:(CGFloat)widthInPixel;
+
+/**
+ *  Get a resized image from original image.
+ *  @param heightInPixel The final height measured in pixel of resized image.
+ *  @return Returns a resized image for specific condition.
+ */
 - (UIImage *)resizedImageForHeightInPixel:(CGFloat)heightInPixel;
 
 @end

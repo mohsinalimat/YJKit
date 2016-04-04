@@ -47,7 +47,7 @@ static void *YJBarButtonItemAssociatedTargetKey = &YJBarButtonItemAssociatedTarg
 
 - (instancetype)initWithTitle:(nullable NSString *)title
                         style:(UIBarButtonItemStyle)style
-                  actionHandler:(nullable void(^)(UIBarButtonItem *barButtonItem))actionHandler {
+                  actionHandler:(nullable void(^)(UIBarButtonItem *sender))actionHandler {
     self.yj_target = [[_YJBarButtonItemTarget alloc] initWithActionHandler:actionHandler];
     return [self initWithTitle:title style:style target:self.yj_target action:@selector(invokeActionFromBarButtonItem:)];
 }

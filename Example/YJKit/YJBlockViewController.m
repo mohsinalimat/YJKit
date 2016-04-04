@@ -10,6 +10,7 @@
 
 @interface YJBlockViewController ()
 @property (nonatomic, strong) UIButton *presentButton;
+@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation YJBlockViewController
@@ -36,6 +37,20 @@
         }];
         [self presentViewController:nav animated:YES completion:nil];
     }];
+    
+    static int i = 0;
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES timerHandler:^(NSTimer *timer) {
+        @strongify(self)
+        if (i > 4) {
+            i = 0;
+            [timer invalidate];
+        } else {
+            NSLog(@"%@", self.class);
+//            NSLog(@"i = %@", @(i));
+        }
+        i++;
+    }];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -49,6 +64,7 @@
 }
 
 - (void)dealloc {
+    [self.timer invalidate];
     NSLog(@"%@ dealloc", self.class);
 }
 

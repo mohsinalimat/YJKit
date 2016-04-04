@@ -76,7 +76,7 @@
 		3204F0E81CACC2BA006282DF /* UIScreen+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+YJCategory.m"; sourceTree = "<group>"; };
 		3204F0E91CACC2BA006282DF /* UIView+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YJCategory.h"; sourceTree = "<group>"; };
 		3204F0EA1CACC2BA006282DF /* UIView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YJCategory.m"; sourceTree = "<group>"; };
-		3204F0EB1CACC2BA006282DF /* YJMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMacros.h; sourceTree = "<group>"; };
+		3204F0EB1CACC2BA006282DF /* YJMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YJMacros.h; path = Base/YJMacros.h; sourceTree = "<group>"; };
 		3204F0ED1CACC2BA006282DF /* YJMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMemoryCache.h; sourceTree = "<group>"; };
 		3204F0EE1CACC2BA006282DF /* YJMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJMemoryCache.m; sourceTree = "<group>"; };
 		3204F0F01CACC2BA006282DF /* YJKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJKit.h; sourceTree = "<group>"; };
@@ -153,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				3204F0F01CACC2BA006282DF /* YJKit.h */,
+				3204F0EB1CACC2BA006282DF /* YJMacros.h */,
 				3204F0D61CACC2BA006282DF /* AVFoundation */,
 				3204F0D91CACC2BA006282DF /* Base */,
 				3204F0EC1CACC2BA006282DF /* Cache */,
@@ -177,7 +178,6 @@
 				3204F0DA1CACC2BA006282DF /* Foundation */,
 				3204F0DD1CACC2BA006282DF /* Quartz */,
 				3204F0E01CACC2BA006282DF /* UIKit */,
-				3204F0EB1CACC2BA006282DF /* YJMacros.h */,
 			);
 			path = Base;
 			sourceTree = "<group>";

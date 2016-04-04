@@ -29,9 +29,9 @@ static void *YJTimerAssociatedTargetKey = &YJTimerAssociatedTargetKey;
     if (self.timerHandler) self.timerHandler(timer);
 }
 
-- (void)dealloc {
-    NSLog(@"%@ dealloc.", self.class);
-}
+//- (void)dealloc {
+//    NSLog(@"%@ dealloc.", self.class);
+//}
 
 @end
 
@@ -49,16 +49,16 @@ static void *YJTimerAssociatedTargetKey = &YJTimerAssociatedTargetKey;
     return objc_getAssociatedObject(self, YJTimerAssociatedTargetKey);
 }
 
-+ (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)ti repeats:(BOOL)yesOrNo timerHandler:(void(^)(NSTimer *))timerHandler {
++ (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)seconds repeats:(BOOL)yesOrNo timerHandler:(void(^)(NSTimer *))timerHandler {
     _YJTimerTarget *target = [[_YJTimerTarget alloc] initWithTimerHandler:timerHandler];
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:ti target:target selector:@selector(invokeSelectorFromTimer:) userInfo:nil repeats:yesOrNo];
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:seconds target:target selector:@selector(invokeSelectorFromTimer:) userInfo:nil repeats:yesOrNo];
     timer.yj_target = target;
     return timer;
 }
 
-+ (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti repeats:(BOOL)yesOrNo timerHandler:(void(^)(NSTimer *))timerHandler {
++ (NSTimer *)timerWithTimeInterval:(NSTimeInterval)seconds repeats:(BOOL)yesOrNo timerHandler:(void(^)(NSTimer *))timerHandler {
     _YJTimerTarget *target = [[_YJTimerTarget alloc] initWithTimerHandler:timerHandler];
-    NSTimer *timer = [NSTimer timerWithTimeInterval:ti target:target selector:@selector(invokeSelectorFromTimer:) userInfo:nil repeats:yesOrNo];
+    NSTimer *timer = [NSTimer timerWithTimeInterval:seconds target:target selector:@selector(invokeSelectorFromTimer:) userInfo:nil repeats:yesOrNo];
     timer.yj_target = target;
     return timer;
 }
