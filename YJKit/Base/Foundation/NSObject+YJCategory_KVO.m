@@ -51,7 +51,7 @@ static void *YJKVOAssociatedObserversKey = &YJKVOAssociatedObserversKey;
     return observers;
 }
 
-- (void)addObserverForKeyPath:(NSString *)keyPath valueChangeHandler:(void (^)(id, id, id))changeHandler {
+- (void)addObservedKeyPath:(NSString *)keyPath valueChangeHandler:(void (^)(id, id, id))changeHandler {
     _YJKVOObserver *observer = [[_YJKVOObserver alloc] initWithChangeHandler:changeHandler];
     NSMutableSet *observersForKeyPath = self.yj_observers[keyPath];
     if (!observersForKeyPath) {
@@ -62,7 +62,7 @@ static void *YJKVOAssociatedObserversKey = &YJKVOAssociatedObserversKey;
     [self addObserver:observer forKeyPath:keyPath options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:NULL];
 }
 
-- (void)removeObserverForKeyPath:(NSString *)keyPath {
+- (void)removeObservedKeyPath:(NSString *)keyPath {
     NSMutableSet <_YJKVOObserver *> *observersForKeyPath = self.yj_observers[keyPath];
     [observersForKeyPath enumerateObjectsUsingBlock:^(_YJKVOObserver * _Nonnull observer, BOOL * _Nonnull stop) {
         [self removeObserver:observer forKeyPath:keyPath];
