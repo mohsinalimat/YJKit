@@ -14,7 +14,7 @@ static void *YJBarButtonItemAssociatedTargetKey = &YJBarButtonItemAssociatedTarg
 @interface _YJBarButtonItemTarget : NSObject
 @property (nonatomic, copy) void(^actionHandler)(UIBarButtonItem *);
 - (instancetype)initWithActionHandler:(void(^)(UIBarButtonItem *barButtonItem))actionHandler;
-- (void)yj_performActionFromBarButtonItem:(UIBarButtonItem *)barButtonItem;
+- (void)invokeActionFromBarButtonItem:(UIBarButtonItem *)barButtonItem;
 @end
 
 @implementation _YJBarButtonItemTarget
@@ -25,7 +25,7 @@ static void *YJBarButtonItemAssociatedTargetKey = &YJBarButtonItemAssociatedTarg
     return self;
 }
 
-- (void)yj_performActionFromBarButtonItem:(UIBarButtonItem *)barButtonItem {
+- (void)invokeActionFromBarButtonItem:(UIBarButtonItem *)barButtonItem {
     if (self.actionHandler) self.actionHandler(barButtonItem);
 }
 
@@ -49,7 +49,7 @@ static void *YJBarButtonItemAssociatedTargetKey = &YJBarButtonItemAssociatedTarg
                         style:(UIBarButtonItemStyle)style
                   actionHandler:(nullable void(^)(UIBarButtonItem *barButtonItem))actionHandler {
     self.yj_target = [[_YJBarButtonItemTarget alloc] initWithActionHandler:actionHandler];
-    return [self initWithTitle:title style:style target:self.yj_target action:@selector(yj_performActionFromBarButtonItem:)];
+    return [self initWithTitle:title style:style target:self.yj_target action:@selector(invokeActionFromBarButtonItem:)];
 }
 
 - (void)setActionHandler:(nullable YJBarButtonItemActionHandler)actionHandler {

@@ -29,6 +29,7 @@
 		32B37D121CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B37D111CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
 		32B37D151CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B37D141CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
 		32B37D181CAEA649009AA2A0 /* UIAlertView+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B37D171CAEA649009AA2A0 /* UIAlertView+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
+		32D9E7991CB21E7500CD763A /* NSTimer+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9E7981CB21E7500CD763A /* NSTimer+YJCategory.m */; settings = {ASSET_TAGS = (); }; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -98,6 +99,8 @@
 		32B37D141CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+YJCategory.m"; sourceTree = "<group>"; };
 		32B37D161CAEA649009AA2A0 /* UIAlertView+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+YJCategory.h"; sourceTree = "<group>"; };
 		32B37D171CAEA649009AA2A0 /* UIAlertView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+YJCategory.m"; sourceTree = "<group>"; };
+		32D9E7971CB21E7500CD763A /* NSTimer+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+YJCategory.h"; sourceTree = "<group>"; };
+		32D9E7981CB21E7500CD763A /* NSTimer+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+YJCategory.m"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* YJKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YJKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -186,6 +189,8 @@
 				3204F0DC1CACC2BA006282DF /* NSBundle+YJCategory.m */,
 				325F88091CB11D19007F9BE1 /* NSObject+YJCategory_KVO.h */,
 				325F880A1CB11D19007F9BE1 /* NSObject+YJCategory_KVO.m */,
+				32D9E7971CB21E7500CD763A /* NSTimer+YJCategory.h */,
+				32D9E7981CB21E7500CD763A /* NSTimer+YJCategory.m */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -460,6 +465,7 @@
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				3268A1D41CA83F5300B71E50 /* YJGeometryViewController.m in Sources */,
 				3204F0F21CACC2BA006282DF /* NSBundle+YJCategory.m in Sources */,
+				32D9E7991CB21E7500CD763A /* NSTimer+YJCategory.m in Sources */,
 				3204F0F31CACC2BA006282DF /* CGGeometry_YJExtension.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

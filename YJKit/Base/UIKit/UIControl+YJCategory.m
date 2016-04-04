@@ -16,7 +16,7 @@ static void *YJControlAssociatedTargetsKey = &YJControlAssociatedTargetsKey;
 @property (nonatomic, copy) void(^actionHandler)(UIControl *);
 @property (nonatomic) UIControlEvents events;
 - (instancetype)initWithControlEvents:(UIControlEvents)events actionHandler:(void(^)(UIControl *sender))actionHandler;
-- (void)yj_performActionFromControl:(UIControl *)sender;
+- (void)invokeActionFromControl:(UIControl *)sender;
 @end
 
 @implementation _YJControlTarget
@@ -30,7 +30,7 @@ static void *YJControlAssociatedTargetsKey = &YJControlAssociatedTargetsKey;
     return self;
 }
 
-- (void)yj_performActionFromControl:(UIControl *)sender {
+- (void)invokeActionFromControl:(UIControl *)sender {
     if (self.actionHandler) self.actionHandler(sender);
 }
 
@@ -58,7 +58,7 @@ static void *YJControlAssociatedTargetsKey = &YJControlAssociatedTargetsKey;
 - (void)addActionForControlEvents:(UIControlEvents)events actionHandler:(void(^)(UIControl *sender))actionHandler {
     _YJControlTarget *target = [[_YJControlTarget alloc] initWithControlEvents:events actionHandler:actionHandler];
     [self.yj_targets addObject:target];
-    [self addTarget:target action:@selector(yj_performActionFromControl:) forControlEvents:events];
+    [self addTarget:target action:@selector(invokeActionFromControl:) forControlEvents:events];
 }
 
 @end

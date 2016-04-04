@@ -14,6 +14,7 @@
 #import <YJKit/CGGeometry_YJExtension.h>
 #import <YJKit/NSObject+YJCategory_KVO.h>
 #import <YJKit/NSBundle+YJCategory.h>
+#import <YJKit/NSTimer+YJCategory.h>
 #import <YJKit/YJMemoryCache.h>
 #import <YJKit/UIView+YJCategory.h>
 #import <YJKit/UIImage+YJCategory.h>
@@ -30,6 +31,7 @@
 #import "CGGeometry_YJExtension.h"
 #import "NSObject+YJCategory_KVO.h"
 #import "NSBundle+YJCategory.h"
+#import "NSTimer+YJCategory.h"
 #import "YJMemoryCache.h"
 #import "UIView+YJCategory.h"
 #import "UIImage+YJCategory.h"

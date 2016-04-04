@@ -36,17 +36,6 @@
         }];
         [self presentViewController:nav animated:YES completion:nil];
     }];
-    
-    [button addObserverForKeyPath:@"hidden" valueChangeHandler:^(id object, id oldValue, id newValue) {
-        NSLog(@"hidden changed");
-    }];
-    
-    [button addObserverForKeyPath:@"hidden" valueChangeHandler:^(id object, id oldValue, id newValue) {
-        NSLog(@"hidden changed again");
-    }];
-    
-    button.hidden = YES;
-    button.hidden = NO;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -57,7 +46,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     // Dispose of any resources that can be recreated.
-    [self.presentButton removeObserverForKeyPath:@"hidden"];
 }
 
 - (void)dealloc {

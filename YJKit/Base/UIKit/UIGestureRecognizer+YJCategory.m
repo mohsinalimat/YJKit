@@ -14,7 +14,7 @@ static void *YJRestureRecognizerAssociatedTargetsKey = &YJRestureRecognizerAssoc
 @interface _YJGestureTarget : NSObject
 @property (nonatomic, copy) void(^actionHandler)(UIGestureRecognizer *);
 - (instancetype)initWithActionHandler:(void(^)(UIGestureRecognizer *))actionHandler;
-- (void)yj_handleGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer;
+- (void)invokeGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer;
 @end
 
 @implementation _YJGestureTarget
@@ -25,7 +25,7 @@ static void *YJRestureRecognizerAssociatedTargetsKey = &YJRestureRecognizerAssoc
     return self;
 }
 
-- (void)yj_handleGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer {
+- (void)invokeGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer {
     if (self.actionHandler) self.actionHandler(gestureRecognizer);
 }
 
@@ -53,13 +53,13 @@ static void *YJRestureRecognizerAssociatedTargetsKey = &YJRestureRecognizerAssoc
 - (instancetype)initWithActionHandler:(nullable void(^)(UIGestureRecognizer *gestureRecognizer))actionHandler {
     _YJGestureTarget *target = [[_YJGestureTarget alloc] initWithActionHandler:actionHandler];
     [self.yj_targets addObject:target];
-    return [self initWithTarget:target action:@selector(yj_handleGestureRecognizer:)];
+    return [self initWithTarget:target action:@selector(invokeGestureRecognizer:)];
 }
 
 - (void)addActionHandler:(void(^)(UIGestureRecognizer *gestureRecognizer))actionHandler {
     _YJGestureTarget *target = [[_YJGestureTarget alloc] initWithActionHandler:actionHandler];
     [self.yj_targets addObject:target];
-    [self addTarget:target action:@selector(yj_handleGestureRecognizer:)];
+    [self addTarget:target action:@selector(invokeGestureRecognizer:)];
 }
 
 @end
