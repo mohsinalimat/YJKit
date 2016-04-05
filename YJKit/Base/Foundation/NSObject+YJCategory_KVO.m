@@ -11,25 +11,29 @@
 
 static const void *YJKVOAssociatedObserversKey = &YJKVOAssociatedObserversKey;
 
+typedef void(^YJKVOChangeHandler)(id object, id oldValue, id newValue);
+typedef void(^YJKVOSetupHandler)(id object, id newValue);
+
 @interface _YJKeyValueObserver : NSObject
-@property (nonatomic, copy) void(^changeHandler)(id object, id oldValue, id newValue);
-@property (nonatomic) BOOL shouldPerformChangeHandlerOnMainThread;
-- (instancetype)initWithChangeHandler:(void(^)(id object, id oldValue, id newValue))changeHandler;
+@property (nonatomic, copy) YJKVOChangeHandler changeHandler;
+@property (nonatomic, copy) YJKVOSetupHandler setupHandler;
+@property (nonatomic) BOOL shouldPerformHandlerOnMainThread;
 @end
 
 @implementation _YJKeyValueObserver
 
-- (instancetype)initWithChangeHandler:(void (^)(id, id, id))changeHandler {
-    self = [super init];
-    if (self) _changeHandler = [changeHandler copy];
-    return self;
-}
-
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-    if (!self.changeHandler) return;
     if (change[NSKeyValueChangeNotificationIsPriorKey]) return;
+
+    void (^handleSetupForObject)(id,NSDictionary*) = ^(id object, NSDictionary<NSString *,id> *change){
+        if (!self.setupHandler) return;
+        id newValue = change[NSKeyValueChangeNewKey];
+        if (newValue == [NSNull null]) newValue = nil;
+        self.setupHandler(object, newValue);
+    };
     
-    void (^handleObservedObject)(id,NSDictionary*) = ^(id object, NSDictionary<NSString *,id> *change){
+    void (^handleChangesForObject)(id,NSDictionary*) = ^(id object, NSDictionary<NSString *,id> *change){
+        if (!self.changeHandler) return;
         id oldValue = change[NSKeyValueChangeOldKey];
         if (oldValue == [NSNull null]) oldValue = nil;
         id newValue = change[NSKeyValueChangeNewKey];
@@ -37,10 +41,14 @@ static const void *YJKVOAssociatedObserversKey = &YJKVOAssociatedObserversKey;
         self.changeHandler(object, oldValue, newValue);
     };
     
-    if (self.shouldPerformChangeHandlerOnMainThread) {
-        dispatch_async(dispatch_get_main_queue(), ^{ handleObservedObject(object, change); });
+    if (self.shouldPerformHandlerOnMainThread) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            handleSetupForObject(object, change);
+            handleChangesForObject(object, change);
+        });
     } else {
-        handleObservedObject(object, change);
+        handleSetupForObject(object, change);
+        handleChangesForObject(object, change);
     }
 }
 
@@ -69,27 +77,38 @@ static const void *YJKVOAssociatedObserversKey = &YJKVOAssociatedObserversKey;
     return observers;
 }
 
-- (void)addObservedKeyPath:(NSString *)keyPath valueChangeHandler:(void (^)(id, id, id))changeHandler {
-    _YJKeyValueObserver *observer = [[_YJKeyValueObserver alloc] initWithChangeHandler:changeHandler];
-    NSMutableSet *observersForKeyPath = self.yj_observers[keyPath];
+static void _yj_registerKVOForObject(NSObject *object, NSString *keyPath, NSKeyValueObservingOptions options, BOOL callbackOnMainThread, YJKVOSetupHandler setupHandler, YJKVOChangeHandler changeHandler) {
+    
+    _YJKeyValueObserver *observer = [[_YJKeyValueObserver alloc] init];
+    if (setupHandler) observer.setupHandler = setupHandler;
+    if (changeHandler) observer.changeHandler = changeHandler;
+    observer.shouldPerformHandlerOnMainThread = callbackOnMainThread;
+    
+    NSMutableDictionary *observers = [object yj_observers];
+    NSMutableSet *observersForKeyPath = observers[keyPath];
     if (!observersForKeyPath) {
         observersForKeyPath = [NSMutableSet new];
-        self.yj_observers[keyPath] = observersForKeyPath;
+        observers[keyPath] = observersForKeyPath;
     }
     [observersForKeyPath addObject:observer];
-    [self addObserver:observer forKeyPath:keyPath options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:NULL];
+    
+    [object addObserver:observer forKeyPath:keyPath options:options context:NULL];
 }
 
-- (void)addObservedKeyPath:(NSString *)keyPath valueChangeHandlerOnMainThread:(void (^)(id, id, id))changeHandler {
-    _YJKeyValueObserver *observer = [[_YJKeyValueObserver alloc] initWithChangeHandler:changeHandler];
-    observer.shouldPerformChangeHandlerOnMainThread = YES;
-    NSMutableSet *observersForKeyPath = self.yj_observers[keyPath];
-    if (!observersForKeyPath) {
-        observersForKeyPath = [NSMutableSet new];
-        self.yj_observers[keyPath] = observersForKeyPath;
-    }
-    [observersForKeyPath addObject:observer];
-    [self addObserver:observer forKeyPath:keyPath options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:NULL];
+- (void)addObservedKeyPath:(NSString *)keyPath handleChanges:(void (^)(id, id, id))changeHandler {
+    _yj_registerKVOForObject(self, keyPath, (NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew), NO, nil, changeHandler);
+}
+
+- (void)addObservedKeyPath:(NSString *)keyPath handleChangesOnMainThread:(void (^)(id, id, id))changeHandler {
+    _yj_registerKVOForObject(self, keyPath, (NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew), YES, nil, changeHandler);
+}
+
+- (void)addObservedKeyPath:(NSString *)keyPath handleSetup:(void(^)(id, id))setupHandler {
+    _yj_registerKVOForObject(self, keyPath, NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew, NO, setupHandler, nil);
+}
+
+- (void)addObservedKeyPath:(NSString *)keyPath handleSetupOnMainThread:(void(^)(id, id))setupHandler {
+    _yj_registerKVOForObject(self, keyPath, NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew, YES, setupHandler, nil);
 }
 
 - (void)removeObservedKeyPath:(NSString *)keyPath {
