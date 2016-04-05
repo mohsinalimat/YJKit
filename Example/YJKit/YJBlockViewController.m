@@ -10,7 +10,6 @@
 
 @interface YJBlockViewController ()
 @property (nonatomic, strong) UIButton *presentButton;
-@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation YJBlockViewController
@@ -36,6 +35,7 @@
             [bvc dismissViewControllerAnimated:YES completion:nil];
         }];
         [self presentViewController:nav animated:YES completion:nil];
+        NSLog(@"%@", [(UIButton *)sender titleForState:UIControlStateNormal]);
     }];
     
 //    static int i = 0;
@@ -48,6 +48,11 @@
 //        }
 //        i++;
 //    }];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionTaged:@"handleSingleTap" actionHandler:^(UIGestureRecognizer * _Nonnull gestureRecognizer) {
+        NSLog(@"Tap location: %@", NSStringFromCGPoint([gestureRecognizer locationInView:gestureRecognizer.view]));
+    }];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -61,8 +66,6 @@
 }
 
 - (void)dealloc {
-//    [self.timer invalidate];
-    [self removeAllObservedKeyPaths];
     NSLog(@"%@ dealloc", self.class);
 }
 
