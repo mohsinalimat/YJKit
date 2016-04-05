@@ -9,7 +9,7 @@
 #import <objc/runtime.h>
 #import "NSTimer+YJCategory.h"
 
-static void *YJTimerAssociatedTargetKey = &YJTimerAssociatedTargetKey;
+static const void *YJTimerAssociatedTargetKey = &YJTimerAssociatedTargetKey;
 
 @interface _YJTimerTarget : NSObject
 @property (nonatomic, copy) void(^timerHandler)(NSTimer *);

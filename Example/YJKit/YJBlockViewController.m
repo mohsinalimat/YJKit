@@ -38,19 +38,16 @@
         [self presentViewController:nav animated:YES completion:nil];
     }];
     
-    static int i = 0;
-    
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES timerHandler:^(NSTimer *timer) {
-        @strongify(self)
-        if (i > 4) {
-            i = 0;
-            [timer invalidate];
-        } else {
-            NSLog(@"%@", self.class);
-//            NSLog(@"i = %@", @(i));
-        }
-        i++;
-    }];
+//    static int i = 0;
+//    [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES timerHandler:^(NSTimer *timer) {
+//        if (i > 4) {
+//            i = 0;
+//            [timer invalidate];
+//        } else {
+//            NSLog(@"i = %@ in %@", @(i), [self class]);
+//        }
+//        i++;
+//    }];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -64,7 +61,8 @@
 }
 
 - (void)dealloc {
-    [self.timer invalidate];
+//    [self.timer invalidate];
+    [self removeAllObservedKeyPaths];
     NSLog(@"%@ dealloc", self.class);
 }
 

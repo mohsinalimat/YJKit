@@ -10,7 +10,7 @@
 #import <objc/runtime.h>
 #import "UIAlertView+YJCategory.h"
 
-static void *YJAlertViewAssociatedDelegateKey = &YJAlertViewAssociatedDelegateKey;
+static const void *YJAlertViewAssociatedDelegateKey = &YJAlertViewAssociatedDelegateKey;
 
 @interface _YJAlertViewDelegate : NSObject <UIAlertViewDelegate>
 @property (nonatomic, copy) void(^actionHandler)(NSInteger);

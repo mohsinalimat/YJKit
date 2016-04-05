@@ -9,7 +9,7 @@
 #import <objc/runtime.h>
 #import "UIGestureRecognizer+YJCategory.h"
 
-static void *YJRestureRecognizerAssociatedTargetsKey = &YJRestureRecognizerAssociatedTargetsKey;
+static const void *YJRestureRecognizerAssociatedTargetsKey = &YJRestureRecognizerAssociatedTargetsKey;
 
 @interface _YJGestureTarget : NSObject
 @property (nonatomic, copy) void(^actionHandler)(UIGestureRecognizer *);

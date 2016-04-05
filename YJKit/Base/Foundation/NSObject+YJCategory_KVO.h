@@ -18,7 +18,15 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param keyPath       The key path, relative to the array, of the property to observe. This value must not be nil.
  *  @param changeHandler The block of code will be performed when observed value get changed.
  */
-- (void)addObservedKeyPath:(NSString *)keyPath valueChangeHandler:(void(^)(id object, id oldValue, id newValue))changeHandler;
+- (void)addObservedKeyPath:(NSString *)keyPath valueChangeHandler:(void(^)(id object, id _Nullable oldValue, id _Nullable newValue))changeHandler;
+
+/**
+ *  Key-Value observing the key path and execute the change handler block on main thread when observed value changes.
+ *
+ *  @param keyPath       The key path, relative to the array, of the property to observe. This value must not be nil.
+ *  @param changeHandler The block of code will be performed on main thread when observed value get changed.
+ */
+- (void)addObservedKeyPath:(NSString *)keyPath valueChangeHandlerOnMainThread:(void (^)(id object, id _Nullable oldValue, id _Nullable newValue))changeHandler;
 
 /**
  *  Stops observing changes for the property specified by a given key-path relative to the receiver.

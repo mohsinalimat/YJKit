@@ -10,7 +10,7 @@
 #import <objc/runtime.h>
 #import "UIControl+YJCategory.h"
 
-static void *YJControlAssociatedTargetsKey = &YJControlAssociatedTargetsKey;
+static const void *YJControlAssociatedTargetsKey = &YJControlAssociatedTargetsKey;
 
 @interface _YJControlTarget : NSObject
 @property (nonatomic, copy) void(^actionHandler)(UIControl *);

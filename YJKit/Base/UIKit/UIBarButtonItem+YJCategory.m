@@ -9,7 +9,7 @@
 #import <objc/runtime.h>
 #import "UIBarButtonItem+YJCategory.h"
 
-static void *YJBarButtonItemAssociatedTargetKey = &YJBarButtonItemAssociatedTargetKey;
+static const void *YJBarButtonItemAssociatedTargetKey = &YJBarButtonItemAssociatedTargetKey;
 
 @interface _YJBarButtonItemTarget : NSObject
 @property (nonatomic, copy) void(^actionHandler)(UIBarButtonItem *);
