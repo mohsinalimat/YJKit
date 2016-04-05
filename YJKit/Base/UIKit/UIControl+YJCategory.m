@@ -78,7 +78,7 @@ static void _yj_registerTargetActionPairForUIControl(UIControl *control, UIContr
     _yj_registerTargetActionPairForUIControl(self, events, (tag.length ? tag : nil), actionHandler);
 }
 
-static void _yj_removeTargetActionPairForUIControl(UIControl *control, UIControlEvents events, NSString *actionTag, BOOL(^condition)(_YJControlTarget *target)) {
+static void _yj_removeTargetActionPairForUIControl(UIControl *control, BOOL(^condition)(_YJControlTarget *target)) {
     NSMutableSet <_YJControlTarget *> *targets = [control yj_targets];
     NSMutableArray *collector = [NSMutableArray arrayWithCapacity:targets.count];
     [targets enumerateObjectsUsingBlock:^(_YJControlTarget * _Nonnull target, BOOL * _Nonnull stop) {
@@ -93,14 +93,14 @@ static void _yj_removeTargetActionPairForUIControl(UIControl *control, UIControl
 }
 
 - (void)removeActionForControlEvents:(UIControlEvents)events {
-    _yj_removeTargetActionPairForUIControl(self, events, nil, ^BOOL(_YJControlTarget *target) {
+    _yj_removeTargetActionPairForUIControl(self, ^BOOL(_YJControlTarget *target) {
         return target.events == events ? YES : NO;
     });
 }
 
 - (void)removeActionForTag:(NSString *)tag {
     if (!tag.length) return;
-    _yj_removeTargetActionPairForUIControl(self, 0, tag, ^BOOL(_YJControlTarget *target) {
+    _yj_removeTargetActionPairForUIControl(self, ^BOOL(_YJControlTarget *target) {
         return [target.actionTag isEqualToString:tag] ? YES : NO;
     });
 }
