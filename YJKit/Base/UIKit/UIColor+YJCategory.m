@@ -27,6 +27,7 @@
 }
 
 + (nullable UIColor *)colorWithHexString:(NSString *)hexString alpha:(CGFloat)alpha {
+    if ([hexString hasPrefix:@"#"]) hexString = [hexString stringByReplacingOccurrencesOfString:@"#" withString:@"0x"];
     if (!hexString || hexString.length == 0 || hexString.length > 8 || ![hexString hasPrefix:@"0x"]) return nil;
     if (![[hexString stringByTrimmingCharactersInSet:[NSCharacterSet alphanumericCharacterSet]] isEqualToString:@""]) return nil;
     unsigned int hex = 0;

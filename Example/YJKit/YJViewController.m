@@ -10,6 +10,7 @@
 #import "YJGeometryViewController.h"
 #import "YJGridViewController.h"
 #import "YJImageViewController.h"
+#import "UIColor+YJCategory.h"
 
 @interface YJViewController () <UITableViewDelegate, UITableViewDataSource>
 @end
@@ -21,8 +22,6 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.title = @"YJKitDemo";
     [(UITableView *)self.view reloadData];
-    
-    
 }
 
 - (NSArray <NSString *> *)controllerClassNames {
