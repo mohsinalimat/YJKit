@@ -7,6 +7,8 @@
 //
 
 #import "YJBlockViewController.h"
+#import "UIControl+YJCategory.h"
+#import "YJKit.h"
 
 @interface YJBlockViewController ()
 @property (nonatomic, strong) UIButton *presentButton;
