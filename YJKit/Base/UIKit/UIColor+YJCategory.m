@@ -32,9 +32,7 @@
     if (!hexString || hexString.length == 0 || hexString.length > 8 || ![hexString hasPrefix:@"0x"]) return nil;
     if (![[hexString stringByTrimmingCharactersInSet:[NSCharacterSet alphanumericCharacterSet]] isEqualToString:@""]) return nil;
     unsigned int hex = 0;
-    static NSScanner *scanner = nil;
-    if (!scanner) scanner = [NSScanner scannerWithString:hexString];
-    if (![scanner scanHexInt:&hex]) return nil;
+    if (![[NSScanner scannerWithString:hexString] scanHexInt:&hex]) return nil;
     return [UIColor colorWithHex:hex alpha:alpha];
 }
 
