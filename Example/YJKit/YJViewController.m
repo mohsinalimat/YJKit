@@ -21,6 +21,8 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.title = @"YJKitDemo";
     [(UITableView *)self.view reloadData];
+    
+    
 }
 
 - (NSArray <NSString *> *)controllerClassNames {

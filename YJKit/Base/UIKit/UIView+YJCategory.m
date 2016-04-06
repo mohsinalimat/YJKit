@@ -64,35 +64,35 @@
 }
 
 - (void)setTopInPixel:(CGFloat)topInPixel {
-    self.top = topInPixel / kYJScreenScale;
+    self.top = topInPixel / kScreenScale;
 }
 
 - (void)setLeftInPixel:(CGFloat)leftInPixel {
-    self.left = leftInPixel / kYJScreenScale;
+    self.left = leftInPixel / kScreenScale;
 }
 
 - (void)setBottomInPixel:(CGFloat)bottomInPixel {
-    self.bottom = bottomInPixel / kYJScreenScale;
+    self.bottom = bottomInPixel / kScreenScale;
 }
 
 - (void)setRightInPixel:(CGFloat)rightInPixel {
-    self.right = rightInPixel / kYJScreenScale;
+    self.right = rightInPixel / kScreenScale;
 }
 
 - (void)setCenterXInPixel:(CGFloat)centerXInPixel {
-    self.centerX = centerXInPixel / kYJScreenScale;
+    self.centerX = centerXInPixel / kScreenScale;
 }
 
 - (void)setCenterYInPixel:(CGFloat)centerYInPixel {
-    self.centerY = centerYInPixel / kYJScreenScale;
+    self.centerY = centerYInPixel / kScreenScale;
 }
 
 - (void)setOriginInPixel:(CGPoint)originInPixel {
-    self.origin = (CGPoint){ originInPixel.x / kYJScreenScale, originInPixel.y / kYJScreenScale };
+    self.origin = (CGPoint){ originInPixel.x / kScreenScale, originInPixel.y / kScreenScale };
 }
 
 - (void)setSizeInPixel:(CGSize)sizeInPixel {
-    self.size = (CGSize){ sizeInPixel.width / kYJScreenScale, sizeInPixel.height / kYJScreenScale };
+    self.size = (CGSize){ sizeInPixel.width / kScreenScale, sizeInPixel.height / kScreenScale };
 }
 
 #pragma mark * Getter
@@ -106,14 +106,14 @@
 - (CGPoint)origin { return self.frame.origin; }
 - (CGSize)size { return self.frame.size; }
 
-- (CGFloat)topInPixel { return self.top * kYJScreenScale; }
-- (CGFloat)leftInPixel { return self.left * kYJScreenScale; }
-- (CGFloat)bottomInPixel { return self.bottom * kYJScreenScale; }
-- (CGFloat)rightInPixel { return self.right * kYJScreenScale; }
-- (CGFloat)centerXInPixel { return self.centerX * kYJScreenScale; }
-- (CGFloat)centerYInPixel { return self.centerY * kYJScreenScale; }
-- (CGPoint)originInPixel { return (CGPoint){ self.origin.x * kYJScreenScale, self.origin.y * kYJScreenScale }; }
-- (CGSize)sizeInPixel { return (CGSize){ self.size.width * kYJScreenScale, self.size.height * kYJScreenScale }; }
+- (CGFloat)topInPixel { return self.top * kScreenScale; }
+- (CGFloat)leftInPixel { return self.left * kScreenScale; }
+- (CGFloat)bottomInPixel { return self.bottom * kScreenScale; }
+- (CGFloat)rightInPixel { return self.right * kScreenScale; }
+- (CGFloat)centerXInPixel { return self.centerX * kScreenScale; }
+- (CGFloat)centerYInPixel { return self.centerY * kScreenScale; }
+- (CGPoint)originInPixel { return (CGPoint){ self.origin.x * kScreenScale, self.origin.y * kScreenScale }; }
+- (CGSize)sizeInPixel { return (CGSize){ self.size.width * kScreenScale, self.size.height * kScreenScale }; }
 
 #pragma mark - Springs & Struts
 

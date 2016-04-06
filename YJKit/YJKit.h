@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 
 #if __has_include(<YJKit/YJKit.h>)
-#import <YJKit/YJMacros.h>
 #import <YJKit/CGGeometry_YJExtension.h>
 #import <YJKit/NSObject+YJCategory_KVO.h>
 #import <YJKit/NSBundle+YJCategory.h>
@@ -26,8 +25,8 @@
 #import <YJKit/UIGestureRecognizer+YJCategory.h>
 #import <YJKit/UIBarButtonItem+YJCategory.h>
 #import <YJKit/UIAlertView+YJCategory.h>
+#import <YJKit/YJMacros.h>
 #else
-#import "YJMacros.h"
 #import "CGGeometry_YJExtension.h"
 #import "NSObject+YJCategory_KVO.h"
 #import "NSBundle+YJCategory.h"
@@ -43,4 +42,5 @@
 #import "UIGestureRecognizer+YJCategory.h"
 #import "UIBarButtonItem+YJCategory.h"
 #import "UIAlertView+YJCategory.h"
+#import "YJMacros.h"
 #endif

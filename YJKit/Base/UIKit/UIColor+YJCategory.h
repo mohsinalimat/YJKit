@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#ifndef RGBColor
-#define RGBColor(hexValue, alphaValue) [UIColor colorWithHex:hexValue alpha:alphaValue];
-#endif
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIColor (YJCategory)
