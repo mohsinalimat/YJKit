@@ -10,7 +10,6 @@
 #import "YJGeometryViewController.h"
 #import "YJGridViewController.h"
 #import "YJImageViewController.h"
-#import "UIColor+YJCategory.h"
 
 @interface YJViewController () <UITableViewDelegate, UITableViewDataSource>
 @end
