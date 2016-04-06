@@ -10,6 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#ifndef RGBColor
+#define RGBColor(hexValue, alphaValue) [UIColor colorWithHex:hexValue alpha:alphaValue];
+#endif
+
 @interface UIColor (YJCategory)
 
 + (UIColor *)colorWithHex:(UInt32)hex;

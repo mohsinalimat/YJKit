@@ -17,25 +17,13 @@
 
 // UIScreen
 
-#ifndef kScreenBounds
-#define kScreenBounds YJScreenBounds()
-#endif
-
-#ifndef kScreenSize
-#define kScreenSize YJScreenSize()
-#endif
-
-#ifndef kScreenScale
-#define kScreenScale YJScreenScale()
-#endif
+// kScreenBounds, kScreenSize, kScreenScale
 
 /* ------------------------------------------------------------------------------------------------------------ */
 
 // UIColor
 
-#ifndef RGBColor
-#define RGBColor(hexValue, alphaValue) [UIColor colorWithHex:hexValue alpha:alphaValue];
-#endif
+// RGBColor(value, alpha)
 
 /* ------------------------------------------------------------------------------------------------------------ */
 

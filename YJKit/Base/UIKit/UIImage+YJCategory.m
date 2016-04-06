@@ -10,7 +10,6 @@
 #import "NSBundle+YJCategory.h"
 #import "YJMemoryCache.h"
 #import "UIScreen+YJCategory.h"
-#import "YJMacros.h"
 
 @implementation UIImage (YJCategory)
 
