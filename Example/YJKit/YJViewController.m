@@ -57,6 +57,7 @@
     Class controllerClass = NSClassFromString(className);
     UIViewController *controller = [[controllerClass alloc] init];
     controller.title = className;
+    controller.view.backgroundColor = [UIColor whiteColor];
     controller.edgesForExtendedLayout = UIRectEdgeNone;
     [self.navigationController pushViewController:controller animated:YES];
 }

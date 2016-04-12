@@ -30,6 +30,7 @@
     [button addActionForControlEvents:UIControlEventTouchUpInside actionHandler:^(UIControl *sender) {
         @strongify(self)
         YJBlockViewController *bvc = [[YJBlockViewController alloc] init];
+        bvc.view.backgroundColor = [UIColor whiteColor];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:bvc];
         @weakify(bvc)
         bvc.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Dismiss" style:UIBarButtonItemStyleDone actionHandler:^(UIBarButtonItem * _Nonnull barButtonItem) {
