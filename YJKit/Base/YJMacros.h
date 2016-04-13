@@ -125,6 +125,29 @@ static inline void YJBlockCleanUp(__strong void(^*block)(void)) { (*block)(); }
 
 /**
  *  Execute function or method only once. Call execute_once() at first line inside of a function or method.
+ *  execute_once() also can be used for executing code once after the execute_once() line, even if not use it at first line.
+ *  @code
+ 
+ Usage:
+ 
+ void greet() {
+    execute_once();
+    printf("hello. ")
+ };
+ 
+ for (int i = 0; i < 10; i++) {
+    greet();
+ }
+ 
+ Another usage:
+ 
+ void doSomething() {
+    // some code
+    execute_once()
+    // execute code below once.
+ }
+ 
+ *  @endcode
  */
 #ifndef execute_once
 #define execute_once() static bool yj_once_flag_ = false; \
@@ -133,9 +156,13 @@ static inline void YJBlockCleanUp(__strong void(^*block)(void)) { (*block)(); }
 #endif
 
 /**
- * Execute function or method only condition is true. Call execute_condition(...) at first line inside of a function or method.
+ *  Execute function or method only condition is true. Call execute_condition(...) at first line inside of a function or method.
+ *  execute_condition() also can be used for executing code if condition is true after the execute_condition() line, even if not use it at first line.
  *
  *  @code
+ 
+ Usage:
+ 
  void printNumber(int n) {
     execute_condition(n % 2 == 0)
     printf("%d ", n);
@@ -144,6 +171,15 @@ static inline void YJBlockCleanUp(__strong void(^*block)(void)) { (*block)(); }
  for (int i = 0; i < 10; i++) {
     printNumber(i);
  }
+ 
+ Another usage:
+ 
+ void doSomething() {
+    // some code
+    execute_condition(...)
+    // execute code below only if condition is true
+ }
+ 
  *  @endcode
  */
 #ifndef execute_condition
@@ -165,6 +201,7 @@ static inline void YJBlockCleanUp(__strong void(^*block)(void)) { (*block)(); }
 
 /**
  *  Perform a method only once. Import <objc/runtime.h> and call perform_once() at first line inside of a method.
+ *  perform_once() also can be used for executing code once after the perform_once() line, even if not use it at first line.
  */
 #ifndef perform_once
 #define perform_once() if (objc_getAssociatedObject(self, _cmd)) return; \
@@ -173,6 +210,7 @@ static inline void YJBlockCleanUp(__strong void(^*block)(void)) { (*block)(); }
 
 /**
  *  Perform a method only condition is true. Import <objc/runtime.h> and call perform_condition(...) at first line inside of a or method.
+ *  perform_condition() also can be used for executing code if condition is true after the perform_condition() line, even if not use it at first line.
  *
  *  @code
  - (void)logNumber:(int)n {
