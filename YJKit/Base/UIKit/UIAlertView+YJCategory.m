@@ -28,6 +28,9 @@ static const void *YJAlertViewAssociatedDelegateKey = &YJAlertViewAssociatedDele
 @property (nonatomic, strong) _YJAlertViewDelegate *yj_delegate;
 @end
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
 @implementation UIAlertView (YJCategory)
 
 - (void)setYj_delegate:(_YJAlertViewDelegate *)yj_delegate {
@@ -90,3 +93,5 @@ static const void *YJAlertViewAssociatedDelegateKey = &YJAlertViewAssociatedDele
 }
 
 @end
+
+#pragma clang diagnostic pop
