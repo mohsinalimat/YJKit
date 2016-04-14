@@ -85,17 +85,21 @@
 
 // @ keyword
 
+#ifndef _yj_keywordify
 #if __OPTIMIZE__
 #define _yj_keywordify try {} @finally {}
 #else
 #define _yj_keywordify autoreleasepool {}
+#endif
 #endif
 
 /* ------------------------------------------------------------------------------------------------------------ */
 
 // weakify & strongify
 
+#ifndef _weak_cast
 #define _weak_cast(x) x##_weak_
+#endif
 
 #ifndef weakify
 #if __has_feature(objc_arc)
@@ -121,7 +125,7 @@ static inline void YJBlockCleanUp(__strong void(^*block)(void)) { (*block)(); }
 
 /* ------------------------------------------------------------------------------------------------------------ */
 
-// execute once
+// execute_once()
 
 /**
  *  Execute function or method only once. Call execute_once() at first line inside of a function or method.
@@ -143,51 +147,57 @@ static inline void YJBlockCleanUp(__strong void(^*block)(void)) { (*block)(); }
  
  void doSomething() {
     // some code
+    // ...
     execute_once()
     // execute code below once.
+    // ...
  }
  
  *  @endcode
  */
 #ifndef execute_once
-#define execute_once() static bool yj_once_flag_ = false; \
-    if (yj_once_flag_) return; \
-    yj_once_flag_ = true;
+#define execute_once() \
+    static bool yj_execute_once_flag = false; \
+    if (yj_execute_once_flag) return; \
+    yj_execute_once_flag = true;
 #endif
 
+
 /**
- *  Execute function or method only condition is true. Call execute_condition(...) at first line inside of a function or method.
- *  execute_condition() also can be used for executing code if condition is true after the execute_condition() line, even if not use it at first line.
+ *  Execute part of code inside of a function or method only once. Use execute_once_begin() and execute_once_end() as a pair.
  *
  *  @code
  
- Usage:
+ Usage: 
  
- void printNumber(int n) {
-    execute_condition(n % 2 == 0)
-    printf("%d ", n);
- };
- 
- for (int i = 0; i < 10; i++) {
-    printNumber(i);
- }
- 
- Another usage:
- 
- void doSomething() {
-    // some code
-    execute_condition(...)
-    // execute code below only if condition is true
+ void doSomething {
+    // execute some code
+    // ...
+    execute_once_begin()
+    // excute code once
+    // ...
+    execute_once_end()
+    // execute other code
+    // ...
  }
  
  *  @endcode
  */
-#ifndef execute_condition
-#define execute_condition(...) static bool yj_once_flag_ = false; \
-    if (__VA_ARGS__) yj_once_flag_ = false; \
-    else yj_once_flag_ = true; \
-    if (yj_once_flag_) return;
+#ifndef execute_once_begin
+#define execute_once_begin() \
+    static bool yj_execute_once_flag = false; \
+    if (yj_execute_once_flag) goto YOU_MUST_CALL_ONCE_END; \
+    yj_execute_once_flag = true;
 #endif
+
+#ifndef execute_once_end
+#define execute_once_end() \
+    YOU_MUST_CALL_ONCE_END: {}
+#endif
+
+/* ------------------------------------------------------------------------------------------------------------ */
+
+// perform_once()
 
 // Another approach: (by Sunnyxx)
 // 1. #import <objc/runtime.h>
@@ -197,36 +207,34 @@ static inline void YJBlockCleanUp(__strong void(^*block)(void)) { (*block)(); }
 //     else objc_setAssociatedObject(self, _cmd, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN);
 //     ...
 // }
-// if the object is released, and new object is created, perform_once() can be used again.
+
+
+// - Difference bewteen execute_once() and perform_once() -
+// * The code below execute_once() only can be executed once.
+// * If the receiver object (self) is released, and new receiver object (self) is created, the code below perform_once() can be performed again.
+
+
+// Usage: Same as execute_once(), execute_once_begin(), execute_once_end()
 
 /**
  *  Perform a method only once. Import <objc/runtime.h> and call perform_once() at first line inside of a method.
  *  perform_once() also can be used for executing code once after the perform_once() line, even if not use it at first line.
  */
 #ifndef perform_once
-#define perform_once() if (objc_getAssociatedObject(self, _cmd)) return; \
+#define perform_once() \
+    if (objc_getAssociatedObject(self, _cmd)) return; \
     else objc_setAssociatedObject(self, _cmd, @(YES), OBJC_ASSOCIATION_RETAIN);
 #endif
 
-/**
- *  Perform a method only condition is true. Import <objc/runtime.h> and call perform_condition(...) at first line inside of a or method.
- *  perform_condition() also can be used for executing code if condition is true after the perform_condition() line, even if not use it at first line.
- *
- *  @code
- - (void)logNumber:(int)n {
-    perform_condition(n % 2 == 0)
-    NSLog(@"%@", @(n));
- }
- 
- for (int i = 0; i < 10; i++) {
-    [self logNumber:i];
- }
- *  @endcode
- */
-#ifndef perform_condition
-#define perform_condition(...) if (__VA_ARGS__) objc_setAssociatedObject(self, _cmd, nil, OBJC_ASSOCIATION_RETAIN); \
-    else objc_setAssociatedObject(self, _cmd, @(YES), OBJC_ASSOCIATION_RETAIN); \
-    if (objc_getAssociatedObject(self, _cmd)) return;
+#ifndef perform_once_begin
+#define perform_once_begin() \
+    if (objc_getAssociatedObject(self, _cmd)) goto YOU_MUST_CALL_ONCE_END; \
+    else objc_setAssociatedObject(self, _cmd, @(YES), OBJC_ASSOCIATION_RETAIN);
+#endif
+
+#ifndef perform_once_end
+#define perform_once_end() \
+    YOU_MUST_CALL_ONCE_END: {}
 #endif
 
 /* ------------------------------------------------------------------------------------------------------------ */
