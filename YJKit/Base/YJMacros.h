@@ -85,10 +85,12 @@
 
 // @ keyword
 
-#ifndef _yj_keywordify
 #if __OPTIMIZE__
+#ifndef _yj_keywordify
 #define _yj_keywordify try {} @finally {}
+#endif
 #else
+#ifndef _yj_keywordify
 #define _yj_keywordify autoreleasepool {}
 #endif
 #endif
