@@ -15,13 +15,13 @@
 
 /* ------------------------------------------------------------------------------------------------------------ */
 
-// UIScreen
+// UIScreen+YJCategory.h
 
 // kScreenBounds, kScreenSize, kScreenScale
 
 /* ------------------------------------------------------------------------------------------------------------ */
 
-// UIColor
+// UIColor+YJCategory.h
 
 // RGBColor(value, alpha)
 
@@ -128,7 +128,7 @@ static inline void YJBlockCleanUp(__strong void(^*block)(void)) { (*block)(); }
 // execute_once()
 
 /**
- *  Execute function or method only once. Call execute_once() at first line inside of a function or method.
+ *  Execute function or method only once. Call execute_once() at first line inside of a non-returned function or method.
  *  execute_once() also can be used for executing code once after the execute_once() line, even if not use it at first line.
  *  @code
  
@@ -218,7 +218,7 @@ static inline void YJBlockCleanUp(__strong void(^*block)(void)) { (*block)(); }
 // Remark: If you use perform_once() inside of a method, then the _cmd as associated key is taken. Better use another key for other associated objects.
 
 /**
- *  Perform a method only once. Import <objc/runtime.h> and call perform_once() at first line inside of a method.
+ *  Perform a method only once. Import <objc/runtime.h> and call perform_once() at first line inside of a non-returned method.
  *  perform_once() also can be used for executing code once after the perform_once() line, even if not use it at first line.
  */
 #ifndef perform_once
