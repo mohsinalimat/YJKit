@@ -209,12 +209,13 @@ static inline void YJBlockCleanUp(__strong void(^*block)(void)) { (*block)(); }
 // }
 
 
-// - Difference bewteen execute_once() and perform_once() -
-// * The code below execute_once() only can be executed once.
-// * If the receiver object (self) is released, and new receiver object (self) is created, the code below perform_once() can be performed again.
+// -- Difference bewteen execute_once() and perform_once() --
+// * execute_once() can be used for both inside of function and method, and perform_once() can be used for only inside of method.
+// * The code below execute_once() only can be executed once. If the receiver object (self) is released, and new receiver object (self) is created, the code below perform_once() can be performed again.
 
 
 // Usage: Same as execute_once(), execute_once_begin(), execute_once_end()
+// Remark: If you use perform_once() inside of a method, then the _cmd as associated key is taken. Better use another key for other associated objects.
 
 /**
  *  Perform a method only once. Import <objc/runtime.h> and call perform_once() at first line inside of a method.
