@@ -76,7 +76,6 @@
 		3204F0E81CACC2BA006282DF /* UIScreen+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+YJCategory.m"; sourceTree = "<group>"; };
 		3204F0E91CACC2BA006282DF /* UIView+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YJCategory.h"; sourceTree = "<group>"; };
 		3204F0EA1CACC2BA006282DF /* UIView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YJCategory.m"; sourceTree = "<group>"; };
-		3204F0EB1CACC2BA006282DF /* YJMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YJMacros.h; path = Base/YJMacros.h; sourceTree = "<group>"; };
 		3204F0ED1CACC2BA006282DF /* YJMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMemoryCache.h; sourceTree = "<group>"; };
 		3204F0EE1CACC2BA006282DF /* YJMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJMemoryCache.m; sourceTree = "<group>"; };
 		3204F0F01CACC2BA006282DF /* YJKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJKit.h; sourceTree = "<group>"; };
@@ -101,6 +100,11 @@
 		32B37D171CAEA649009AA2A0 /* UIAlertView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+YJCategory.m"; sourceTree = "<group>"; };
 		32D9E7971CB21E7500CD763A /* NSTimer+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+YJCategory.h"; sourceTree = "<group>"; };
 		32D9E7981CB21E7500CD763A /* NSTimer+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+YJCategory.m"; sourceTree = "<group>"; };
+		32F9DE1B1CC1DC66004E384E /* YJMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMacros.h; sourceTree = "<group>"; };
+		32F9DE1C1CC1DC66004E384E /* YJUIMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJUIMacros.h; sourceTree = "<group>"; };
+		32F9DE1D1CC1DCFB004E384E /* YJMathMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMathMacros.h; sourceTree = "<group>"; };
+		32F9DE1E1CC1DD44004E384E /* YJObjcMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJObjcMacros.h; sourceTree = "<group>"; };
+		32F9DE1F1CC1DDA2004E384E /* YJExecutionMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJExecutionMacros.h; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* YJKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YJKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -153,7 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				3204F0F01CACC2BA006282DF /* YJKit.h */,
-				3204F0EB1CACC2BA006282DF /* YJMacros.h */,
+				32F9DE1A1CC1DC66004E384E /* Macros */,
 				3204F0D61CACC2BA006282DF /* AVFoundation */,
 				3204F0D91CACC2BA006282DF /* Base */,
 				3204F0EC1CACC2BA006282DF /* Cache */,
@@ -245,6 +249,18 @@
 			children = (
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		32F9DE1A1CC1DC66004E384E /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				32F9DE1B1CC1DC66004E384E /* YJMacros.h */,
+				32F9DE1C1CC1DC66004E384E /* YJUIMacros.h */,
+				32F9DE1D1CC1DCFB004E384E /* YJMathMacros.h */,
+				32F9DE1E1CC1DD44004E384E /* YJObjcMacros.h */,
+				32F9DE1F1CC1DDA2004E384E /* YJExecutionMacros.h */,
+			);
+			path = Macros;
 			sourceTree = "<group>";
 		};
 		6003F581195388D10070C39A = {
