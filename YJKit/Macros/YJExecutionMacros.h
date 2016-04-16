@@ -71,6 +71,30 @@
  }
  
  *  @endcode
+ *
+ *
+ *  @note Working with block: Define any block before calling execute_once_begin()
+ *
+ *  @code
+ 
+ void test() {
+ 
+     // some code ...
+     
+     void(^block)(void) = ^{ printf("hello block\n"); };
+     dispatch_queue_t queue = dispatch_queue_create("new queue", 0);
+     
+     execute_once_begin()
+     
+     block();
+     dispatch_async(queue, ^{ printf("hello queue\n"); });
+ 
+     execute_once_end()
+     
+     // some other code ...
+ }
+ 
+ *  @endcode
  */
 #ifndef execute_once_begin
 #define execute_once_begin() \
@@ -80,7 +104,7 @@
 #endif
 
 #ifndef execute_once_end
-    #define execute_once_end() \
+#define execute_once_end() \
     YOU_MUST_CALL_ONCE_END: {}
 #endif
 
@@ -91,25 +115,25 @@
 // perform_once_end()
 
 
-// perform_once original approach: (by Sunnyxx, http://weibo.com/u/1364395395?is_all=1)
-//
-// 1. #import <objc/runtime.h>
-// 2. Write the code inside of a method at very first line:
-// - (void)method {
-//     if (objc_getAssociatedObject(self, _cmd)) return;
-//     else objc_setAssociatedObject(self, _cmd, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN);
-//     ...
-// }
+/// perform_once original approach: ( by Sunnyxx, http://weibo.com/u/1364395395 )
+///
+/// 1. #import <objc/runtime.h>
+/// 2. Write the code inside of a method at very first line:
+/// - (void)method {
+///     if (objc_getAssociatedObject(self, _cmd)) return;
+///     else objc_setAssociatedObject(self, _cmd, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN);
+///     ...
+/// }
 
 
-// -- Difference bewteen execute_once() and perform_once() --
-//
-// * execute_once() can be used for both inside of function and method, and perform_once() can be used for only inside of method.
-// * The code below execute_once() only can be executed once. If the receiver object (self) is released, and new receiver object (self) is created, the code below perform_once() can be performed again.
+/// -- Difference bewteen execute_once() and perform_once() --
+///
+/// * execute_once() can be used for both inside of function and method, and perform_once() can be used for only inside of method.
+/// * The code below execute_once() only can be executed once. If the receiver object (self) is released, and new receiver object (self) is created, the code below perform_once() can be performed again.
 
 
-// Usage: Same as execute_once(), execute_once_begin(), execute_once_end()
-// Remark: If you use perform_once() inside of a method, then the _cmd as associated key is taken. Better use another key for other associated objects.
+/// Usage: Same as execute_once(), execute_once_begin(), execute_once_end()
+/// Remark: If you use perform_once() inside of a method, then the _cmd as associated key is taken. Better use another key for other associated objects.
 
 /**
  *  Perform a method only once. Import <objc/runtime.h> and call perform_once() at first line inside of a non-returned method.
@@ -128,7 +152,7 @@
 #endif
 
 #ifndef perform_once_end
-    #define perform_once_end() \
+#define perform_once_end() \
     YOU_MUST_CALL_ONCE_END: {}
 #endif
 
@@ -140,11 +164,37 @@
 /**
  *  Use standby to avoid multiple calling of the same function or method during it's processing. Call standby_begin() and standby_end() as a pair.
  *
+ *  @remark standby_begin() and standby_end() is NOT thread-safe, so use it carefully.
+ *
  *  @code
+ 
+ Usage for function:
+ 
+ {
+    test();
+    test();
+ }
+ 
+ void test() {
+ 
+     // some code ...
+     
+     standby_begin()
+     printf("hello\n");
+     
+     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        standby_end()
+     });
+     
+     // some other code ...
+ }
+ 
+ 
+ Usage for method:
+ 
  {
     [controller networkFetch];
     [controller networkFetch];
-    ...
  }
  
  - (void)networkFetch {
@@ -167,7 +217,7 @@
 #endif
 
 #ifndef standby_end
-    #define standby_end() \
+#define standby_end() \
     yj_standby_flag = false;
 #endif
 
