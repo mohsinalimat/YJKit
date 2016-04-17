@@ -57,9 +57,12 @@ static pthread_mutex_t yj_stdby_mutex_0 = PTHREAD_MUTEX_INITIALIZER;
 
 #ifndef execute_once_pthread_lockify
 #define execute_once_pthread_lockify(lockPtr) \
-    static bool exe_flag_ = false; \
-    if (exe_flag_) return; \
     pthread_mutex_lock(lockPtr); \
+    static bool exe_flag_ = false; \
+    if (exe_flag_) { \
+        pthread_mutex_unlock(lockPtr); \
+        return; \
+    } \
     exe_flag_ = true; \
     pthread_mutex_unlock(lockPtr);
 #endif
@@ -121,9 +124,12 @@ static pthread_mutex_t yj_stdby_mutex_0 = PTHREAD_MUTEX_INITIALIZER;
 
 #ifndef execute_once_begin_pthread_lockify
 #define execute_once_begin_pthread_lockify(lockPtr) \
-    static bool exe_flag_ = false; \
-    if (exe_flag_) goto YOU_MUST_CALL_ONCE_END; \
     pthread_mutex_lock(lockPtr); \
+    static bool exe_flag_ = false; \
+    if (exe_flag_) { \
+        pthread_mutex_unlock(lockPtr); \
+        goto YOU_MUST_CALL_ONCE_END; \
+    } \
     exe_flag_ = true; \
     pthread_mutex_unlock(lockPtr);
 #endif
@@ -239,9 +245,12 @@ static pthread_mutex_t yj_stdby_mutex_0 = PTHREAD_MUTEX_INITIALIZER;
 
 #ifndef standby_begin_pthread_lockify
 #define standby_begin_pthread_lockify(lockPtr) \
-    static bool stdby_flag_ = false; \
-    if (stdby_flag_) return; \
     pthread_mutex_lock(lockPtr); \
+    static bool stdby_flag_ = false; \
+    if (stdby_flag_) { \
+        pthread_mutex_unlock(lockPtr); \
+        return; \
+    } \
     stdby_flag_ = true; \
     pthread_mutex_unlock(lockPtr);
 #endif
