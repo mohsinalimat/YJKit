@@ -9,7 +9,7 @@
 #ifndef YJMacros_h
 #define YJMacros_h
 
-#if __has_include(<YJKit/YJUIMacros.h>)
+#if __has_include(<YJKit/YJMacros.h>)
 #import <YJKit/YJUIMacros.h>
 #import <YJKit/YJMathMacros.h>
 #import <YJKit/YJObjcMacros.h>
