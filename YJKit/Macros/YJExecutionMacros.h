@@ -9,6 +9,12 @@
 #ifndef YJExecutionMacros_h
 #define YJExecutionMacros_h
 
+#import <pthread/pthread.h>
+
+static pthread_mutex_t yj_exe_mutex_0 = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t yj_exe_mutex_1 = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t yj_stdby_mutex_0 = PTHREAD_MUTEX_INITIALIZER;
+
 /* ------------------------------------------------------------------------------------------------------------ */
 
 // execute_once()
@@ -46,9 +52,16 @@
  */
 #ifndef execute_once
 #define execute_once() \
-    static bool yj_execute_once_flag = false; \
-    if (yj_execute_once_flag) return; \
-    yj_execute_once_flag = true;
+    execute_once_pthread_lockify(&yj_exe_mutex_0)
+#endif
+
+#ifndef execute_once_pthread_lockify
+#define execute_once_pthread_lockify(lockPtr) \
+    static bool exe_flag_ = false; \
+    if (exe_flag_) return; \
+    pthread_mutex_lock(lockPtr); \
+    exe_flag_ = true; \
+    pthread_mutex_unlock(lockPtr);
 #endif
 
 
@@ -98,14 +111,21 @@
  */
 #ifndef execute_once_begin
 #define execute_once_begin() \
-    static bool yj_execute_once_flag = false; \
-    if (yj_execute_once_flag) goto YOU_MUST_CALL_ONCE_END; \
-    yj_execute_once_flag = true;
+    execute_once_begin_pthread_lockify(&yj_exe_mutex_1)
 #endif
 
 #ifndef execute_once_end
 #define execute_once_end() \
     YOU_MUST_CALL_ONCE_END: {}
+#endif
+
+#ifndef execute_once_begin_pthread_lockify
+#define execute_once_begin_pthread_lockify(lockPtr) \
+    static bool exe_flag_ = false; \
+    if (exe_flag_) goto YOU_MUST_CALL_ONCE_END; \
+    pthread_mutex_lock(lockPtr); \
+    exe_flag_ = true; \
+    pthread_mutex_unlock(lockPtr);
 #endif
 
 /* ------------------------------------------------------------------------------------------------------------ */
@@ -164,8 +184,6 @@
 /**
  *  Use standby to avoid multiple calling of the same function or method during it's processing. Call standby_begin() and standby_end() as a pair.
  *
- *  @remark standby_begin() and standby_end() is NOT thread-safe, so use it carefully.
- *
  *  @code
  
  Usage for function:
@@ -211,14 +229,28 @@
  */
 #ifndef standby_begin
 #define standby_begin() \
-    static bool yj_standby_flag = false; \
-    if (yj_standby_flag) return; \
-    yj_standby_flag = true;
+    standby_begin_pthread_lockify(&yj_stdby_mutex_0)
 #endif
 
 #ifndef standby_end
 #define standby_end() \
-    yj_standby_flag = false;
+    standby_end_pthread_lockify(&yj_stdby_mutex_0)
+#endif
+
+#ifndef standby_begin_pthread_lockify
+#define standby_begin_pthread_lockify(lockPtr) \
+    static bool stdby_flag_ = false; \
+    if (stdby_flag_) return; \
+    pthread_mutex_lock(lockPtr); \
+    stdby_flag_ = true; \
+    pthread_mutex_unlock(lockPtr);
+#endif
+
+#ifndef standby_end_pthread_lockify
+#define standby_end_pthread_lockify(lockPtr) \
+    pthread_mutex_lock(lockPtr); \
+    stdby_flag_ = false; \
+    pthread_mutex_unlock(lockPtr);
 #endif
 
 /* ------------------------------------------------------------------------------------------------------------ */
