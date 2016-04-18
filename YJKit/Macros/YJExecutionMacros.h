@@ -50,11 +50,11 @@ static pthread_mutex_t yj_exe_mutex_2 = PTHREAD_MUTEX_INITIALIZER;
  */
 #ifndef execute_once
 #define execute_once() \
-    execute_once_pthread_lockify(&yj_exe_mutex_0)
+    _execute_once_pthread_mutex_lockify(&yj_exe_mutex_0)
 #endif
 
-#ifndef execute_once_pthread_lockify
-#define execute_once_pthread_lockify(lockPtr) \
+#ifndef _execute_once_pthread_mutex_lockify
+#define _execute_once_pthread_mutex_lockify(lockPtr) \
     pthread_mutex_lock(lockPtr); \
     static bool exe_flag_ = false; \
     if (exe_flag_) { \
@@ -116,7 +116,7 @@ static pthread_mutex_t yj_exe_mutex_2 = PTHREAD_MUTEX_INITIALIZER;
  */
 #ifndef execute_once_begin
 #define execute_once_begin() \
-    execute_once_begin_pthread_lockify(&yj_exe_mutex_1)
+    _execute_once_begin_pthread_mutex_lockify(&yj_exe_mutex_1)
 #endif
 
 #ifndef execute_once_end
@@ -124,8 +124,8 @@ static pthread_mutex_t yj_exe_mutex_2 = PTHREAD_MUTEX_INITIALIZER;
     YOU_MUST_CALL_ONCE_END: {}
 #endif
 
-#ifndef execute_once_begin_pthread_lockify
-#define execute_once_begin_pthread_lockify(lockPtr) \
+#ifndef _execute_once_begin_pthread_mutex_lockify
+#define _execute_once_begin_pthread_mutex_lockify(lockPtr) \
     pthread_mutex_lock(lockPtr); \
     static bool exe_flag_ = false; \
     if (exe_flag_) { \
@@ -189,16 +189,16 @@ static pthread_mutex_t yj_exe_mutex_2 = PTHREAD_MUTEX_INITIALIZER;
  */
 #ifndef execute_once_on
 #define execute_once_on() \
-    execute_once_on_pthread_lockify(&yj_exe_mutex_2)
+    _execute_once_on_pthread_mutex_lockify(&yj_exe_mutex_2)
 #endif
 
 #ifndef execute_once_off
 #define execute_once_off() \
-    execute_once_off_pthread_lockify(&yj_exe_mutex_2)
+    _execute_once_off_pthread_mutex_lockify(&yj_exe_mutex_2)
 #endif
 
-#ifndef execute_once_on_pthread_lockify
-#define execute_once_on_pthread_lockify(lockPtr) \
+#ifndef _execute_once_on_pthread_mutex_lockify
+#define _execute_once_on_pthread_mutex_lockify(lockPtr) \
     pthread_mutex_lock(lockPtr); \
     static bool exe_flag1_ = false; \
     if (exe_flag1_) { \
@@ -209,8 +209,8 @@ static pthread_mutex_t yj_exe_mutex_2 = PTHREAD_MUTEX_INITIALIZER;
     pthread_mutex_unlock(lockPtr);
 #endif
 
-#ifndef execute_once_off_pthread_lockify
-#define execute_once_off_pthread_lockify(lockPtr) \
+#ifndef _execute_once_off_pthread_mutex_lockify
+#define _execute_once_off_pthread_mutex_lockify(lockPtr) \
     pthread_mutex_lock(lockPtr); \
     exe_flag1_ = false; \
     pthread_mutex_unlock(lockPtr);
