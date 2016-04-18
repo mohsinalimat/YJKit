@@ -6,6 +6,9 @@
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
 
+#ifndef YJKit_h
+#define YJKit_h
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -26,6 +29,7 @@
 #import <YJKit/UIGestureRecognizer+YJCategory.h>
 #import <YJKit/UIBarButtonItem+YJCategory.h>
 #import <YJKit/UIAlertView+YJCategory.h>
+#import <YJKit/UIActionSheet+YJCategory.h>
 #else
 #import "YJMacros.h"
 #import "CGGeometry_YJExtension.h"
@@ -43,4 +47,7 @@
 #import "UIGestureRecognizer+YJCategory.h"
 #import "UIBarButtonItem+YJCategory.h"
 #import "UIAlertView+YJCategory.h"
+#import "UIActionSheet+YJCategory.h"
 #endif
+
+#endif /* YJKit_h */
