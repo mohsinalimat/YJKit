@@ -9,23 +9,13 @@
 
 #import <objc/runtime.h>
 #import "UIAlertView+YJCategory.h"
+#import "_YJAlertDelegate.h"
+#import "YJDebugMacros.h"
 
 static const void *YJAlertViewAssociatedDelegateKey = &YJAlertViewAssociatedDelegateKey;
 
-@interface _YJAlertViewDelegate : NSObject <UIAlertViewDelegate>
-@property (nonatomic, copy) void(^actionHandler)(NSInteger);
-@end
-
-@implementation _YJAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (self.actionHandler) self.actionHandler(buttonIndex);
-}
-
-@end
-
 @interface UIAlertView ()
-@property (nonatomic, strong) _YJAlertViewDelegate *yj_delegate;
+@property (nonatomic, strong) _YJAlertDelegate *yj_delegate;
 @end
 
 #pragma clang diagnostic push
@@ -33,64 +23,49 @@ static const void *YJAlertViewAssociatedDelegateKey = &YJAlertViewAssociatedDele
 
 @implementation UIAlertView (YJCategory)
 
-- (void)setYj_delegate:(_YJAlertViewDelegate *)yj_delegate {
+- (void)setYj_delegate:(_YJAlertDelegate *)yj_delegate {
     objc_setAssociatedObject(self, YJAlertViewAssociatedDelegateKey, yj_delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (_YJAlertViewDelegate *)yj_delegate {
+- (_YJAlertDelegate *)yj_delegate {
     return objc_getAssociatedObject(self, YJAlertViewAssociatedDelegateKey);
 }
 
-- (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message actionHandler:(nullable void(^)(NSInteger buttonIndex))actionHandler cancelButtonTitle:(nullable NSString *)cancelButtonTitle otherButtonTitles:(nullable NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION {
-    self.yj_delegate = [[_YJAlertViewDelegate alloc] init];
-    if (actionHandler) self.yj_delegate.actionHandler = actionHandler;
-    NSMutableArray *titles = @[].mutableCopy;
-    va_list args;
-    va_start(args, otherButtonTitles);
-    BOOL canAdd = NO;
-    for (NSString *arg = otherButtonTitles; arg != nil; arg = va_arg(args, NSString*)) {
-        if (canAdd) [titles addObject:arg];
-        canAdd = YES;
-    }
-    va_end(args);
-    switch (titles.count) {
-        case 0: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, nil];
-        case 1: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, titles[0], nil];
-        case 2: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, titles[0], titles[1], nil];
-        case 3: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, titles[0], titles[1], titles[2], nil];
-        case 4: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, titles[0], titles[1], titles[2], titles[3], nil];
-        case 5: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, titles[0], titles[1], titles[2], titles[3], titles[4], nil];
-        case 6: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, titles[0], titles[1], titles[2], titles[3], titles[4], @"...", nil];
-    }
-    return nil;
-}
-
 - (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message cancelButtonTitle:(nullable NSString *)cancelButtonTitle otherButtonTitles:(nullable NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION {
-    self.yj_delegate = [[_YJAlertViewDelegate alloc] init];
-    NSMutableArray *titles = @[].mutableCopy;
+    _YJAlertDelegate *delegate = [_YJAlertDelegate alertDelegateWithType:YJAlertDelegateTypeAlertView];
+    UIAlertView *alertView = [self initWithTitle:title message:message delegate:delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, nil];
+    if (otherButtonTitles) delegate.buttonIndexesWithTitles[@(alertView.firstOtherButtonIndex)] = otherButtonTitles;
+    if (cancelButtonTitle) delegate.buttonIndexesWithTitles[@(alertView.cancelButtonIndex)] = cancelButtonTitle;
+    NSString *otherButtonTitle = nil;
     va_list args;
-    va_start(args, otherButtonTitles);
-    BOOL canAdd = NO;
-    for (NSString *arg = otherButtonTitles; arg != nil; arg = va_arg(args, NSString*)) {
-        if (canAdd) [titles addObject:arg];
-        canAdd = YES;
+    if (otherButtonTitles) {
+        va_start(args, otherButtonTitles);
+        while ((otherButtonTitle = va_arg(args, NSString *))) {
+            NSInteger buttonIndex = [alertView addButtonWithTitle:otherButtonTitle];
+            delegate.buttonIndexesWithTitles[@(buttonIndex)] = otherButtonTitle;
+        }
+        va_end(args);
     }
-    va_end(args);
-    switch (titles.count) {
-        case 0: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, nil];
-        case 1: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, titles[0], nil];
-        case 2: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, titles[0], titles[1], nil];
-        case 3: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, titles[0], titles[1], titles[2], nil];
-        case 4: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, titles[0], titles[1], titles[2], titles[3], nil];
-        case 5: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, titles[0], titles[1], titles[2], titles[3], titles[4], nil];
-        case 6: return [self initWithTitle:title message:message delegate:self.yj_delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, titles[0], titles[1], titles[2], titles[3], titles[4], @"...", nil];
-    }
-    return nil;
+    self.yj_delegate = delegate;
+    return alertView;
 }
 
-- (void)setActionHandler:(void(^)(NSInteger buttonIndex))actionHandler {
-    if (actionHandler) self.yj_delegate.actionHandler = actionHandler;
+- (void)setActionHandler:(YJAlertViewActionHandler)actionHandler {
+    if (actionHandler) self.yj_delegate.actionHandler = (YJAlertDelegateActionHandler)actionHandler;
 }
+
+- (NSInteger)addButtonWithTitle:(NSString *)title actionHandler:(YJAlertViewActionHandler)actionHandler {
+    NSInteger buttonIndex = [self addButtonWithTitle:title];
+    self.yj_delegate.buttonIndexesWithTitles[@(buttonIndex)] = title;
+    self.yj_delegate.addedButtonActionHandlers[@(buttonIndex)] = [actionHandler copy];
+    return buttonIndex;
+}
+
+#if YJ_DEBUG
+- (void)dealloc {
+    NSLog(@"%@ dealloc", self.class);
+}
+#endif
 
 @end
 

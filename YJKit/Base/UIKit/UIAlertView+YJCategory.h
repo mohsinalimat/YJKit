@@ -10,25 +10,31 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ *  Example:
+ *
+ *  @code
+ 
+ - (void)showAlertView {
+     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"title" message:@"message" cancelButtonTitle:@"cancel" otherButtonTitles:@"button1", @"button2", nil];
+     [alertView setActionHandler:^(UIAlertView * _Nonnull alertView, NSInteger buttonIndex, NSString * _Nonnull buttonTitle) {
+        NSLog(@"Button %@ at index %@", buttonTitle, @(buttonIndex));
+     }];
+     [alertView addButtonWithTitle:@"button3" actionHandler:^(UIAlertView * _Nonnull alertView, NSInteger buttonIndex, NSString * _Nonnull buttonTitle) {
+        NSLog(@"New Button %@ at index %@", buttonTitle, @(buttonIndex));
+     }];
+     [alertView show];
+ }
+ 
+ *  @endcode
+ */
+
+typedef void(^YJAlertViewActionHandler)(UIAlertView *alertView, NSInteger buttonIndex, NSString *buttonTitle);
+
 @interface UIAlertView (YJCategory)
 
 /**
  *  Convenience method for initializing an alert view.
- *  @remark The method only support maximum of 5 otherButtonTitles.
- *
- *  @param title             The string that appears in the receiver’s title bar.
- *  @param message           Descriptive text that provides more details than the title.
- *  @param actionHandler     The block of code will be executed when the user clicks a button on an alert view.
- *  @param cancelButtonTitle The title of the cancel button or nil if there is no cancel button.
- *  @param otherButtonTitles The title of another button.
- *
- *  @return Newly initialized alert view.
- */
-- (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message actionHandler:(nullable void(^)(NSInteger buttonIndex))actionHandler cancelButtonTitle:(nullable NSString *)cancelButtonTitle otherButtonTitles:(nullable NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
-
-/**
- *  Convenience method for initializing an alert view.
- *  @remark The method only support maximum of 5 otherButtonTitles.
  *
  *  @param title             The string that appears in the receiver’s title bar.
  *  @param message           Descriptive text that provides more details than the title.
@@ -37,13 +43,23 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return Newly initialized alert view.
  */
-- (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message cancelButtonTitle:(nullable NSString *)cancelButtonTitle otherButtonTitles:(nullable NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
+- (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message cancelButtonTitle:(nullable NSString *)cancelButtonTitle otherButtonTitles:(nullable NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION NS_EXTENSION_UNAVAILABLE_IOS("Use UIAlertController instead.");
 
 /**
  *  Set the block of code to be executed when the user clicks a button on an alert view.
  *  @param actionHandler     The block of code will be executed when the user clicks a button on an alert view.
  */
-- (void)setActionHandler:(void(^)(NSInteger buttonIndex))actionHandler;
+- (void)setActionHandler:(YJAlertViewActionHandler)actionHandler;
+
+/**
+ *  Adds a custom button to the alert view with associated action block code.
+ *
+ *  @param title         The title of the new button.
+ *  @param actionHandler The block of code will be executed when the user clicks this button on the alert view.
+ *
+ *  @return The index of the new button.
+ */
+- (NSInteger)addButtonWithTitle:(NSString *)title actionHandler:(YJAlertViewActionHandler)actionHandler;
 
 @end
 
