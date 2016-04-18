@@ -8,6 +8,7 @@
 
 #import <objc/runtime.h>
 #import "NSObject+YJCategory_KVO.h"
+#import "YJDebugMacros.h"
 
 static const void *YJKVOAssociatedObserversKey = &YJKVOAssociatedObserversKey;
 
@@ -52,9 +53,11 @@ typedef void(^YJKVOSetupHandler)(id object, id newValue);
     }
 }
 
-//- (void)dealloc {
-//    NSLog(@"%@ dealloc", self.class);
-//}
+#if YJ_DEBUG
+- (void)dealloc {
+    NSLog(@"%@ dealloc", self.class);
+}
+#endif
 
 @end
 

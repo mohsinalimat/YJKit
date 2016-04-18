@@ -8,6 +8,7 @@
 
 #import <objc/runtime.h>
 #import "UIGestureRecognizer+YJCategory.h"
+#import "YJDebugMacros.h"
 
 static const void *YJRestureRecognizerAssociatedTargetsKey = &YJRestureRecognizerAssociatedTargetsKey;
 
@@ -32,9 +33,11 @@ typedef void(^YJGestureActionHandler)(UIGestureRecognizer *);
     if (self.actionHandler) self.actionHandler(gestureRecognizer);
 }
 
-//- (void)dealloc {
-//    NSLog(@"%@ dealloc", self.class);
-//}
+#if YJ_DEBUG
+- (void)dealloc {
+    NSLog(@"%@ dealloc", self.class);
+}
+#endif
 
 @end
 

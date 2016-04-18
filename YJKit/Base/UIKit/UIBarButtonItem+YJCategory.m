@@ -8,6 +8,7 @@
 
 #import <objc/runtime.h>
 #import "UIBarButtonItem+YJCategory.h"
+#import "YJDebugMacros.h"
 
 static const void *YJBarButtonItemAssociatedTargetKey = &YJBarButtonItemAssociatedTargetKey;
 
@@ -28,6 +29,12 @@ static const void *YJBarButtonItemAssociatedTargetKey = &YJBarButtonItemAssociat
 - (void)invokeActionFromBarButtonItem:(UIBarButtonItem *)barButtonItem {
     if (self.actionHandler) self.actionHandler(barButtonItem);
 }
+
+#if YJ_DEBUG
+- (void)dealloc {
+    NSLog(@"%@ dealloc", self.class);
+}
+#endif
 
 @end
 

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "YJKit"
-  s.version          = "0.1.6"
+  s.version          = "0.1.7"
   s.summary          = "YJKit is a simple wrapper for iOS library."
   s.homepage         = "https://github.com/huang-kun/YJKit"
   s.license          = 'MIT'

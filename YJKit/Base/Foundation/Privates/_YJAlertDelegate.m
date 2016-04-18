@@ -45,7 +45,7 @@
 
 #pragma mark - delegate implementations
 
-void _yj_performActionHandlerForAlertDelegate(_YJAlertDelegate *alertDelegate, UIView *alertObject, NSInteger buttonIndex) {
+static void _yj_performActionHandlerForAlertDelegate(_YJAlertDelegate *alertDelegate, UIView *alertObject, NSInteger buttonIndex) {
     NSString *otherButtonTitle = alertDelegate.buttonIndexesWithTitles[@(buttonIndex)];
     YJAlertDelegateActionHandler actionHandler = alertDelegate.addedButtonActionHandlers[@(buttonIndex)] ?: alertDelegate.actionHandler;
     if (actionHandler) actionHandler(alertObject, buttonIndex, otherButtonTitle);

@@ -9,6 +9,7 @@
 
 #import <objc/runtime.h>
 #import "UIControl+YJCategory.h"
+#import "YJDebugMacros.h"
 
 static const void *YJControlAssociatedTargetsKey = &YJControlAssociatedTargetsKey;
 
@@ -37,9 +38,11 @@ typedef void(^YJControlActionHandler)(UIControl *);
     if (self.actionHandler) self.actionHandler(sender);
 }
 
-//- (void)dealloc {
-//    NSLog(@"%@ dealloc", self.class);
-//}
+#if YJ_DEBUG
+- (void)dealloc {
+    NSLog(@"%@ dealloc", self.class);
+}
+#endif
 
 @end
 

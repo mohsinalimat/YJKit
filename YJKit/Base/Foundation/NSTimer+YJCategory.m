@@ -8,6 +8,7 @@
 
 #import <objc/runtime.h>
 #import "NSTimer+YJCategory.h"
+#import "YJDebugMacros.h"
 
 static const void *YJTimerAssociatedTargetKey = &YJTimerAssociatedTargetKey;
 
@@ -29,9 +30,11 @@ static const void *YJTimerAssociatedTargetKey = &YJTimerAssociatedTargetKey;
     if (self.timerHandler) self.timerHandler(timer);
 }
 
-//- (void)dealloc {
-//    NSLog(@"%@ dealloc.", self.class);
-//}
+#if YJ_DEBUG
+- (void)dealloc {
+    NSLog(@"%@ dealloc.", self.class);
+}
+#endif
 
 @end
 
