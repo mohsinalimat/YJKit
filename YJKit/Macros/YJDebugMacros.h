@@ -2,7 +2,7 @@
 //  YJDebugMacros.h
 //  YJKit
 //
-//  Created by Jack Huang on 16/4/18.
+//  Created by huang-kun on 16/4/18.
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #define YJDebugMacros_h
 
 #ifndef YJ_DEBUG
-#define YJ_DEBUG 1
+#define YJ_DEBUG 0
 #endif
 
 #endif /* YJDebugMacros_h */

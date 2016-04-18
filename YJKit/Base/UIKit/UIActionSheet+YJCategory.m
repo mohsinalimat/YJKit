@@ -5,6 +5,7 @@
 //  Created by huang-kun on 16/4/18.
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
+//  Reference https://developer.apple.com/library/mac/qa/qa1405/_index.html
 
 #import <objc/runtime.h>
 #import "UIActionSheet+YJCategory.h"
