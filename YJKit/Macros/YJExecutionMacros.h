@@ -38,24 +38,31 @@
  Example:
  
  static execute_init(x)
+ static execute_init(y)
  
  void greet() {
-    execute_once(x);
-    printf("hello\n")
- };
+    execute_once(x)
+    printf("hello\n");
+ }
+ 
+ void farewell() {
+    execute_once(y)
+    printf("bye-bye\n");
+ }
  
  for (int i = 0; i < 5; i++) {
     greet();
+    farewell();
  }
  
  
  Another Example:
  
- static execute_init(y)
+ static execute_init(a)
  
  void doSomething() {
     printf("hello\n");
-    execute_once(y)
+    execute_once(a)
     printf("world\n");
  }
  
