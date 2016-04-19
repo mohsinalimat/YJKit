@@ -39,9 +39,12 @@ NS_ASSUME_NONNULL_BEGIN
  * @endcode
  */
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 typedef void(^YJActionSheetActionHandler)(UIActionSheet *actionSheet, NSInteger buttonIndex, NSString *buttonTitle);
+#pragma clang diagnostic pop
 
-@interface UIActionSheet (YJCategory)
+@interface UIActionSheet (YJCategory) // First deprecated in iOS 8.3
 
 /**
  *  Convenience method for initializing an action sheet.

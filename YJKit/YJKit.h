@@ -30,6 +30,7 @@
 #import <YJKit/UIBarButtonItem+YJCategory.h>
 #import <YJKit/UIAlertView+YJCategory.h>
 #import <YJKit/UIActionSheet+YJCategory.h>
+#import <YJKit/YJPhotoLibrary.h>
 #else
 #import "YJMacros.h"
 #import "CGGeometry_YJExtension.h"
@@ -48,6 +49,7 @@
 #import "UIBarButtonItem+YJCategory.h"
 #import "UIAlertView+YJCategory.h"
 #import "UIActionSheet+YJCategory.h"
+#import "YJPhotoLibrary.h"
 #endif
 
 #endif /* YJKit_h */

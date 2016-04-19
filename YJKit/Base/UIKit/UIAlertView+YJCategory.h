@@ -28,10 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
  
  *  @endcode
  */
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 typedef void(^YJAlertViewActionHandler)(UIAlertView *alertView, NSInteger buttonIndex, NSString *buttonTitle);
+#pragma clang diagnostic pop
 
-@interface UIAlertView (YJCategory)
+@interface UIAlertView (YJCategory) // First deprecated in iOS 9.0
 
 /**
  *  Convenience method for initializing an alert view.
