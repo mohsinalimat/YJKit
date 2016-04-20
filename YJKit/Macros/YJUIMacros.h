@@ -33,7 +33,7 @@
 #define UIWindowSnapshotBegin() \
 UIWindow *window = [UIApplication sharedApplication].keyWindow; \
 UIView *yj_snapview_ = [window snapshotViewAfterScreenUpdates:NO]; \
-[window addSubview:snapview];
+[window addSubview:yj_snapview_];
 #endif
 
 #ifndef UIWindowSnapshotEnd

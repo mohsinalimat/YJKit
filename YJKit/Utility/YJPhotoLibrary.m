@@ -207,15 +207,15 @@ static execute_init(save_img_exe)
 - (NSString *)albumName {
     if (!_albumName || !_albumName.length) {
         _albumName = [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"] ?: @"Album";
-    }
-    if (_forceAlbumCreationAfterUserDeleted) {
-        int deletionCount = self.albumDeletionCount;
-        if (deletionCount) {
-            NSMutableString *name = [_albumName mutableCopy];
-            for (int i = 0; i < deletionCount; i++) {
-                [name appendString:@" "];
+        if (_forceAlbumCreationAfterUserDeleted) {
+            int deletionCount = self.albumDeletionCount;
+            if (deletionCount) {
+                NSMutableString *name = [_albumName mutableCopy];
+                for (int i = 0; i < deletionCount; i++) {
+                    [name appendString:@" "];
+                }
+                _albumName = [name copy];
             }
-            _albumName = [name copy];
         }
     }
     return _albumName;

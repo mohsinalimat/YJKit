@@ -18,7 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return An initialized instance of a concrete UIGestureRecognizer subclass or nil if an error occurred in the attempt to initialize the object.
  *  @code
  UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionHandler:^(UIGestureRecognizer * _Nonnull gestureRecognizer) {
-    NSLog(@"Tap location: %@", NSStringFromCGPoint([gestureRecognizer locationInView:gestureRecognizer.view]));
+     if (gestureRecognizer.state == UIGestureRecognizerStateRecognized) {
+         NSLog(@"Tap location: %@", NSStringFromCGPoint([gestureRecognizer locationInView:gestureRecognizer.view]));
+     }
  }];
  *  @endcode
  */
@@ -31,7 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return An initialized instance of a concrete UIGestureRecognizer subclass or nil if an error occurred in the attempt to initialize the object.
  *  @code
  UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionTaged:@"handleSingleTap" actionHandler:^(UIGestureRecognizer * _Nonnull gestureRecognizer) {
-     NSLog(@"Tap location: %@", NSStringFromCGPoint([gestureRecognizer locationInView:gestureRecognizer.view]));
+     if (gestureRecognizer.state == UIGestureRecognizerStateRecognized) {
+         NSLog(@"Tap location: %@", NSStringFromCGPoint([gestureRecognizer locationInView:gestureRecognizer.view]));
+     }
  }];
  *  @endcode
  */
@@ -43,7 +47,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param actionHandler The block of code will be executed when the gesture is recognized.
  *  @code
  [tap addActionHandler:^(UIGestureRecognizer * _Nonnull gestureRecognizer) {
-    NSLog(@"Tap location: %@", NSStringFromCGPoint([gestureRecognizer locationInView:gestureRecognizer.view]));
+     if (gestureRecognizer.state == UIGestureRecognizerStateRecognized) {
+         NSLog(@"Tap location: %@", NSStringFromCGPoint([gestureRecognizer locationInView:gestureRecognizer.view]));
+     }
  }];
  *  @endcode
  */
@@ -56,7 +62,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param actionHandler The block of code will be executed when the gesture is recognized.
  *  @code
  [tap addActionTaged:@"handleSingleTap" actionHandler:^(UIGestureRecognizer * _Nonnull gestureRecognizer) {
-    NSLog(@"Tap location: %@", NSStringFromCGPoint([gestureRecognizer locationInView:gestureRecognizer.view]));
+     if (gestureRecognizer.state == UIGestureRecognizerStateRecognized) {
+         NSLog(@"Tap location: %@", NSStringFromCGPoint([gestureRecognizer locationInView:gestureRecognizer.view]));
+     }
  }];
  *  @endcode
  */
