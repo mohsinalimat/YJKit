@@ -31,6 +31,8 @@
 
 @implementation YJPhotoLibrary
 
+#pragma mark - init & dealloc
+
 + (instancetype)sharedLibrary {
     static YJPhotoLibrary *lib;
     static dispatch_once_t onceToken;
@@ -60,6 +62,8 @@
     NSLog(@"%@ dealloc", self.class);
 #endif
 }
+
+#pragma mark - save image
 
 - (void)saveImage:(UIImage *)image metadata:(NSDictionary *)metadata success:(void(^)(void))success failure:(void(^)(NSError *error))failure {
     if (!image) return;
@@ -222,6 +226,18 @@ static execute_init(save_img_exe)
 }
 
 #endif /* iOS_target_below_9.0 */
+
+#pragma mark - authorization status
+
++ (YJPhotoLibraryAuthorizationStatus)authorizationStatus {
+    NSInteger status;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_9_0
+    status = [PHPhotoLibrary authorizationStatus];
+#else 
+    status = [ALAssetsLibrary authorizationStatus];
+#endif
+    return status;
+}
 
 @end
 

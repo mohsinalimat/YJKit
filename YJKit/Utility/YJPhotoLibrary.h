@@ -11,6 +11,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, YJPhotoLibraryAuthorizationStatus) {
+    YJPhotoLibraryAuthorizationStatusNotDetermined = 0, // User has not yet made a choice with regards to this application
+    YJPhotoLibraryAuthorizationStatusRestricted,        // This application is not authorized to access photo data. The user cannot change this application’s status, possibly due to active restrictions such as parental controls being in place.
+    YJPhotoLibraryAuthorizationStatusDenied,            // User has explicitly denied this application access to photos data.
+    YJPhotoLibraryAuthorizationStatusAuthorized         // User has authorized this application to access photos data.
+};
+
 @interface YJPhotoLibrary : NSObject
 
 /**
@@ -19,6 +26,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return The singleton YJPhotoLibrary object.
  */
 + (instancetype)sharedLibrary;
+
+/**
+ *  Returns information about your app’s authorization for accessing the user’s Photos library.
+ *
+ *  @return The current authorization status.
+ */
++ (YJPhotoLibraryAuthorizationStatus)authorizationStatus;
 
 /**
  *  Whether always create an album after saving a photo data, even user deleted it from photo library. Default is NO.
