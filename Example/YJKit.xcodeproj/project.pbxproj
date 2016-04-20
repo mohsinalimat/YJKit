@@ -104,6 +104,7 @@
 		32B37D141CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+YJCategory.m"; sourceTree = "<group>"; };
 		32B37D161CAEA649009AA2A0 /* UIAlertView+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+YJCategory.h"; sourceTree = "<group>"; };
 		32B37D171CAEA649009AA2A0 /* UIAlertView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+YJCategory.m"; sourceTree = "<group>"; };
+		32B8E1171CC7681100856053 /* YJConfigureMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJConfigureMacros.h; sourceTree = "<group>"; };
 		32D9E7971CB21E7500CD763A /* NSTimer+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+YJCategory.h"; sourceTree = "<group>"; };
 		32D9E7981CB21E7500CD763A /* NSTimer+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+YJCategory.m"; sourceTree = "<group>"; };
 		32F9DE1B1CC1DC66004E384E /* YJMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMacros.h; sourceTree = "<group>"; };
@@ -271,6 +272,7 @@
 			children = (
 				32F9DE1B1CC1DC66004E384E /* YJMacros.h */,
 				321D8A5A1CC50ED800CB44DC /* YJDebugMacros.h */,
+				32B8E1171CC7681100856053 /* YJConfigureMacros.h */,
 				32F9DE1C1CC1DC66004E384E /* YJUIMacros.h */,
 				32F9DE1D1CC1DCFB004E384E /* YJMathMacros.h */,
 				32F9DE1E1CC1DD44004E384E /* YJObjcMacros.h */,
@@ -585,7 +587,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -618,7 +620,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

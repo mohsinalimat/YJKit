@@ -14,11 +14,13 @@
 #import <YJKit/YJMathMacros.h>
 #import <YJKit/YJObjcMacros.h>
 #import <YJKit/YJExecutionMacros.h>
+#import <YJKit/YJConfigureMacros.h>
 #else
 #import "YJUIMacros.h"
 #import "YJMathMacros.h"
 #import "YJObjcMacros.h"
 #import "YJExecutionMacros.h"
+#import "YJConfigureMacros.h"
 #endif
 
 #endif /* YJMacros_h */
