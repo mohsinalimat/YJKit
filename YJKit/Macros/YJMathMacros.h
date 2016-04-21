@@ -14,11 +14,11 @@
 // Radians & Degrees
 
 #ifndef RadiansInDegrees
-#define RadiansInDegrees(degrees) (degrees) * M_PI / 180
+#define RadiansInDegrees(degrees) ((degrees) * M_PI / 180)
 #endif
 
 #ifndef DegreesInRadians
-#define DegreesInRadians(radians) (radians) * 180 / M_PI
+#define DegreesInRadians(radians) ((radians) * 180 / M_PI)
 #endif
 
 /* ------------------------------------------------------------------------------------------------------------ */

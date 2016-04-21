@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 #ifndef RGBColor
-#define RGBColor(hexValue, alphaValue) [UIColor colorWithHex:hexValue alpha:alphaValue];
+#define RGBColor(hexValue, alphaValue) [UIColor colorWithHex:hexValue alpha:alphaValue]
 #endif
 
 @interface UIColor (YJCategory)
