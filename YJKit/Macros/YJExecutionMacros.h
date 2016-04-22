@@ -17,12 +17,12 @@
 // execute_init()
 
 #ifndef execute_init
-#define execute_init(x) \
-    _execute_mutex_init(x)
+#define execute_init(exe) \
+    _execute_pthread_mutex_init(exe)
 #endif
 
-#ifndef _execute_mutex_init
-#define _execute_mutex_init(m) pthread_mutex_t m = PTHREAD_MUTEX_INITIALIZER;
+#ifndef _execute_pthread_mutex_init
+#define _execute_pthread_mutex_init(mutex) pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 #endif
 
 /* ------------------------------------------------------------------------------------------------------------ */
@@ -37,16 +37,16 @@
  
  Example:
  
- static execute_init(x)
- static execute_init(y)
+ static execute_init(say_hello)
+ static execute_init(say_goodbye)
  
  void greet() {
-    execute_once(x)
+    execute_once(say_hello)
     printf("hello\n");
  }
  
  void farewell() {
-    execute_once(y)
+    execute_once(say_goodbye)
     printf("bye-bye\n");
  }
  
@@ -58,31 +58,35 @@
  
  Another Example:
  
- static execute_init(a)
+ static execute_init(say_jack)
  
- void doSomething() {
-    printf("hello\n");
-    execute_once(a)
-    printf("world\n");
+ void sayHi() {
+    printf("hi\n");
+    execute_once(say_jack)
+    printf("Jack\n");
+ }
+ 
+ for (int i = 0; i < 5; i++) {
+    sayHi();
  }
  
  *  @endcode
  */
 #ifndef execute_once
-#define execute_once(x) \
-    _execute_once_pthread_mutex_lockify(&(x))
+#define execute_once(exe) \
+    _execute_once_pthread_mutex_lockify(exe)
 #endif
 
 #ifndef _execute_once_pthread_mutex_lockify
-#define _execute_once_pthread_mutex_lockify(lockPtr) \
-    pthread_mutex_lock(lockPtr); \
-    static bool exe_flag_ = false; \
-    if (exe_flag_) { \
-        pthread_mutex_unlock(lockPtr); \
+#define _execute_once_pthread_mutex_lockify(mutex) \
+    pthread_mutex_lock(&(mutex)); \
+    static bool exe_flag_##mutex = false; \
+    if (exe_flag_##mutex) { \
+        pthread_mutex_unlock(&(mutex)); \
         return; \
     } \
-    exe_flag_ = true; \
-    pthread_mutex_unlock(lockPtr);
+    exe_flag_##mutex = true; \
+    pthread_mutex_unlock(&(mutex));
 #endif
 
 /* ------------------------------------------------------------------------------------------------------------ */
@@ -97,18 +101,25 @@
  
  Example:
  
- static execute_init(exe)
+ static execute_init(print_hello)
+ static execute_init(print_hi)
  
- void doSomething {
+ void doSomething() {
      printf("-----\n");
-     execute_once_begin(exe)
+     execute_once_begin(print_hello)
      printf("hello\n");
-     execute_once_end(exe)
+     execute_once_end(print_hello)
      printf("-----\n");
+ 
+     printf("*****\n");
+     execute_once_begin(print_hi)
+     printf("hi\n");
+     execute_once_end(print_hi)
+     printf("*****\n");
  }
  
  for (int i = 0; i < 5; i++) {
-    doSomething();
+     doSomething();
  }
  
  *  @endcode
@@ -118,18 +129,20 @@
  *
  *  @code
  
+ static execute_init(block_test)
+ 
  void test() {
      printf("-----\n");
      
      void(^block)(void) = ^{ printf("hello block\n"); };
      dispatch_queue_t queue = dispatch_queue_create("new queue", 0);
      
-     execute_once_begin(exe)
+     execute_once_begin(block_test)
      
      block();
      dispatch_async(queue, ^{ printf("hello queue\n"); });
  
-     execute_once_end(exe)
+     execute_once_end(block_test)
      
      printf("-----\n");
  }
@@ -137,25 +150,25 @@
  *  @endcode
  */
 #ifndef execute_once_begin
-#define execute_once_begin(x) \
-    _execute_once_begin_pthread_mutex_lockify(&(x))
+#define execute_once_begin(exe) \
+    _execute_once_begin_pthread_mutex_lockify(exe)
 #endif
 
 #ifndef execute_once_end
-#define execute_once_end(x) \
-    YOU_ALSO_MUST_CALL_EXECUTE_ONCE_END: {}
+#define execute_once_end(exe) \
+    YOU_ALSO_MUST_CALL_EXECUTE_ONCE_END_FOR_##exe: {}
 #endif
 
 #ifndef _execute_once_begin_pthread_mutex_lockify
-#define _execute_once_begin_pthread_mutex_lockify(lockPtr) \
-    pthread_mutex_lock(lockPtr); \
-    static bool exe_flag_ = false; \
-    if (exe_flag_) { \
-        pthread_mutex_unlock(lockPtr); \
-        goto YOU_ALSO_MUST_CALL_EXECUTE_ONCE_END; \
+#define _execute_once_begin_pthread_mutex_lockify(mutex) \
+    pthread_mutex_lock(&(mutex)); \
+    static bool exe_flag_##mutex = false; \
+    if (exe_flag_##mutex) { \
+        pthread_mutex_unlock(&(mutex)); \
+        goto YOU_ALSO_MUST_CALL_EXECUTE_ONCE_END_FOR_##mutex; \
     } \
-    exe_flag_ = true; \
-    pthread_mutex_unlock(lockPtr);
+    exe_flag_##mutex = true; \
+    pthread_mutex_unlock(&(mutex));
 #endif
 
 /* ------------------------------------------------------------------------------------------------------------ */
@@ -170,7 +183,7 @@
  
  Example for function:
  
- static execute_init(z)
+ static execute_init(hello_test)
  
  void doSomething() {
      test();
@@ -180,11 +193,11 @@
  void test() {
      printf("-----\n");
      
-     execute_once_on(z)
+     execute_once_on(hello_test)
      printf("hello\n");
      
      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        execute_once_off(z)
+        execute_once_off(hello_test)
      });
      
      printf("-----\n");
@@ -195,7 +208,7 @@
  Example for method:
  
  @implementation XXXViewController {
-     execute_init(_exe)
+     execute_init(_fetch_flag)
  }
  
  - (void)doSomething {
@@ -204,44 +217,44 @@
  }
  
  - (void)networkFetch {
-     execute_once_on(_exe)
+     execute_once_on(_fetch_flag)
      [networkManager request:post completion:^(id response) {
-        execute_once_off(_exe)
+        execute_once_off(_fetch_flag)
         ...
      } failure:^(NSError *error) {
-        execute_once_off(_exe)
+        execute_once_off(_fetch_flag)
         ...
      }];
  }
  *  @endcode
  */
 #ifndef execute_once_on
-#define execute_once_on(x) \
-    _execute_once_on_pthread_mutex_lockify(&(x))
+#define execute_once_on(exe) \
+    _execute_once_on_pthread_mutex_lockify(exe)
 #endif
 
 #ifndef execute_once_off
-#define execute_once_off(x) \
-    _execute_once_off_pthread_mutex_lockify(&(x))
+#define execute_once_off(exe) \
+    _execute_once_off_pthread_mutex_lockify(exe)
 #endif
 
 #ifndef _execute_once_on_pthread_mutex_lockify
-#define _execute_once_on_pthread_mutex_lockify(lockPtr) \
-    pthread_mutex_lock(lockPtr); \
-    static bool exe_flag1_ = false; \
-    if (exe_flag1_) { \
-        pthread_mutex_unlock(lockPtr); \
+#define _execute_once_on_pthread_mutex_lockify(mutex) \
+    pthread_mutex_lock(&(mutex)); \
+    static bool exe_flag_##mutex = false; \
+    if (exe_flag_##mutex) { \
+        pthread_mutex_unlock(&(mutex)); \
         return; \
     } \
-    exe_flag1_ = true; \
-    pthread_mutex_unlock(lockPtr);
+    exe_flag_##mutex = true; \
+    pthread_mutex_unlock(&(mutex));
 #endif
 
 #ifndef _execute_once_off_pthread_mutex_lockify
-#define _execute_once_off_pthread_mutex_lockify(lockPtr) \
-    pthread_mutex_lock(lockPtr); \
-    exe_flag1_ = false; \
-    pthread_mutex_unlock(lockPtr);
+#define _execute_once_off_pthread_mutex_lockify(mutex) \
+    pthread_mutex_lock(&(mutex)); \
+    exe_flag_##mutex = false; \
+    pthread_mutex_unlock(&(mutex));
 #endif
 
 /* ------------------------------------------------------------------------------------------------------------ */
