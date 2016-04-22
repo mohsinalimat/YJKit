@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.    
+    // Do any additional setup after loading the view.
     self.horizontalBar = [[UIView alloc] init];
     self.horizontalBar.backgroundColor = [UIColor orangeColor];
     self.verticalBar = [[UIView alloc] init];

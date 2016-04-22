@@ -9,7 +9,6 @@
 #import "YJViewController.h"
 #import "YJGeometryViewController.h"
 #import "YJGridViewController.h"
-#import "YJImageViewController.h"
 
 @interface YJViewController () <UITableViewDelegate, UITableViewDataSource>
 @end
@@ -25,9 +24,8 @@
 
 - (NSArray <NSString *> *)controllerClassNames {
     return @[@"YJGridViewController",
-             @"YJImageViewController",
              @"YJGeometryViewController",
-             @"YJBlockViewController",
+             @"YJSavingImageToAlbumViewController"
              ];
 }
 
