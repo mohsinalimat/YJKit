@@ -22,15 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addObservedKeyPath:(NSString *)keyPath handleChanges:(void(^)(id object, id _Nullable oldValue, id _Nullable newValue))changeHandler;
 
 /**
- *  @brief      Key-Value observing the key path and execute the handler block on main thread when observed value changes.
- *  @discussion This method performs as same as add observer with options (NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew)
- *  @remark     The handler block captures inner objects while the receiver is alive.
- *  @param keyPath       The key path, relative to the array, of the property to observe. This value must not be nil.
- *  @param changeHandler The block of code will be performed on main thread when observed value get changed.
- */
-- (void)addObservedKeyPath:(NSString *)keyPath handleChangesOnMainThread:(void (^)(id object, id _Nullable oldValue, id _Nullable newValue))changeHandler;
-
-/**
  *  @brief      Key-Value observing the key path and execute the handler block when observed value changes.
  *  @discussion This method performs as same as add observer with options (NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew)
  *  @remark     The handler block captures inner objects while the receiver is alive.
@@ -38,15 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param setupHandler  The block of code will be performed when observed value get setup.
  */
 - (void)addObservedKeyPath:(NSString *)keyPath handleSetup:(void(^)(id object, id _Nullable newValue))setupHandler;
-
-/**
- *  @brief      Key-Value observing the key path and execute the handler block on main thread when observed value changes.
- *  @discussion This method performs as same as add observer with options (NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew)
- *  @remark     The handler block captures inner objects while the receiver is alive.
- *  @param keyPath       The key path, relative to the array, of the property to observe. This value must not be nil.
- *  @param setupHandler  The block of code will be performed on main thread when observed value get setup.
- */
-- (void)addObservedKeyPath:(NSString *)keyPath handleSetupOnMainThread:(void(^)(id object, id _Nullable newValue))setupHandler;
 
 /**
  *  Stops observing changes for the property specified by a given key-path relative to the receiver.
