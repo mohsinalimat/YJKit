@@ -25,7 +25,8 @@
 - (NSArray <NSString *> *)controllerClassNames {
     return @[@"YJGridViewController",
              @"YJGeometryViewController",
-             @"YJSavingImageToAlbumViewController"
+             @"YJSavingImageToAlbumViewController",
+             @"YJCircularImageViewController"
              ];
 }
 
