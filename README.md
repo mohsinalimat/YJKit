@@ -11,6 +11,19 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
+To specify the Podfile this way: (Add `use_frameworks!` to avoid IB_DESIGNABLE compiler error)
+
+```
+platform :ios, '7.0'
+
+use_frameworks!
+
+...
+pod 'YJKit'
+...
+
+```
+
 ## Installation
 
 YJKit is available through [CocoaPods](http://cocoapods.org). To install
@@ -27,3 +40,5 @@ huang-kun, jack-huang-developer@foxmail.com
 ## License
 
 YJKit is available under the MIT license. See the LICENSE file for more info.
+
+

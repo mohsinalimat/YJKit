@@ -8,14 +8,14 @@
 
 Pod::Spec.new do |s|
   s.name             = "YJKit"
-  s.version          = "0.1.16"
+  s.version          = "0.1.17"
   s.summary          = "YJKit is a simple wrapper for iOS library."
   s.homepage         = "https://github.com/huang-kun/YJKit"
   s.license          = 'MIT'
   s.author           = { "huang-kun" => "jack-huang-developer@foxmail.com" }
   s.source           = { :git => "https://github.com/huang-kun/YJKit.git", :tag => s.version.to_s }
 
-  s.platform     = :ios, '6.0'
+  s.platform     = :ios, '7.0'
   s.requires_arc = true
 
   s.source_files = 'YJKit/**/*'
