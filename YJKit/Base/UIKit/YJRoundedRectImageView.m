@@ -7,7 +7,9 @@
 //
 
 #import "YJRoundedRectImageView.h"
-#import "NSBundle+YJCategory.h"
+#import "UIDevice+YJCategory.h"
+
+static const CGFloat kYJRoundedRectImageViewDefaultCornerRadius = 20.0f;
 
 @implementation YJRoundedRectImageView
 
@@ -15,7 +17,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _cornerRadius = 0.0f;
+        _cornerRadius = kYJRoundedRectImageViewDefaultCornerRadius;
     }
     return self;
 }
@@ -24,7 +26,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        _cornerRadius = 0.0f;
+        _cornerRadius = kYJRoundedRectImageViewDefaultCornerRadius;
         if ([self image]) [self setImage:[self image]];
     }
     return self;
@@ -59,9 +61,9 @@
 
 // Override
 - (void)prepareForInterfaceBuilder {
-    if (!self.image) {
-        NSString *path = [[NSBundle bundleWithName:@"YJPlaceholderImages"] pathForResource:@"head_icon" ofType:@"png"];
-        self.image = [UIImage imageWithContentsOfFile:path];
+    if (!self.image && UIDevice.systemVersion >= 8.0) {
+        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+        self.image = [UIImage imageNamed:@"yj_head_icon" inBundle:bundle compatibleWithTraitCollection:nil];
     }
 }
 

@@ -8,7 +8,7 @@
 //  Reference: https://developer.apple.com/videos/play/wwdc2014/401/
 
 #import "YJCircularImageView.h"
-#import "NSBundle+YJCategory.h"
+#import "UIDevice+YJCategory.h"
 
 @interface YJCircularImageView ()
 @end
@@ -70,9 +70,9 @@
 // Override
 // Quote From WWDC: This is going to be invoked on our view right before it renders into the canvas, and it's a last miniute chance for us to do any additional setup.
 - (void)prepareForInterfaceBuilder {
-    if (!self.image) {
-        NSString *path = [[NSBundle bundleWithName:@"YJPlaceholderImages"] pathForResource:@"head_icon" ofType:@"png"];
-        self.image = [UIImage imageWithContentsOfFile:path];
+    if (!self.image && UIDevice.systemVersion >= 8.0) {
+        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+        self.image = [UIImage imageNamed:@"yj_head_icon" inBundle:bundle compatibleWithTraitCollection:nil];
     }
 }
 
