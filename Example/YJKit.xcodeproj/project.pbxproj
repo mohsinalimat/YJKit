@@ -25,6 +25,8 @@
 		324AB0A01CD1C6EE00A9DCF0 /* YJCircularImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 324AB09F1CD1C6EE00A9DCF0 /* YJCircularImageViewController.m */; settings = {ASSET_TAGS = (); }; };
 		324AB0A41CD1CE4C00A9DCF0 /* YJCircularImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 324AB0A31CD1CE4C00A9DCF0 /* YJCircularImageViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		324AB0A81CD1EE8C00A9DCF0 /* Puppy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 324AB0A71CD1EE8C00A9DCF0 /* Puppy.jpg */; settings = {ASSET_TAGS = (); }; };
+		324AB0AB1CD202A700A9DCF0 /* YJRoundedRectImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 324AB0AA1CD202A700A9DCF0 /* YJRoundedRectImageView.m */; settings = {ASSET_TAGS = (); }; };
+		324AB0AE1CD2123E00A9DCF0 /* YJPlaceholderImages.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 324AB0AD1CD2123E00A9DCF0 /* YJPlaceholderImages.bundle */; settings = {ASSET_TAGS = (); }; };
 		324E98BE1CABC75F00CFB8D3 /* YJGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 324E98BD1CABC75F00CFB8D3 /* YJGridViewController.m */; settings = {ASSET_TAGS = (); }; };
 		325F880B1CB11D19007F9BE1 /* NSObject+YJCategory_KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 325F880A1CB11D19007F9BE1 /* NSObject+YJCategory_KVO.m */; settings = {ASSET_TAGS = (); }; };
 		3268A1D41CA83F5300B71E50 /* YJGeometryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3268A1D31CA83F5300B71E50 /* YJGeometryViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -95,6 +97,9 @@
 		324AB09F1CD1C6EE00A9DCF0 /* YJCircularImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJCircularImageViewController.m; sourceTree = "<group>"; };
 		324AB0A31CD1CE4C00A9DCF0 /* YJCircularImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YJCircularImageViewController.xib; sourceTree = "<group>"; };
 		324AB0A71CD1EE8C00A9DCF0 /* Puppy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Puppy.jpg; sourceTree = "<group>"; };
+		324AB0A91CD202A700A9DCF0 /* YJRoundedRectImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJRoundedRectImageView.h; sourceTree = "<group>"; };
+		324AB0AA1CD202A700A9DCF0 /* YJRoundedRectImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJRoundedRectImageView.m; sourceTree = "<group>"; };
+		324AB0AD1CD2123E00A9DCF0 /* YJPlaceholderImages.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YJPlaceholderImages.bundle; sourceTree = "<group>"; };
 		324E98BC1CABC75F00CFB8D3 /* YJGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJGridViewController.h; sourceTree = "<group>"; };
 		324E98BD1CABC75F00CFB8D3 /* YJGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJGridViewController.m; sourceTree = "<group>"; };
 		325F88091CB11D19007F9BE1 /* NSObject+YJCategory_KVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YJCategory_KVO.h"; sourceTree = "<group>"; };
@@ -175,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				3204F0F01CACC2BA006282DF /* YJKit.h */,
+				324AB0AC1CD2120100A9DCF0 /* Resources */,
 				32F9DE1A1CC1DC66004E384E /* Macros */,
 				3204F0D61CACC2BA006282DF /* AVFoundation */,
 				3204F0D91CACC2BA006282DF /* Base */,
@@ -253,6 +259,8 @@
 				321D8A511CC4CDC000CB44DC /* UIActionSheet+YJCategory.m */,
 				324AB09B1CD1BF5A00A9DCF0 /* YJCircularImageView.h */,
 				324AB09C1CD1BF5A00A9DCF0 /* YJCircularImageView.m */,
+				324AB0A91CD202A700A9DCF0 /* YJRoundedRectImageView.h */,
+				324AB0AA1CD202A700A9DCF0 /* YJRoundedRectImageView.m */,
 				32FC88D01CC610590060FBA7 /* Privates */,
 			);
 			path = UIKit;
@@ -274,6 +282,14 @@
 				32FC88D51CC616930060FBA7 /* YJPhotoLibrary.m */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		324AB0AC1CD2120100A9DCF0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				324AB0AD1CD2123E00A9DCF0 /* YJPlaceholderImages.bundle */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		32F9DE1A1CC1DC66004E384E /* Macros */ = {
@@ -481,6 +497,7 @@
 				324AB0A41CD1CE4C00A9DCF0 /* YJCircularImageViewController.xib in Resources */,
 				320A97EF1CA9493800485B9A /* AFTCameraUI.bundle in Resources */,
 				324AB0A81CD1EE8C00A9DCF0 /* Puppy.jpg in Resources */,
+				324AB0AE1CD2123E00A9DCF0 /* YJPlaceholderImages.bundle in Resources */,
 				3204F0C01CACA98D006282DF /* Octocat.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -515,6 +532,7 @@
 				3204F0F81CACC2BA006282DF /* UIView+YJCategory.m in Sources */,
 				3204F0F91CACC2BA006282DF /* YJMemoryCache.m in Sources */,
 				6003F5A7195388D20070C39A /* YJViewController.m in Sources */,
+				324AB0AB1CD202A700A9DCF0 /* YJRoundedRectImageView.m in Sources */,
 				324AB09D1CD1BF5A00A9DCF0 /* YJCircularImageView.m in Sources */,
 				3204F0FC1CAD5645006282DF /* UIColor+YJCategory.m in Sources */,
 				321D8A521CC4CDC000CB44DC /* UIActionSheet+YJCategory.m in Sources */,

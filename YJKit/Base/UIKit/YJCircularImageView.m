@@ -8,6 +8,7 @@
 //  Reference: https://developer.apple.com/videos/play/wwdc2014/401/
 
 #import "YJCircularImageView.h"
+#import "NSBundle+YJCategory.h"
 
 @interface YJCircularImageView ()
 @end
@@ -37,17 +38,17 @@
     if (saturation < 0.0f) saturation = 0.0f;
     if (saturation > 1.0f) saturation = 1.0f;
     _saturation = saturation;
-    if (self.image) [self _refreshImage:self.image forSuperclass:NO];
+    if (self.image) [self _refreshImage:self.image];
 }
 
 - (void)setImage:(UIImage *)image {
-    [self _refreshImage:image forSuperclass:YES];
+    [self _refreshImage:image];
 }
 
-- (void)_refreshImage:(UIImage *)image forSuperclass:(BOOL)forSuperclass {
+- (void)_refreshImage:(UIImage *)image {
     UIImage *circularImage = image ? [self _preparedCircularImage:image] : nil;
     if (image) self.backgroundColor = nil;
-    forSuperclass ? [super setImage:circularImage] : [self setImage:circularImage];
+    [super setImage:circularImage];
 }
 
 - (UIImage *)_preparedCircularImage:(UIImage *)image {
@@ -61,15 +62,18 @@
         [[UIColor colorWithWhite:1.0 alpha:(1.0 - self.saturation)] set];
         UIRectFillUsingBlendMode(bounds, kCGBlendModeColor);
     }
-    UIImage *preparedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *circularImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    return preparedImage;
+    return circularImage;
 }
 
 // Override
 // Quote From WWDC: This is going to be invoked on our view right before it renders into the canvas, and it's a last miniute chance for us to do any additional setup.
 - (void)prepareForInterfaceBuilder {
-    if (!self.image) self.image = [UIImage imageWithContentsOfFile:kYJCircularImageViewDefaultImagePath];
+    if (!self.image) {
+        NSString *path = [[NSBundle bundleWithName:@"YJPlaceholderImages"] pathForResource:@"head_icon" ofType:@"png"];
+        self.image = [UIImage imageWithContentsOfFile:path];
+    }
 }
 
 @end

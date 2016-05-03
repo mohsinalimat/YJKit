@@ -47,6 +47,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"YJCell"];
     if (!cell) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"YJCell"];
+    cell.textLabel.font = [UIFont systemFontOfSize:14.0];
     cell.textLabel.text = [self controllerClassNames][indexPath.row];
     return cell;
 }

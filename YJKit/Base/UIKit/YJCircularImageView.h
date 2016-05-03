@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#ifndef kYJCircularImageViewDefaultImagePath
-#define kYJCircularImageViewDefaultImagePath @""
-#endif
-
 /**
  *  Display a circular image for UIImageView. The center of circle is the center of the image, and the radius of circle will be the length of the shortest border of the image rectangle.
  *
@@ -21,12 +17,11 @@
  *
  *  - Drag out a UIImageView from Xcode object library in the Interface Builder.
  *  - Tap the Xcode Identity Inspector, select the UIImageView and Change it's class to YJCircularImageView.
- *  - Tap the Xcode Attributes Inspector, fill in the "image" blank with image name.
+ *  - Tap the Xcode Attributes Inspector, fill in the "image" blank with image name in "Image View" section.
  *
  *  Here is a tip to reveal the invisible YJCircularImageView without image content:
  *  - In the Interface Builder(.xib or .storyboard), go to Xcode menu bar -> Editor -> Canvas -> Show Bounds Rectangles.
  *
- *  #define kYJCircularImageViewDefaultImagePath for loading default image at design time.
  */
 
 IB_DESIGNABLE

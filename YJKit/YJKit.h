@@ -32,6 +32,7 @@
 #import <YJKit/UIActionSheet+YJCategory.h>
 #import <YJKit/YJPhotoLibrary.h>
 #import <YJKit/YJCircularImageView.h>
+#import <YJKit/YJRoundedRectImageView.h>
 #else
 #import "YJMacros.h"
 #import "CGGeometry_YJExtension.h"
@@ -52,6 +53,7 @@
 #import "UIActionSheet+YJCategory.h"
 #import "YJPhotoLibrary.h"
 #import "YJCircularImageView.h"
+#import "YJRoundedRectImageView.h"
 #endif
 
 #endif /* YJKit_h */
