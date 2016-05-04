@@ -81,6 +81,11 @@ static void _yj_registerTargetActionPairForUIControl(UIControl *control, UIContr
     _yj_registerTargetActionPairForUIControl(self, events, (tag.length ? tag : nil), actionHandler);
 }
 
+- (void)setActionForControlEvents:(UIControlEvents)events actionHandler:(void(^)(UIControl *sender))actionHandler {
+    [self removeActionForControlEvents:events];
+    [self addActionForControlEvents:events actionHandler:actionHandler];
+}
+
 static void _yj_removeTargetActionPairForUIControl(UIControl *control, BOOL(^condition)(_YJControlTarget *target)) {
     NSMutableSet <_YJControlTarget *> *targets = [control yj_targets];
     NSMutableArray *collector = [NSMutableArray arrayWithCapacity:targets.count];

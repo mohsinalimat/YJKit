@@ -13,7 +13,21 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIControl (YJCategory)
 
 /**
- *  The block based action setup for replacing -[UIControl addTarget:action:forControlEvents:]
+ *  The block based action setup for replacing using -[UIControl removeTarget:action:forControlEvents:] first and then calling -[UIControl addTarget:action:forControlEvents:] after. In order to make sure that only one action block will be executed under the specific control events.
+ *  @param events           A bitmask specifying the control events for which the action message is sent. See Control Events for bitmask constants.
+ *  @param actionHandler    The action block which can be executed for specified control events.
+ *  @remark The actionHandler will retain the objects that inside of block when the control (receiver) is alive.
+ *  @code
+ [button setActionForControlEvents:UIControlEventTouchUpInside actionHandler:^(UIControl *sender) {
+    UIButton *cameraButton = (UIButton *)sender;
+    ...
+ }];
+ *  @endcode
+ */
+- (void)setActionForControlEvents:(UIControlEvents)events actionHandler:(void(^)(UIControl *sender))actionHandler;
+
+/**
+ *  The block based action setup for replacing -[UIControl addTarget:action:forControlEvents:]. Multiple action blocks can be added to the same specific control events.
  *  @param events           A bitmask specifying the control events for which the action message is sent. See Control Events for bitmask constants.
  *  @param actionHandler    The action block which can be executed for specified control events.
  *  @remark The actionHandler will retain the objects that inside of block when the control (receiver) is alive.
@@ -27,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addActionForControlEvents:(UIControlEvents)events actionHandler:(void(^)(UIControl *sender))actionHandler;
 
 /**
- *  The block based action setup for replacing -[UIControl addTarget:action:forControlEvents:]
+ *  The block based action setup for replacing -[UIControl addTarget:action:forControlEvents:]. Multiple action blocks can be added to the same specific control events.
  *  @param events           A bitmask specifying the control events for which the action message is sent. See Control Events for bitmask constants.
  *  @param tag              The tag string associated with the action block. Better be unique and descriptive.
  *  @param actionHandler    The action block which can be executed for specified control events.

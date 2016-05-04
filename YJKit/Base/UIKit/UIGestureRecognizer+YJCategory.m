@@ -88,6 +88,11 @@ static _YJGestureTarget * _yj_targetForUIGestureRecognizer(UIGestureRecognizer *
     [self addTarget:target action:@selector(invokeGestureRecognizer:)];
 }
 
+- (void)setActionHandler:(void(^)(UIGestureRecognizer *gestureRecognizer))actionHandler {
+    [self removeAllActions];
+    [self addActionHandler:actionHandler];
+}
+
 - (void)removeActionForTag:(NSString *)tag {
     NSMutableSet <_YJGestureTarget *> *targets = [self yj_targets];
     NSMutableArray *collector = [NSMutableArray arrayWithCapacity:targets.count];
