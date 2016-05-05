@@ -23,7 +23,7 @@
  
  *  @endcode
  */
-- (NSArray *)map:(id(^)(id obj))messaging;
+- (NSArray *)map:(id(^)(id obj))mapping;
 
 
 /**
