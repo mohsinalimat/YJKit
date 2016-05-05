@@ -7,9 +7,10 @@
 //
 
 #import "YJRoundedRectImageView.h"
-#import "UIDevice+YJCategory.h"
+#import "UIBezierPath+YJCategory.h"
+#import "CAShapeLayer+YJCategory.h"
 
-static const CGFloat kYJRoundedRectImageViewDefaultCornerRadius = 20.0f;
+static const CGFloat kYJRoundedRectImageViewDefaultCornerRadius = 10.0f;
 
 @implementation YJRoundedRectImageView
 
@@ -27,7 +28,6 @@ static const CGFloat kYJRoundedRectImageViewDefaultCornerRadius = 20.0f;
     self = [super initWithCoder:aDecoder];
     if (self) {
         _cornerRadius = kYJRoundedRectImageViewDefaultCornerRadius;
-        if ([self image]) [self setImage:[self image]];
     }
     return self;
 }
@@ -35,20 +35,11 @@ static const CGFloat kYJRoundedRectImageViewDefaultCornerRadius = 20.0f;
 - (void)setCornerRadius:(CGFloat)cornerRadius {
     if (cornerRadius < 0.0f) cornerRadius = 0.0f;
     _cornerRadius = cornerRadius;
-    if (self.image) [self _refreshImage:self.image];
+    if (self.image) [self updateUIForInterfaceBuilder];
 }
 
-- (void)setImage:(UIImage *)image {
-    self.cornerRadius ? [self _refreshImage:image] : [super setImage:image];
-}
-
-- (void)_refreshImage:(UIImage *)image {
-    UIImage *circularImage = image ? [self _preparedRoundedRectImage:image] : nil;
-    if (image) self.backgroundColor = nil;
-    [super setImage:circularImage];
-}
-
-- (UIImage *)_preparedRoundedRectImage:(UIImage *)image {
+- (UIImage *)prepareMaskedImageForInterfaceBuilder {
+    UIImage *image = self.image;
     CGSize size = image.size;
     CGRect bounds = (CGRect){ CGPointZero, (CGSize){ size.width, size.height } };
     UIGraphicsBeginImageContextWithOptions(bounds.size, NO, image.scale);
@@ -59,11 +50,22 @@ static const CGFloat kYJRoundedRectImageViewDefaultCornerRadius = 20.0f;
     return roundedRectImage;
 }
 
-// Override
-- (void)prepareForInterfaceBuilder {
-    if (!self.image && UIDevice.systemVersion >= 8.0) {
-        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-        self.image = [UIImage imageNamed:@"yj_head_icon" inBundle:bundle compatibleWithTraitCollection:nil];
+- (UIBezierPath *)prepareClosedBezierPathForRenderingMask {
+    return [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:self.bounds.size cornerRadius:self.cornerRadius outerFramePath:NULL innerRoundedPath:NULL];
+}
+
+- (nullable CAShapeLayer *)prepareHighlightedMaskShapeLayerWithDefaultMaskColor:(UIColor *)maskColor {
+    if (!self.borderWidth || !self.borderColor) {
+        return nil;
+    } else {
+        UIBezierPath *framePath, *roundedBorderPath;
+        CGSize innerSize = CGSizeMake(self.bounds.size.width - self.borderWidth / 2, self.bounds.size.height - self.borderWidth / 2);
+        [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:innerSize cornerRadius:self.cornerRadius outerFramePath:&framePath innerRoundedPath:&roundedBorderPath];
+        return [CAShapeLayer maskLayerForFrameBezierPath:framePath
+                                         shapeBezierPath:roundedBorderPath
+                                               fillColor:maskColor.CGColor
+                                             strokeWidth:self.borderWidth
+                                             strokeColor:self.borderColor.CGColor];
     }
 }
 

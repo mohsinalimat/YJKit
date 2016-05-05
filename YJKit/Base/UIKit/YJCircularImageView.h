@@ -6,7 +6,7 @@
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "YJMaskedImageView.h"
 
 /**
  *  Display a circular image for UIImageView. The center of circle is the center of the image, and the radius of circle will be the length of the shortest border of the image rectangle.
@@ -25,9 +25,11 @@
  */
 
 IB_DESIGNABLE
-@interface YJCircularImageView : UIImageView
+@interface YJCircularImageView : YJMaskedImageView
 
-/// The saturation of the image with range (0.0 ~ 1.0), default is 1.0
-@property (nonatomic) IBInspectable CGFloat saturation;
+/// The width of the circle around the image. Default is 0.0
+@property (nonatomic, assign) IBInspectable CGFloat circleWidth;
 
+/// The color of the circle around the image. Default is nil
+@property (nonatomic, strong) IBInspectable UIColor *circleColor;
 @end

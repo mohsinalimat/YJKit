@@ -21,6 +21,8 @@
 #import <YJKit/NSBundle+YJCategory.h>
 #import <YJKit/NSTimer+YJCategory.h>
 #import <YJKit/YJMemoryCache.h>
+#import <YJKit/UIBezierPath+YJCategory.h>
+#import <YJKit/CAShapeLayer+YJCategory.h>
 #import <YJKit/UIView+YJCategory.h>
 #import <YJKit/UIImage+YJCategory.h>
 #import <YJKit/UIDevice+YJCategory.h>
@@ -44,6 +46,8 @@
 #import "NSBundle+YJCategory.h"
 #import "NSTimer+YJCategory.h"
 #import "YJMemoryCache.h"
+#import "UIBezierPath+YJCategory.h"
+#import "CAShapeLayer+YJCategory.h"
 #import "UIView+YJCategory.h"
 #import "UIImage+YJCategory.h"
 #import "UIDevice+YJCategory.h"

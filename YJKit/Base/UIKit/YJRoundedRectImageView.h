@@ -6,7 +6,7 @@
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "YJMaskedImageView.h"
 
 /**
  *  Display a rounded rectangle image for UIImageView.
@@ -25,9 +25,15 @@
  */
 
 IB_DESIGNABLE
-@interface YJRoundedRectImageView : UIImageView
+@interface YJRoundedRectImageView : YJMaskedImageView
 
-/// The radius to use when drawing rounded corners for the image content. Default is 0.0
-@property (nonatomic) IBInspectable CGFloat cornerRadius;
+/// The radius to use when drawing rounded corners for the image content. Default is 10.0f
+@property (nonatomic, assign) IBInspectable CGFloat cornerRadius;
+
+/// The width of border around the image. Default is 0.0
+@property (nonatomic, assign) IBInspectable CGFloat borderWidth;
+
+/// The color of border around the image. Default is nil
+@property (nonatomic, strong) IBInspectable UIColor *borderColor;
 
 @end

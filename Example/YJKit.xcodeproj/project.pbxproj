@@ -23,6 +23,9 @@
 		32166C6E1CD85BC700CE699B /* yj_head_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 32166C6D1CD85BC700CE699B /* yj_head_icon.png */; };
 		321D8A521CC4CDC000CB44DC /* UIActionSheet+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 321D8A511CC4CDC000CB44DC /* UIActionSheet+YJCategory.m */; };
 		3223B4341CDAE5CE00956ED3 /* NSSet+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3223B4331CDAE5CE00956ED3 /* NSSet+YJCategory.m */; };
+		3223B43D1CDB127800956ED3 /* CAShapeLayer+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3223B43C1CDB127800956ED3 /* CAShapeLayer+YJCategory.m */; };
+		3223B4471CDB48F200956ED3 /* YJMaskedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3223B4451CDB48F200956ED3 /* YJMaskedImageView.m */; };
+		3223B44D1CDB4AB000956ED3 /* UIBezierPath+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3223B44C1CDB4AB000956ED3 /* UIBezierPath+YJCategory.m */; };
 		324AB09D1CD1BF5A00A9DCF0 /* YJCircularImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 324AB09C1CD1BF5A00A9DCF0 /* YJCircularImageView.m */; };
 		324AB0A01CD1C6EE00A9DCF0 /* YJCircularImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 324AB09F1CD1C6EE00A9DCF0 /* YJCircularImageViewController.m */; };
 		324AB0A41CD1CE4C00A9DCF0 /* YJCircularImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 324AB0A31CD1CE4C00A9DCF0 /* YJCircularImageViewController.xib */; };
@@ -96,6 +99,12 @@
 		321D8A5A1CC50ED800CB44DC /* YJDebugMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YJDebugMacros.h; sourceTree = "<group>"; };
 		3223B4321CDAE5CE00956ED3 /* NSSet+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+YJCategory.h"; sourceTree = "<group>"; };
 		3223B4331CDAE5CE00956ED3 /* NSSet+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+YJCategory.m"; sourceTree = "<group>"; };
+		3223B43B1CDB127800956ED3 /* CAShapeLayer+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAShapeLayer+YJCategory.h"; sourceTree = "<group>"; };
+		3223B43C1CDB127800956ED3 /* CAShapeLayer+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAShapeLayer+YJCategory.m"; sourceTree = "<group>"; };
+		3223B4441CDB48F200956ED3 /* YJMaskedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMaskedImageView.h; sourceTree = "<group>"; };
+		3223B4451CDB48F200956ED3 /* YJMaskedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJMaskedImageView.m; sourceTree = "<group>"; };
+		3223B44B1CDB4AB000956ED3 /* UIBezierPath+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+YJCategory.h"; sourceTree = "<group>"; };
+		3223B44C1CDB4AB000956ED3 /* UIBezierPath+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+YJCategory.m"; sourceTree = "<group>"; };
 		324AB09B1CD1BF5A00A9DCF0 /* YJCircularImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJCircularImageView.h; sourceTree = "<group>"; };
 		324AB09C1CD1BF5A00A9DCF0 /* YJCircularImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJCircularImageView.m; sourceTree = "<group>"; };
 		324AB09E1CD1C6EE00A9DCF0 /* YJCircularImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJCircularImageViewController.h; sourceTree = "<group>"; };
@@ -238,6 +247,8 @@
 			children = (
 				3204F0DE1CACC2BA006282DF /* CGGeometry_YJExtension.c */,
 				3204F0DF1CACC2BA006282DF /* CGGeometry_YJExtension.h */,
+				3223B43B1CDB127800956ED3 /* CAShapeLayer+YJCategory.h */,
+				3223B43C1CDB127800956ED3 /* CAShapeLayer+YJCategory.m */,
 			);
 			path = Quartz;
 			sourceTree = "<group>";
@@ -267,10 +278,14 @@
 				32B37D171CAEA649009AA2A0 /* UIAlertView+YJCategory.m */,
 				321D8A501CC4CDC000CB44DC /* UIActionSheet+YJCategory.h */,
 				321D8A511CC4CDC000CB44DC /* UIActionSheet+YJCategory.m */,
+				3223B4441CDB48F200956ED3 /* YJMaskedImageView.h */,
+				3223B4451CDB48F200956ED3 /* YJMaskedImageView.m */,
 				324AB09B1CD1BF5A00A9DCF0 /* YJCircularImageView.h */,
 				324AB09C1CD1BF5A00A9DCF0 /* YJCircularImageView.m */,
 				324AB0A91CD202A700A9DCF0 /* YJRoundedRectImageView.h */,
 				324AB0AA1CD202A700A9DCF0 /* YJRoundedRectImageView.m */,
+				3223B44B1CDB4AB000956ED3 /* UIBezierPath+YJCategory.h */,
+				3223B44C1CDB4AB000956ED3 /* UIBezierPath+YJCategory.m */,
 				32FC88D01CC610590060FBA7 /* Privates */,
 			);
 			path = UIKit;
@@ -542,6 +557,7 @@
 				6003F59E195388D20070C39A /* YJAppDelegate.m in Sources */,
 				3204F0F81CACC2BA006282DF /* UIView+YJCategory.m in Sources */,
 				3204F0F91CACC2BA006282DF /* YJMemoryCache.m in Sources */,
+				3223B43D1CDB127800956ED3 /* CAShapeLayer+YJCategory.m in Sources */,
 				6003F5A7195388D20070C39A /* YJViewController.m in Sources */,
 				324AB0AB1CD202A700A9DCF0 /* YJRoundedRectImageView.m in Sources */,
 				324AB09D1CD1BF5A00A9DCF0 /* YJCircularImageView.m in Sources */,
@@ -555,7 +571,9 @@
 				32FC88D61CC616930060FBA7 /* YJPhotoLibrary.m in Sources */,
 				3268A1D41CA83F5300B71E50 /* YJGeometryViewController.m in Sources */,
 				3204F0F21CACC2BA006282DF /* NSBundle+YJCategory.m in Sources */,
+				3223B44D1CDB4AB000956ED3 /* UIBezierPath+YJCategory.m in Sources */,
 				32D9E7991CB21E7500CD763A /* NSTimer+YJCategory.m in Sources */,
+				3223B4471CDB48F200956ED3 /* YJMaskedImageView.m in Sources */,
 				3204F0F31CACC2BA006282DF /* CGGeometry_YJExtension.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
