@@ -16,12 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateUIForInterfaceBuilder;
 
 /// Override: returns an masked UIImage object which for rendering at IBDesignable phase. It will be called after imageView.image being set.
-- (UIImage *)prepareMaskedImageForInterfaceBuilder;
+//- (UIImage *)prepareMaskedImageForInterfaceBuilder;
 
 /// Override: returns an UIBezierPath object which for rendering masked CAShapeLayer object at runtime.
-- (UIBezierPath *)prepareClosedBezierPathForRenderingMask;
+- (UIBezierPath *)prepareClosedMaskBezierPath;
 
-/// Override: returns an CAShapeLayer object with highlighted mask shape which for rendering at runtime. Returns a nonnull object will ignore the -prepareClosedBezierPathForRenderingMask;
+/// Override: returns an CAShapeLayer object with highlighted mask shape which for rendering at runtime. Returns a nonnull object will ignore the -prepareClosedMaskBezierPath;
 - (nullable CAShapeLayer *)prepareHighlightedMaskShapeLayerWithDefaultMaskColor:(UIColor *)maskColor;
 
 @end

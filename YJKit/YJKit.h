@@ -35,8 +35,9 @@
 #import <YJKit/UIAlertView+YJCategory.h>
 #import <YJKit/UIActionSheet+YJCategory.h>
 #import <YJKit/YJPhotoLibrary.h>
+#import <YJKit/YJRoundedCornerView.h>
 #import <YJKit/YJCircularImageView.h>
-#import <YJKit/YJRoundedRectImageView.h>
+#import <YJKit/YJRoundedCornerImageView.h>
 #else
 #import "YJMacros.h"
 #import "CGGeometry_YJExtension.h"
@@ -60,8 +61,9 @@
 #import "UIAlertView+YJCategory.h"
 #import "UIActionSheet+YJCategory.h"
 #import "YJPhotoLibrary.h"
+#import "YJRoundedCornerView.h"
 #import "YJCircularImageView.h"
-#import "YJRoundedRectImageView.h"
+#import "YJRoundedCornerImageView.h"
 #endif
 
 #endif /* YJKit_h */

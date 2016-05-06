@@ -12,35 +12,37 @@
 		3204F0F11CACC2BA006282DF /* AVCaptureSession+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0D81CACC2BA006282DF /* AVCaptureSession+YJCategory.m */; };
 		3204F0F21CACC2BA006282DF /* NSBundle+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0DC1CACC2BA006282DF /* NSBundle+YJCategory.m */; };
 		3204F0F31CACC2BA006282DF /* CGGeometry_YJExtension.c in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0DE1CACC2BA006282DF /* CGGeometry_YJExtension.c */; };
-		3204F0F41CACC2BA006282DF /* UIDevice+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0E21CACC2BA006282DF /* UIDevice+YJCategory.m */; };
-		3204F0F51CACC2BA006282DF /* UIImage+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0E41CACC2BA006282DF /* UIImage+YJCategory.m */; };
-		3204F0F61CACC2BA006282DF /* UIImageView+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0E61CACC2BA006282DF /* UIImageView+YJCategory.m */; };
-		3204F0F71CACC2BA006282DF /* UIScreen+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0E81CACC2BA006282DF /* UIScreen+YJCategory.m */; };
-		3204F0F81CACC2BA006282DF /* UIView+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0EA1CACC2BA006282DF /* UIView+YJCategory.m */; };
 		3204F0F91CACC2BA006282DF /* YJMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0EE1CACC2BA006282DF /* YJMemoryCache.m */; };
-		3204F0FC1CAD5645006282DF /* UIColor+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0FB1CAD5645006282DF /* UIColor+YJCategory.m */; };
 		320A97EF1CA9493800485B9A /* AFTCameraUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 320A97EE1CA9493800485B9A /* AFTCameraUI.bundle */; };
 		32166C6E1CD85BC700CE699B /* yj_head_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 32166C6D1CD85BC700CE699B /* yj_head_icon.png */; };
-		321D8A521CC4CDC000CB44DC /* UIActionSheet+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 321D8A511CC4CDC000CB44DC /* UIActionSheet+YJCategory.m */; };
 		3223B4341CDAE5CE00956ED3 /* NSSet+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3223B4331CDAE5CE00956ED3 /* NSSet+YJCategory.m */; };
 		3223B43D1CDB127800956ED3 /* CAShapeLayer+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3223B43C1CDB127800956ED3 /* CAShapeLayer+YJCategory.m */; };
-		3223B4471CDB48F200956ED3 /* YJMaskedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3223B4451CDB48F200956ED3 /* YJMaskedImageView.m */; };
-		3223B44D1CDB4AB000956ED3 /* UIBezierPath+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3223B44C1CDB4AB000956ED3 /* UIBezierPath+YJCategory.m */; };
-		324AB09D1CD1BF5A00A9DCF0 /* YJCircularImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 324AB09C1CD1BF5A00A9DCF0 /* YJCircularImageView.m */; };
 		324AB0A01CD1C6EE00A9DCF0 /* YJCircularImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 324AB09F1CD1C6EE00A9DCF0 /* YJCircularImageViewController.m */; };
-		324AB0A41CD1CE4C00A9DCF0 /* YJCircularImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 324AB0A31CD1CE4C00A9DCF0 /* YJCircularImageViewController.xib */; };
 		324AB0A81CD1EE8C00A9DCF0 /* Puppy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 324AB0A71CD1EE8C00A9DCF0 /* Puppy.jpg */; };
-		324AB0AB1CD202A700A9DCF0 /* YJRoundedRectImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 324AB0AA1CD202A700A9DCF0 /* YJRoundedRectImageView.m */; };
 		324E98BE1CABC75F00CFB8D3 /* YJGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 324E98BD1CABC75F00CFB8D3 /* YJGridViewController.m */; };
 		325F880B1CB11D19007F9BE1 /* NSObject+YJCategory_KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 325F880A1CB11D19007F9BE1 /* NSObject+YJCategory_KVO.m */; };
 		3268A1D41CA83F5300B71E50 /* YJGeometryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3268A1D31CA83F5300B71E50 /* YJGeometryViewController.m */; };
-		32B37D0F1CAE97A9009AA2A0 /* UIControl+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B37D0E1CAE97A9009AA2A0 /* UIControl+YJCategory.m */; };
-		32B37D121CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B37D111CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.m */; };
-		32B37D151CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B37D141CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.m */; };
-		32B37D181CAEA649009AA2A0 /* UIAlertView+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B37D171CAEA649009AA2A0 /* UIAlertView+YJCategory.m */; };
 		32CB4AAB1CCA3C880050C01B /* YJSavingImageToAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CB4AAA1CCA3C880050C01B /* YJSavingImageToAlbumViewController.m */; };
 		32D9E7991CB21E7500CD763A /* NSTimer+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9E7981CB21E7500CD763A /* NSTimer+YJCategory.m */; };
 		32DF47B11CDA342F00BC225C /* NSArray+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32DF47B01CDA342F00BC225C /* NSArray+YJCategory.m */; };
+		32FA127F1CDC3637008CA61C /* UIActionSheet+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA12611CDC3637008CA61C /* UIActionSheet+YJCategory.m */; };
+		32FA12801CDC3637008CA61C /* UIAlertView+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA12631CDC3637008CA61C /* UIAlertView+YJCategory.m */; };
+		32FA12811CDC3637008CA61C /* UIBarButtonItem+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA12651CDC3637008CA61C /* UIBarButtonItem+YJCategory.m */; };
+		32FA12821CDC3637008CA61C /* UIBezierPath+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA12671CDC3637008CA61C /* UIBezierPath+YJCategory.m */; };
+		32FA12831CDC3637008CA61C /* UIColor+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA12691CDC3637008CA61C /* UIColor+YJCategory.m */; };
+		32FA12841CDC3637008CA61C /* UIControl+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA126B1CDC3637008CA61C /* UIControl+YJCategory.m */; };
+		32FA12851CDC3637008CA61C /* UIDevice+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA126D1CDC3637008CA61C /* UIDevice+YJCategory.m */; };
+		32FA12861CDC3637008CA61C /* UIGestureRecognizer+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA126F1CDC3637008CA61C /* UIGestureRecognizer+YJCategory.m */; };
+		32FA12871CDC3637008CA61C /* UIImage+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA12711CDC3637008CA61C /* UIImage+YJCategory.m */; };
+		32FA12881CDC3637008CA61C /* UIImageView+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA12731CDC3637008CA61C /* UIImageView+YJCategory.m */; };
+		32FA12891CDC3637008CA61C /* UIScreen+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA12751CDC3637008CA61C /* UIScreen+YJCategory.m */; };
+		32FA128A1CDC3637008CA61C /* UIView+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA12771CDC3637008CA61C /* UIView+YJCategory.m */; };
+		32FA128B1CDC3637008CA61C /* YJCircularImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA127A1CDC3637008CA61C /* YJCircularImageView.m */; };
+		32FA128C1CDC3637008CA61C /* YJMaskedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA127C1CDC3637008CA61C /* YJMaskedImageView.m */; };
+		32FA128D1CDC3637008CA61C /* YJRoundedCornerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA127E1CDC3637008CA61C /* YJRoundedCornerImageView.m */; };
+		32FA12901CDC3659008CA61C /* YJMaskedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA128F1CDC3659008CA61C /* YJMaskedView.m */; };
+		32FA12931CDC368F008CA61C /* YJRoundedCornerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA12921CDC368F008CA61C /* YJRoundedCornerView.m */; };
+		32FA12951CDC3718008CA61C /* YJCircularImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32FA12941CDC3718008CA61C /* YJCircularImageViewController.xib */; };
 		32FC88D31CC610590060FBA7 /* _YJAlertDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FC88D21CC610590060FBA7 /* _YJAlertDelegate.m */; };
 		32FC88D61CC616930060FBA7 /* YJPhotoLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FC88D51CC616930060FBA7 /* YJPhotoLibrary.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -77,56 +79,25 @@
 		3204F0DC1CACC2BA006282DF /* NSBundle+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+YJCategory.m"; sourceTree = "<group>"; };
 		3204F0DE1CACC2BA006282DF /* CGGeometry_YJExtension.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CGGeometry_YJExtension.c; sourceTree = "<group>"; };
 		3204F0DF1CACC2BA006282DF /* CGGeometry_YJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGGeometry_YJExtension.h; sourceTree = "<group>"; };
-		3204F0E11CACC2BA006282DF /* UIDevice+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+YJCategory.h"; sourceTree = "<group>"; };
-		3204F0E21CACC2BA006282DF /* UIDevice+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+YJCategory.m"; sourceTree = "<group>"; };
-		3204F0E31CACC2BA006282DF /* UIImage+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+YJCategory.h"; sourceTree = "<group>"; };
-		3204F0E41CACC2BA006282DF /* UIImage+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YJCategory.m"; sourceTree = "<group>"; };
-		3204F0E51CACC2BA006282DF /* UIImageView+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YJCategory.h"; sourceTree = "<group>"; };
-		3204F0E61CACC2BA006282DF /* UIImageView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YJCategory.m"; sourceTree = "<group>"; };
-		3204F0E71CACC2BA006282DF /* UIScreen+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScreen+YJCategory.h"; sourceTree = "<group>"; };
-		3204F0E81CACC2BA006282DF /* UIScreen+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+YJCategory.m"; sourceTree = "<group>"; };
-		3204F0E91CACC2BA006282DF /* UIView+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YJCategory.h"; sourceTree = "<group>"; };
-		3204F0EA1CACC2BA006282DF /* UIView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YJCategory.m"; sourceTree = "<group>"; };
 		3204F0ED1CACC2BA006282DF /* YJMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMemoryCache.h; sourceTree = "<group>"; };
 		3204F0EE1CACC2BA006282DF /* YJMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJMemoryCache.m; sourceTree = "<group>"; };
 		3204F0F01CACC2BA006282DF /* YJKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJKit.h; sourceTree = "<group>"; };
-		3204F0FA1CAD5645006282DF /* UIColor+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+YJCategory.h"; sourceTree = "<group>"; };
-		3204F0FB1CAD5645006282DF /* UIColor+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+YJCategory.m"; sourceTree = "<group>"; };
 		320A97EE1CA9493800485B9A /* AFTCameraUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AFTCameraUI.bundle; sourceTree = "<group>"; };
 		32166C6D1CD85BC700CE699B /* yj_head_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yj_head_icon.png; sourceTree = "<group>"; };
-		321D8A501CC4CDC000CB44DC /* UIActionSheet+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+YJCategory.h"; sourceTree = "<group>"; };
-		321D8A511CC4CDC000CB44DC /* UIActionSheet+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+YJCategory.m"; sourceTree = "<group>"; };
 		321D8A5A1CC50ED800CB44DC /* YJDebugMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YJDebugMacros.h; sourceTree = "<group>"; };
 		3223B4321CDAE5CE00956ED3 /* NSSet+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+YJCategory.h"; sourceTree = "<group>"; };
 		3223B4331CDAE5CE00956ED3 /* NSSet+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+YJCategory.m"; sourceTree = "<group>"; };
 		3223B43B1CDB127800956ED3 /* CAShapeLayer+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAShapeLayer+YJCategory.h"; sourceTree = "<group>"; };
 		3223B43C1CDB127800956ED3 /* CAShapeLayer+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAShapeLayer+YJCategory.m"; sourceTree = "<group>"; };
-		3223B4441CDB48F200956ED3 /* YJMaskedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMaskedImageView.h; sourceTree = "<group>"; };
-		3223B4451CDB48F200956ED3 /* YJMaskedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJMaskedImageView.m; sourceTree = "<group>"; };
-		3223B44B1CDB4AB000956ED3 /* UIBezierPath+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+YJCategory.h"; sourceTree = "<group>"; };
-		3223B44C1CDB4AB000956ED3 /* UIBezierPath+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+YJCategory.m"; sourceTree = "<group>"; };
-		324AB09B1CD1BF5A00A9DCF0 /* YJCircularImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJCircularImageView.h; sourceTree = "<group>"; };
-		324AB09C1CD1BF5A00A9DCF0 /* YJCircularImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJCircularImageView.m; sourceTree = "<group>"; };
 		324AB09E1CD1C6EE00A9DCF0 /* YJCircularImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJCircularImageViewController.h; sourceTree = "<group>"; };
 		324AB09F1CD1C6EE00A9DCF0 /* YJCircularImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJCircularImageViewController.m; sourceTree = "<group>"; };
-		324AB0A31CD1CE4C00A9DCF0 /* YJCircularImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YJCircularImageViewController.xib; sourceTree = "<group>"; };
 		324AB0A71CD1EE8C00A9DCF0 /* Puppy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Puppy.jpg; sourceTree = "<group>"; };
-		324AB0A91CD202A700A9DCF0 /* YJRoundedRectImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJRoundedRectImageView.h; sourceTree = "<group>"; };
-		324AB0AA1CD202A700A9DCF0 /* YJRoundedRectImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJRoundedRectImageView.m; sourceTree = "<group>"; };
 		324E98BC1CABC75F00CFB8D3 /* YJGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJGridViewController.h; sourceTree = "<group>"; };
 		324E98BD1CABC75F00CFB8D3 /* YJGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJGridViewController.m; sourceTree = "<group>"; };
 		325F88091CB11D19007F9BE1 /* NSObject+YJCategory_KVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YJCategory_KVO.h"; sourceTree = "<group>"; };
 		325F880A1CB11D19007F9BE1 /* NSObject+YJCategory_KVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YJCategory_KVO.m"; sourceTree = "<group>"; };
 		3268A1D21CA83F5300B71E50 /* YJGeometryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJGeometryViewController.h; sourceTree = "<group>"; };
 		3268A1D31CA83F5300B71E50 /* YJGeometryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJGeometryViewController.m; sourceTree = "<group>"; };
-		32B37D0D1CAE97A9009AA2A0 /* UIControl+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+YJCategory.h"; sourceTree = "<group>"; };
-		32B37D0E1CAE97A9009AA2A0 /* UIControl+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+YJCategory.m"; sourceTree = "<group>"; };
-		32B37D101CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+YJCategory.h"; sourceTree = "<group>"; };
-		32B37D111CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+YJCategory.m"; sourceTree = "<group>"; };
-		32B37D131CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+YJCategory.h"; sourceTree = "<group>"; };
-		32B37D141CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+YJCategory.m"; sourceTree = "<group>"; };
-		32B37D161CAEA649009AA2A0 /* UIAlertView+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+YJCategory.h"; sourceTree = "<group>"; };
-		32B37D171CAEA649009AA2A0 /* UIAlertView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+YJCategory.m"; sourceTree = "<group>"; };
 		32B8E1171CC7681100856053 /* YJConfigureMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJConfigureMacros.h; sourceTree = "<group>"; };
 		32CB4AA91CCA3C880050C01B /* YJSavingImageToAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJSavingImageToAlbumViewController.h; sourceTree = "<group>"; };
 		32CB4AAA1CCA3C880050C01B /* YJSavingImageToAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJSavingImageToAlbumViewController.m; sourceTree = "<group>"; };
@@ -139,6 +110,41 @@
 		32F9DE1D1CC1DCFB004E384E /* YJMathMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMathMacros.h; sourceTree = "<group>"; };
 		32F9DE1E1CC1DD44004E384E /* YJObjcMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJObjcMacros.h; sourceTree = "<group>"; };
 		32F9DE1F1CC1DDA2004E384E /* YJExecutionMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJExecutionMacros.h; sourceTree = "<group>"; };
+		32FA12601CDC3637008CA61C /* UIActionSheet+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+YJCategory.h"; sourceTree = "<group>"; };
+		32FA12611CDC3637008CA61C /* UIActionSheet+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+YJCategory.m"; sourceTree = "<group>"; };
+		32FA12621CDC3637008CA61C /* UIAlertView+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+YJCategory.h"; sourceTree = "<group>"; };
+		32FA12631CDC3637008CA61C /* UIAlertView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+YJCategory.m"; sourceTree = "<group>"; };
+		32FA12641CDC3637008CA61C /* UIBarButtonItem+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+YJCategory.h"; sourceTree = "<group>"; };
+		32FA12651CDC3637008CA61C /* UIBarButtonItem+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+YJCategory.m"; sourceTree = "<group>"; };
+		32FA12661CDC3637008CA61C /* UIBezierPath+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+YJCategory.h"; sourceTree = "<group>"; };
+		32FA12671CDC3637008CA61C /* UIBezierPath+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+YJCategory.m"; sourceTree = "<group>"; };
+		32FA12681CDC3637008CA61C /* UIColor+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+YJCategory.h"; sourceTree = "<group>"; };
+		32FA12691CDC3637008CA61C /* UIColor+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+YJCategory.m"; sourceTree = "<group>"; };
+		32FA126A1CDC3637008CA61C /* UIControl+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+YJCategory.h"; sourceTree = "<group>"; };
+		32FA126B1CDC3637008CA61C /* UIControl+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+YJCategory.m"; sourceTree = "<group>"; };
+		32FA126C1CDC3637008CA61C /* UIDevice+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+YJCategory.h"; sourceTree = "<group>"; };
+		32FA126D1CDC3637008CA61C /* UIDevice+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+YJCategory.m"; sourceTree = "<group>"; };
+		32FA126E1CDC3637008CA61C /* UIGestureRecognizer+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+YJCategory.h"; sourceTree = "<group>"; };
+		32FA126F1CDC3637008CA61C /* UIGestureRecognizer+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+YJCategory.m"; sourceTree = "<group>"; };
+		32FA12701CDC3637008CA61C /* UIImage+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+YJCategory.h"; sourceTree = "<group>"; };
+		32FA12711CDC3637008CA61C /* UIImage+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YJCategory.m"; sourceTree = "<group>"; };
+		32FA12721CDC3637008CA61C /* UIImageView+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YJCategory.h"; sourceTree = "<group>"; };
+		32FA12731CDC3637008CA61C /* UIImageView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YJCategory.m"; sourceTree = "<group>"; };
+		32FA12741CDC3637008CA61C /* UIScreen+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScreen+YJCategory.h"; sourceTree = "<group>"; };
+		32FA12751CDC3637008CA61C /* UIScreen+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+YJCategory.m"; sourceTree = "<group>"; };
+		32FA12761CDC3637008CA61C /* UIView+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YJCategory.h"; sourceTree = "<group>"; };
+		32FA12771CDC3637008CA61C /* UIView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YJCategory.m"; sourceTree = "<group>"; };
+		32FA12791CDC3637008CA61C /* YJCircularImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJCircularImageView.h; sourceTree = "<group>"; };
+		32FA127A1CDC3637008CA61C /* YJCircularImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJCircularImageView.m; sourceTree = "<group>"; };
+		32FA127B1CDC3637008CA61C /* YJMaskedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMaskedImageView.h; sourceTree = "<group>"; };
+		32FA127C1CDC3637008CA61C /* YJMaskedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJMaskedImageView.m; sourceTree = "<group>"; };
+		32FA127D1CDC3637008CA61C /* YJRoundedCornerImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJRoundedCornerImageView.h; sourceTree = "<group>"; };
+		32FA127E1CDC3637008CA61C /* YJRoundedCornerImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJRoundedCornerImageView.m; sourceTree = "<group>"; };
+		32FA128E1CDC3659008CA61C /* YJMaskedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMaskedView.h; sourceTree = "<group>"; };
+		32FA128F1CDC3659008CA61C /* YJMaskedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJMaskedView.m; sourceTree = "<group>"; };
+		32FA12911CDC368F008CA61C /* YJRoundedCornerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJRoundedCornerView.h; sourceTree = "<group>"; };
+		32FA12921CDC368F008CA61C /* YJRoundedCornerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJRoundedCornerView.m; sourceTree = "<group>"; };
+		32FA12941CDC3718008CA61C /* YJCircularImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YJCircularImageViewController.xib; sourceTree = "<group>"; };
 		32FC88D11CC610590060FBA7 /* _YJAlertDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _YJAlertDelegate.h; sourceTree = "<group>"; };
 		32FC88D21CC610590060FBA7 /* _YJAlertDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _YJAlertDelegate.m; sourceTree = "<group>"; };
 		32FC88D41CC616930060FBA7 /* YJPhotoLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJPhotoLibrary.h; sourceTree = "<group>"; };
@@ -195,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				3204F0F01CACC2BA006282DF /* YJKit.h */,
+				32FA12971CDC5295008CA61C /* Dependencies */,
 				324AB0AC1CD2120100A9DCF0 /* Resources */,
 				32F9DE1A1CC1DC66004E384E /* Macros */,
 				3204F0D61CACC2BA006282DF /* AVFoundation */,
@@ -256,36 +263,9 @@
 		3204F0E01CACC2BA006282DF /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				3204F0E11CACC2BA006282DF /* UIDevice+YJCategory.h */,
-				3204F0E21CACC2BA006282DF /* UIDevice+YJCategory.m */,
-				3204F0E31CACC2BA006282DF /* UIImage+YJCategory.h */,
-				3204F0E41CACC2BA006282DF /* UIImage+YJCategory.m */,
-				3204F0E51CACC2BA006282DF /* UIImageView+YJCategory.h */,
-				3204F0E61CACC2BA006282DF /* UIImageView+YJCategory.m */,
-				3204F0E71CACC2BA006282DF /* UIScreen+YJCategory.h */,
-				3204F0E81CACC2BA006282DF /* UIScreen+YJCategory.m */,
-				3204F0E91CACC2BA006282DF /* UIView+YJCategory.h */,
-				3204F0EA1CACC2BA006282DF /* UIView+YJCategory.m */,
-				3204F0FA1CAD5645006282DF /* UIColor+YJCategory.h */,
-				3204F0FB1CAD5645006282DF /* UIColor+YJCategory.m */,
-				32B37D0D1CAE97A9009AA2A0 /* UIControl+YJCategory.h */,
-				32B37D0E1CAE97A9009AA2A0 /* UIControl+YJCategory.m */,
-				32B37D101CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.h */,
-				32B37D111CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.m */,
-				32B37D131CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.h */,
-				32B37D141CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.m */,
-				32B37D161CAEA649009AA2A0 /* UIAlertView+YJCategory.h */,
-				32B37D171CAEA649009AA2A0 /* UIAlertView+YJCategory.m */,
-				321D8A501CC4CDC000CB44DC /* UIActionSheet+YJCategory.h */,
-				321D8A511CC4CDC000CB44DC /* UIActionSheet+YJCategory.m */,
-				3223B4441CDB48F200956ED3 /* YJMaskedImageView.h */,
-				3223B4451CDB48F200956ED3 /* YJMaskedImageView.m */,
-				324AB09B1CD1BF5A00A9DCF0 /* YJCircularImageView.h */,
-				324AB09C1CD1BF5A00A9DCF0 /* YJCircularImageView.m */,
-				324AB0A91CD202A700A9DCF0 /* YJRoundedRectImageView.h */,
-				324AB0AA1CD202A700A9DCF0 /* YJRoundedRectImageView.m */,
-				3223B44B1CDB4AB000956ED3 /* UIBezierPath+YJCategory.h */,
-				3223B44C1CDB4AB000956ED3 /* UIBezierPath+YJCategory.m */,
+				32FA12961CDC50DF008CA61C /* Protocols */,
+				32FA125F1CDC3637008CA61C /* Categories */,
+				32FA12781CDC3637008CA61C /* Subclasses */,
 				32FC88D01CC610590060FBA7 /* Privates */,
 			);
 			path = UIKit;
@@ -329,6 +309,68 @@
 				32F9DE1F1CC1DDA2004E384E /* YJExecutionMacros.h */,
 			);
 			path = Macros;
+			sourceTree = "<group>";
+		};
+		32FA125F1CDC3637008CA61C /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				32FA12601CDC3637008CA61C /* UIActionSheet+YJCategory.h */,
+				32FA12611CDC3637008CA61C /* UIActionSheet+YJCategory.m */,
+				32FA12621CDC3637008CA61C /* UIAlertView+YJCategory.h */,
+				32FA12631CDC3637008CA61C /* UIAlertView+YJCategory.m */,
+				32FA12641CDC3637008CA61C /* UIBarButtonItem+YJCategory.h */,
+				32FA12651CDC3637008CA61C /* UIBarButtonItem+YJCategory.m */,
+				32FA12661CDC3637008CA61C /* UIBezierPath+YJCategory.h */,
+				32FA12671CDC3637008CA61C /* UIBezierPath+YJCategory.m */,
+				32FA12681CDC3637008CA61C /* UIColor+YJCategory.h */,
+				32FA12691CDC3637008CA61C /* UIColor+YJCategory.m */,
+				32FA126A1CDC3637008CA61C /* UIControl+YJCategory.h */,
+				32FA126B1CDC3637008CA61C /* UIControl+YJCategory.m */,
+				32FA126C1CDC3637008CA61C /* UIDevice+YJCategory.h */,
+				32FA126D1CDC3637008CA61C /* UIDevice+YJCategory.m */,
+				32FA126E1CDC3637008CA61C /* UIGestureRecognizer+YJCategory.h */,
+				32FA126F1CDC3637008CA61C /* UIGestureRecognizer+YJCategory.m */,
+				32FA12701CDC3637008CA61C /* UIImage+YJCategory.h */,
+				32FA12711CDC3637008CA61C /* UIImage+YJCategory.m */,
+				32FA12721CDC3637008CA61C /* UIImageView+YJCategory.h */,
+				32FA12731CDC3637008CA61C /* UIImageView+YJCategory.m */,
+				32FA12741CDC3637008CA61C /* UIScreen+YJCategory.h */,
+				32FA12751CDC3637008CA61C /* UIScreen+YJCategory.m */,
+				32FA12761CDC3637008CA61C /* UIView+YJCategory.h */,
+				32FA12771CDC3637008CA61C /* UIView+YJCategory.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		32FA12781CDC3637008CA61C /* Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				32FA12791CDC3637008CA61C /* YJCircularImageView.h */,
+				32FA127A1CDC3637008CA61C /* YJCircularImageView.m */,
+				32FA127B1CDC3637008CA61C /* YJMaskedImageView.h */,
+				32FA127C1CDC3637008CA61C /* YJMaskedImageView.m */,
+				32FA127D1CDC3637008CA61C /* YJRoundedCornerImageView.h */,
+				32FA127E1CDC3637008CA61C /* YJRoundedCornerImageView.m */,
+				32FA128E1CDC3659008CA61C /* YJMaskedView.h */,
+				32FA128F1CDC3659008CA61C /* YJMaskedView.m */,
+				32FA12911CDC368F008CA61C /* YJRoundedCornerView.h */,
+				32FA12921CDC368F008CA61C /* YJRoundedCornerView.m */,
+			);
+			path = Subclasses;
+			sourceTree = "<group>";
+		};
+		32FA12961CDC50DF008CA61C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		32FA12971CDC5295008CA61C /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Dependencies;
 			sourceTree = "<group>";
 		};
 		32FC88D01CC610590060FBA7 /* Privates */ = {
@@ -387,7 +429,7 @@
 				32CB4AAA1CCA3C880050C01B /* YJSavingImageToAlbumViewController.m */,
 				324AB09E1CD1C6EE00A9DCF0 /* YJCircularImageViewController.h */,
 				324AB09F1CD1C6EE00A9DCF0 /* YJCircularImageViewController.m */,
-				324AB0A31CD1CE4C00A9DCF0 /* YJCircularImageViewController.xib */,
+				32FA12941CDC3718008CA61C /* YJCircularImageViewController.xib */,
 				324AB0A71CD1EE8C00A9DCF0 /* Puppy.jpg */,
 				3204F0BF1CACA98D006282DF /* Octocat.png */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
@@ -519,8 +561,8 @@
 				3204F0D41CACBF1C006282DF /* LaunchScreen.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
-				324AB0A41CD1CE4C00A9DCF0 /* YJCircularImageViewController.xib in Resources */,
 				320A97EF1CA9493800485B9A /* AFTCameraUI.bundle in Resources */,
+				32FA12951CDC3718008CA61C /* YJCircularImageViewController.xib in Resources */,
 				324AB0A81CD1EE8C00A9DCF0 /* Puppy.jpg in Resources */,
 				3204F0C01CACA98D006282DF /* Octocat.png in Resources */,
 				32166C6E1CD85BC700CE699B /* yj_head_icon.png in Resources */,
@@ -542,39 +584,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32B37D121CAEA5F7009AA2A0 /* UIGestureRecognizer+YJCategory.m in Sources */,
+				32FA12831CDC3637008CA61C /* UIColor+YJCategory.m in Sources */,
 				325F880B1CB11D19007F9BE1 /* NSObject+YJCategory_KVO.m in Sources */,
-				32B37D151CAEA61B009AA2A0 /* UIBarButtonItem+YJCategory.m in Sources */,
-				32B37D0F1CAE97A9009AA2A0 /* UIControl+YJCategory.m in Sources */,
-				3204F0F41CACC2BA006282DF /* UIDevice+YJCategory.m in Sources */,
-				3204F0F71CACC2BA006282DF /* UIScreen+YJCategory.m in Sources */,
 				3204F0F11CACC2BA006282DF /* AVCaptureSession+YJCategory.m in Sources */,
-				3204F0F51CACC2BA006282DF /* UIImage+YJCategory.m in Sources */,
+				32FA12881CDC3637008CA61C /* UIImageView+YJCategory.m in Sources */,
+				32FA128C1CDC3637008CA61C /* YJMaskedImageView.m in Sources */,
 				3223B4341CDAE5CE00956ED3 /* NSSet+YJCategory.m in Sources */,
 				324AB0A01CD1C6EE00A9DCF0 /* YJCircularImageViewController.m in Sources */,
+				32FA12871CDC3637008CA61C /* UIImage+YJCategory.m in Sources */,
+				32FA128A1CDC3637008CA61C /* UIView+YJCategory.m in Sources */,
+				32FA12891CDC3637008CA61C /* UIScreen+YJCategory.m in Sources */,
+				32FA12851CDC3637008CA61C /* UIDevice+YJCategory.m in Sources */,
+				32FA12801CDC3637008CA61C /* UIAlertView+YJCategory.m in Sources */,
+				32FA12931CDC368F008CA61C /* YJRoundedCornerView.m in Sources */,
+				32FA128D1CDC3637008CA61C /* YJRoundedCornerImageView.m in Sources */,
 				32FC88D31CC610590060FBA7 /* _YJAlertDelegate.m in Sources */,
+				32FA12901CDC3659008CA61C /* YJMaskedView.m in Sources */,
 				32CB4AAB1CCA3C880050C01B /* YJSavingImageToAlbumViewController.m in Sources */,
 				6003F59E195388D20070C39A /* YJAppDelegate.m in Sources */,
-				3204F0F81CACC2BA006282DF /* UIView+YJCategory.m in Sources */,
 				3204F0F91CACC2BA006282DF /* YJMemoryCache.m in Sources */,
+				32FA12811CDC3637008CA61C /* UIBarButtonItem+YJCategory.m in Sources */,
 				3223B43D1CDB127800956ED3 /* CAShapeLayer+YJCategory.m in Sources */,
+				32FA128B1CDC3637008CA61C /* YJCircularImageView.m in Sources */,
+				32FA12841CDC3637008CA61C /* UIControl+YJCategory.m in Sources */,
 				6003F5A7195388D20070C39A /* YJViewController.m in Sources */,
-				324AB0AB1CD202A700A9DCF0 /* YJRoundedRectImageView.m in Sources */,
-				324AB09D1CD1BF5A00A9DCF0 /* YJCircularImageView.m in Sources */,
-				3204F0FC1CAD5645006282DF /* UIColor+YJCategory.m in Sources */,
-				321D8A521CC4CDC000CB44DC /* UIActionSheet+YJCategory.m in Sources */,
 				324E98BE1CABC75F00CFB8D3 /* YJGridViewController.m in Sources */,
-				32B37D181CAEA649009AA2A0 /* UIAlertView+YJCategory.m in Sources */,
-				3204F0F61CACC2BA006282DF /* UIImageView+YJCategory.m in Sources */,
 				32DF47B11CDA342F00BC225C /* NSArray+YJCategory.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				32FC88D61CC616930060FBA7 /* YJPhotoLibrary.m in Sources */,
 				3268A1D41CA83F5300B71E50 /* YJGeometryViewController.m in Sources */,
+				32FA12861CDC3637008CA61C /* UIGestureRecognizer+YJCategory.m in Sources */,
 				3204F0F21CACC2BA006282DF /* NSBundle+YJCategory.m in Sources */,
-				3223B44D1CDB4AB000956ED3 /* UIBezierPath+YJCategory.m in Sources */,
+				32FA12821CDC3637008CA61C /* UIBezierPath+YJCategory.m in Sources */,
 				32D9E7991CB21E7500CD763A /* NSTimer+YJCategory.m in Sources */,
-				3223B4471CDB48F200956ED3 /* YJMaskedImageView.m in Sources */,
 				3204F0F31CACC2BA006282DF /* CGGeometry_YJExtension.c in Sources */,
+				32FA127F1CDC3637008CA61C /* UIActionSheet+YJCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

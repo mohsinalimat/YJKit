@@ -1,24 +1,25 @@
 //
-//  YJRoundedRectImageView.m
+//  YJRoundedCornerImageView.m
 //  YJKit
 //
 //  Created by huang-kun on 16/4/28.
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
 
-#import "YJRoundedRectImageView.h"
+#import "YJRoundedCornerImageView.h"
 #import "UIBezierPath+YJCategory.h"
 #import "CAShapeLayer+YJCategory.h"
+#import "YJConfigureMacros.h"
 
-static const CGFloat kYJRoundedRectImageViewDefaultCornerRadius = 10.0f;
+static const CGFloat kYJRoundedCornerImageViewDefaultCornerRadius = 10.0f;
 
-@implementation YJRoundedRectImageView
+@implementation YJRoundedCornerImageView
 
 // init from code
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _cornerRadius = kYJRoundedRectImageViewDefaultCornerRadius;
+        _cornerRadius = kYJRoundedCornerImageViewDefaultCornerRadius;
     }
     return self;
 }
@@ -27,7 +28,7 @@ static const CGFloat kYJRoundedRectImageViewDefaultCornerRadius = 10.0f;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        _cornerRadius = kYJRoundedRectImageViewDefaultCornerRadius;
+        _cornerRadius = kYJRoundedCornerImageViewDefaultCornerRadius;
     }
     return self;
 }
@@ -38,6 +39,7 @@ static const CGFloat kYJRoundedRectImageViewDefaultCornerRadius = 10.0f;
     if (self.image) [self updateUIForInterfaceBuilder];
 }
 
+#if YJ_COMPILE_UNAVAILABLE
 - (UIImage *)prepareMaskedImageForInterfaceBuilder {
     UIImage *image = self.image;
     CGSize size = image.size;
@@ -49,8 +51,9 @@ static const CGFloat kYJRoundedRectImageViewDefaultCornerRadius = 10.0f;
     UIGraphicsEndImageContext();
     return roundedRectImage;
 }
+#endif
 
-- (UIBezierPath *)prepareClosedBezierPathForRenderingMask {
+- (UIBezierPath *)prepareClosedMaskBezierPath {
     return [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:self.bounds.size cornerRadius:self.cornerRadius outerFramePath:NULL innerRoundedPath:NULL];
 }
 

@@ -32,4 +32,5 @@ IB_DESIGNABLE
 
 /// The color of the circle around the image. Default is nil
 @property (nonatomic, strong) IBInspectable UIColor *circleColor;
+
 @end

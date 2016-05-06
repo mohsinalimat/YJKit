@@ -20,4 +20,8 @@
     #endif
 #endif
 
+#ifndef YJ_COMPILE_UNAVAILABLE
+#define YJ_COMPILE_UNAVAILABLE 0
+#endif
+
 #endif /* YJConfigureMacros_h */

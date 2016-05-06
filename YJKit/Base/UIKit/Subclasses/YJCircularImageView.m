@@ -11,6 +11,7 @@
 #import "UIBezierPath+YJCategory.h"
 #import "CAShapeLayer+YJCategory.h"
 #import "YJDebugMacros.h"
+#import "YJConfigureMacros.h"
 
 @implementation YJCircularImageView
 
@@ -26,6 +27,7 @@
     [self updateUIForInterfaceBuilder];
 }
 
+#if YJ_COMPILE_UNAVAILABLE
 - (UIImage *)prepareMaskedImageForInterfaceBuilder {
     UIImage *image = self.image;
     CGSize size = image.size;
@@ -38,8 +40,9 @@
     UIGraphicsEndImageContext();
     return circularImage;
 }
+#endif
 
-- (UIBezierPath *)prepareClosedBezierPathForRenderingMask {
+- (UIBezierPath *)prepareClosedMaskBezierPath {
     return [UIBezierPath bezierPathWithCircleMaskShapeInSize:self.bounds.size outerFramePath:NULL innerCircularPath:NULL];
 }
 
