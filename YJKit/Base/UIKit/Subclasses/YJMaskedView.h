@@ -10,6 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * This is an ABSTRACT class for displaying UIView object with masked effect.
+ */
 @interface YJMaskedView : UIView
 
 /// Call this method to update mask layer for both design phase and runtime.

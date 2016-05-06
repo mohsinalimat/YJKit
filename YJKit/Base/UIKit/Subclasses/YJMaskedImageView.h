@@ -10,16 +10,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * This is an ABSTRACT class for displaying image with masked effect. For performance reason, it will not re-render the image for masking.
+ */
 @interface YJMaskedImageView : UIImageView
 
 /// Call this method to update mask layer for both design phase and runtime.
 - (void)updateMaskLayer;
 
 /// Override: returns an UIBezierPath object which for rendering masked CAShapeLayer object at runtime.
-- (UIBezierPath *)prepareClosedMaskBezierPath;
+- (UIBezierPath *)prepareMaskShapePathInRect:(CGRect)rect;
 
 /// Override: returns an CAShapeLayer object with highlighted mask shape which for rendering at runtime. Returns a nonnull object will ignore the -prepareClosedMaskBezierPath;
-- (nullable CAShapeLayer *)prepareHighlightedMaskShapeLayerWithDefaultMaskColor:(UIColor *)maskColor;
+- (nullable CAShapeLayer *)prepareHighlightedMaskShapeLayerInRect:(CGRect)rect withDefaultMaskColor:(UIColor *)maskColor;
 
 @end
 

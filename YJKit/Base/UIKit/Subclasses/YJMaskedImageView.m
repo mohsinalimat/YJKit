@@ -10,13 +10,15 @@
 #import "NSObject+YJCategory_KVO.h"
 #import "CAShapeLayer+YJCategory.h"
 #import "UIColor+YJCategory.h"
+#import "UIView+YJCategory.h"
+#import "CGGeometry_YJExtension.h"
 #import "UIDevice+YJCategory.h"
 #import "YJDebugMacros.h"
-#import "YJConfigureMacros.h"
 
 @interface YJMaskedImageView ()
 @property (nonatomic, strong) CAShapeLayer *maskLayer;
 @property (nonatomic, strong) UIColor *maskColor;
+@property (nonatomic, assign) CGRect maskFrame;
 @end
 
 @implementation YJMaskedImageView
@@ -47,14 +49,15 @@
 }
 #endif
 
-#pragma mark - view hierarchy
+#pragma mark - override view hierarchy
 
 - (void)willMoveToSuperview:(nullable UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
     if (!newSuperview) return;
     // added to superview
     if (newSuperview.backgroundColor) {
-        [self _configureMaskLayerWithColor:newSuperview.backgroundColor];
+        self.maskColor = newSuperview.backgroundColor;
+        [self updateMaskLayer];
         return;
     }
     [newSuperview addObservedKeyPath:@"backgroundColor" handleSetup:^(id  _Nonnull object, id  _Nullable newValue) {
@@ -73,27 +76,43 @@
     [super removeFromSuperview];
 }
 
-#pragma mark - modifying
+#pragma mark - override setters
 
 - (void)setImage:(UIImage *)image {
     [super setImage:image];
     if (!image) return;
     self.backgroundColor = nil;
+    [self _updateMaskFrameIfNeeded];
     [self updateMaskLayer];
 }
+
+- (void)setFrame:(CGRect)frame {
+    BOOL sizeChanged = NO;
+    CGSize oldSize = super.frame.size;
+    if (!CGSizeEqualToSize(oldSize, frame.size)) sizeChanged = YES;
+    [super setFrame:frame];
+    if (sizeChanged) [self updateMaskLayer];
+}
+
+- (void)setContentMode:(UIViewContentMode)contentMode {
+    [super setContentMode:contentMode];
+    [self _updateMaskFrameIfNeeded];
+    [self updateMaskLayer];
+}
+
+#pragma mark - masking
 
 - (void)updateMaskLayer {
     [self.maskLayer removeFromSuperlayer];
     [self _configureMaskLayerWithColor:self.maskColor];
 }
 
-#pragma mark - internals
-
 - (void)_configureMaskLayerWithColor:(UIColor *)color {
     if (self.isMasked || !color) return;
-    self.maskLayer = [self prepareHighlightedMaskShapeLayerWithDefaultMaskColor:color];
+    CGRect maskRect = !CGRectIsEmpty(self.maskFrame) ? self.maskFrame : self.bounds;
+    self.maskLayer = [self prepareHighlightedMaskShapeLayerInRect:maskRect withDefaultMaskColor:color];
     if (!self.maskLayer) {
-        UIBezierPath *maskShape = [self prepareClosedMaskBezierPath];
+        UIBezierPath *maskShape = [self prepareMaskShapePathInRect:maskRect];
         self.maskLayer = [CAShapeLayer maskLayerForBezierPath:maskShape fillColor:color.CGColor];
     }
     [self.layer addSublayer:self.maskLayer];
@@ -101,6 +120,14 @@
 
 - (BOOL)isMasked {
     return self.maskLayer.superlayer ? YES : NO;
+}
+
+- (void)_updateMaskFrameIfNeeded {
+    YJViewContentMode mode = [self mappedYJcontentMode];
+    if (mode == YJViewContentModeUnspecified) return;
+    CGRect displayedImageRect = CGRectPositioned((CGRect){ CGPointZero, self.image.size }, self.bounds, mode);
+    CGRect finalRect = CGRectIntersection(displayedImageRect, self.bounds);
+    if (!CGRectIsNull(finalRect)) self.maskFrame = finalRect;
 }
 
 // Deprecated
@@ -114,8 +141,8 @@
 
 // For subclasses overriding
 - (UIImage *)prepareMaskedImageForInterfaceBuilder { return nil; }
-- (UIBezierPath *)prepareClosedMaskBezierPath { return nil; }
-- (nullable CAShapeLayer *)prepareHighlightedMaskShapeLayerWithDefaultMaskColor:(UIColor *)maskColor { return nil; }
+- (UIBezierPath *)prepareMaskShapePathInRect:(CGRect)rect { return nil; }
+- (nullable CAShapeLayer *)prepareHighlightedMaskShapeLayerInRect:(CGRect)rect withDefaultMaskColor:(UIColor *)maskColor { return nil; }
 
 // Quote From WWDC: This is going to be invoked on our view right before it renders into the canvas, and it's a last miniute chance for us to do any additional setup.
 - (void)prepareForInterfaceBuilder {

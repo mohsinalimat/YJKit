@@ -165,4 +165,24 @@ CGFloat YJGridPaddingInContainerHeight(CGFloat containerHeight, CGFloat gridHeig
     return YJGridPaddingInContainerLength(containerHeight, gridHeight, gridCount);
 }
 
+#pragma mark - YJContentMode
+
+- (YJViewContentMode)mappedYJcontentMode {
+    switch (self.contentMode) {
+        case UIViewContentModeTop: return YJViewContentModeTop;
+        case UIViewContentModeLeft: return YJViewContentModeLeft;
+        case UIViewContentModeRight: return YJViewContentModeRight;
+        case UIViewContentModeBottom: return YJViewContentModeBottom;
+        case UIViewContentModeCenter: return YJViewContentModeCenter;
+        case UIViewContentModeTopLeft: return (YJViewContentModeTop | YJViewContentModeLeft);
+        case UIViewContentModeTopRight: return (YJViewContentModeTop | YJViewContentModeRight);
+        case UIViewContentModeBottomLeft: return (YJViewContentModeBottom | YJViewContentModeLeft);
+        case UIViewContentModeBottomRight: return (YJViewContentModeBottom | YJViewContentModeRight);
+        case UIViewContentModeScaleToFill: return YJViewContentModeUnspecified;
+        case UIViewContentModeScaleAspectFit: return YJViewContentModeScaleAspectFit;
+        case UIViewContentModeScaleAspectFill: return YJViewContentModeScaleAspectFill;
+        case UIViewContentModeRedraw: return YJViewContentModeUnspecified;
+    }
+}
+
 @end

@@ -26,14 +26,15 @@
 }
 #endif
 
-#pragma mark - view hierarchy
+#pragma mark - override view hierarchy
 
 - (void)willMoveToSuperview:(nullable UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
     if (!newSuperview) return;
     // added to superview
     if (newSuperview.backgroundColor) {
-        [self _configureMaskLayerWithColor:newSuperview.backgroundColor];
+        self.maskColor = newSuperview.backgroundColor;
+        [self updateMaskLayer];
         return;
     }
     [newSuperview addObservedKeyPath:@"backgroundColor" handleSetup:^(id  _Nonnull object, id  _Nullable newValue) {
@@ -52,7 +53,17 @@
     [super removeFromSuperview];
 }
 
-#pragma mark - rounded corner
+#pragma mark - override setters
+
+- (void)setFrame:(CGRect)frame {
+    BOOL sizeChanged = NO;
+    CGSize oldSize = super.frame.size;
+    if (!CGSizeEqualToSize(oldSize, frame.size)) sizeChanged = YES;
+    [super setFrame:frame];
+    if (sizeChanged) [self updateMaskLayer];
+}
+
+#pragma mark - masking
 
 // #if TARGET_INTERFACE_BUILDER
 // Compiler won't warn you if you make typos under TARGET_INTERFACE_BUILDER. So if you failed to build Xcode for IBDesignable phase by selecting Xcode menu bar (in interface builder, either .storyboard or .xib) -> Editor -> Debug Selected Views, then check your code under TARGET_INTERFACE_BUILDER.

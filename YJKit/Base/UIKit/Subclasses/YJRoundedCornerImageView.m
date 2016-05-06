@@ -49,17 +49,42 @@ static const CGFloat kYJRoundedCornerImageViewDefaultCornerRadius = 10.0f;
     if (self.image) [self updateMaskLayer];
 }
 
-- (UIBezierPath *)prepareClosedMaskBezierPath {
-    return [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:self.bounds.size cornerRadius:self.cornerRadius outerFramePath:NULL innerRoundedPath:NULL];
+- (UIBezierPath *)prepareMaskShapePathInRect:(CGRect)rect {
+    CGRect bounds = self.bounds;
+    
+    UIEdgeInsets edgeInsets;
+    edgeInsets.top = rect.origin.y;
+    edgeInsets.left = rect.origin.x;
+    edgeInsets.bottom = bounds.size.height - rect.size.height - rect.origin.y;
+    edgeInsets.right = bounds.size.width - rect.size.width - rect.origin.x;
+    
+    return [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:bounds.size
+                                                       cornerRadius:self.cornerRadius
+                                                         edgeInsets:edgeInsets
+                                                     outerFramePath:NULL
+                                                   innerRoundedPath:NULL];
 }
 
-- (nullable CAShapeLayer *)prepareHighlightedMaskShapeLayerWithDefaultMaskColor:(UIColor *)maskColor {
+- (nullable CAShapeLayer *)prepareHighlightedMaskShapeLayerInRect:(CGRect)rect withDefaultMaskColor:(UIColor *)maskColor {
     if (!self.borderWidth || !self.borderColor) {
         return nil;
     } else {
+        CGRect bounds = self.bounds;
+
+        UIEdgeInsets edgeInsets;
+        edgeInsets.top = rect.origin.y;
+        edgeInsets.left = rect.origin.x;
+        edgeInsets.bottom = bounds.size.height - rect.size.height - rect.origin.y;
+        edgeInsets.right = bounds.size.width - rect.size.width - rect.origin.x;
+        
+        CGSize innerSize = CGSizeMake(bounds.size.width - self.borderWidth / 2, bounds.size.height - self.borderWidth / 2);
         UIBezierPath *framePath, *roundedBorderPath;
-        CGSize innerSize = CGSizeMake(self.bounds.size.width - self.borderWidth / 2, self.bounds.size.height - self.borderWidth / 2);
-        [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:innerSize cornerRadius:self.cornerRadius outerFramePath:&framePath innerRoundedPath:&roundedBorderPath];
+        [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:innerSize
+                                                    cornerRadius:self.cornerRadius
+                                                      edgeInsets:edgeInsets
+                                                  outerFramePath:&framePath
+                                                innerRoundedPath:&roundedBorderPath];
+        
         return [CAShapeLayer maskLayerForFrameBezierPath:framePath
                                          shapeBezierPath:roundedBorderPath
                                                fillColor:maskColor.CGColor

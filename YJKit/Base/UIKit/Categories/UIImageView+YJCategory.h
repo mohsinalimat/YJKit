@@ -7,18 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef NS_OPTIONS(NSUInteger, YJViewContentMode) {
-    // Alignment
-    YJViewContentModeCenter             = 0 << 0,
-    YJViewContentModeTop                = 1 << 0,
-    YJViewContentModeLeft               = 1 << 1,
-    YJViewContentModeBottom             = 1 << 2,
-    YJViewContentModeRight              = 1 << 3,
-    // Aspect Scaling
-    YJViewContentModeScaleAspectFit     = 1 << 4,
-    YJViewContentModeScaleAspectFill    = 2 << 4,
-};
+#import "UIView+YJCategory.h"
 
 @interface UIImageView (YJCategory)
 

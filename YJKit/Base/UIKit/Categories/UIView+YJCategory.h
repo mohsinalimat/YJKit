@@ -8,6 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_OPTIONS(NSUInteger, YJViewContentMode) {
+    // Alignment
+    YJViewContentModeCenter             = 0 << 0,
+    YJViewContentModeTop                = 1 << 0,
+    YJViewContentModeLeft               = 1 << 1,
+    YJViewContentModeBottom             = 1 << 2,
+    YJViewContentModeRight              = 1 << 3,
+    // Aspect Scaling
+    YJViewContentModeScaleAspectFit     = 1 << 4,
+    YJViewContentModeScaleAspectFill    = 2 << 4,
+    // Unspecified
+    YJViewContentModeUnspecified        = 0xFF,
+};
+
+
 @interface UIView (YJCategory)
 
 // Geometry
@@ -43,5 +58,9 @@ CGFloat YJGridOffsetYAtIndex(NSUInteger index, CGFloat gridHeight, CGFloat paddi
 
 NSUInteger YJGridCountInContainerWidth(CGFloat containerWidth, CGFloat gridWidth, CGFloat padding);
 NSUInteger YJGridCountInContainerHeight(CGFloat containerHeight, CGFloat gridHeight, CGFloat padding);
+
+// YJContentMode
+
+- (YJViewContentMode)mappedYJcontentMode;
 
 @end

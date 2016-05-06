@@ -31,11 +31,11 @@
     [self updateMaskLayer];
 }
 
-- (UIBezierPath *)prepareClosedMaskBezierPath {
+- (UIBezierPath *)prepareMaskShapePathInRect:(CGRect)rect {
     return [UIBezierPath bezierPathWithCircleMaskShapeInSize:self.bounds.size outerFramePath:NULL innerCircularPath:NULL];
 }
 
-- (nullable CAShapeLayer *)prepareHighlightedMaskShapeLayerWithDefaultMaskColor:(UIColor *)maskColor {
+- (nullable CAShapeLayer *)prepareHighlightedMaskShapeLayerInRect:(CGRect)rect withDefaultMaskColor:(UIColor *)maskColor {
     if (!self.circleWidth || !self.circleColor) {
         return nil;
     } else {
