@@ -11,7 +11,6 @@
 #import "UIBezierPath+YJCategory.h"
 #import "CAShapeLayer+YJCategory.h"
 #import "YJDebugMacros.h"
-#import "YJConfigureMacros.h"
 
 @implementation YJCircularImageView
 
@@ -24,23 +23,13 @@
 - (void)setCircleWidth:(CGFloat)circleWidth {
     if (circleWidth < 0.0) circleWidth = 0.0f;
     _circleWidth = circleWidth;
-    [self updateUIForInterfaceBuilder];
+    [self updateMaskLayer];
 }
 
-#if YJ_COMPILE_UNAVAILABLE
-- (UIImage *)prepareMaskedImageForInterfaceBuilder {
-    UIImage *image = self.image;
-    CGSize size = image.size;
-    CGFloat minValue = MIN(size.width, size.height);
-    CGRect bounds = (CGRect){ CGPointZero, (CGSize){ minValue, minValue } };
-    UIGraphicsBeginImageContextWithOptions(bounds.size, NO, image.scale);
-    [[UIBezierPath bezierPathWithOvalInRect:bounds] addClip];
-    [image drawAtPoint:(CGPoint){ (minValue - size.width) / 2, (minValue - size.height) / 2 }];
-    UIImage *circularImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return circularImage;
+- (void)setCircleColor:(UIColor *)circleColor {
+    _circleColor = circleColor;
+    [self updateMaskLayer];
 }
-#endif
 
 - (UIBezierPath *)prepareClosedMaskBezierPath {
     return [UIBezierPath bezierPathWithCircleMaskShapeInSize:self.bounds.size outerFramePath:NULL innerCircularPath:NULL];

@@ -33,15 +33,14 @@
     if (!newSuperview) return;
     // added to superview
     if (newSuperview.backgroundColor) {
-        [self _configureMaskWithColor:newSuperview.backgroundColor];
+        [self _configureMaskLayerWithColor:newSuperview.backgroundColor];
         return;
     }
     [newSuperview addObservedKeyPath:@"backgroundColor" handleSetup:^(id  _Nonnull object, id  _Nullable newValue) {
         if (self.superview == object && newValue && [newValue isKindOfClass:[UIColor class]]) { // not go in from design phase.
             if (![self.maskColor isEqualToRGBColor:newValue]) {
-                [self.maskLayer removeFromSuperlayer];
-                [self _configureMaskWithColor:newValue];
                 self.maskColor = newValue;
+                [self updateMaskLayer];
             }
         }
     }];
@@ -55,15 +54,16 @@
 
 #pragma mark - rounded corner
 
-- (void)updateUIForInterfaceBuilder {
-#if TARGET_INTERFACE_BUILDER
-    #if YJ_COMPILE_UNAVAILABLE
-    self.layer.masksToBounds = YES;
-    #endif
-#endif
+// #if TARGET_INTERFACE_BUILDER
+// Compiler won't warn you if you make typos under TARGET_INTERFACE_BUILDER. So if you failed to build Xcode for IBDesignable phase by selecting Xcode menu bar (in interface builder, either .storyboard or .xib) -> Editor -> Debug Selected Views, then check your code under TARGET_INTERFACE_BUILDER.
+// #endif
+
+- (void)updateMaskLayer {
+    [self.maskLayer removeFromSuperlayer];
+    [self _configureMaskLayerWithColor:self.maskColor];
 }
 
-- (void)_configureMaskWithColor:(UIColor *)color {
+- (void)_configureMaskLayerWithColor:(UIColor *)color {
     if (self.isMasked || !color) return;
     self.maskLayer = [self prepareHighlightedMaskShapeLayerWithDefaultMaskColor:color];
     if (!self.maskLayer) {

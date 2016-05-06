@@ -14,7 +14,6 @@
 		3204F0F31CACC2BA006282DF /* CGGeometry_YJExtension.c in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0DE1CACC2BA006282DF /* CGGeometry_YJExtension.c */; };
 		3204F0F91CACC2BA006282DF /* YJMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3204F0EE1CACC2BA006282DF /* YJMemoryCache.m */; };
 		320A97EF1CA9493800485B9A /* AFTCameraUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 320A97EE1CA9493800485B9A /* AFTCameraUI.bundle */; };
-		32166C6E1CD85BC700CE699B /* yj_head_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 32166C6D1CD85BC700CE699B /* yj_head_icon.png */; };
 		3223B4341CDAE5CE00956ED3 /* NSSet+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3223B4331CDAE5CE00956ED3 /* NSSet+YJCategory.m */; };
 		3223B43D1CDB127800956ED3 /* CAShapeLayer+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3223B43C1CDB127800956ED3 /* CAShapeLayer+YJCategory.m */; };
 		324AB0A01CD1C6EE00A9DCF0 /* YJCircularImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 324AB09F1CD1C6EE00A9DCF0 /* YJCircularImageViewController.m */; };
@@ -25,6 +24,7 @@
 		32CB4AAB1CCA3C880050C01B /* YJSavingImageToAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CB4AAA1CCA3C880050C01B /* YJSavingImageToAlbumViewController.m */; };
 		32D9E7991CB21E7500CD763A /* NSTimer+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9E7981CB21E7500CD763A /* NSTimer+YJCategory.m */; };
 		32DF47B11CDA342F00BC225C /* NSArray+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32DF47B01CDA342F00BC225C /* NSArray+YJCategory.m */; };
+		32E5D29F1CDC7DEE0070B96D /* yj_head_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 32E5D29E1CDC7DEE0070B96D /* yj_head_icon.png */; };
 		32FA127F1CDC3637008CA61C /* UIActionSheet+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA12611CDC3637008CA61C /* UIActionSheet+YJCategory.m */; };
 		32FA12801CDC3637008CA61C /* UIAlertView+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA12631CDC3637008CA61C /* UIAlertView+YJCategory.m */; };
 		32FA12811CDC3637008CA61C /* UIBarButtonItem+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA12651CDC3637008CA61C /* UIBarButtonItem+YJCategory.m */; };
@@ -83,7 +83,6 @@
 		3204F0EE1CACC2BA006282DF /* YJMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJMemoryCache.m; sourceTree = "<group>"; };
 		3204F0F01CACC2BA006282DF /* YJKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJKit.h; sourceTree = "<group>"; };
 		320A97EE1CA9493800485B9A /* AFTCameraUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AFTCameraUI.bundle; sourceTree = "<group>"; };
-		32166C6D1CD85BC700CE699B /* yj_head_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yj_head_icon.png; sourceTree = "<group>"; };
 		321D8A5A1CC50ED800CB44DC /* YJDebugMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YJDebugMacros.h; sourceTree = "<group>"; };
 		3223B4321CDAE5CE00956ED3 /* NSSet+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+YJCategory.h"; sourceTree = "<group>"; };
 		3223B4331CDAE5CE00956ED3 /* NSSet+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+YJCategory.m"; sourceTree = "<group>"; };
@@ -105,6 +104,7 @@
 		32D9E7981CB21E7500CD763A /* NSTimer+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+YJCategory.m"; sourceTree = "<group>"; };
 		32DF47AF1CDA342F00BC225C /* NSArray+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+YJCategory.h"; sourceTree = "<group>"; };
 		32DF47B01CDA342F00BC225C /* NSArray+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+YJCategory.m"; sourceTree = "<group>"; };
+		32E5D29E1CDC7DEE0070B96D /* yj_head_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yj_head_icon.png; sourceTree = "<group>"; };
 		32F9DE1B1CC1DC66004E384E /* YJMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMacros.h; sourceTree = "<group>"; };
 		32F9DE1C1CC1DC66004E384E /* YJUIMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJUIMacros.h; sourceTree = "<group>"; };
 		32F9DE1D1CC1DCFB004E384E /* YJMathMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMathMacros.h; sourceTree = "<group>"; };
@@ -292,7 +292,6 @@
 		324AB0AC1CD2120100A9DCF0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				32166C6D1CD85BC700CE699B /* yj_head_icon.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -432,6 +431,7 @@
 				32FA12941CDC3718008CA61C /* YJCircularImageViewController.xib */,
 				324AB0A71CD1EE8C00A9DCF0 /* Puppy.jpg */,
 				3204F0BF1CACA98D006282DF /* Octocat.png */,
+				32E5D29E1CDC7DEE0070B96D /* yj_head_icon.png */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				320A97EE1CA9493800485B9A /* AFTCameraUI.bundle */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -560,12 +560,12 @@
 			files = (
 				3204F0D41CACBF1C006282DF /* LaunchScreen.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				32E5D29F1CDC7DEE0070B96D /* yj_head_icon.png in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				320A97EF1CA9493800485B9A /* AFTCameraUI.bundle in Resources */,
 				32FA12951CDC3718008CA61C /* YJCircularImageViewController.xib in Resources */,
 				324AB0A81CD1EE8C00A9DCF0 /* Puppy.jpg in Resources */,
 				3204F0C01CACA98D006282DF /* Octocat.png in Resources */,
-				32166C6E1CD85BC700CE699B /* yj_head_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

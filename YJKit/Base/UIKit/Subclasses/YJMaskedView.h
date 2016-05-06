@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YJMaskedView : UIView
 
-/// refresh UI for design phase.
-- (void)updateUIForInterfaceBuilder;
+/// Call this method to update mask layer for both design phase and runtime.
+- (void)updateMaskLayer;
 
 /// Override: returns an UIBezierPath object which for rendering masked CAShapeLayer object at runtime.
 - (UIBezierPath *)prepareClosedMaskBezierPath;

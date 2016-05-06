@@ -12,11 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YJMaskedImageView : UIImageView
 
-/// refresh UI for design phase.
-- (void)updateUIForInterfaceBuilder;
-
-/// Override: returns an masked UIImage object which for rendering at IBDesignable phase. It will be called after imageView.image being set.
-//- (UIImage *)prepareMaskedImageForInterfaceBuilder;
+/// Call this method to update mask layer for both design phase and runtime.
+- (void)updateMaskLayer;
 
 /// Override: returns an UIBezierPath object which for rendering masked CAShapeLayer object at runtime.
 - (UIBezierPath *)prepareClosedMaskBezierPath;

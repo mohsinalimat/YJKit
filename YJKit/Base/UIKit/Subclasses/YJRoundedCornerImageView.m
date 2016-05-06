@@ -9,7 +9,6 @@
 #import "YJRoundedCornerImageView.h"
 #import "UIBezierPath+YJCategory.h"
 #import "CAShapeLayer+YJCategory.h"
-#import "YJConfigureMacros.h"
 
 static const CGFloat kYJRoundedCornerImageViewDefaultCornerRadius = 10.0f;
 
@@ -36,22 +35,19 @@ static const CGFloat kYJRoundedCornerImageViewDefaultCornerRadius = 10.0f;
 - (void)setCornerRadius:(CGFloat)cornerRadius {
     if (cornerRadius < 0.0f) cornerRadius = 0.0f;
     _cornerRadius = cornerRadius;
-    if (self.image) [self updateUIForInterfaceBuilder];
+    if (self.image) [self updateMaskLayer];
 }
 
-#if YJ_COMPILE_UNAVAILABLE
-- (UIImage *)prepareMaskedImageForInterfaceBuilder {
-    UIImage *image = self.image;
-    CGSize size = image.size;
-    CGRect bounds = (CGRect){ CGPointZero, (CGSize){ size.width, size.height } };
-    UIGraphicsBeginImageContextWithOptions(bounds.size, NO, image.scale);
-    [[UIBezierPath bezierPathWithRoundedRect:bounds cornerRadius:self.cornerRadius] addClip];
-    [image drawAtPoint:CGPointZero];
-    UIImage *roundedRectImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return roundedRectImage;
+- (void)setBorderWidth:(CGFloat)borderWidth {
+    if (borderWidth < 0.0f) borderWidth = 0.0f;
+    _borderWidth = borderWidth;
+    if (self.image) [self updateMaskLayer];
 }
-#endif
+
+- (void)setBorderColor:(UIColor *)borderColor {
+    _borderColor = borderColor;
+    if (self.image) [self updateMaskLayer];
+}
 
 - (UIBezierPath *)prepareClosedMaskBezierPath {
     return [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:self.bounds.size cornerRadius:self.cornerRadius outerFramePath:NULL innerRoundedPath:NULL];

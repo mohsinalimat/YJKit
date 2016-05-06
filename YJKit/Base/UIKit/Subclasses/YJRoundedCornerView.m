@@ -35,14 +35,18 @@ static const CGFloat kYJRoundedCornerViewDefaultCornerRadius = 10.0f;
 - (void)setCornerRadius:(CGFloat)cornerRadius {
     if (cornerRadius < 0.0f) cornerRadius = 0.0f;
     _cornerRadius = cornerRadius;
-    [self updateUIForInterfaceBuilder];
+    [self updateMaskLayer];
 }
 
-- (void)updateUIForInterfaceBuilder {
-#if TARGET_INTERFACE_BUILDER
-    self.layer.cornerRadius = self.cornerRadius;
-#endif
-    [super updateUIForInterfaceBuilder];
+- (void)setBorderWidth:(CGFloat)borderWidth {
+    if (borderWidth < 0.0f) borderWidth = 0.0f;
+    _borderWidth = borderWidth;
+    [self updateMaskLayer];
+}
+
+- (void)setBorderColor:(UIColor *)borderColor {
+    _borderColor = borderColor;
+    [self updateMaskLayer];
 }
 
 - (UIBezierPath *)prepareClosedMaskBezierPath {
