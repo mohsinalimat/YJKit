@@ -26,7 +26,7 @@
     return @[@"YJGridViewController",
              @"YJGeometryViewController",
              @"YJSavingImageToAlbumViewController",
-             @"YJCircularImageViewController"
+             @"YJMaskViewController"
              ];
 }
 

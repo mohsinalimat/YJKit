@@ -18,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
  * @param fillColor The color for filling the mask layer.
  * @return A mask layer based on the specific UIBezierPath object.
  */
-+ (instancetype)maskLayerForBezierPath:(UIBezierPath *)bezierPath fillColor:(CGColorRef)fillColor;
++ (instancetype)maskLayerForBezierPath:(UIBezierPath *)bezierPath
+                             fillColor:(CGColorRef)fillColor;
 
 /**
  * @brief Create a mask layer based on the specific UIBezierPath object. The masked part is the region which between the frameBezierPath and shapeBezierPath.
@@ -29,7 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
  * @param strokeColor The inner shape line color.
  * @return A mask layer based on the specific UIBezierPath object.
  */
-+ (instancetype)maskLayerForFrameBezierPath:(UIBezierPath *)frameBezierPath shapeBezierPath:(UIBezierPath *)shapeBezierPath fillColor:(CGColorRef)fillColor strokeWidth:(CGFloat)strokeWidth strokeColor:(CGColorRef)strokeColor;
++ (instancetype)maskLayerForFrameBezierPath:(UIBezierPath *)frameBezierPath
+                            shapeBezierPath:(UIBezierPath *)shapeBezierPath
+                                  fillColor:(CGColorRef)fillColor
+                                strokeWidth:(CGFloat)strokeWidth
+                                strokeColor:(CGColorRef)strokeColor;
 
 /**
  * @brief Create a circular mask layer.
@@ -37,7 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
  * @param fillColor The color for filling the mask layer.
  * @return A circular mask layer.
  */
-+ (instancetype)circularMaskLayerInSize:(CGSize)size fillColor:(CGColorRef)fillColor;
++ (instancetype)circularMaskLayerInSize:(CGSize)size
+                              fillColor:(CGColorRef)fillColor;
 
 /**
  * @brief Create a circular mask layer.
@@ -47,7 +53,10 @@ NS_ASSUME_NONNULL_BEGIN
  * @param strokeColor The circular line color.
  * @return A circular mask layer.
  */
-+ (instancetype)circularMaskLayerInSize:(CGSize)size fillColor:(CGColorRef)fillColor strokeWidth:(CGFloat)strokeWidth strokeColor:(CGColorRef)strokeColor;
++ (instancetype)circularMaskLayerInSize:(CGSize)size
+                              fillColor:(CGColorRef)fillColor
+                            strokeWidth:(CGFloat)strokeWidth
+                            strokeColor:(CGColorRef)strokeColor;
 
 /**
  * @brief Create a rounded rect mask layer.
@@ -55,7 +64,9 @@ NS_ASSUME_NONNULL_BEGIN
  * @param fillColor The color for filling the mask layer.
  * @return A rounded rect mask layer.
  */
-+ (instancetype)roundedRectMaskLayerInSize:(CGSize)size cornerRadius:(CGFloat)cornerRadius fillColor:(CGColorRef)fillColor;
++ (instancetype)roundedRectMaskLayerInSize:(CGSize)size
+                              cornerRadius:(CGFloat)cornerRadius
+                                 fillColor:(CGColorRef)fillColor;
 
 /**
  * @brief Create a rounded rect mask layer.
@@ -65,7 +76,11 @@ NS_ASSUME_NONNULL_BEGIN
  * @param strokeColor The rounded rect line color.
  * @return A rounded rect mask layer.
  */
-+ (instancetype)roundedRectMaskLayerInSize:(CGSize)size cornerRadius:(CGFloat)cornerRadius fillColor:(CGColorRef)fillColor strokeWidth:(CGFloat)strokeWidth strokeColor:(CGColorRef)strokeColor;
++ (instancetype)roundedRectMaskLayerInSize:(CGSize)size
+                              cornerRadius:(CGFloat)cornerRadius
+                                 fillColor:(CGColorRef)fillColor
+                               strokeWidth:(CGFloat)strokeWidth
+                               strokeColor:(CGColorRef)strokeColor;
 
 @end
 

@@ -35,9 +35,12 @@
 #import <YJKit/UIAlertView+YJCategory.h>
 #import <YJKit/UIActionSheet+YJCategory.h>
 #import <YJKit/YJPhotoLibrary.h>
+#import <YJKit/YJLayerBasedMasking.h>
 #import <YJKit/YJRoundedCornerView.h>
 #import <YJKit/YJCircularImageView.h>
 #import <YJKit/YJRoundedCornerImageView.h>
+#import <YJKit/YJRoundedCornerButton.h>
+#import <YJKit/YJRoundedCornerLabel.h>
 #else
 #import "YJMacros.h"
 #import "CGGeometry_YJExtension.h"
@@ -61,9 +64,12 @@
 #import "UIAlertView+YJCategory.h"
 #import "UIActionSheet+YJCategory.h"
 #import "YJPhotoLibrary.h"
+#import "YJLayerBasedMasking.h"
 #import "YJRoundedCornerView.h"
 #import "YJCircularImageView.h"
 #import "YJRoundedCornerImageView.h"
+#import "YJRoundedCornerButton.h"
+#import "YJRoundedCornerLabel.h"
 #endif
 
 #endif /* YJKit_h */

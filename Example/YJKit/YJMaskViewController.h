@@ -1,5 +1,5 @@
 //
-//  YJCircularImageViewController.h
+//  YJMaskViewController.h
 //  YJKit
 //
 //  Created by huang-kun on 16/4/28.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YJCircularImageViewController : UIViewController
+@interface YJMaskViewController : UIViewController
 
 @end

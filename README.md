@@ -15,13 +15,8 @@ To specify the Podfile this way: (Add `use_frameworks!` to avoid IB_DESIGNABLE c
 
 ```
 platform :ios, '7.0'
-
-use_frameworks!
-
-...
+use_frameworks! # Avoid IB_DESIGNABLE compiler error
 pod 'YJKit'
-...
-
 ```
 
 ## Installation
