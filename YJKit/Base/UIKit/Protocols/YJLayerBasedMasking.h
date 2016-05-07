@@ -10,20 +10,22 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * This is a protocol for rendering the shape layer based custom mask on UIView object. Any subclass of UIView can conform this protocol.
+ */
 @protocol YJLayerBasedMasking <NSObject>
-
-@property (nonatomic, strong) CAShapeLayer *maskLayer;
-@property (nonatomic, strong, nullable) UIColor *maskColor;
-@property (nonatomic, assign) CGRect maskFrame;
 
 /// Call this method to update mask layer for both design phase and runtime.
 - (void)updateMaskLayer;
 
 /// Returns an UIBezierPath object which for rendering masked CAShapeLayer object at runtime.
-- (UIBezierPath *)prepareMaskShapePathInRect:(CGRect)rect;
+/// The mask region will be rendered in self's boundary.
+- (UIBezierPath *)prepareMaskRegion;
 
-/// Returns an CAShapeLayer object with highlighted mask shape which for rendering at runtime. Returns a nonnull object will ignore the -prepareClosedMaskBezierPath;
-- (nullable CAShapeLayer *)prepareHighlightedMaskShapeLayerInRect:(CGRect)rect withDefaultMaskColor:(UIColor *)maskColor;
+/// Returns an CALayer object with custom mask shape which for rendering at runtime.
+/// The mask layer will be rendered in self's boundary.
+/// Notice: Returning a nonnull CAShapeLayer object will ignore the UIBezierPath object from -prepareMaskRegion;
+- (nullable CALayer *)prepareMaskLayerWithDefaultMaskColor:(UIColor *)maskColor;
 
 @end
 

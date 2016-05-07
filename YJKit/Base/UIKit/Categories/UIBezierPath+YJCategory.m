@@ -37,9 +37,9 @@ void (^calculateMaskBoundaries)(CGRect *, CGRect *, UIEdgeInsets);
 + (instancetype)bezierPathWithRoundedCornerMaskShapeInSize:(CGSize)size cornerRadius:(CGFloat)cornerRadius edgeInsets:(UIEdgeInsets)edgeInsets outerFramePath:(UIBezierPath **)framePathPtr innerRoundedPath:(UIBezierPath **)roundedPathPtr {
     Class BPClass = [self class];
     CGRect outerFrame = (CGRect){ CGPointZero, size };
-    CGRect maskFrame = UIEdgeInsetsInsetRect(outerFrame, edgeInsets);
+    CGRect transparentFrame = UIEdgeInsetsInsetRect(outerFrame, edgeInsets);
     UIBezierPath *framePath = [BPClass bezierPathWithRect:outerFrame];
-    UIBezierPath *roundedPath = [BPClass bezierPathWithRoundedRect:maskFrame cornerRadius:cornerRadius];
+    UIBezierPath *roundedPath = [BPClass bezierPathWithRoundedRect:transparentFrame cornerRadius:cornerRadius];
     if (framePathPtr) *framePathPtr = [framePath copy];
     if (roundedPathPtr) *roundedPathPtr = [roundedPath copy];
     [framePath appendPath:roundedPath];

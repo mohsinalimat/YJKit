@@ -22,12 +22,44 @@
  * Must declare a kind of YJMaskView abstract class which conforms protocol <YJLayerBasedMasking>
  * Then declare a custom mask view which inherits that abstract class.
  */
-#ifndef YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS
-#define YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS \
+#ifndef YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
+#define YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS \
 \
-@synthesize maskLayer = _maskLayer; \
-@synthesize maskColor = _maskColor; \
-@synthesize maskFrame = _maskFrame; \
+/* @implementation XXMaskedView */{ \
+    CALayer *_maskLayer; \
+    UIColor *_maskColor; \
+    CGRect _transparentFrame; \
+} \
+\
+/* generate internal properties */ \
+\
+/* @property (nonatomic, strong, nullable) CALayer *maskLayer; */ \
+/* @property (nonatomic, strong, nullable) UIColor *maskColor; */ \
+/* @property (nonatomic, assign) CGRect transparentFrame; */ \
+\
+- (void)setMaskLayer:(CALayer *)maskLayer { \
+    _maskLayer = maskLayer; \
+} \
+\
+- (CALayer *)maskLayer { \
+    return _maskLayer; \
+} \
+\
+- (void)setMaskColor:(UIColor *)maskColor { \
+    _maskColor = maskColor; \
+} \
+\
+- (UIColor *)maskColor { \
+    return _maskColor; \
+} \
+\
+- (void)setTransparentFrame:(CGRect)transparentFrame { \
+    _transparentFrame = transparentFrame; \
+} \
+\
+- (CGRect)transparentFrame { \
+    return _transparentFrame; \
+} \
 \
 /* override view hierarchy */ \
 \
@@ -75,10 +107,9 @@
 \
 - (void)_configureMaskLayerWithColor:(UIColor *)color { \
     if (self.isMasked || !color) return; \
-    CGRect maskRect = !CGRectIsEmpty(self.maskFrame) ? self.maskFrame : self.bounds; \
-    self.maskLayer = [self prepareHighlightedMaskShapeLayerInRect:maskRect withDefaultMaskColor:color]; \
+    self.maskLayer = [self prepareMaskLayerWithDefaultMaskColor:color]; \
     if (!self.maskLayer) { \
-        UIBezierPath *maskShape = [self prepareMaskShapePathInRect:maskRect]; \
+        UIBezierPath *maskShape = [self prepareMaskRegion]; \
         self.maskLayer = [CAShapeLayer maskLayerForBezierPath:maskShape fillColor:color.CGColor]; \
     } \
     [self.layer addSublayer:self.maskLayer]; \
@@ -89,21 +120,21 @@
 } \
 \
 
-#endif // YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
+#endif // YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS
 
 
 /**
  * Must conforms protocol <YJLayerBasedMasking> to your custom UIView subclass
  */
-#ifndef YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
-#define YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS \
+#ifndef YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS
+#define YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS \
 \
-        YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS \
+        YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS \
 \
 /* for subclasses overriding */ \
 \
-- (UIBezierPath *)prepareMaskShapePathInRect:(CGRect)rect { return nil; } \
-- (nullable CAShapeLayer *)prepareHighlightedMaskShapeLayerInRect:(CGRect)rect withDefaultMaskColor:(UIColor *)maskColor { return nil; } \
+- (UIBezierPath *)prepareMaskRegion { return nil; } \
+- (nullable CALayer *)prepareMaskLayerWithDefaultMaskColor:(UIColor *)maskColor { return nil; } \
 \
 
 #endif

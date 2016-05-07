@@ -17,7 +17,7 @@
 @implementation YJMaskedImageView
 
 // Add default YJLayerBasedMasking implementations
-YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
+YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS /* set _transparantFrame later */
 
 #pragma mark - init & dealloc
 
@@ -51,24 +51,24 @@ YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
     [super setImage:image];
     if (!image) return;
     self.backgroundColor = nil;
-    [self _updateMaskFrameIfNeeded];
+    [self _updateTransparentFrameIfNeeded];
     [self updateMaskLayer];
 }
 
 - (void)setContentMode:(UIViewContentMode)contentMode {
     [super setContentMode:contentMode];
-    [self _updateMaskFrameIfNeeded];
+    [self _updateTransparentFrameIfNeeded];
     [self updateMaskLayer];
 }
 
 #pragma mark - masking
 
-- (void)_updateMaskFrameIfNeeded {
+- (void)_updateTransparentFrameIfNeeded {
     YJViewContentMode mode = [self mappedYJcontentMode];
     if (mode == YJViewContentModeUnspecified) return;
     CGRect displayedImageRect = CGRectPositioned((CGRect){ CGPointZero, self.image.size }, self.bounds, mode);
     CGRect finalRect = CGRectIntersection(displayedImageRect, self.bounds);
-    if (!CGRectIsNull(finalRect)) self.maskFrame = finalRect;
+    if (!CGRectIsNull(finalRect)) self.transparentFrame = finalRect;
 }
 
 // Deprecated
