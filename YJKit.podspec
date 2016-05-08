@@ -22,38 +22,4 @@ Pod::Spec.new do |s|
   s.public_header_files = 'YJKit/YJKit.h'
   s.frameworks = 'UIKit', 'Foundation', 'CoreGraphics', 'AVFoundation'
 
-  s.cocoapods_version = '>= 0.36'
-
-
-pch_YJ = <<-EOS
-#ifndef TARGET_OS_IOS
-    #define TARGET_OS_IOS TARGET_OS_IPHONE
-#endif
-#ifndef TARGET_OS_WATCH
-    #define TARGET_OS_WATCH 0
-#endif
-#ifndef TARGET_OS_TV
-    #define TARGET_OS_TV 0
-#endif
-EOS
-  s.prefix_header_contents = pch_YJ
-
-
-#  s.subspec 'EXE' do |ss|
-#    ss.source_files = 'YJKit/Base/Macros/YJExecutionMacros.h'
-#  end
-
-#  s.subspec 'Macros' do |ss|
-#    ss.source_files = 'YJKit/Base/Macros/*'
-#  end
-
-#  s.subspec 'Foundation' do |ss|
-#    ss.source_files = 'YJKit/Base/Foundation/*'
-#    ss.dependency 'YJKit/Macros'
-#  end
-
-#  s.subspec 'UIKit' do |ss|
-#    ss.source_files = 'YJKit/Base/**/*'
-#  end
-
 end
