@@ -39,14 +39,21 @@ EOS
   s.prefix_header_contents = pch_YJ
 
 
-  s.subspec 'ExeMacros' do |ems|
-    ems.name = 'EXE_YJ'
-    ems.source_files = 'YJKit/Base/Macros/YJExecutionMacros.h'
+  s.subspec 'EXE' do |ss|
+    ss.source_files = 'YJKit/Base/Macros/YJExecutionMacros.h'
   end
 
-  s.subspec 'UIKit' do |uis|
-    uis.name = 'UIKit_YJ'
-    uis.source_files = 'YJKit/Base/**/*'
+  s.subspec 'Macros' do |ss|
+    ss.source_files = 'YJKit/Base/Macros/*'
+  end
+
+  s.subspec 'Foundation' do |ss|
+    ss.source_files = 'YJKit/Base/Foundation/*'
+    ss.dependency 'YJKit/Macros'
+  end
+
+  s.subspec 'UIKit' do |ss|
+    ss.source_files = 'YJKit/Base/**/*'
   end
 
 end
