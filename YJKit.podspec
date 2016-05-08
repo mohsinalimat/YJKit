@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "YJKit"
-  s.version          = "0.1.26"
+  s.version          = "0.1.25"
   s.license          = 'MIT'
   s.summary          = "YJKit is a simple wrapper for iOS library."
   s.homepage         = "https://github.com/huang-kun/YJKit"
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'YJKit/**/*'
-  s.public_header_files = 'YJKit/**/*.h'
+  s.public_header_files = 'YJKit/YJKit.h'
   s.frameworks = 'UIKit', 'Foundation', 'CoreGraphics', 'AVFoundation'
 
   s.cocoapods_version = '>= 0.36'
@@ -39,24 +39,14 @@ EOS
   s.prefix_header_contents = pch_YJ
 
 
-  s.subspec 'Macros' do |mcs|
-    mcs.name = 'YJMacros'
-    mcs.source_files = 'YJKit/Macros'
-  end
+#  s.subspec 'ExeMacros' do |ems|
+#    ems.name = 'EXE_YJ'
+#    ems.source_files = 'YJKit/Base/Macros/YJExecutionMacros.h'
+#  end
 
-  s.subspec 'Foundation' do |fs|
-    fs.name = 'Foundation_YJ'
-    avs.source_files = 'YJKit/Base/Foundation'
-  end
-
-  s.subspec 'Quartz' do |qzs|
-    qzs.name = 'Quartz_YJ'
-    qzs.source_files = 'YJKit/Base/Quartz'
-  end
-
-  s.subspec 'UIKit' do |uis|
-    uis.name = 'UIKit_YJ'
-    uis.source_files = 'YJKit/Base/UIKit'
-  end
+#  s.subspec 'UIKit' do |uis|
+#    uis.name = 'UIKit_YJ'
+#    uis.source_files = 'YJKit/Base/**/*'
+#  end
 
 end
