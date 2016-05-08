@@ -18,10 +18,6 @@
 #import "CAShapeLayer+YJCategory.h"
 #import "UIColor+YJCategory.h"
 
-/**
- * Must declare a kind of YJMaskView abstract class which conforms protocol <YJLayerBasedMasking>
- * Then declare a custom mask view which inherits that abstract class.
- */
 #ifndef YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
 #define YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS \
 \
@@ -123,9 +119,6 @@
 #endif // YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS
 
 
-/**
- * Must conforms protocol <YJLayerBasedMasking> to your custom UIView subclass
- */
 #ifndef YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS
 #define YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS \
 \

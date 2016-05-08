@@ -9,9 +9,9 @@
 #import "YJMaskedImageView.h"
 
 /**
- *  Display a rounded rectangle image for UIImageView.
+ *  Display a rounded corner image for UIImageView.
  *
- *  The benefit for using the YJRoundedCornerImageView is getting rounded rectangle image result both at runtime and design time (in the Interface Builder) by using Xcode 6+.
+ *  The benefit for using the YJRoundedCornerImageView is getting rounded corner image result both at runtime and design time (in the Interface Builder) by using Xcode 6+.
  *
  *  Usage:
  *

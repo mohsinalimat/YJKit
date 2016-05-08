@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * This is a protocol for rendering the shape layer based custom mask on UIView object. Any subclass of UIView can conform this protocol.
+ * This is a protocol for rendering the layer based custom mask on UIView object. Any subclass of UIView can conform this protocol.
  */
 @protocol YJLayerBasedMasking <NSObject>
 

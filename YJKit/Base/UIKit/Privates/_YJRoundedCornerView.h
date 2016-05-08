@@ -109,6 +109,14 @@ static const CGFloat kYJRoundedCornerViewDefaultCornerRadius = 10.0f; \
 #endif // YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS
 
 
+/**
+ * Must declare properties:
+ 
+ CGFloat cornerRadius,
+ CGFloat borderWidth,
+ UIColor *borderColor
+ 
+ */
 #ifndef YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS
 #define YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS \
 \
