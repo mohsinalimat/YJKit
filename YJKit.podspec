@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'YJKit/**/*'
-  s.public_header_files = 'YJKit/YJKit.h'
+  s.public_header_files = 'YJKit/**/*.h'
   s.frameworks = 'UIKit', 'Foundation', 'CoreGraphics', 'AVFoundation'
 
 end
