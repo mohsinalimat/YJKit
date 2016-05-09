@@ -89,6 +89,7 @@
 		3268A1D31CA83F5300B71E50 /* YJGeometryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJGeometryViewController.m; sourceTree = "<group>"; };
 		32CB4AA91CCA3C880050C01B /* YJSavingImageToAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJSavingImageToAlbumViewController.h; sourceTree = "<group>"; };
 		32CB4AAA1CCA3C880050C01B /* YJSavingImageToAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJSavingImageToAlbumViewController.m; sourceTree = "<group>"; };
+		32DFD0561CE07C0000ECD091 /* _YJLayerBasedMasking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _YJLayerBasedMasking.h; sourceTree = "<group>"; };
 		32E5D29E1CDC7DEE0070B96D /* yj_head_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yj_head_icon.png; sourceTree = "<group>"; };
 		32FC75521CDF3477009855B9 /* YJMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMemoryCache.h; sourceTree = "<group>"; };
 		32FC75531CDF3477009855B9 /* YJMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJMemoryCache.m; sourceTree = "<group>"; };
@@ -137,7 +138,6 @@
 		32FC75851CDF3477009855B9 /* UIView+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YJCategory.m"; sourceTree = "<group>"; };
 		32FC75871CDF3477009855B9 /* _YJAlertDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _YJAlertDelegate.h; sourceTree = "<group>"; };
 		32FC75881CDF3477009855B9 /* _YJAlertDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _YJAlertDelegate.m; sourceTree = "<group>"; };
-		32FC75891CDF3477009855B9 /* _YJLayerBasedMasking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _YJLayerBasedMasking.h; sourceTree = "<group>"; };
 		32FC758A1CDF3477009855B9 /* _YJRoundedCornerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _YJRoundedCornerView.h; sourceTree = "<group>"; };
 		32FC758C1CDF3477009855B9 /* YJLayerBasedMasking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJLayerBasedMasking.h; sourceTree = "<group>"; };
 		32FC758F1CDF3477009855B9 /* YJCircularImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJCircularImageView.h; sourceTree = "<group>"; };
@@ -361,7 +361,7 @@
 			children = (
 				32FC75871CDF3477009855B9 /* _YJAlertDelegate.h */,
 				32FC75881CDF3477009855B9 /* _YJAlertDelegate.m */,
-				32FC75891CDF3477009855B9 /* _YJLayerBasedMasking.h */,
+				32DFD0561CE07C0000ECD091 /* _YJLayerBasedMasking.h */,
 				32FC758A1CDF3477009855B9 /* _YJRoundedCornerView.h */,
 			);
 			path = Privates;

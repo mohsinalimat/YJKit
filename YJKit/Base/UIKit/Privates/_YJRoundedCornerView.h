@@ -62,7 +62,7 @@ static const CGFloat kYJRoundedCornerViewDefaultCornerRadius = 10.0f; \
 \
 - (UIBezierPath *)prepareMaskRegion { \
     CGRect bounds = self.bounds; \
-    CGRect rcRect = !CGRectIsEmpty(self.transparentFrame) ? self.transparentFrame : self.bounds; /* rounded corner rect */ \
+    CGRect rcRect = !CGRectIsEmpty(_transparentFrame) ? _transparentFrame : self.bounds; /* rounded corner rect */ \
     \
     UIEdgeInsets edgeInsets; \
     edgeInsets.top = rcRect.origin.y; \
@@ -82,7 +82,7 @@ static const CGFloat kYJRoundedCornerViewDefaultCornerRadius = 10.0f; \
         return nil; \
     } else { \
         CGRect bounds = self.bounds; \
-        CGRect rcRect = !CGRectIsEmpty(self.transparentFrame) ? self.transparentFrame : self.bounds; /* rounded corner rect */ \
+        CGRect rcRect = !CGRectIsEmpty(_transparentFrame) ? _transparentFrame : self.bounds; /* rounded corner rect */ \
         \
         UIEdgeInsets edgeInsets; \
         edgeInsets.top = rcRect.origin.y; \
@@ -123,15 +123,6 @@ static const CGFloat kYJRoundedCornerViewDefaultCornerRadius = 10.0f; \
 /* @implementation XXRoundedCornerView */{ \
     CGRect _transparentFrame; \
 } \
-\
-- (void)setTransparentFrame:(CGRect)transparentFrame { \
-    _transparentFrame = transparentFrame; \
-} \
-\
-- (CGRect)transparentFrame { \
-    return _transparentFrame; \
-} \
-\
 \
         YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS \
 \

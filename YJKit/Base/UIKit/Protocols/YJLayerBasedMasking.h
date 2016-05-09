@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * This is a protocol for rendering the layer based custom mask on UIView object. Any subclass of UIView can conform this protocol.
+ * This is a protocol for rendering the shape layer based custom mask on UIView object. Any subclass of UIView can conform this protocol.
  */
 @protocol YJLayerBasedMasking <NSObject>
 
@@ -27,12 +27,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// Notice: Returning a nonnull CAShapeLayer object will ignore the UIBezierPath object from -prepareMaskRegion;
 - (nullable CALayer *)prepareMaskLayerWithDefaultMaskColor:(UIColor *)maskColor;
 
+@optional
+
+/// Specify a mask color instead of default color. Normally, a UIView object will take it's superview's background color as it's mask color. If it's superview does not have a background color, then there will be no mask effect, except you can manually specify a UIColor object here.
+@property (nonatomic, strong, nullable) UIColor *maskColor;
+
 @end
 
 NS_ASSUME_NONNULL_END
-
-
-
-
-
-

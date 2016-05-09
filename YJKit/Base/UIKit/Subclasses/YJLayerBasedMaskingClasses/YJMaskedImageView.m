@@ -68,7 +68,7 @@ YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS
     if (mode == YJViewContentModeUnspecified) return;
     CGRect displayedImageRect = CGRectPositioned((CGRect){ CGPointZero, self.image.size }, self.bounds, mode);
     CGRect finalRect = CGRectIntersection(displayedImageRect, self.bounds);
-    if (!CGRectIsNull(finalRect)) self.transparentFrame = finalRect;
+    if (!CGRectIsNull(finalRect)) _transparentFrame = finalRect;
 }
 
 // Deprecated
