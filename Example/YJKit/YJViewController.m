@@ -7,8 +7,6 @@
 //
 
 #import "YJViewController.h"
-#import "YJGeometryViewController.h"
-#import "YJGridViewController.h"
 
 @interface YJViewController () <UITableViewDelegate, UITableViewDataSource>
 @end
@@ -17,17 +15,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     self.title = @"YJKitDemo";
     [(UITableView *)self.view reloadData];
 }
 
+- (NSArray <NSString *> *)listNames {
+    return @[@"Alignment and scaling",
+             @"Image displaying and saving",
+             @"Rounded corner views",
+             @"Layer blending demo"];
+}
+
 - (NSArray <NSString *> *)controllerClassNames {
-    return @[@"YJGridViewController",
-             @"YJGeometryViewController",
+    return @[@"YJGeometryViewController",
              @"YJSavingImageToAlbumViewController",
-             @"YJMaskViewController"
-             ];
+             @"YJMaskViewController",
+             @"YJMaskTableViewController"];
 }
 
 - (void)loadView {
@@ -45,10 +48,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"YJCell"];
-    if (!cell) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"YJCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"YJDemoListCell"];
+    if (!cell) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"YJDemoListCell"];
     cell.textLabel.font = [UIFont systemFontOfSize:14.0];
-    cell.textLabel.text = [self controllerClassNames][indexPath.row];
+    cell.textLabel.text = [self listNames][indexPath.row];
     return cell;
 }
 
@@ -56,7 +59,7 @@
     NSString *className = [self controllerClassNames][indexPath.row];
     Class controllerClass = NSClassFromString(className);
     UIViewController *controller = [[controllerClass alloc] init];
-    controller.title = className;
+    controller.title = [self listNames][indexPath.row];
     controller.view.backgroundColor = [UIColor whiteColor];
     controller.edgesForExtendedLayout = UIRectEdgeNone;
     [self.navigationController pushViewController:controller animated:YES];
