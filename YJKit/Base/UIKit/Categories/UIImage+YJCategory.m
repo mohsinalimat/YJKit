@@ -72,12 +72,12 @@ static NSString *_yj_cachedKeyForUIImageName(NSString *name, UIImageOrientation 
 }
 
 - (UIImage *)resizedImageForWidthInPixel:(CGFloat)widthInPixel {
-    CGFloat width = widthInPixel * kScreenScale;
+    CGFloat width = widthInPixel * kUIScreenScale;
     return [self resizedImageForWidth:width];
 }
 
 - (UIImage *)resizedImageForHeightInPixel:(CGFloat)heightInPixel {
-    CGFloat height = heightInPixel * kScreenScale;
+    CGFloat height = heightInPixel * kUIScreenScale;
     return [self resizedImageForHeight:height];
 }
 

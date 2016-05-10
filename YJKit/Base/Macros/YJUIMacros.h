@@ -11,15 +11,34 @@
 
 /* ------------------------------------------------------------------------------------------------------------ */
 
-// UIScreen+YJCategory.h
-
-// kScreenBounds, kScreenSize, kScreenScale
-
-/* ------------------------------------------------------------------------------------------------------------ */
-
 // UIColor+YJCategory.h
 
 // RGBColor(value, alpha)
+
+/* ------------------------------------------------------------------------------------------------------------ */
+
+// UI Constants
+
+// (UIScreen+YJCategory.h)
+// kUIScreenBounds
+// kUIScreenSize
+// kUIScreenScale
+
+#ifndef kUINavigationBarHeight
+#define kUINavigationBarHeight 44.0f
+#endif
+
+#ifndef kUIStatusBarHeight
+#define kUIStatusBarHeight 20.0f
+#endif
+
+#ifndef kUITabBarHeight
+#define kUITabBarHeight 49.0f
+#endif
+
+#ifndef kUIToolbarHeight
+#define kUIToolbarHeight 44.0f
+#endif
 
 /* ------------------------------------------------------------------------------------------------------------ */
 
