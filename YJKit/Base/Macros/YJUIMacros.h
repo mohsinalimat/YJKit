@@ -9,20 +9,45 @@
 #ifndef YJUIMacros_h
 #define YJUIMacros_h
 
-/* ------------------------------------------------------------------------------------------------------------ */
-
-// UIColor+YJCategory.h
-
-// RGBColor(value, alpha)
+#import "UIDevice+YJCategory.h"
+#import "UIColor+YJCategory.h"
+#import "UIScreen+YJCategory.h"
 
 /* ------------------------------------------------------------------------------------------------------------ */
 
-// UI Constants
+// UIDevice
 
-// (UIScreen+YJCategory.h)
-// kUIScreenBounds
-// kUIScreenSize
-// kUIScreenScale
+#ifndef kSystemVersion
+#define kSystemVersion [UIDevice systemVersion]
+#endif
+
+/* ------------------------------------------------------------------------------------------------------------ */
+
+// UIColor
+
+#ifndef RGBColor
+#define RGBColor(hexValue, alphaValue) [UIColor colorWithHex:hexValue alpha:alphaValue]
+#endif
+
+/* ------------------------------------------------------------------------------------------------------------ */
+
+// UIScreen
+
+#ifndef kUIScreenBounds
+#define kUIScreenBounds YJScreenBounds()
+#endif
+
+#ifndef kUIScreenSize
+#define kUIScreenSize YJScreenSize()
+#endif
+
+#ifndef kUIScreenScale
+#define kUIScreenScale YJScreenScale()
+#endif
+
+/* ------------------------------------------------------------------------------------------------------------ */
+
+// UI Constants (Standard Height)
 
 #ifndef kUINavigationBarHeight
 #define kUINavigationBarHeight 44.0f
@@ -62,7 +87,7 @@ UIView *yj_snapview_ = [window snapshotViewAfterScreenUpdates:NO]; \
 
 /* ------------------------------------------------------------------------------------------------------------ */
 
-// StatusBar
+// UIStatusBar
 
 #ifndef UIStatusBarHide
 #define UIStatusBarHide() [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];

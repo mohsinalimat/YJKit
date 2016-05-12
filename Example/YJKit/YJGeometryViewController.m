@@ -10,7 +10,7 @@
 #import "CGGeometry_YJExtension.h"
 #import "UIGestureRecognizer+YJCategory.h"
 #import "YJObjcMacros.h"
-#import "UIScreen+YJCategory.h"
+#import "YJUIMacros.h"
 
 @interface YJGeometryViewController ()
 @property (nonatomic, strong) UILabel *label;

@@ -1,5 +1,5 @@
 //
-//  NSSet+YJCategory.h
+//  NSSet+YJCollection.h
 //  YJKit
 //
 //  Created by huang-kun on 16/5/5.
@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSSet (YJCategory)
+NS_ASSUME_NONNULL_BEGIN
+
+typedef id U;
+
+@interface NSSet <T> (YJCollection)
 
 /**
  *  @code
@@ -23,8 +27,7 @@
  
  *  @endcode
  */
-- (NSSet *)map:(id(^)(id obj))mapping;
-
+- (instancetype)map:(U(^)(T obj))mapping;
 
 /**
  *  @code
@@ -45,6 +48,14 @@
  
  *  @endcode
  */
-- (NSSet *)filter:(BOOL(^)(id obj))condition;
+- (instancetype)filter:(BOOL(^)(T obj))condition;
+
+- (T)reduce:(U(^)(U result, T obj))combine;
+
+- (instancetype)flatten;
+
+- (instancetype)flatMap:(U(^)(T obj))mapping;
 
 @end
+
+NS_ASSUME_NONNULL_END

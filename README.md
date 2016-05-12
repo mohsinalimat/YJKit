@@ -11,11 +11,11 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-To specify the Podfile this way: (Add `use_frameworks!` to avoid IB_DESIGNABLE compiler error)
+To specify the Podfile this way: (Add `use_frameworks!` to avoid compiler error by defining IB_DESIGNABLE in cocoapods project)
 
 ```
 platform :ios, '7.0'
-use_frameworks! # Avoid IB_DESIGNABLE compiler error
+use_frameworks!
 pod 'YJKit'
 ```
 

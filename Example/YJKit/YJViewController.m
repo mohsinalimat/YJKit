@@ -26,7 +26,7 @@
              @"Layer blending demo"];
 }
 
-- (NSArray <NSString *> *)controllerClassNames {
+- (NSArray <NSString *> *)classNamesForControllers {
     return @[@"YJGeometryViewController",
              @"YJSavingImageToAlbumViewController",
              @"YJMaskViewController",
@@ -44,7 +44,7 @@
 #pragma mark - table view
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self controllerClassNames].count;
+    return [self classNamesForControllers].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -56,7 +56,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *className = [self controllerClassNames][indexPath.row];
+    NSString *className = [self classNamesForControllers][indexPath.row];
     Class controllerClass = NSClassFromString(className);
     UIViewController *controller = [[controllerClass alloc] init];
     controller.title = [self listNames][indexPath.row];

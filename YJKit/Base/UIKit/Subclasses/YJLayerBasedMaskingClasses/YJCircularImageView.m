@@ -5,7 +5,7 @@
 //  Created by huang-kun on 16/4/28.
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
-//  Reference: https://developer.apple.com/videos/play/wwdc2014/401/
+//  Reference: https://developer.apple.com/videos/play/wwdc2014/401/ (CircularImageView demo)
 
 #import "YJCircularImageView.h"
 #import "UIBezierPath+YJCategory.h"
@@ -32,7 +32,7 @@
 }
 
 - (UIBezierPath *)prepareMaskRegion {
-    return [UIBezierPath bezierPathWithCircleMaskShapeInSize:self.bounds.size outerFramePath:NULL innerCircularPath:NULL];
+    return [UIBezierPath bezierPathWithCircleMaskShapeInSize:self.bounds.size outerFramePath:NULL innerCirclePath:NULL];
 }
 
 - (nullable CALayer *)prepareMaskLayerWithDefaultMaskColor:(UIColor *)maskColor {
@@ -41,7 +41,7 @@
     } else {
         UIBezierPath *framePath, *circlePath;
         CGSize innerSize = CGSizeMake(self.bounds.size.width - self.circleWidth / 2, self.bounds.size.height - self.circleWidth / 2);
-        [UIBezierPath bezierPathWithCircleMaskShapeInSize:innerSize outerFramePath:&framePath innerCircularPath:&circlePath];
+        [UIBezierPath bezierPathWithCircleMaskShapeInSize:innerSize outerFramePath:&framePath innerCirclePath:&circlePath];
         return [CAShapeLayer maskLayerForFrameBezierPath:framePath
                                          shapeBezierPath:circlePath
                                                fillColor:maskColor.CGColor

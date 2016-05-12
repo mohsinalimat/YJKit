@@ -7,7 +7,7 @@
 //
 
 #import "UIView+YJCategory.h"
-#import "UIScreen+YJCategory.h"
+#import "YJUIMacros.h"
 
 @implementation UIView (YJCategory)
 

@@ -74,7 +74,7 @@ static const CGFloat kYJRoundedCornerViewDefaultCornerRadius = 10.0f; \
                                                        cornerRadius:self.cornerRadius \
                                                          edgeInsets:edgeInsets \
                                                      outerFramePath:NULL \
-                                                   innerRoundedPath:NULL]; \
+                                                   innerRoundPath:NULL]; \
 } \
 \
 - (nullable CALayer *)prepareMaskLayerWithDefaultMaskColor:(UIColor *)maskColor { \
@@ -96,7 +96,7 @@ static const CGFloat kYJRoundedCornerViewDefaultCornerRadius = 10.0f; \
                                                     cornerRadius:self.cornerRadius \
                                                       edgeInsets:edgeInsets \
                                                   outerFramePath:&framePath \
-                                                innerRoundedPath:&roundedBorderPath]; \
+                                                innerRoundPath:&roundedBorderPath]; \
         \
         return [CAShapeLayer maskLayerForFrameBezierPath:framePath \
                                          shapeBezierPath:roundedBorderPath \

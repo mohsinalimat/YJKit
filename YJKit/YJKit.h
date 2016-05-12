@@ -16,8 +16,9 @@
 #import <YJKit/YJMacros.h>
 #import <YJKit/CGGeometry_YJExtension.h>
 #import <YJKit/NSObject+YJCategory_KVO.h>
-#import <YJKit/NSArray+YJCategory.h>
-#import <YJKit/NSSet+YJCategory.h>
+#import <YJKit/NSArray+YJCollection.h>
+#import <YJKit/NSMutableArray+YJCollection.h>
+#import <YJKit/NSSet+YJCollection.h>
 #import <YJKit/NSBundle+YJCategory.h>
 #import <YJKit/NSTimer+YJCategory.h>
 #import <YJKit/YJMemoryCache.h>
@@ -41,12 +42,14 @@
 #import <YJKit/YJRoundedCornerImageView.h>
 #import <YJKit/YJRoundedCornerButton.h>
 #import <YJKit/YJRoundedCornerLabel.h>
+#import <YJKit/YJGroupedStyleTableViewController.h>
 #else
 #import "YJMacros.h"
 #import "CGGeometry_YJExtension.h"
 #import "NSObject+YJCategory_KVO.h"
-#import "NSArray+YJCategory.h"
-#import "NSSet+YJCategory.h"
+#import "NSArray+YJCollection.h"
+#import "NSMutableArray+YJCollection.h"
+#import "NSSet+YJCollection.h"
 #import "NSBundle+YJCategory.h"
 #import "NSTimer+YJCategory.h"
 #import "YJMemoryCache.h"
@@ -70,6 +73,7 @@
 #import "YJRoundedCornerImageView.h"
 #import "YJRoundedCornerButton.h"
 #import "YJRoundedCornerLabel.h"
+#import "YJGroupedStyleTableViewController.h"
 #endif
 
 #endif /* YJKit_h */

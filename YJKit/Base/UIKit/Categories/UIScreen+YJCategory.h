@@ -37,17 +37,6 @@ CGSize YJScreenSize();
 /// Convenience function for acquiring [UIScreen mainScreen].scale
 CGFloat YJScreenScale();
 
-#ifndef kUIScreenBounds
-#define kUIScreenBounds YJScreenBounds()
-#endif
-
-#ifndef kUIScreenSize
-#define kUIScreenSize YJScreenSize()
-#endif
-
-#ifndef kUIScreenScale
-#define kUIScreenScale YJScreenScale()
-#endif
 
 @interface UIScreen (YJCategory)
 

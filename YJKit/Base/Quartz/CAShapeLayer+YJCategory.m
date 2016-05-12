@@ -8,6 +8,7 @@
 
 #import "CAShapeLayer+YJCategory.h"
 #import "UIBezierPath+YJCategory.h"
+#import "YJUIMacros.h"
 
 @implementation CAShapeLayer (YJCategory)
 
@@ -27,6 +28,7 @@
     maskLayer.strokeColor = fillColor; // cover the rect path of corner
     maskLayer.lineWidth = strokeWidth;
     UIBezierPath *cornerPath = [shapeBezierPath copy];
+    if (kSystemVersion < 8.0) cornerPath = [UIBezierPath bezierPathWithCGPath:shapeBezierPath.CGPath];
     [cornerPath appendPath:frameBezierPath];
     maskLayer.path = cornerPath.CGPath;
     if (!strokeWidth) return maskLayer;
@@ -47,7 +49,7 @@
 + (instancetype)circularMaskLayerInSize:(CGSize)size fillColor:(CGColorRef)fillColor strokeWidth:(CGFloat)strokeWidth strokeColor:(CGColorRef)strokeColor {
     UIBezierPath *framePath, *circularPath;
     CGSize innerSize = CGSizeMake(size.width - strokeWidth / 2, size.height - strokeWidth / 2);
-    [UIBezierPath bezierPathWithCircleMaskShapeInSize:innerSize outerFramePath:&framePath innerCircularPath:&circularPath];
+    [UIBezierPath bezierPathWithCircleMaskShapeInSize:innerSize outerFramePath:&framePath innerCirclePath:&circularPath];
     return [self maskLayerForFrameBezierPath:framePath shapeBezierPath:circularPath fillColor:fillColor strokeWidth:strokeWidth strokeColor:strokeColor];
 }
 
@@ -58,7 +60,7 @@
 + (instancetype)roundedRectMaskLayerInSize:(CGSize)size cornerRadius:(CGFloat)cornerRadius fillColor:(CGColorRef)fillColor strokeWidth:(CGFloat)strokeWidth strokeColor:(CGColorRef)strokeColor {
     UIBezierPath *framePath, *roundedPath;
     CGSize innerSize = CGSizeMake(size.width - strokeWidth / 2, size.height - strokeWidth / 2);
-    [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:innerSize cornerRadius:cornerRadius outerFramePath:&framePath innerRoundedPath:&roundedPath];
+    [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:innerSize cornerRadius:cornerRadius outerFramePath:&framePath innerRoundPath:&roundedPath];
     return [self maskLayerForFrameBezierPath:framePath shapeBezierPath:roundedPath fillColor:fillColor strokeWidth:strokeWidth strokeColor:strokeColor];
 }
 

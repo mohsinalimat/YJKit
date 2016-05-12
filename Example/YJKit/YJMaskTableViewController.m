@@ -12,7 +12,7 @@
 #import "YJExecutionMacros.h"
 #import "YJRoundedCornerImageView.h"
 #import "UIView+YJCategory.h"
-#import "UIScreen+YJCategory.h"
+#import "YJUIMacros.h"
 
 
 #define YJBlendedLayerCellReuseID @"YJBlendedLayerCellReuseID"
