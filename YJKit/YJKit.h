@@ -16,6 +16,7 @@
 #import <YJKit/YJMacros.h>
 #import <YJKit/CGGeometry_YJExtension.h>
 #import <YJKit/NSObject+YJCategory_KVO.h>
+#import <YJKit/NSObject+YJCategory_Swizzling.h>
 #import <YJKit/NSArray+YJCollection.h>
 #import <YJKit/NSMutableArray+YJCollection.h>
 #import <YJKit/NSSet+YJCollection.h>
@@ -47,6 +48,7 @@
 #import "YJMacros.h"
 #import "CGGeometry_YJExtension.h"
 #import "NSObject+YJCategory_KVO.h"
+#import "NSObject+YJCategory_Swizzling.h"
 #import "NSArray+YJCollection.h"
 #import "NSMutableArray+YJCollection.h"
 #import "NSSet+YJCollection.h"

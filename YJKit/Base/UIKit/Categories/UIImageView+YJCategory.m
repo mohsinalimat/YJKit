@@ -9,6 +9,7 @@
 #import <objc/runtime.h>
 #import "UIImageView+YJCategory.h"
 #import "CGGeometry_YJExtension.h"
+#import "NSObject+YJCategory_Swizzling.h"
 
 @interface UIImageView ()
 @property (nonatomic) BOOL yj_contentModeEnabled;
@@ -19,14 +20,7 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Class class = [self class];
-        SEL fromSelector = @selector(setImage:);
-        SEL toSelector = @selector(yj_setImage:);
-        Method fromMethod = class_getInstanceMethod(class, fromSelector);
-        Method toMethod = class_getInstanceMethod(class, toSelector);
-        BOOL added = class_addMethod(class, fromSelector, method_getImplementation(toMethod), method_getTypeEncoding(toMethod));
-        if (added) class_replaceMethod(class, toSelector, method_getImplementation(fromMethod), method_getTypeEncoding(fromMethod));
-        else method_exchangeImplementations(fromMethod, toMethod);
+        [self swizzleInstanceMethodForSelector:@selector(setImage:) toSelector:@selector(yj_setImage:)];
     });
 }
 

@@ -10,6 +10,7 @@
 #import "NSArray+YJCollection.h"
 #import "YJUIMacros.h"
 #import "YJExecutionMacros.h"
+#import "NSObject+YJCategory_Swizzling.h"
 
 @interface YJGroupedStyleItemCell : UITableViewCell
 @end
@@ -57,21 +58,21 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 @property (nonatomic, copy, nullable) NSDictionary <NSNumber *, NSString *> *classNamesForDestinationViewControllers;
 @property (nonatomic, copy, nullable) NSDictionary <NSNumber *, NSString *> *storyboardIdentifiersForDestinationViewControllers;
 @property (nonatomic, strong) UIColor *backgroundColorForHeaderCell; // @dynamic
-@property (nonatomic, assign) BOOL shouldAnimateStatusBar;
+@property (nonatomic, assign) BOOL shouldAnimateNavigationBar;
 @property (nonatomic, assign) BOOL didRegisterHeaderCell;
 @end
 
 @implementation YJGroupedStyleTableViewController
 
-- (instancetype)init {
+- (instancetype)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:UITableViewStylePlain];
-    if (self) [self fetchRequiredData];
+    if (self) [self _fetchRequiredDataForLoadingGroupedCells];
     return self;
 }
 
-#pragma mark - mapping
+#pragma mark - Mapping
 
-- (void)fetchRequiredData {
+- (void)_fetchRequiredDataForLoadingGroupedCells {
     
     NSMutableDictionary <NSNumber *, NSString *> *titles = @{}.mutableCopy;
     NSInteger index = 2;
@@ -109,23 +110,25 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     self.classNamesForDestinationViewControllers = cellContentsFromList([self classNamesOfDestinationViewControllersForItemCells]);
     self.storyboardIdentifiersForDestinationViewControllers = cellContentsFromList([self storyboardIdentifiersOfDestinationViewControllersForItemCells]);
     
-    UIEdgeInsets insets = UIEdgeInsetsZero;
-    insets.bottom = kYJGSTVCBottomSpaceFromLastCell;
-    if ([self shouldHideNavigationBar]) insets.top -= kUIStatusBarHeight;
-    self.tableView.contentInset = insets;
-    
     self.tableView.backgroundColor = [self backgroundColorForTableView];
     self.tableView.separatorColor = [self backgroundColorForTableView];
     self.tableView.separatorInset = [self separatorInsetsForTableView];
+    
+    UIEdgeInsets insets = UIEdgeInsetsZero;
+    if (![self shouldHideNavigationBar]) {
+        insets.top = kUINavigationBarHeight;
+    }
+    insets.bottom = kYJGSTVCBottomSpaceFromLastCell - kYJGSTVCLastSeparatorCellHeight;
+    self.tableView.contentInset = insets;
+    self.edgesForExtendedLayout = [self shouldHideNavigationBar] ? UIRectEdgeNone : UIRectEdgeTop;
+    self.extendedLayoutIncludesOpaqueBars = YES;
 }
 
 - (NSUInteger)totalCellCount {
     return self.itemRows.lastObject.integerValue + 2;
 }
 
-
-
-#pragma mark - life cycle
+#pragma mark - Life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -146,17 +149,14 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     // update navigation bar and status bar
+    self.navigationController.navigationBar.translucent = NO;
+    
     if ([self shouldHideNavigationBar]) {
-        [self.navigationController setNavigationBarHidden:YES animated:self.shouldAnimateStatusBar];
-        [self updateStatusBar];
+        [self.navigationController setNavigationBarHidden:YES animated:self.shouldAnimateNavigationBar];
+        [self updateNavigationBarState];
     } else {
         [self hideNavigationBarShadow];
     }
-    // update tableView scrollable insets
-    perform_once()
-    UIEdgeInsets insets = self.tableView.contentInset;
-    insets.bottom -= kYJGSTVCLastSeparatorCellHeight;
-    self.tableView.contentInset = insets;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -168,34 +168,33 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     [super viewWillDisappear:animated];
     if ([self shouldHideNavigationBar]) {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
-        [self updateStatusBar];
+        [self updateNavigationBarState];
     }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    if ([self shouldHideNavigationBar]) [self updateStatusBar];
+    if ([self shouldHideNavigationBar]) [self updateNavigationBarState];
 }
 
 #pragma mark - Update status bar and navigation bar
 
-- (void)updateStatusBar {
-    self.shouldAnimateStatusBar = (self.navigationController.viewControllers.count == 1) ? NO : YES;
+- (void)updateNavigationBarState {
+    self.shouldAnimateNavigationBar = (self.navigationController.viewControllers.count == 1) ? NO : YES;
 }
 
 - (void)hideNavigationBarShadow {
     // hide 1px shadow image
     UIImage *emptyShadow = [UIImage new];
-    UINavigationBar *navBar = self.navigationController.navigationBar;
-    navBar.translucent = NO;
-    navBar.shadowImage = emptyShadow;
-    [navBar setBackgroundImage:emptyShadow forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = emptyShadow;
+    [self.navigationController.navigationBar setBackgroundImage:emptyShadow forBarMetrics:UIBarMetricsDefault];
 }
 
 #pragma mark - Accessors
 
 - (void)setBackgroundColorForHeaderCell:(UIColor *)backgroundColorForHeaderCell {
     self.tableView.backgroundColor = backgroundColorForHeaderCell;
+    self.tableView.superview.backgroundColor = backgroundColorForHeaderCell;
     self.navigationController.navigationBar.barTintColor = backgroundColorForHeaderCell;
 }
 
@@ -257,8 +256,9 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     cell.textLabel.text = self.itemTitles[@(row)];
     cell.detailTextLabel.text = self.itemSubtitles[@(row)];
     UIImage *image = self.itemIconImages[@(row)];
-    if (!image) image = [UIImage imageNamed:self.itemIconImageNames[@(row)]];
-    cell.imageView.image = image;
+    NSString *imageName = self.itemIconImageNames[@(row)];
+    if (!image && imageName.length) image = [UIImage imageNamed:imageName];
+    if (image) cell.imageView.image = image;
 }
 
 #pragma mark - UITableViewDelegate
@@ -450,4 +450,25 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 
 @end
 
-const NSInteger YJGroupedStyleTableViewControllerHeaderCellForFittingSizeCalculationTag = __LINE__;
+
+NSInteger const YJGroupedStyleTableViewControllerHeaderCellForFittingSizeCalculationTag = __LINE__;
+
+
+@implementation UITableView (_YJReloadData)
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self swizzleInstanceMethodForSelector:@selector(reloadData) toSelector:@selector(yj_reloadData)];
+    });
+}
+
+- (void)yj_reloadData {
+    if ([self.delegate respondsToSelector:@selector(_fetchRequiredDataForLoadingGroupedCells)]) {
+        [self.delegate performSelector:@selector(_fetchRequiredDataForLoadingGroupedCells)];
+    }
+    [self yj_reloadData];
+}
+
+@end
+

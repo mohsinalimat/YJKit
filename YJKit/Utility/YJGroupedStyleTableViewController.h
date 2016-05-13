@@ -50,6 +50,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-extern const NSInteger YJGroupedStyleTableViewControllerHeaderCellForFittingSizeCalculationTag;
+FOUNDATION_EXPORT NSInteger const YJGroupedStyleTableViewControllerHeaderCellForFittingSizeCalculationTag;
 
 NS_ASSUME_NONNULL_END
