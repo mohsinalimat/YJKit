@@ -17,14 +17,18 @@ NS_ASSUME_NONNULL_BEGIN
 // table view
 - (nullable UIColor *)backgroundColorForTableView;
 - (nullable UIImage *)backgroundImageForTableView;
+- (UIEdgeInsets)separatorInsetsForTableView;
 
 // register header cell
+- (nullable NSString *)reuseIdentifierForHeaderCell;
 - (nullable NSString *)nibNameForRegisteringHeaderCell;
 - (nullable Class)classForRegisteringHeaderCell;
-- (NSString *)reuseIdentifierForHeaderCell;
 
 // configure cells
 - (void)configureHeaderCell:(__kindof UITableViewCell *)cell;
+- (void)configureItemCell:(UITableViewCell *)cell atItemRow:(NSUInteger)itemRow;
+- (void)configureSeparatorCell:(UITableViewCell *)cell;
+
 - (UITableViewCellStyle)styleForItemCell;
 
 - (NSArray <NSArray <NSString *> *> *)titlesForGroupedCells;
@@ -35,13 +39,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSArray <NSString *> *)classNamesOfDestinationViewControllersForItemCells;
 - (nullable NSArray <NSString *> *)storyboardIdentifiersOfDestinationViewControllersForItemCells;
-- (NSString *)storyboardNameForControllerStoryboardIdentifier:(NSString *)storyboardID;
+- (nullable NSString *)storyboardNameForControllerStoryboardIdentifier:(NSString *)storyboardID;
 
 - (CGFloat)heightForItemCell;
-- (CGFloat)heightForSeparator;
+- (CGFloat)heightForVerticalSpaceBetweenGroups;
 
 // push action
-- (BOOL)canPushViewControllerFromItemCellAtIndexPath:(NSIndexPath *)indexPath;
+- (BOOL)canPushDestinationViewControllerFromItemCellAtItemRow:(NSUInteger)itemRow;
+- (void)configureDestinationViewControllerBeforePushing:(__kindof UIViewController *)viewController atItemRow:(NSUInteger)itemRow;
 
 @end
 
