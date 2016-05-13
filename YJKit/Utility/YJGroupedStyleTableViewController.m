@@ -149,19 +149,19 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     // update navigation bar and status bar
-    self.navigationController.navigationBar.translucent = NO;
+    [self setNavigationBarTranslucentIfPossible:NO];
     
     if ([self shouldHideNavigationBar]) {
         [self.navigationController setNavigationBarHidden:YES animated:self.shouldAnimateNavigationBar];
         [self updateNavigationBarState];
     } else {
-        [self hideNavigationBarShadow];
+        [self hideNavigationBarShadowIfPossible];
     }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.navigationController.navigationBar.translucent = YES;
+    [self setNavigationBarTranslucentIfPossible:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -183,11 +183,19 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     self.shouldAnimateNavigationBar = (self.navigationController.viewControllers.count == 1) ? NO : YES;
 }
 
-- (void)hideNavigationBarShadow {
-    // hide 1px shadow image
-    UIImage *emptyShadow = [UIImage new];
-    self.navigationController.navigationBar.shadowImage = emptyShadow;
-    [self.navigationController.navigationBar setBackgroundImage:emptyShadow forBarMetrics:UIBarMetricsDefault];
+- (void)hideNavigationBarShadowIfPossible {
+    if ([self shouldHideNavigationBarShadow]) {
+        // hide 1px shadow image
+        UIImage *emptyShadow = [UIImage new];
+        self.navigationController.navigationBar.shadowImage = emptyShadow;
+        [self.navigationController.navigationBar setBackgroundImage:emptyShadow forBarMetrics:UIBarMetricsDefault];
+    }
+}
+
+- (void)setNavigationBarTranslucentIfPossible:(BOOL)translucent {
+    if ([self shouldTranslucentNavigationBar]) {
+        self.navigationController.navigationBar.translucent = translucent;
+    }
 }
 
 #pragma mark - Accessors
@@ -195,7 +203,9 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 - (void)setBackgroundColorForHeaderCell:(UIColor *)backgroundColorForHeaderCell {
     self.tableView.backgroundColor = backgroundColorForHeaderCell;
     self.tableView.superview.backgroundColor = backgroundColorForHeaderCell;
-    self.navigationController.navigationBar.barTintColor = backgroundColorForHeaderCell;
+    if ([self shouldMaskNavigationBarBackgroundColor]) {
+        self.navigationController.navigationBar.barTintColor = backgroundColorForHeaderCell;
+    }
 }
 
 - (UIColor *)backgroundColorForHeaderCell {
@@ -320,7 +330,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     vc.hidesBottomBarWhenPushed = YES;
     [self configureDestinationViewControllerBeforePushing:vc atItemRow:[self.itemRows indexOfObject:@(row)]];
     
-    self.navigationController.navigationBar.translucent = NO;
+    [self setNavigationBarTranslucentIfPossible:NO];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -350,7 +360,20 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 
 #pragma mark - default implementations
 
+// navigation bar
 - (BOOL)shouldHideNavigationBar {
+    return YES;
+}
+
+- (BOOL)shouldMaskNavigationBarBackgroundColor {
+    return YES;
+}
+
+- (BOOL)shouldHideNavigationBarShadow {
+    return YES;
+}
+
+- (BOOL)shouldTranslucentNavigationBar {
     return YES;
 }
 
@@ -359,17 +382,13 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     return [UIColor lightGrayColor];
 }
 
-- (nullable UIImage *)backgroundImageForTableView {
-    return nil;
-}
-
 - (UIEdgeInsets)separatorInsetsForTableView {
     return UIEdgeInsetsMake(0, 5, 0, 0);
 }
 
 // register header cell
 - (nullable NSString *)nibNameForRegisteringHeaderCell {
-    return @"YJPersonCenterUserInfoCell";
+    return nil;
 }
 
 - (nullable Class)classForRegisteringHeaderCell {
@@ -377,7 +396,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 }
 
 - (nullable NSString *)reuseIdentifierForHeaderCell {
-    return @"YJGSTVCHeaderCellReuseID";
+    return nil;
 }
 
 - (UITableViewCellStyle)styleForItemCell {
@@ -398,18 +417,26 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 }
 
 // configure cell contents
+// For cell titles, it needs the nest array for grouping titles.
+
 - (NSArray <NSArray <NSString *> *> *)titlesForGroupedCells {
     return @[ @[ @"First item in group A" ],
               @[ @"First item in group B", @"Second item in group B", @"Third item in group B" ],
               @[ @"First item in group C", @"Second item in group C" ] ];
 }
 
+// There is no need to group cast style for rest of cell content informations, expect for cell titles.
+
 - (nullable NSArray <NSString *> *)subtitlesForItemCells {
+/* Example: 
+ return 
+ @[ @"group A - item 1",
+    @"group B - item 1", 
+    @"group B - item 2", 
+    @"group B - item 3", 
+    @"group C - item 1", 
+    @"group C - item 2" ]; */
     return nil;
-    /* Example:
-     return @[ @"group A - item 1",
-     @"group B - item 1", @"group B - item 2", @"group B - item 3",
-     @"group C - item 1", @"group C - item 2" ]; */
 }
 
 - (nullable NSArray <UIImage *> *)iconImagesForItemCells {
