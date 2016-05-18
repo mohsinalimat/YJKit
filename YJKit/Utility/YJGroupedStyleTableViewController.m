@@ -410,7 +410,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     NSInteger row = indexPath.row;
     BOOL isItemRow = [self.itemRows containsObject:@(row)] ? YES : NO;
     UITableViewCell *cell = nil;
-    UIColor *tableBGColor = [self backgroundColorForTableView];
+    UIColor *tableBGColor = [self backgroundColorForTableView] ?: YJGSTVC_DEFAULT_TABLE_BACKGROUND_COLOR;
     UIColor *itemBGColor = [self backgroundColorForItemCell] ?: YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR;
     // header cell
     if (row == 0) {
@@ -423,7 +423,8 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
             cell = [tableView dequeueReusableCellWithIdentifier:headerCellReuseID];
             if (!cell) {
                 cell = [[_YJGroupedStyleGroupSeparatorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:headerCellReuseID];
-                if (tableBGColor) cell.contentView.backgroundColor = tableBGColor;
+                cell.contentView.backgroundColor = tableBGColor;
+                cell.backgroundColor = tableBGColor;
                 [self configureGroupSeparatorCell:cell];
             }
         }
@@ -441,7 +442,8 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     // group separator cell
     else if ([self.mappedRows[row] hasPrefix:YJGSGroupSeparator]) {
         cell = [tableView dequeueReusableCellWithIdentifier:YJGSTVC_GROUP_SEPARATOR_CELL_REUSE_ID forIndexPath:indexPath];
-        if (tableBGColor) cell.contentView.backgroundColor = tableBGColor;
+        cell.contentView.backgroundColor = tableBGColor;
+        cell.backgroundColor = tableBGColor;
         [self configureGroupSeparatorCell:cell];
     }
     // line separator cell
@@ -462,7 +464,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
             UIColor *separatorColor = [self lineSeparatorColorForTableView] ?: YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
             switch ([self lineSeparatorStyleForTableView]) {
                 case YJGroupedStyleTableViewSeparatorStyleDefault: break;
-                case YJGroupedStyleTableViewSeparatorStyleHideAll: separatorColor = [UIColor clearColor]; break;
+                case YJGroupedStyleTableViewSeparatorStyleHideAll: separatorColor = tableBGColor; break;
                 case YJGroupedStyleTableViewSeparatorStyleHideGroup: break;
             }
             lineSeparator.lineColor = separatorColor;
@@ -476,8 +478,8 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
             UIColor *separatorColor = [self lineSeparatorColorForTableView] ?: YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
             switch ([self lineSeparatorStyleForTableView]) {
                 case YJGroupedStyleTableViewSeparatorStyleDefault: break;
-                case YJGroupedStyleTableViewSeparatorStyleHideAll: separatorColor = [UIColor clearColor]; break;
-                case YJGroupedStyleTableViewSeparatorStyleHideGroup: separatorColor = [UIColor clearColor]; break;
+                case YJGroupedStyleTableViewSeparatorStyleHideAll: separatorColor = tableBGColor; break;
+                case YJGroupedStyleTableViewSeparatorStyleHideGroup: separatorColor = tableBGColor; break;
             }
             lineSeparator.lineColor = separatorColor;
             lineSeparator.compensatedColor = [self backgroundColorForTableView];
@@ -655,7 +657,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 }
 
 // table view
-- (nullable UIColor *)backgroundColorForTableView {
+- (UIColor *)backgroundColorForTableView {
     return YJGSTVC_DEFAULT_TABLE_BACKGROUND_COLOR;
 }
 

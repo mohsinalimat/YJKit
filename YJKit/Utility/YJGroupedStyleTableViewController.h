@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
 - (BOOL)shouldHideNavigationBar; // Default NO
 
 // custom table view
-- (nullable UIColor *)backgroundColorForTableView; // Default is the same color as Settings App table view background color.
+- (UIColor *)backgroundColorForTableView; // Default is the same color as Settings App table view background color.
 - (CGFloat)topEdgeInsetForTableView; // Default 0.0f, If navigation bar is displaying, the table view will below (not underneath) the navigation bar.
 
 // custom line separator
