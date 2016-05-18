@@ -14,6 +14,7 @@
 
 #define YJGSTVC_DEFAULT_TABLE_BACKGROUND_COLOR [UIColor colorWithRed:0.937 green:0.937 blue:0.957 alpha:1.00]
 #define YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR [UIColor whiteColor]
+#define YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR [UIColor colorWithRed:0.784 green:0.780 blue:0.800 alpha:1.00]
 
 @interface _YJGroupedStyleItemCell : UITableViewCell
 @end
@@ -51,18 +52,19 @@
 
 @interface _YJGroupedStyleLineSeparatorCell : UITableViewCell
 @property (nonatomic) CGFloat leftIndentation;
+@property (nonatomic, strong) UIColor *lineColor; // It's dangerous to name "separatorColor" if you override it's setter because it replaces system internal method -setSeparatorColor: for UITableViewCell
 @property (nonatomic, strong) UIColor *compensatedColor;
 @end
 
 @implementation _YJGroupedStyleLineSeparatorCell {
-    UIView *_indentView;
+    UIView *_indentView; // white space for left indentation
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.contentView.backgroundColor = [UIColor colorWithRed:0.784 green:0.780 blue:0.800 alpha:1.00];
-        self.backgroundColor = YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR;
+        [self setLineColor:YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR];
+        [self setCompensatedColor:YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR];
         _indentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 1)];
         _indentView.backgroundColor = YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR;
         [self.contentView addSubview:_indentView];
@@ -75,6 +77,14 @@
     CGRect frame = _indentView.frame;
     frame.size.width = _leftIndentation;
     _indentView.frame = frame;
+}
+
+- (void)setLineColor:(UIColor *)lineColor {
+    self.contentView.backgroundColor = lineColor;
+}
+
+- (UIColor *)lineColor {
+    return self.contentView.backgroundColor;
 }
 
 - (void)setCompensatedColor:(UIColor *)compensatedColor {
@@ -327,6 +337,16 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 
 // remove back drop view from subviews of navigation back ground if possible
 - (void)removeDropBackViewFromNavBarIfPossible {
+    // check if pusher has shown nav bar
+    BOOL isNavBarShownBeforePushIn = YES;
+    NSArray *viewControllers = self.navigationController.viewControllers;
+    NSUInteger count = viewControllers.count;
+    id sourceViewController = (count >= 2) ? viewControllers[count-2] : nil;
+    if ([sourceViewController respondsToSelector:@selector(shouldHideNavigationBar)]) {
+        isNavBarShownBeforePushIn = ![sourceViewController shouldHideNavigationBar];
+    }
+    if (!isNavBarShownBeforePushIn) return;
+    // remove back drop view
     if (![self shouldHideNavigationBar] && [self shouldMaskNavigationBarBackgroundColor] && [self shouldTranslucentNavigationBar]) {
         NSArray *bgViews = [self.navigationController.navigationBar.subviews.firstObject subviews];
         if (bgViews.count > 1) {
@@ -342,6 +362,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 
 // reset back drop view back to nav bar if needed
 - (void)addDropBackViewToNavBarIfNeeded {
+    if (!self.navBarBGSubviews.count) return;
     UIView *bgView = self.navigationController.navigationBar.subviews.firstObject;
     for (UIView *subview in self.navBarBGSubviews) {
         if (![bgView.subviews containsObject:subview]) {
@@ -421,19 +442,40 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     // line separator cell
     else {
         cell = [tableView dequeueReusableCellWithIdentifier:YJGSTVC_LINE_SEPARATOR_CELL_REUSE_ID forIndexPath:indexPath];
-        _YJGroupedStyleLineSeparatorCell *lineCell = (_YJGroupedStyleLineSeparatorCell *)cell;
+        _YJGroupedStyleLineSeparatorCell *lineSeparator = (_YJGroupedStyleLineSeparatorCell *)cell;
+        // line separator for separating item cell
         if ([[self.mappedRows[row] componentsSeparatedByString:@":"].lastObject isEqualToString:YJGSLineSeparatingItemCell]) {
+            // set left indentation
             CGFloat indent = 0.0f;
             BOOL hasIcon = (self.iconImagesForItemCells.count || self.iconImageNamesForItemCells.count) ? YES : NO;
             switch ([self indentationStyleForItemCell]) {
                 case YJGroupedStyleTableViewCellIndentationStyleAlignTitle: indent = hasIcon ? 54.0f : 16.0f; break;
                 case YJGroupedStyleTableViewCellIndentationStyleFixedMargin: indent = 16.0f; break;
             }
-            lineCell.leftIndentation = indent;
-            lineCell.compensatedColor = YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR;
-        } else {
-            lineCell.leftIndentation = 0.0f;
-            lineCell.compensatedColor = [self backgroundColorForTableView];
+            lineSeparator.leftIndentation = indent;
+            // set line separator color
+            UIColor *separatorColor = YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
+            switch ([self separatorStyleForTableView]) {
+                case YJGroupedStyleTableViewSeparatorStyleDefault: break;
+                case YJGroupedStyleTableViewSeparatorStyleHideAll: separatorColor = [UIColor clearColor]; break;
+                case YJGroupedStyleTableViewSeparatorStyleHideGroup: break;
+            }
+            lineSeparator.lineColor = separatorColor;
+            lineSeparator.compensatedColor = YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR;
+        }
+        // line separator for separating group
+        else {
+            // set left indentation
+            lineSeparator.leftIndentation = 0.0f;
+            // set line separator color
+            UIColor *separatorColor = YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
+            switch ([self separatorStyleForTableView]) {
+                case YJGroupedStyleTableViewSeparatorStyleDefault: break;
+                case YJGroupedStyleTableViewSeparatorStyleHideAll: separatorColor = [UIColor clearColor]; break;
+                case YJGroupedStyleTableViewSeparatorStyleHideGroup: separatorColor = [UIColor clearColor]; break;
+            }
+            lineSeparator.lineColor = separatorColor;
+            lineSeparator.compensatedColor = [self backgroundColorForTableView];
         }
     }
     // hide default separator
@@ -616,6 +658,10 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     return 0.0f;
 }
 
+- (YJGroupedStyleTableViewSeparatorStyle)separatorStyleForTableView {
+    return YJGroupedStyleTableViewSeparatorStyleDefault;
+}
+
 - (UIEdgeInsets)separatorInsetsForTableView {
     return UIEdgeInsetsZero;
 }
@@ -702,7 +748,7 @@ return
 }
 
 - (BOOL)canPushDestinationViewControllerFromItemCellForRow:(NSInteger)row inSection:(NSInteger)section {
-    return NO;
+    return YES;
 }
 
 - (void)configureDestinationViewControllerBeforePushing:(__kindof UIViewController *)viewController forRow:(NSInteger)row inSection:(NSInteger)section {
@@ -734,7 +780,7 @@ NSInteger const YJGroupedStyleTableViewControllerHeaderCellForCompressedSizeCalc
 
 - (void)yj_reloadData {
     if ([self.delegate respondsToSelector:@selector(fetchRequiredDataForLoadingGroupedCells)]) {
-        [self.delegate performSelector:@selector(fetchRequiredDataForLoadingGroupedCells)];
+        [(id)self.delegate fetchRequiredDataForLoadingGroupedCells];
     }
     [self yj_reloadData];
 }

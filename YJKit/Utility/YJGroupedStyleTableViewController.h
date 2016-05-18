@@ -15,6 +15,12 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewCellIndentationStyle) {
     YJGroupedStyleTableViewCellIndentationStyleFixedMargin,
 };
 
+typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
+    YJGroupedStyleTableViewSeparatorStyleDefault,   // draw all separators
+    YJGroupedStyleTableViewSeparatorStyleHideGroup, // hide group separators
+    YJGroupedStyleTableViewSeparatorStyleHideAll,   // hide all separators
+};
+
 @interface YJGroupedStyleTableViewController : UITableViewController
 
 // navigation bar
@@ -23,6 +29,7 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewCellIndentationStyle) {
 // table view
 - (nullable UIColor *)backgroundColorForTableView; // Default light Gray color
 - (CGFloat)topEdgeInsetForTableView; // Default 0.0f, If navigation bar is displaying, the table view will below (not underneath) the navigation bar.
+- (YJGroupedStyleTableViewSeparatorStyle)separatorStyleForTableView;
 
 // register header cell
 - (nullable NSString *)reuseIdentifierForHeaderCell; // Default nil
@@ -52,7 +59,7 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewCellIndentationStyle) {
 - (CGFloat)heightForVerticalSpaceBetweenGroups; // Default 8.0f
 
 // push action
-- (BOOL)canPushDestinationViewControllerFromItemCellForRow:(NSInteger)row inSection:(NSInteger)section; // Default NO
+- (BOOL)canPushDestinationViewControllerFromItemCellForRow:(NSInteger)row inSection:(NSInteger)section; // Default YES
 - (void)configureDestinationViewControllerBeforePushing:(__kindof UIViewController *)viewController forRow:(NSInteger)row inSection:(NSInteger)section; // Default do nothing
 
 @end
