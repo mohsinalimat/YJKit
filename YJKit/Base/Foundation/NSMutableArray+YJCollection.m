@@ -22,4 +22,12 @@
     return last;
 }
 
+- (void)sort:(BOOL(^)(id, id))condition {
+    [self sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        if (condition(obj1, obj2)) return NSOrderedAscending;
+        else return NSOrderedDescending;
+        return NSOrderedSame;
+    }];
+}
+
 @end

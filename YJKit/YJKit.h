@@ -15,8 +15,11 @@
 #if __has_include(<YJKit/YJKit.h>)
 #import <YJKit/YJMacros.h>
 #import <YJKit/CGGeometry_YJExtension.h>
+#import <YJKit/YJTitleIndents.h>
 #import <YJKit/NSObject+YJCategory_KVO.h>
 #import <YJKit/NSObject+YJCategory_Swizzling.h>
+#import <YJKit/NSString+YJSequence.h>
+#import <YJKit/NSArray+YJSequence.h>
 #import <YJKit/NSArray+YJCollection.h>
 #import <YJKit/NSMutableArray+YJCollection.h>
 #import <YJKit/NSSet+YJCollection.h>
@@ -47,8 +50,11 @@
 #else
 #import "YJMacros.h"
 #import "CGGeometry_YJExtension.h"
+#import "YJTitleIndents.h"
 #import "NSObject+YJCategory_KVO.h"
 #import "NSObject+YJCategory_Swizzling.h"
+#import "NSString+YJSequence.h"
+#import "NSArray+YJSequence.h"
 #import "NSArray+YJCollection.h"
 #import "NSMutableArray+YJCollection.h"
 #import "NSSet+YJCollection.h"

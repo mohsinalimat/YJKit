@@ -10,7 +10,7 @@
 
 @implementation NSSet (YJCollection)
 
-- (instancetype)map:(id(^)(id obj))mapping {
+- (id)map:(id(^)(id obj))mapping {
     if (!mapping) return [NSSet set];
     NSMutableSet *collector = [NSMutableSet setWithCapacity:self.count];
     for (id elem in self) {
@@ -31,7 +31,7 @@
     return [self.class setWithSet:collector];
 }
 
-- (id)reduce:(id(^)(id result, id obj))combine {
+- (nullable id)reduce:(id(^)(id result, id obj))combine {
     id result = [self anyObject];
     for (id obj in self) {
         if (combine && ![obj isEqual:result]) {
@@ -42,15 +42,21 @@
     return result;
 }
 
-- (instancetype)flatten {
+- (id)flatten {
     return [self deepFlatten];
 }
 
-- (instancetype)deepFlatten {
+- (id)deepFlatten {
     NSMutableSet *collector = [NSMutableSet setWithCapacity:self.count];
     for (id elem in self) {
         if ([elem conformsToProtocol:@protocol(NSFastEnumeration)]) {
-            [collector unionSet:[elem deepFlatten]];
+            if ([elem isKindOfClass:[NSArray class]]) {
+                [collector addObjectsFromArray:[elem deepFlatten]];
+            } else if ([elem isKindOfClass:[NSSet class]]) {
+                [collector unionSet:[elem deepFlatten]];
+            } else {
+                NSAssert([elem isKindOfClass:[NSArray class]] || [elem isKindOfClass:[NSSet class]], @"The nested collection type %@ is not much unified for using -[%@ %@].", [elem class], self.class, NSStringFromSelector(_cmd));
+            }
         } else {
             [collector addObject:elem];
         }
@@ -58,7 +64,7 @@
     return [self.class setWithSet:collector];
 }
 
-- (instancetype)flatMap:(id(^)(id obj))mapping {
+- (id)flatMap:(id(^)(id obj))mapping {
     return [[self map:mapping] flatten];
 }
 

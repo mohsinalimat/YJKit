@@ -15,19 +15,16 @@ typedef id U;
 @interface NSArray <T> (YJCollection)
 
 /**
+ *  @remark The implementation of -map will prevent crashing from sending message to NSNull object.
  *  @code
  
- NSArray *a = @[@"hello", @"world", @"and", @"you"];
+ NSArray *a = @[@"hello", @"world", [NSNull null], @"and", @"you"];
  
- NSArray *b = [a map:^id(id obj) {
-     return [obj uppercaseString];
- }];
- 
- // b = @[@"HELLO", @"WORLD", @"AND", @"YOU"]
+ NSArray *b = [a map:^id(id obj) { return [obj uppercaseString]; }]; // @[@"HELLO", @"WORLD", [NSNull null], @"AND", @"YOU"]
  
  *  @endcode
  */
-- (instancetype)map:(U(^)(T obj))mapping;
+- (id)map:(U(^)(T obj))mapping;
 
 
 /**
@@ -35,17 +32,9 @@ typedef id U;
  
  NSArray *a = @[@1, @2, [NSNull null], @3, [NSNull null], @"hello"];
  
- NSArray *b = [a filter:^BOOL(id obj) {
-     return [obj isKindOfClass:[NSNumber class]];
- }];
+ NSArray *b = [a filter:^BOOL(id obj) { return [obj isKindOfClass:[NSNumber class]]; }]; // @[@1, @2, @3];
  
- // b = @[@1, @2, @3];
- 
- NSArray *c = [b filter:^BOOL(id obj) {
-     return [obj intValue] < 3;
- }];
- 
- // c = @[@1, @2];
+ NSArray *c = [b filter:^BOOL(id obj) { return [obj intValue] < 3; }]; // @[@1, @2];
  
  *  @endcode
  */
@@ -55,24 +44,27 @@ typedef id U;
 /**
  *  @code
  
- NSArray <NSNumber *> *a = @[@1, @2, @3, @4 ];
+ NSNumber *a = [@[ @1, @2, @3, @4 ] reduce:nil combine:^U(U result, NSNumber *obj) {
+     return @([result intValue] + [obj intValue]);
+ }]; // @10
  
- NSNumber *b = [a reduce:nil combine:^U(U result, NSNumber *obj) {
-    return @([result intValue] + [obj intValue]);
- }];
+ NSNumber *b = [@[ @1, @2, @3, @4 ] reduce:@2 combine:^U(U result, NSNumber *obj) {
+     return @([result intValue] + [obj intValue]);
+ }]; // @9
  
- // b = @10
- 
- NSNumber *c = [a reduce:@2 combine:^U(U result, NSNumber *obj) {
-    return @([result intValue] + [obj intValue]);
- }];
- 
- // c = @9
+ NSString *c = [@[ @"hello", @"world", @"and", @"you" ] reduce:@"hello" combine:^id(id result, id obj) {
+     return [result stringByAppendingFormat:@" %@", obj];
+ }]; // @"hello world and you"
  
  *  @endcode
  */
-- (T)reduce:(U)initial combine:(U(^)(U result, T obj))combine;
+- (nullable T)reduce:(nullable U)initial combine:(U(^)(U result, T obj))combine;
 
+
+/**
+ * Same for calling [array reduce:firstObject combine:...] or [array reduce:nil combine:...]
+ */
+- (nullable T)reduce:(U(^)(U result, T obj))combine;
 
 /**
  *  @code
@@ -83,75 +75,13 @@ typedef id U;
  
  *  @endcode
  */
-- (instancetype)flatten;
+- (id)flatten;
 
 
 /**
  * Call [array flatMap] is equal to call [[array map:...] flatten]
  */
-- (instancetype)flatMap:(U(^)(T obj))mapping;
-
-
-/* ----------------------------------  Sequence ----------------------------------*/
-
-/**
- *  @code
- 
- NSArray *a = [@[ @1, @2, @3, @4, @5 ] dropFirst:2]; // @[ @3, @4, @5 ];
- 
- *  @endcode
- */
-- (instancetype)dropFirst:(NSUInteger)count;
-
-
-/**
- *  @code
- 
- NSArray *a = [@[ @1, @2, @3, @4, @5 ] dropLast:2]; // @[ @1, @2, @3 ];
- 
- *  @endcode
- */
-- (instancetype)dropLast:(NSUInteger)count;
-
-
-/**
- *  @code
- 
- NSArray *a = [@[ @1, @2, @3, @4, @5 ] prefix:2]; // @[ @1, @2 ];
- 
- *  @endcode
- */
-- (instancetype)prefix:(NSUInteger)count;
-
-
-/**
- *  @code
- 
- NSArray *a = [@[ @1, @2, @3, @4, @5 ] suffix:2]; // @[ @4, @5 ];
- 
- *  @endcode
- */
-- (instancetype)suffix:(NSUInteger)count;
-
-
-/**
- *  @code
- 
- NSArray *a = [@[ @1, @2, @3, @4, @5 ] prefixUpTo:2]; // @[ @1, @2, @3 ];
- 
- *  @endcode
- */
-- (instancetype)prefixUpTo:(NSUInteger)upToIndex;
-
-
-/**
- *  @code
- 
- NSArray *a = [@[ @1, @2, @3, @4, @5 ] suffixFrom:2]; // @[ @3, @4, @5 ];
- 
- *  @endcode
- */
-- (instancetype)suffixFrom:(NSUInteger)fromIndex;
+- (id)flatMap:(U(^)(T obj))mapping;
 
 @end
 

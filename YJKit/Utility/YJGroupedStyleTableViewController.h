@@ -10,29 +10,33 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewCellIndentationStyle) {
+    YJGroupedStyleTableViewCellIndentationStyleAlignTitle,
+    YJGroupedStyleTableViewCellIndentationStyleFixedMargin,
+};
+
 @interface YJGroupedStyleTableViewController : UITableViewController
 
 // navigation bar
-- (BOOL)shouldHideNavigationBar; // Default YES
-- (BOOL)shouldMaskNavigationBarBackgroundColor; // Default YES
-- (BOOL)shouldHideNavigationBarShadow; // Default YES
-- (BOOL)shouldTranslucentNavigationBar; // Default YES
+- (BOOL)shouldHideNavigationBar; // Default NO
 
 // table view
 - (nullable UIColor *)backgroundColorForTableView; // Default light Gray color
-- (UIEdgeInsets)separatorInsetsForTableView; // Default (0,5,0,0)
+- (CGFloat)topEdgeInsetForTableView; // Default 0.0f, If navigation bar is displaying, the table view will below (not underneath) the navigation bar.
 
 // register header cell
 - (nullable NSString *)reuseIdentifierForHeaderCell; // Default nil
 - (nullable NSString *)nibNameForRegisteringHeaderCell; // Default nil
 - (nullable Class)classForRegisteringHeaderCell; // Default nil
+- (nullable NSString *)classNameForRegisteringHeaderCell; // Default nil
 
 // configure cells
-- (void)configureHeaderCell:(__kindof UITableViewCell *)cell; // Default do nothing
-- (void)configureItemCell:(UITableViewCell *)cell atItemRow:(NSUInteger)itemRow; // Default do nothing
-- (void)configureSeparatorCell:(UITableViewCell *)cell; // Default do nothing
-
 - (UITableViewCellStyle)styleForItemCell; // Default UITableViewCellStyleDefault
+- (YJGroupedStyleTableViewCellIndentationStyle)indentationStyleForItemCell; // Default YJGroupedStyleTableViewCellIndentationStyleAlignTitle
+
+- (void)configureHeaderCell:(__kindof UITableViewCell *)cell; // Default do nothing
+- (void)configureItemCell:(UITableViewCell *)cell forRow:(NSInteger)row inSection:(NSInteger)section; // Default do nothing
+- (void)configureGroupSeparatorCell:(UITableViewCell *)cell; // Default do nothing
 
 - (NSArray <NSArray <NSString *> *> *)titlesForGroupedCells; // Default example placeholder
 - (nullable NSArray <NSString *> *)subtitlesForItemCells; // Default nil
@@ -48,11 +52,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGFloat)heightForVerticalSpaceBetweenGroups; // Default 8.0f
 
 // push action
-- (BOOL)canPushDestinationViewControllerFromItemCellAtItemRow:(NSUInteger)itemRow; // Default NO
-- (void)configureDestinationViewControllerBeforePushing:(__kindof UIViewController *)viewController atItemRow:(NSUInteger)itemRow; // Default do nothing
+- (BOOL)canPushDestinationViewControllerFromItemCellForRow:(NSInteger)row inSection:(NSInteger)section; // Default NO
+- (void)configureDestinationViewControllerBeforePushing:(__kindof UIViewController *)viewController forRow:(NSInteger)row inSection:(NSInteger)section; // Default do nothing
 
 @end
 
-FOUNDATION_EXPORT NSInteger const YJGroupedStyleTableViewControllerHeaderCellForFittingSizeCalculationTag;
+FOUNDATION_EXPORT NSInteger const YJGroupedStyleTableViewControllerHeaderCellForCompressedSizeCalculation;
 
 NS_ASSUME_NONNULL_END

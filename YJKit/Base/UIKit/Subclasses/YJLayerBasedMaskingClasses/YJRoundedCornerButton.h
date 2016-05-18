@@ -7,6 +7,7 @@
 //
 
 #import "YJLayerBasedMasking.h"
+#import "YJTitleIndents.h"
 
 IB_DESIGNABLE
 @interface YJRoundedCornerButton : UIButton <YJLayerBasedMasking>
@@ -17,7 +18,13 @@ IB_DESIGNABLE
 /// The width of border around the view. Default is 0.0
 @property (nonatomic, assign) IBInspectable CGFloat borderWidth;
 
-/// The color of border around the view. Default is nil
+/// The color of border around the view. Default is tint color.
 @property (nonatomic, strong) IBInspectable UIColor *borderColor;
+
+/// The indentation style for making indentation space of the title to extend it's intrinsic content size.
+@property (nonatomic, assign) IBInspectable YJTitleIndentationStyle titleIndentationStyle;
+
+/// The indentation value for the title;
+@property (nonatomic, readonly) YJTitleIndents titleIndents;
 
 @end

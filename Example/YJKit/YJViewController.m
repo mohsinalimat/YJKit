@@ -23,14 +23,16 @@
     return @[@"Alignment and scaling",
              @"Image displaying and saving",
              @"Rounded corner views",
-             @"Layer blending demo"];
+             @"Layer blending demo",
+             @"Static Table View"];
 }
 
 - (NSArray <NSString *> *)classNamesForControllers {
     return @[@"YJGeometryViewController",
              @"YJSavingImageToAlbumViewController",
              @"YJMaskViewController",
-             @"YJMaskTableViewController"];
+             @"YJMaskTableViewController",
+             @"YJStaticTableViewController"];
 }
 
 - (void)loadView {
@@ -59,7 +61,6 @@
     NSString *className = [self classNamesForControllers][indexPath.row];
     Class controllerClass = NSClassFromString(className);
     UIViewController *controller = [[controllerClass alloc] init];
-    controller.title = [self listNames][indexPath.row];
     controller.view.backgroundColor = [UIColor whiteColor];
     controller.edgesForExtendedLayout = UIRectEdgeNone;
     [self.navigationController pushViewController:controller animated:YES];
