@@ -23,28 +23,34 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
 
 @interface YJGroupedStyleTableViewController : UITableViewController
 
-// navigation bar
+// custom navigation bar
 - (BOOL)shouldHideNavigationBar; // Default NO
 
-// table view
-- (nullable UIColor *)backgroundColorForTableView; // Default light Gray color
+// custom table view
+- (nullable UIColor *)backgroundColorForTableView; // Default is the same color as Settings App table view background color.
 - (CGFloat)topEdgeInsetForTableView; // Default 0.0f, If navigation bar is displaying, the table view will below (not underneath) the navigation bar.
-- (YJGroupedStyleTableViewSeparatorStyle)separatorStyleForTableView;
 
-// register header cell
+// custom line separator
+- (YJGroupedStyleTableViewSeparatorStyle)lineSeparatorStyleForTableView;
+- (UIColor *)lineSeparatorColorForTableView; // Default is the same color as Settings App separator color.
+
+// custom group separator
+- (void)configureGroupSeparatorCell:(UITableViewCell *)cell; // Default do nothing
+
+// custom header cell
 - (nullable NSString *)reuseIdentifierForHeaderCell; // Default nil
 - (nullable NSString *)nibNameForRegisteringHeaderCell; // Default nil
 - (nullable Class)classForRegisteringHeaderCell; // Default nil
 - (nullable NSString *)classNameForRegisteringHeaderCell; // Default nil
+- (void)configureHeaderCell:(__kindof UITableViewCell *)cell; // Default do nothing
 
-// configure cells
+// custom item cells
 - (UITableViewCellStyle)styleForItemCell; // Default UITableViewCellStyleDefault
 - (YJGroupedStyleTableViewCellIndentationStyle)indentationStyleForItemCell; // Default YJGroupedStyleTableViewCellIndentationStyleAlignTitle
-
-- (void)configureHeaderCell:(__kindof UITableViewCell *)cell; // Default do nothing
+- (UIColor *)backgroundColorForItemCell; // Default [UIColor whiteColor];
 - (void)configureItemCell:(UITableViewCell *)cell forRow:(NSInteger)row inSection:(NSInteger)section; // Default do nothing
-- (void)configureGroupSeparatorCell:(UITableViewCell *)cell; // Default do nothing
 
+// custom content for item cells
 - (NSArray <NSArray <NSString *> *> *)titlesForGroupedCells; // Default example placeholder
 - (nullable NSArray <NSString *> *)subtitlesForItemCells; // Default nil
 
@@ -56,7 +62,7 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
 - (nullable NSString *)storyboardNameForControllerStoryboardIdentifier:(NSString *)storyboardID; // Default @"Main"
 
 - (CGFloat)heightForItemCell; // Default 44.0f
-- (CGFloat)heightForVerticalSpaceBetweenGroups; // Default 8.0f
+- (CGFloat)heightForVerticalSpaceBetweenGroups; // Default 40.0f
 
 // push action
 - (BOOL)canPushDestinationViewControllerFromItemCellForRow:(NSInteger)row inSection:(NSInteger)section; // Default YES

@@ -63,11 +63,11 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        _indentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 1)];
+        [self.contentView addSubview:_indentView];
+        
         [self setLineColor:YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR];
         [self setCompensatedColor:YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR];
-        _indentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 1)];
-        _indentView.backgroundColor = YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR;
-        [self.contentView addSubview:_indentView];
     }
     return self;
 }
@@ -81,6 +81,7 @@
 
 - (void)setLineColor:(UIColor *)lineColor {
     self.contentView.backgroundColor = lineColor;
+    self.backgroundColor = lineColor;
 }
 
 - (UIColor *)lineColor {
@@ -88,7 +89,7 @@
 }
 
 - (void)setCompensatedColor:(UIColor *)compensatedColor {
-    self.backgroundColor = compensatedColor;
+    _indentView.backgroundColor = compensatedColor;
 }
 
 - (UIColor *)compensatedColor {
@@ -409,18 +410,20 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     NSInteger row = indexPath.row;
     BOOL isItemRow = [self.itemRows containsObject:@(row)] ? YES : NO;
     UITableViewCell *cell = nil;
-    UIColor *bgColor = [self backgroundColorForTableView];
+    UIColor *tableBGColor = [self backgroundColorForTableView];
+    UIColor *itemBGColor = [self backgroundColorForItemCell] ?: YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR;
     // header cell
     if (row == 0) {
         NSString *headerCellReuseID = [self reuseIdentifierForHeaderCell] ?: YJGSTVC_HEADER_CELL_REUSE_ID;
         if (self.didRegisterHeaderCell) {
             cell = [tableView dequeueReusableCellWithIdentifier:headerCellReuseID forIndexPath:indexPath];
+            cell.backgroundColor = cell.contentView.backgroundColor;
             [self configureHeaderCell:cell];
         } else {
             cell = [tableView dequeueReusableCellWithIdentifier:headerCellReuseID];
             if (!cell) {
                 cell = [[_YJGroupedStyleGroupSeparatorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:headerCellReuseID];
-                if (bgColor) cell.contentView.backgroundColor = bgColor;
+                if (tableBGColor) cell.contentView.backgroundColor = tableBGColor;
                 [self configureGroupSeparatorCell:cell];
             }
         }
@@ -431,12 +434,14 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
         cell = [tableView dequeueReusableCellWithIdentifier:YJGSTVC_ITEM_CELL_REUSE_ID];
         if (!cell) cell = [[_YJGroupedStyleItemCell alloc] initWithStyle:[self styleForItemCell] reuseIdentifier:YJGSTVC_ITEM_CELL_REUSE_ID];
         cell.accessoryType = [self hasDestinationViewControllerForItemCellAtIndexPath:indexPath] ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
+        cell.contentView.backgroundColor = itemBGColor;
+        cell.backgroundColor = itemBGColor;
         [self configureItemCell:(id)cell atIndexPath:indexPath];
     }
     // group separator cell
     else if ([self.mappedRows[row] hasPrefix:YJGSGroupSeparator]) {
         cell = [tableView dequeueReusableCellWithIdentifier:YJGSTVC_GROUP_SEPARATOR_CELL_REUSE_ID forIndexPath:indexPath];
-        if (bgColor) cell.contentView.backgroundColor = bgColor;
+        if (tableBGColor) cell.contentView.backgroundColor = tableBGColor;
         [self configureGroupSeparatorCell:cell];
     }
     // line separator cell
@@ -454,22 +459,22 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
             }
             lineSeparator.leftIndentation = indent;
             // set line separator color
-            UIColor *separatorColor = YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
-            switch ([self separatorStyleForTableView]) {
+            UIColor *separatorColor = [self lineSeparatorColorForTableView] ?: YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
+            switch ([self lineSeparatorStyleForTableView]) {
                 case YJGroupedStyleTableViewSeparatorStyleDefault: break;
                 case YJGroupedStyleTableViewSeparatorStyleHideAll: separatorColor = [UIColor clearColor]; break;
                 case YJGroupedStyleTableViewSeparatorStyleHideGroup: break;
             }
             lineSeparator.lineColor = separatorColor;
-            lineSeparator.compensatedColor = YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR;
+            lineSeparator.compensatedColor = itemBGColor;
         }
         // line separator for separating group
         else {
             // set left indentation
             lineSeparator.leftIndentation = 0.0f;
             // set line separator color
-            UIColor *separatorColor = YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
-            switch ([self separatorStyleForTableView]) {
+            UIColor *separatorColor = [self lineSeparatorColorForTableView] ?: YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
+            switch ([self lineSeparatorStyleForTableView]) {
                 case YJGroupedStyleTableViewSeparatorStyleDefault: break;
                 case YJGroupedStyleTableViewSeparatorStyleHideAll: separatorColor = [UIColor clearColor]; break;
                 case YJGroupedStyleTableViewSeparatorStyleHideGroup: separatorColor = [UIColor clearColor]; break;
@@ -658,8 +663,12 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     return 0.0f;
 }
 
-- (YJGroupedStyleTableViewSeparatorStyle)separatorStyleForTableView {
+- (YJGroupedStyleTableViewSeparatorStyle)lineSeparatorStyleForTableView {
     return YJGroupedStyleTableViewSeparatorStyleDefault;
+}
+
+- (UIColor *)lineSeparatorColorForTableView {
+    return YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
 }
 
 - (UIEdgeInsets)separatorInsetsForTableView {
@@ -689,6 +698,10 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 
 - (YJGroupedStyleTableViewCellIndentationStyle)indentationStyleForItemCell {
     return YJGroupedStyleTableViewCellIndentationStyleAlignTitle;
+}
+
+- (UIColor *)backgroundColorForItemCell {
+    return YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR;
 }
 
 // configure cell
@@ -760,7 +773,7 @@ return
 }
 
 - (CGFloat)heightForVerticalSpaceBetweenGroups {
-    return 8.0f;
+    return 40.0f;
 }
 
 @end
