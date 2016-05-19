@@ -13,7 +13,6 @@
 #import "YJDebugMacros.h"
 #import "_YJLayerBasedMasking.h"
 
-
 @implementation YJMaskedImageView
 
 // Add default YJLayerBasedMasking implementations

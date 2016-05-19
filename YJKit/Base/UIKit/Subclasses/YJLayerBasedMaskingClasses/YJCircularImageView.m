@@ -11,6 +11,7 @@
 #import "UIBezierPath+YJCategory.h"
 #import "CAShapeLayer+YJCategory.h"
 #import "YJDebugMacros.h"
+#import "YJUIMacros.h"
 
 @implementation YJCircularImageView
 
@@ -32,8 +33,9 @@
 }
 
 - (UIBezierPath *)prepareMaskRegionInSize:(CGSize)size {
+    CGFloat twoPixelInPoint = 2 / kUIScreenScale;
     return [UIBezierPath bezierPathWithCircleMaskShapeInSize:size
-                                                  edgeInsets:(UIEdgeInsets){ 2, 2, 2, 2 }
+                                                  edgeInsets:(UIEdgeInsets){ twoPixelInPoint, twoPixelInPoint, twoPixelInPoint, twoPixelInPoint }
                                               outerFramePath:NULL
                                              innerCirclePath:NULL];
 }
@@ -42,9 +44,11 @@
     if (!self.circleWidth || !self.circleColor) {
         return nil;
     } else {
+        CGFloat twoPixelInPoint = 2 / kUIScreenScale;
+        
         UIBezierPath *framePath, *circlePath;
         [UIBezierPath bezierPathWithCircleMaskShapeInSize:size
-                                               edgeInsets:(UIEdgeInsets){ 2, 2, 2, 2 }
+                                               edgeInsets:(UIEdgeInsets){ twoPixelInPoint, twoPixelInPoint, twoPixelInPoint, twoPixelInPoint }
                                            outerFramePath:&framePath
                                           innerCirclePath:&circlePath];
         

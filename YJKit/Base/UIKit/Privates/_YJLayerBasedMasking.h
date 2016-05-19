@@ -17,6 +17,7 @@
 #import "NSObject+YJCategory_KVO.h"
 #import "CAShapeLayer+YJCategory.h"
 #import "UIColor+YJCategory.h"
+#import "YJUIMacros.h"
 
 /**
  * Must declare a kind of YJMaskView abstract class which conforms protocol <YJLayerBasedMasking>
@@ -25,73 +26,81 @@
 #ifndef YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
 #define YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS \
 \
-/* @implementation XXMaskedView */{    \
-    CALayer *_maskLayer;    \
-    CGRect _transparentFrame;    \
-    BOOL _didFirstLayout;    \
-}    \
+/* @implementation XXMaskedView */{      \
+    CALayer *_maskLayer;      \
+    CGRect _transparentFrame;      \
+    BOOL _didFirstLayout;  \
+    BOOL _forceMaskColor;  \
+}      \
 \
-@synthesize maskColor = _maskColor;    \
+@synthesize maskColor = _maskColor;      \
 \
-- (void)setMaskColor:(UIColor *)maskColor {    \
-    if (![_maskColor isEqualToRGBColor:maskColor]) {    \
-        _maskColor = maskColor;    \
-        [self updateMaskLayer];    \
-    }    \
-}    \
+/* If call -setMaskColor:, the superview's background color changes will not be effective */  \
+- (void)setMaskColor:(UIColor *)maskColor {      \
+    if (![_maskColor isEqualToRGBColor:maskColor]) {      \
+        _maskColor = maskColor;  \
+        _forceMaskColor = YES;  \
+        if (!maskColor) {  \
+            _forceMaskColor = NO;  \
+            _maskColor = self.superview.backgroundColor;  \
+        }  \
+        [self updateMaskLayer];      \
+    }      \
+}      \
 \
-/* override view hierarchy */    \
+/* override view hierarchy */      \
 \
-- (void)willMoveToSuperview:(nullable UIView *)newSuperview {    \
-    [super willMoveToSuperview:newSuperview];    \
-    if (!newSuperview) return;    \
-    /* added to superview */    \
-    if (newSuperview.backgroundColor) {    \
-        self.maskColor = newSuperview.backgroundColor;    \
-        [self updateMaskLayer];    \
-    }    \
-    [newSuperview addObservedKeyPath:@"backgroundColor" handleSetup:^(id  _Nonnull object, id  _Nullable newValue) {    \
-        if (self.superview == object && newValue && [newValue isKindOfClass:[UIColor class]]) { /* not go in from design phase.*/    \
-            if (![self.maskColor isEqualToRGBColor:newValue]) {    \
-                self.maskColor = newValue;    \
-                [self updateMaskLayer];    \
-            }    \
-        }    \
-    }];    \
-}    \
+- (void)willMoveToSuperview:(nullable UIView *)newSuperview {      \
+    [super willMoveToSuperview:newSuperview];      \
+    if (!newSuperview) return;      \
+    /* added to superview */      \
+    if (newSuperview.backgroundColor) {      \
+        _maskColor = newSuperview.backgroundColor;  \
+        [self updateMaskLayer];      \
+    }      \
+    [newSuperview addObservedKeyPath:@"backgroundColor" handleSetup:^(id  _Nonnull object, id  _Nullable newValue) {      \
+        if (self.superview == object && newValue && [newValue isKindOfClass:[UIColor class]]) { /* not go in from design phase.*/      \
+            if (![_maskColor isEqualToRGBColor:newValue] && !_forceMaskColor) {  \
+                _maskColor = newValue;  \
+                [self updateMaskLayer];      \
+            }      \
+        }      \
+    }];      \
+}      \
 \
-- (void)removeFromSuperview {    \
-    self.maskColor = nil;    \
-    [self.superview removeObservedKeyPath:@"backgroundColor"];    \
-    [super removeFromSuperview];    \
-}    \
+- (void)removeFromSuperview {      \
+    self.maskColor = nil;      \
+    [self.superview removeObservedKeyPath:@"backgroundColor"];      \
+    [super removeFromSuperview];      \
+}      \
 \
-/* override layouts (e.g. update auto-layout constraints or view's size changed) */    \
+/* override layouts (e.g. update auto-layout constraints or view's size changed) */      \
 \
-- (void)layoutSubviews {    \
-    [super layoutSubviews];    \
-    _didFirstLayout = YES;    \
-    [self updateMaskLayer];    \
-}    \
+- (void)layoutSubviews {      \
+    [super layoutSubviews];      \
+    _didFirstLayout = YES;      \
+    [self updateMaskLayer];      \
+}      \
 \
-/* masking */    \
+/* masking */      \
 \
-- (void)updateMaskLayer {    \
-    if (!_didFirstLayout) return;    \
-    [_maskLayer removeFromSuperlayer];    \
-    [self _configureMaskLayerWithColor:self.maskColor];    \
-}    \
+- (void)updateMaskLayer {      \
+    if (!_didFirstLayout) return;      \
+    [_maskLayer removeFromSuperlayer];      \
+    [self _configureMaskLayerWithColor:self.maskColor];      \
+}      \
 \
-- (void)_configureMaskLayerWithColor:(UIColor *)color {    \
-    if (_maskLayer.superlayer || !color) return;  \
-    CGSize size = (CGSize){ self.bounds.size.width + 2, self.bounds.size.height + 2 };  \
-    _maskLayer = [self prepareMaskLayerInSize:size withDefaultMaskColor:color];  \
-    if (!_maskLayer) {    \
-        UIBezierPath *maskShape = [self prepareMaskRegionInSize:size];  \
-        _maskLayer = [CAShapeLayer maskLayerForBezierPath:maskShape fillColor:color.CGColor];  \
-    }  \
-    [self.layer addSublayer:_maskLayer];  \
-    _maskLayer.position = (CGPoint){ -1, -1 };  \
+- (void)_configureMaskLayerWithColor:(UIColor *)color {        \
+    if (_maskLayer.superlayer || !color) return;    \
+    CGFloat onePixelInPoint = 1 / kUIScreenScale;    \
+    CGSize size = (CGSize){ self.bounds.size.width + onePixelInPoint * 2, self.bounds.size.height + onePixelInPoint * 2 };    \
+    _maskLayer = [self prepareMaskLayerInSize:size withDefaultMaskColor:color];      \
+    if (!_maskLayer) {        \
+        UIBezierPath *maskShape = [self prepareMaskRegionInSize:size];    \
+        _maskLayer = [CAShapeLayer maskLayerForBezierPath:maskShape fillColor:color.CGColor];    \
+    }      \
+    [self.layer addSublayer:_maskLayer];      \
+    _maskLayer.position = (CGPoint){ -onePixelInPoint, -onePixelInPoint };    \
 }  \
 
 #endif // YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS

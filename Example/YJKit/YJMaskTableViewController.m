@@ -78,6 +78,17 @@ static const int kYJSquareImageCountInEachRow = 5;
     return self;
 }
 
+// Set "view.maskColor = aColor" will force view's masking color and ignore it's superview's background color.
+// Set "view.maskColor = nil" will reset the mask color to it's superview's background color.
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    for (UIView *subview in self.contentView.subviews) {
+        if ([subview conformsToProtocol:@protocol(YJLayerBasedMasking)]) {
+            [(id)subview setMaskColor:nil];
+        }
+    }
+}
+
 @end
 
 
@@ -149,6 +160,26 @@ static const int kYJSquareImageCountInEachRow = 5;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return kYJSquareImageSize.height + 4;
+}
+
+// When highlight the cell, the cell's masked images have to match the selected background color
+- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    for (UIView *subview in cell.contentView.subviews) {
+        if ([subview conformsToProtocol:@protocol(YJLayerBasedMasking)]) {
+            [(id)subview setMaskColor:[UIColor colorWithRed:0.851 green:0.851 blue:0.851 alpha:1.00]];
+        }
+    }
+}
+
+// When deselect the cell, cancel the specified mask color
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    for (UIView *subview in cell.contentView.subviews) {
+        if ([subview conformsToProtocol:@protocol(YJLayerBasedMasking)]) {
+            [(id)subview setMaskColor:nil];
+        }
+    }
 }
 
 @end

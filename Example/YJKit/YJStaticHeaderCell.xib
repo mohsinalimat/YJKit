@@ -14,21 +14,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="164"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yj_head_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="7Bq-vm-yah" customClass="YJRoundedCornerImageView">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yj_head_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="7Bq-vm-yah" customClass="YJCircularImageView">
                         <rect key="frame" x="120" y="42" width="80" height="80"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="80" id="fZH-fx-iTf"/>
                             <constraint firstAttribute="width" constant="80" id="jS1-oB-Xmm"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="20"/>
+                            <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                <color key="value" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                <real key="value" value="3"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="circleWidth">
+                                <real key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
