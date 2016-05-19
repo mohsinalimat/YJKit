@@ -22,7 +22,11 @@ IB_DESIGNABLE
 @property (nonatomic, strong) IBInspectable UIColor *borderColor;
 
 /// The indentation style for making indentation space of the title to extend it's intrinsic content size.
-@property (nonatomic, assign) IBInspectable YJTitleIndentationStyle titleIndentationStyle;
+#if TARGET_INTERFACE_BUILDER
+@property (nonatomic, assign) IBInspectable NSInteger titleIndentationStyle;
+#else
+@property (nonatomic, assign) YJTitleIndentationStyle titleIndentationStyle;
+#endif
 
 /// The indentation value for the title;
 @property (nonatomic, readonly) YJTitleIndents titleIndents;

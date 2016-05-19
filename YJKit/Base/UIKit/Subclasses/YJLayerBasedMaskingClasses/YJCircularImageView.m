@@ -31,17 +31,23 @@
     [self updateMaskLayer];
 }
 
-- (UIBezierPath *)prepareMaskRegion {
-    return [UIBezierPath bezierPathWithCircleMaskShapeInSize:self.bounds.size outerFramePath:NULL innerCirclePath:NULL];
+- (UIBezierPath *)prepareMaskRegionInSize:(CGSize)size {
+    return [UIBezierPath bezierPathWithCircleMaskShapeInSize:size
+                                                  edgeInsets:(UIEdgeInsets){ 2, 2, 2, 2 }
+                                              outerFramePath:NULL
+                                             innerCirclePath:NULL];
 }
 
-- (nullable CALayer *)prepareMaskLayerWithDefaultMaskColor:(UIColor *)maskColor {
+- (nullable CALayer *)prepareMaskLayerInSize:(CGSize)size withDefaultMaskColor:(UIColor *)maskColor {
     if (!self.circleWidth || !self.circleColor) {
         return nil;
     } else {
         UIBezierPath *framePath, *circlePath;
-        CGSize innerSize = CGSizeMake(self.bounds.size.width - self.circleWidth / 2, self.bounds.size.height - self.circleWidth / 2);
-        [UIBezierPath bezierPathWithCircleMaskShapeInSize:innerSize outerFramePath:&framePath innerCirclePath:&circlePath];
+        [UIBezierPath bezierPathWithCircleMaskShapeInSize:size
+                                               edgeInsets:(UIEdgeInsets){ 2, 2, 2, 2 }
+                                           outerFramePath:&framePath
+                                          innerCirclePath:&circlePath];
+        
         return [CAShapeLayer maskLayerForFrameBezierPath:framePath
                                          shapeBezierPath:circlePath
                                                fillColor:maskColor.CGColor

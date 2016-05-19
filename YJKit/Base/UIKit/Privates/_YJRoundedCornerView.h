@@ -20,91 +20,93 @@
     UIColor *borderColor
  
  */
-#ifndef YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
-#define YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS \
+#ifndef YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS_WITH_EXTRA_INIT
+#define YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS_WITH_EXTRA_INIT(EXTRA_INIT) \
 \
-static const CGFloat kYJRoundedCornerViewDefaultCornerRadius = 10.0f; \
+static const CGFloat kYJRoundedCornerViewDefaultCornerRadius = 10.0f;   \
 \
-/* init from code */ \
-- (instancetype)initWithFrame:(CGRect)frame { \
-    self = [super initWithFrame:frame]; \
-    if (self) { \
-        _cornerRadius = kYJRoundedCornerViewDefaultCornerRadius; \
-    } \
-    return self; \
-} \
+/* init from code */   \
+- (instancetype)initWithFrame:(CGRect)frame {   \
+    self = [super initWithFrame:frame];   \
+    if (self) {   \
+        _cornerRadius = kYJRoundedCornerViewDefaultCornerRadius;   \
+        EXTRA_INIT \
+    }   \
+    return self;   \
+}   \
 \
-/* init from IB */ \
-- (instancetype)initWithCoder:(NSCoder *)aDecoder { \
-    self = [super initWithCoder:aDecoder]; \
-    if (self) { \
-        _cornerRadius = kYJRoundedCornerViewDefaultCornerRadius; \
-    } \
-    return self; \
-} \
+/* init from IB */   \
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {   \
+    self = [super initWithCoder:aDecoder];   \
+    if (self) {   \
+        _cornerRadius = kYJRoundedCornerViewDefaultCornerRadius;   \
+        EXTRA_INIT \
+    }   \
+    return self;   \
+}   \
 \
-- (void)setCornerRadius:(CGFloat)cornerRadius { \
-    if (cornerRadius < 0.0f) cornerRadius = 0.0f; \
-        _cornerRadius = cornerRadius; \
-        [self updateMaskLayer]; \
-} \
+- (void)setCornerRadius:(CGFloat)cornerRadius {   \
+    if (cornerRadius < 0.0f) cornerRadius = 0.0f;   \
+        _cornerRadius = cornerRadius;   \
+        [self updateMaskLayer];   \
+}   \
 \
-- (void)setBorderWidth:(CGFloat)borderWidth { \
-    if (borderWidth < 0.0f) borderWidth = 0.0f; \
-        _borderWidth = borderWidth; \
-        [self updateMaskLayer]; \
-} \
+- (void)setBorderWidth:(CGFloat)borderWidth {   \
+    if (borderWidth < 0.0f) borderWidth = 0.0f;   \
+        _borderWidth = borderWidth;   \
+        [self updateMaskLayer];   \
+}   \
 \
-- (void)setBorderColor:(UIColor *)borderColor { \
-    _borderColor = borderColor; \
-    [self updateMaskLayer]; \
-} \
+- (void)setBorderColor:(UIColor *)borderColor {   \
+    _borderColor = borderColor;   \
+    [self updateMaskLayer];   \
+}   \
 \
-- (UIBezierPath *)prepareMaskRegion { \
-    CGRect bounds = self.bounds; \
-    CGRect rcRect = !CGRectIsEmpty(_transparentFrame) ? _transparentFrame : self.bounds; /* rounded corner rect */ \
+- (UIBezierPath *)prepareMaskRegionInSize:(CGSize)size {  \
+    /* rounded corner rect */  \
+    CGRect rcRect = !CGRectIsEmpty(_transparentFrame) ? _transparentFrame : (CGRect){ CGPointZero, size };  \
     \
-    UIEdgeInsets edgeInsets; \
-    edgeInsets.top = rcRect.origin.y; \
-    edgeInsets.left = rcRect.origin.x; \
-    edgeInsets.bottom = bounds.size.height - rcRect.size.height - rcRect.origin.y; \
-    edgeInsets.right = bounds.size.width - rcRect.size.width - rcRect.origin.x; \
+    UIEdgeInsets edgeInsets;   \
+    edgeInsets.top = rcRect.origin.y + 2;  \
+    edgeInsets.left = rcRect.origin.x + 2;  \
+    edgeInsets.bottom = size.height - rcRect.size.height - rcRect.origin.y + 2;  \
+    edgeInsets.right = size.width - rcRect.size.width - rcRect.origin.x + 2;  \
     \
-    return [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:bounds.size \
-                                                       cornerRadius:self.cornerRadius \
-                                                         edgeInsets:edgeInsets \
-                                                     outerFramePath:NULL \
-                                                   innerRoundPath:NULL]; \
-} \
+    return [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:size  \
+                                                       cornerRadius:self.cornerRadius   \
+                                                         edgeInsets:edgeInsets   \
+                                                     outerFramePath:NULL   \
+                                                     innerRoundPath:NULL];   \
+}   \
 \
-- (nullable CALayer *)prepareMaskLayerWithDefaultMaskColor:(UIColor *)maskColor { \
-    if (!self.borderWidth || !self.borderColor) { \
-        return nil; \
-    } else { \
-        CGRect bounds = self.bounds; \
-        CGRect rcRect = !CGRectIsEmpty(_transparentFrame) ? _transparentFrame : self.bounds; /* rounded corner rect */ \
+- (nullable CALayer *)prepareMaskLayerInSize:(CGSize)size withDefaultMaskColor:(UIColor *)maskColor {  \
+    if (!self.borderWidth || !self.borderColor) {   \
+        return nil;   \
+    } else {  \
+        /* rounded corner rect */  \
+        CGRect rcRect = !CGRectIsEmpty(_transparentFrame) ? _transparentFrame : (CGRect){ CGPointZero, size };  \
         \
-        UIEdgeInsets edgeInsets; \
-        edgeInsets.top = rcRect.origin.y; \
-        edgeInsets.left = rcRect.origin.x; \
-        edgeInsets.bottom = bounds.size.height - rcRect.size.height - rcRect.origin.y; \
-        edgeInsets.right = bounds.size.width - rcRect.size.width - rcRect.origin.x; \
+        UIEdgeInsets edgeInsets;   \
+        edgeInsets.top = rcRect.origin.y + 2;  \
+        edgeInsets.left = rcRect.origin.x + 2;  \
+        edgeInsets.bottom = size.height - rcRect.size.height - rcRect.origin.y + 2;  \
+        edgeInsets.right = size.width - rcRect.size.width - rcRect.origin.x + 2;  \
         \
-        CGSize innerSize = CGSizeMake(bounds.size.width - self.borderWidth / 2, bounds.size.height - self.borderWidth / 2); \
-        UIBezierPath *framePath, *roundedBorderPath; \
-        [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:innerSize \
-                                                    cornerRadius:self.cornerRadius \
-                                                      edgeInsets:edgeInsets \
-                                                  outerFramePath:&framePath \
-                                                innerRoundPath:&roundedBorderPath]; \
+        CGSize innerSize = CGSizeMake(size.width - self.borderWidth / 2, size.height - self.borderWidth / 2);  \
+        UIBezierPath *framePath, *roundedBorderPath;   \
+        [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:innerSize   \
+                                                    cornerRadius:self.cornerRadius   \
+                                                      edgeInsets:edgeInsets   \
+                                                  outerFramePath:&framePath   \
+                                                  innerRoundPath:&roundedBorderPath];   \
         \
-        return [CAShapeLayer maskLayerForFrameBezierPath:framePath \
-                                         shapeBezierPath:roundedBorderPath \
-                                               fillColor:maskColor.CGColor \
-                                             strokeWidth:self.borderWidth \
-                                             strokeColor:self.borderColor.CGColor]; \
-    } \
-} \
+        return [CAShapeLayer maskLayerForFrameBezierPath:framePath   \
+                                         shapeBezierPath:roundedBorderPath   \
+                                               fillColor:maskColor.CGColor   \
+                                             strokeWidth:self.borderWidth   \
+                                             strokeColor:self.borderColor.CGColor];   \
+    }   \
+}   \
 
 #endif // YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS
 
@@ -128,6 +130,12 @@ static const CGFloat kYJRoundedCornerViewDefaultCornerRadius = 10.0f; \
 \
 
 #endif // YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
+
+
+#ifndef YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
+#define YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS \
+        YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS_WITH_EXTRA_INIT()
+#endif
 
 
 #endif /* _YJRoundedCornerView_h */

@@ -328,6 +328,12 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 // restore nav bar
 - (void)restoreOriginalNavigationBar {
     if (!self.frozenNavBar) return;
+    if ([self.sourceViewController respondsToSelector:@selector(shouldHideNavigationBar)]) {
+        if ([(id)self.sourceViewController shouldHideNavigationBar]) {
+            return;
+        }
+    }
+    
     UINavigationBar *navBar = self.navigationController.navigationBar;
     UINavigationBar *frozenNavBar = [NSKeyedUnarchiver unarchiveObjectWithData:self.frozenNavBar];
     navBar.translucent = frozenNavBar.translucent;
@@ -340,11 +346,9 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 - (void)removeDropBackViewFromNavBarIfPossible {
     // check if pusher has shown nav bar
     BOOL isNavBarShownBeforePushIn = YES;
-    NSArray *viewControllers = self.navigationController.viewControllers;
-    NSUInteger count = viewControllers.count;
-    id sourceViewController = (count >= 2) ? viewControllers[count-2] : nil;
-    if ([sourceViewController respondsToSelector:@selector(shouldHideNavigationBar)]) {
-        isNavBarShownBeforePushIn = ![sourceViewController shouldHideNavigationBar];
+    
+    if ([self.sourceViewController respondsToSelector:@selector(shouldHideNavigationBar)]) {
+        isNavBarShownBeforePushIn = ![(id)self.sourceViewController shouldHideNavigationBar];
     }
     if (!isNavBarShownBeforePushIn) return;
     // remove back drop view
@@ -394,6 +398,12 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 - (NSMutableArray *)navBarBGSubviews {
     if (!_navBarBGSubviews) _navBarBGSubviews = @[].mutableCopy;
     return _navBarBGSubviews;
+}
+
+- (UIViewController *)sourceViewController {
+    NSArray *viewControllers = self.navigationController.viewControllers;
+    NSUInteger count = viewControllers.count;
+    return count >= 2 ? viewControllers[count-2] : (count == 1 ? viewControllers.firstObject : nil);
 }
 
 #pragma mark - UITableViewDataSource
@@ -519,7 +529,12 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
             if ([self nibNameForRegisteringHeaderCell].length) {
                 cell = [[NSBundle mainBundle] loadNibNamed:[self nibNameForRegisteringHeaderCell] owner:self options:nil].firstObject;
             } else {
-                cell = [[self classForRegisteringHeaderCell] new];
+                Class HCClass = [self classForRegisteringHeaderCell];
+                if (!HCClass && [self classNameForRegisteringHeaderCell].length) {
+                    HCClass = NSClassFromString([self classNameForRegisteringHeaderCell]);
+                }
+                cell = [HCClass new];
+                if (!cell) return 0.0f;
             }
             cell.tag = YJGroupedStyleTableViewControllerHeaderCellForCompressedSizeCalculation;
             [self configureHeaderCell:cell];
@@ -535,7 +550,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     }
     // group sperator
     else if ([self.mappedRows[row] hasPrefix:YJGSGroupSeparator]) {
-        // last big group cell
+        // last big group sperator cell
         if (row == self.totalCellCount - 1) {
             return kYJGSTVCLastGroupSeparatorCellHeight;
         } else {

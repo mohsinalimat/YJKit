@@ -23,6 +23,7 @@
     return @[@"Alignment and scaling",
              @"Image displaying and saving",
              @"Rounded corner views",
+             @"Rounded corner views with content",
              @"Layer blending demo",
              @"Static Table View"];
 }
@@ -31,6 +32,7 @@
     return @[@"YJGeometryViewController",
              @"YJSavingImageToAlbumViewController",
              @"YJMaskViewController",
+             @"YJMaskContentViewController",
              @"YJMaskTableViewController",
              @"YJStaticTableViewController"];
 }

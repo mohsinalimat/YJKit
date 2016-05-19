@@ -1,14 +1,14 @@
 //
-//  YJSemicircularCornerButton.m
+//  YJSemicircularCornerLabel.m
 //  YJKit
 //
-//  Created by huang-kun on 16/5/14.
+//  Created by huang-kun on 16/5/19.
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
 
-#import "YJSemicircularCornerButton.h"
+#import "YJSemicircularCornerLabel.h"
 
-@implementation YJSemicircularCornerButton
+@implementation YJSemicircularCornerLabel
 
 @synthesize cornerRadius = _cornerRadius;
 

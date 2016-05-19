@@ -19,6 +19,7 @@
 // Add default YJLayerBasedMasking implementations
 YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS /* set _transparantFrame later */
 
+
 #pragma mark - init & dealloc
 
 // init from code

@@ -7,6 +7,7 @@
 //
 
 #import "YJLayerBasedMasking.h"
+#import "YJTitleIndents.h"
 
 IB_DESIGNABLE
 @interface YJRoundedCornerLabel : UILabel <YJLayerBasedMasking>
@@ -19,5 +20,15 @@ IB_DESIGNABLE
 
 /// The color of border around the view. Default is nil
 @property (nonatomic, strong) IBInspectable UIColor *borderColor;
+
+/// The indentation style for making indentation space of the title to extend it's intrinsic content size.
+#if TARGET_INTERFACE_BUILDER
+@property (nonatomic, assign) IBInspectable NSInteger titleIndentationStyle;
+#else
+@property (nonatomic, assign) YJTitleIndentationStyle titleIndentationStyle;
+#endif
+
+/// The indentation value for the title;
+@property (nonatomic, readonly) YJTitleIndents titleIndents;
 
 @end

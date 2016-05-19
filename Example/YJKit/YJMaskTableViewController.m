@@ -36,7 +36,7 @@ static const int kYJSquareImageCountInEachRow = 5;
             CGFloat offset = YJGridOffsetXAtIndex(i, kYJSquareImageSize.width, padding);
             // Setup an image view
             UIImageView *demoImageView = [UIImageView new];
-            demoImageView.frame = CGRectMake(offset, 0, kYJSquareImageSize.width, kYJSquareImageSize.height);
+            demoImageView.frame = CGRectMake(offset, 2, kYJSquareImageSize.width, kYJSquareImageSize.height);
             demoImageView.image = [UIImage imageNamed:@"Puppy.jpg"];
             [self.contentView addSubview:demoImageView];
             // Setup rounded corner
@@ -68,7 +68,7 @@ static const int kYJSquareImageCountInEachRow = 5;
             CGFloat offset = YJGridOffsetXAtIndex(i, kYJSquareImageSize.width, padding);
             // Setup an image view
             YJRoundedCornerImageView *demoImageView = [YJRoundedCornerImageView new];
-            demoImageView.frame = CGRectMake(offset, 0, kYJSquareImageSize.width, kYJSquareImageSize.height);
+            demoImageView.frame = CGRectMake(offset, 2, kYJSquareImageSize.width, kYJSquareImageSize.height);
             demoImageView.image = [UIImage imageNamed:@"Puppy.jpg"];
             [self.contentView addSubview:demoImageView];
             // Setup rounded corner
@@ -148,7 +148,7 @@ static const int kYJSquareImageCountInEachRow = 5;
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return kYJSquareImageSize.height + 1.0;
+    return kYJSquareImageSize.height + 4;
 }
 
 @end

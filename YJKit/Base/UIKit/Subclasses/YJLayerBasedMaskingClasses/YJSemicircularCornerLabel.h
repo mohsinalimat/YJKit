@@ -1,16 +1,16 @@
 //
-//  YJSemicircularCornerButton.h
+//  YJSemicircularCornerLabel.h
 //  YJKit
 //
-//  Created by huang-kun on 16/5/14.
+//  Created by huang-kun on 16/5/19.
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
 
-#import "YJRoundedCornerButton.h"
+#import "YJRoundedCornerLabel.h"
 
 /// This class will ignore the -setCornerRadius:
 /// @property (nonatomic, readonly) CGFloat cornerRadius;
 
-@interface YJSemicircularCornerButton : YJRoundedCornerButton
+@interface YJSemicircularCornerLabel : YJRoundedCornerLabel
 
 @end

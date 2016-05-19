@@ -19,13 +19,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateMaskLayer;
 
 /// Returns an UIBezierPath object which for rendering masked CAShapeLayer object at runtime.
-/// The mask region will be rendered in self's boundary.
-- (UIBezierPath *)prepareMaskRegion;
+/// The mask region will be rendered in self's boundary, the size parameter is better slightly larger than the boundary.
+- (UIBezierPath *)prepareMaskRegionInSize:(CGSize)size;
 
 /// Returns an CALayer object with custom mask shape which for rendering at runtime.
-/// The mask layer will be rendered in self's boundary.
-/// Notice: Returning a nonnull CAShapeLayer object will ignore the UIBezierPath object from -prepareMaskRegion;
-- (nullable CALayer *)prepareMaskLayerWithDefaultMaskColor:(UIColor *)maskColor;
+/// The mask region will be rendered in self's boundary, the size parameter is better slightly larger than the boundary.
+/// Notice: Returning a nonnull CAShapeLayer object will ignore the UIBezierPath object from -prepareMaskRegionInSize:
+- (nullable CALayer *)prepareMaskLayerInSize:(CGSize)size withDefaultMaskColor:(UIColor *)maskColor;
 
 @optional
 
