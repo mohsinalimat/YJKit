@@ -460,6 +460,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     else {
         cell = [tableView dequeueReusableCellWithIdentifier:YJGSTVC_LINE_SEPARATOR_CELL_REUSE_ID forIndexPath:indexPath];
         _YJGroupedStyleLineSeparatorCell *lineSeparator = (_YJGroupedStyleLineSeparatorCell *)cell;
+        UIColor *specifiedLineColor = [self lineSeparatorColorForTableView] ?: YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
         // line separator for separating item cell
         if ([[self.mappedRows[row] componentsSeparatedByString:@":"].lastObject isEqualToString:YJGSLineSeparatingItemCell]) {
             // set left indentation
@@ -471,10 +472,10 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
             }
             lineSeparator.leftIndentation = indent;
             // set line separator color
-            UIColor *separatorColor = [self lineSeparatorColorForTableView] ?: YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
+            UIColor *separatorColor = specifiedLineColor;
             switch ([self lineSeparatorStyleForTableView]) {
                 case YJGroupedStyleTableViewSeparatorStyleDefault: break;
-                case YJGroupedStyleTableViewSeparatorStyleHideAll: separatorColor = tableBGColor; break;
+                case YJGroupedStyleTableViewSeparatorStyleHideAll: separatorColor = itemBGColor; break;
                 case YJGroupedStyleTableViewSeparatorStyleHideGroup: break;
             }
             lineSeparator.lineColor = separatorColor;
@@ -485,7 +486,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
             // set left indentation
             lineSeparator.leftIndentation = 0.0f;
             // set line separator color
-            UIColor *separatorColor = [self lineSeparatorColorForTableView] ?: YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
+            UIColor *separatorColor = specifiedLineColor;
             switch ([self lineSeparatorStyleForTableView]) {
                 case YJGroupedStyleTableViewSeparatorStyleDefault: break;
                 case YJGroupedStyleTableViewSeparatorStyleHideAll: separatorColor = tableBGColor; break;
