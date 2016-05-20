@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "NSArray+YJSequence.h"
+#import "NSMutableArray+YJSequence.h"
 
 @interface YJArraySequence : XCTestCase
 
@@ -16,13 +17,13 @@
 @implementation YJArraySequence
 
 - (void)testArraySequence {
-    [self testArrayDropFirst];
-    [self testArrayDropLast];
+    [self testArraydroppingFirst];
+    [self testArraydroppingLast];
     [self testArrayPrefix];
     [self testArraySuffix];
 }
 
-- (void)testArrayDropFirst {
+- (void)testArraydroppingFirst {
     NSArray *a = @[@1, @2, @3, @4, @5];
     
     NSArray *a1 = [a dropFirst];
@@ -37,17 +38,17 @@
     XCTAssert(a3.count == 0);
     
     NSMutableArray *ma = a.mutableCopy;
-    [ma dropFirst];
+    [ma droppingFirst];
     XCTAssert([ma isEqualToArray:aa1]);
     
-    [ma dropFirst:2];
+    [ma droppingFirst:2];
     XCTAssert([ma isEqualToArray:aa2]);
     
-    [ma dropFirst:2];
+    [ma droppingFirst:2];
     XCTAssert(ma.count == 0);
 }
 
-- (void)testArrayDropLast {
+- (void)testArraydroppingLast {
     NSArray *a = @[@1, @2, @3, @4, @5];
     
     NSArray *a1 = [a dropLast];
@@ -62,13 +63,13 @@
     XCTAssert(a3.count == 0);
     
     NSMutableArray *ma = a.mutableCopy;
-    [ma dropLast];
+    [ma droppingLast];
     XCTAssert([ma isEqualToArray:aa1]);
     
-    [ma dropLast:2];
+    [ma droppingLast:2];
     XCTAssert([ma isEqualToArray:aa2]);
     
-    [ma dropLast:2];
+    [ma droppingLast:2];
     XCTAssert(ma.count == 0);
 }
 
@@ -90,19 +91,19 @@
     XCTAssert(a4.count == 0);
     
     NSMutableArray *ma = a.mutableCopy;
-    [ma prefix:1];
+    [ma prefixing:1];
     XCTAssert([ma isEqualToArray:aa1]);
     
     ma = a.mutableCopy;
-    [ma prefix:3];
+    [ma prefixing:3];
     XCTAssert([ma isEqualToArray:aa2]);
     
     ma = a.mutableCopy;
-    [ma prefix:0];
+    [ma prefixing:0];
     XCTAssert(ma.count == 0);
     
     ma = a.mutableCopy;
-    [ma prefix:a.count];
+    [ma prefixing:a.count];
     XCTAssert([ma isEqualToArray:a]);
 }
 
@@ -124,19 +125,19 @@
     XCTAssert(a4.count == 0);
     
     NSMutableArray *ma = a.mutableCopy;
-    [ma suffix:1];
+    [ma suffixing:1];
     XCTAssert([ma isEqualToArray:aa1]);
     
     ma = a.mutableCopy;
-    [ma suffix:3];
+    [ma suffixing:3];
     XCTAssert([ma isEqualToArray:aa2]);
     
     ma = a.mutableCopy;
-    [ma suffix:0];
+    [ma suffixing:0];
     XCTAssert(ma.count == 0);
     
     ma = a.mutableCopy;
-    [ma suffix:a.count];
+    [ma suffixing:a.count];
     XCTAssert([ma isEqualToArray:a]);
 }
 

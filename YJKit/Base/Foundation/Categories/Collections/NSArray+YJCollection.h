@@ -24,7 +24,7 @@ typedef id U;
  
  *  @endcode
  */
-- (id)map:(U(^)(T obj))mapping;
+- (NSArray *)map:(U(^)(T obj))mapping;
 
 
 /**
@@ -38,7 +38,7 @@ typedef id U;
  
  *  @endcode
  */
-- (instancetype)filter:(BOOL(^)(T obj))condition;
+- (NSArray *)filter:(BOOL(^)(T obj))condition;
 
 
 /**
@@ -75,13 +75,13 @@ typedef id U;
  
  *  @endcode
  */
-- (id)flatten;
+- (NSArray *)flatten;
 
 
 /**
  * Call [array flatMap] is equal to call [[array map:...] flatten]
  */
-- (id)flatMap:(U(^)(T obj))mapping;
+- (NSArray *)flatMap:(U(^)(T obj))mapping;
 
 @end
 

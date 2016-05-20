@@ -10,17 +10,17 @@
 
 @implementation NSSet (YJCollection)
 
-- (id)map:(id(^)(id obj))mapping {
+- (NSSet *)map:(id(^)(id obj))mapping {
     if (!mapping) return [NSSet set];
     NSMutableSet *collector = [NSMutableSet setWithCapacity:self.count];
     for (id elem in self) {
         id value = mapping(elem);
         if (value) [collector addObject:value];
     }
-    return [self.class setWithSet:collector];
+    return [collector copy];
 }
 
-- (instancetype)filter:(BOOL(^)(id obj))condition {
+- (NSSet *)filter:(BOOL(^)(id obj))condition {
     if (!condition) return [NSSet set];
     NSMutableSet *collector = [NSMutableSet setWithCapacity:self.count];
     for (id elem in self) {
@@ -28,7 +28,7 @@
             [collector addObject:elem];
         }
     }
-    return [self.class setWithSet:collector];
+    return [collector copy];
 }
 
 - (nullable id)reduce:(id(^)(id result, id obj))combine {
@@ -42,16 +42,16 @@
     return result;
 }
 
-- (id)flatten {
+- (NSSet *)flatten {
     return [self deepFlatten];
 }
 
-- (id)deepFlatten {
+- (NSSet *)deepFlatten {
     NSMutableSet *collector = [NSMutableSet setWithCapacity:self.count];
     for (id elem in self) {
         if ([elem conformsToProtocol:@protocol(NSFastEnumeration)]) {
             if ([elem isKindOfClass:[NSArray class]]) {
-                [collector addObjectsFromArray:[elem deepFlatten]];
+                [collector addObjectsFromArray:(id)[elem deepFlatten]];
             } else if ([elem isKindOfClass:[NSSet class]]) {
                 [collector unionSet:[elem deepFlatten]];
             } else {
@@ -61,10 +61,10 @@
             [collector addObject:elem];
         }
     }
-    return [self.class setWithSet:collector];
+    return [collector copy];
 }
 
-- (id)flatMap:(id(^)(id obj))mapping {
+- (NSSet *)flatMap:(id(^)(id obj))mapping {
     return [[self map:mapping] flatten];
 }
 

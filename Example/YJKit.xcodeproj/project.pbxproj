@@ -40,6 +40,10 @@
 		32DE8AA71CEB5E0B00E63005 /* YJStaticHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32DE8AA51CEB5E0B00E63005 /* YJStaticHeaderCell.m */; };
 		32DE8AA81CEB5E0B00E63005 /* YJStaticHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32DE8AA61CEB5E0B00E63005 /* YJStaticHeaderCell.xib */; };
 		32E5D29F1CDC7DEE0070B96D /* yj_head_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 32E5D29E1CDC7DEE0070B96D /* yj_head_icon.png */; };
+		32F0C7B61CEF2E2A00234ECF /* YJCollectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F0C7B51CEF2E2A00234ECF /* YJCollectionTest.m */; };
+		32F0C7BF1CEF378300234ECF /* NSMutableString+YJSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F0C7BE1CEF378300234ECF /* NSMutableString+YJSequence.m */; };
+		32F0C7C21CEF466900234ECF /* NSMutableArray+YJCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F0C7C11CEF466900234ECF /* NSMutableArray+YJCollection.m */; };
+		32F0C7C51CEF467D00234ECF /* NSMutableSet+YJCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F0C7C41CEF467D00234ECF /* NSMutableSet+YJCollection.m */; };
 		32FA58A81CE76272009A6D93 /* YJContentIndents.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA58A71CE76272009A6D93 /* YJContentIndents.m */; };
 		32FA58AB1CE768FC009A6D93 /* YJSemicircularCornerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA58AA1CE768FC009A6D93 /* YJSemicircularCornerButton.m */; };
 		32FC759D1CDF3477009855B9 /* YJMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FC75531CDF3477009855B9 /* YJMemoryCache.m */; };
@@ -147,6 +151,13 @@
 		32DE8AA61CEB5E0B00E63005 /* YJStaticHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YJStaticHeaderCell.xib; sourceTree = "<group>"; };
 		32DFD0561CE07C0000ECD091 /* _YJLayerBasedMasking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _YJLayerBasedMasking.h; sourceTree = "<group>"; };
 		32E5D29E1CDC7DEE0070B96D /* yj_head_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yj_head_icon.png; sourceTree = "<group>"; };
+		32F0C7B51CEF2E2A00234ECF /* YJCollectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJCollectionTest.m; sourceTree = "<group>"; };
+		32F0C7BD1CEF378300234ECF /* NSMutableString+YJSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+YJSequence.h"; sourceTree = "<group>"; };
+		32F0C7BE1CEF378300234ECF /* NSMutableString+YJSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+YJSequence.m"; sourceTree = "<group>"; };
+		32F0C7C01CEF466900234ECF /* NSMutableArray+YJCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+YJCollection.h"; sourceTree = "<group>"; };
+		32F0C7C11CEF466900234ECF /* NSMutableArray+YJCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+YJCollection.m"; sourceTree = "<group>"; };
+		32F0C7C31CEF467D00234ECF /* NSMutableSet+YJCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableSet+YJCollection.h"; sourceTree = "<group>"; };
+		32F0C7C41CEF467D00234ECF /* NSMutableSet+YJCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableSet+YJCollection.m"; sourceTree = "<group>"; };
 		32FA58A61CE75EED009A6D93 /* YJContentIndents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJContentIndents.h; sourceTree = "<group>"; };
 		32FA58A71CE76272009A6D93 /* YJContentIndents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJContentIndents.m; sourceTree = "<group>"; };
 		32FA58A91CE768FC009A6D93 /* YJSemicircularCornerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJSemicircularCornerButton.h; sourceTree = "<group>"; };
@@ -325,8 +336,12 @@
 			children = (
 				32B8C1731CEE0E0700E2639B /* NSArray+YJCollection.h */,
 				32B8C1741CEE0E0700E2639B /* NSArray+YJCollection.m */,
+				32F0C7C01CEF466900234ECF /* NSMutableArray+YJCollection.h */,
+				32F0C7C11CEF466900234ECF /* NSMutableArray+YJCollection.m */,
 				32B8C1771CEE0E0700E2639B /* NSSet+YJCollection.h */,
 				32B8C1781CEE0E0700E2639B /* NSSet+YJCollection.m */,
+				32F0C7C31CEF467D00234ECF /* NSMutableSet+YJCollection.h */,
+				32F0C7C41CEF467D00234ECF /* NSMutableSet+YJCollection.m */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
@@ -349,6 +364,8 @@
 				3204386F1CEEFF41006806EC /* NSMutableArray+YJSequence.m */,
 				32B8C1831CEE0E0700E2639B /* NSString+YJSequence.h */,
 				32B8C1841CEE0E0700E2639B /* NSString+YJSequence.m */,
+				32F0C7BD1CEF378300234ECF /* NSMutableString+YJSequence.h */,
+				32F0C7BE1CEF378300234ECF /* NSMutableString+YJSequence.m */,
 			);
 			path = Sequences;
 			sourceTree = "<group>";
@@ -616,6 +633,7 @@
 				6003F5B6195388D20070C39A /* Supporting Files */,
 				32B8C1901CEE109700E2639B /* YJStringSequence.m */,
 				3204386C1CEEF3E9006806EC /* YJArraySequence.m */,
+				32F0C7B51CEF2E2A00234ECF /* YJCollectionTest.m */,
 				320438711CEF14EC006806EC /* YJGeneralTest.m */,
 			);
 			path = Tests;
@@ -762,6 +780,9 @@
 				32FC75B81CDF3477009855B9 /* YJRoundedCornerView.m in Sources */,
 				32B8C1931CEE110F00E2639B /* Tests.m in Sources */,
 				324AB0A01CD1C6EE00A9DCF0 /* YJMaskViewController.m in Sources */,
+				32F0C7BF1CEF378300234ECF /* NSMutableString+YJSequence.m in Sources */,
+				32F0C7C51CEF467D00234ECF /* NSMutableSet+YJCollection.m in Sources */,
+				32F0C7C21CEF466900234ECF /* NSMutableArray+YJCollection.m in Sources */,
 				32FC75A31CDF3477009855B9 /* CAShapeLayer+YJCategory.m in Sources */,
 				32FC75B71CDF3477009855B9 /* YJRoundedCornerLabel.m in Sources */,
 				32CB4AAB1CCA3C880050C01B /* YJSavingImageToAlbumViewController.m in Sources */,
@@ -804,6 +825,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32F0C7B61CEF2E2A00234ECF /* YJCollectionTest.m in Sources */,
 				320438721CEF14EC006806EC /* YJGeneralTest.m in Sources */,
 				32B8C1911CEE109700E2639B /* YJStringSequence.m in Sources */,
 				3204386D1CEEF3E9006806EC /* YJArraySequence.m in Sources */,

@@ -7,12 +7,11 @@
 //
 
 #import "NSArray+YJCollection.h"
+#import "NSObject+YJMutabilityChecking.h"
 
 @implementation NSArray (YJCollection)
 
-// Using [self.class arrayWithArray:] to achieve returning an instancetype.
-
-- (id)map:(id(^)(id obj))mapping {
+- (NSArray *)map:(id(^)(id obj))mapping {
     if (!mapping) return @[];
     NSMutableArray *collector = [NSMutableArray arrayWithCapacity:self.count];
     for (id elem in self) {
@@ -22,10 +21,10 @@
         }
         [collector addObject:value];
     }
-    return [self.class arrayWithArray:collector];
+    return [collector copy];
 }
 
-- (instancetype)filter:(BOOL(^)(id obj))condition {
+- (NSArray *)filter:(BOOL(^)(id obj))condition {
     if (!condition) return @[];
     NSMutableArray *collector = [NSMutableArray arrayWithCapacity:self.count];
     for (id elem in self) {
@@ -33,7 +32,7 @@
             [collector addObject:elem];
         }
     }
-    return [self.class arrayWithArray:collector];
+    return [collector copy];
 }
 
 - (nullable id)reduce:(nullable id)initial combine:(id(^)(id result, id obj))combine {
@@ -54,12 +53,12 @@
     return [self reduce:nil combine:combine];
 }
 
-- (id)flatten {
+- (NSArray *)flatten {
     return [self deepFlatten];
 }
 
 // Recursively flatten each level of collections with light-weight type compatible
-- (id)deepFlatten {
+- (NSArray *)deepFlatten {
     NSMutableArray *collector = [NSMutableArray arrayWithCapacity:self.count];
     for (id elem in self) {
         if ([elem conformsToProtocol:@protocol(NSFastEnumeration)]) {
@@ -74,10 +73,10 @@
             [collector addObject:elem];
         }
     }
-    return [self.class arrayWithArray:collector];
+    return [collector copy];
 }
 
-- (id)flatMap:(id(^)(id obj))mapping {
+- (NSArray *)flatMap:(id(^)(id obj))mapping {
     return [[self map:mapping] flatten];
 }
 

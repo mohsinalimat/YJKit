@@ -26,89 +26,65 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  @code 
  NSString *s1 = [@"hello" dropFirst]; // @"ello"
- 
- NSMutableString *s2 = [@"hello" mutableCopy];
- [s2 dropFirst];
  *  @endcode
  */
-- (id)dropFirst;
+- (NSString *)dropFirst;
 
 
 /**
  *  @code
  NSString *s1 = [@"hello" dropFirst:3]; // @"lo"
- 
- NSMutableString *s2 = [@"hello" mutableCopy];
- [s2 dropFirst:3];
  *  @endcode
  */
-- (id)dropFirst:(NSUInteger)count;
+- (NSString *)dropFirst:(NSUInteger)count;
 
 
 /**
  *  @code
  NSString *s1 = [@"hello" dropLast]; // @"hell"
- 
- NSMutableString *s2 = [@"hello" mutableCopy];
- [s2 dropLast];
  *  @endcode
  */
-- (id)dropLast;
+- (NSString *)dropLast;
 
 
 /**
  *  @code
  NSString *s1 = [@"hello" dropLast:3]; // @"he"
- 
- NSMutableString *s2 = [@"hello" mutableCopy];
- [s2 dropLast:3];
  *  @endcode
  */
-- (id)dropLast:(NSUInteger)count;
+- (NSString *)dropLast:(NSUInteger)count;
 
 
 /**
  *  @code
  NSString *s1 = [@"hello" prefix:2]; // @"he"
- 
- NSMutableString *s2 = [@"hello" mutableCopy];
- [s2 prefix:2];
  *  @endcode
  */
-- (id)prefix:(NSUInteger)count;
+- (NSString *)prefix:(NSUInteger)count;
 
 
 /**
  *  @code
  NSString *s1 = [@"hello" prefixUpTo:2]; // @"hel"
- 
- NSMutableString *s2 = [@"hello" mutableCopy];
- [s2 prefixUpTo:2];
  *  @endcode
  */
-- (id)prefixUpTo:(NSUInteger)upToIndex;
+- (NSString *)prefixUpTo:(NSUInteger)upToIndex;
 
 
 /**
  *  @code
  NSString *s1 = [@"hello" suffix:2]; // @"lo"
- 
- NSMutableString *s2 = [@"hello" mutableCopy];
- [s2 suffix:2];
  *  @endcode
  */
-- (id)suffix:(NSUInteger)count;
+- (NSString *)suffix:(NSUInteger)count;
 
 
 /**
  *  @code
  NSString *s1 = [@"hello" suffixFrom:2]; // @"llo"
- 
- NSMutableString *s2 = [@"hello" mutableCopy];
- [s2 suffixFrom:2];
  *  @endcode
  */
-- (id)suffixFrom:(NSUInteger)fromIndex;
+- (NSString *)suffixFrom:(NSUInteger)fromIndex;
 
 @end
 

@@ -23,7 +23,7 @@ typedef id U;
  
  *  @endcode
  */
-- (id)map:(U(^)(T obj))mapping;
+- (NSSet *)map:(U(^)(T obj))mapping;
 
 
 /**
@@ -37,7 +37,7 @@ typedef id U;
  
  *  @endcode
  */
-- (instancetype)filter:(BOOL(^)(T obj))condition;
+- (NSSet *)filter:(BOOL(^)(T obj))condition;
 
 
 /**
@@ -69,13 +69,13 @@ typedef id U;
  
  *  @endcode
  */
-- (id)flatten;
+- (NSSet *)flatten;
 
 
 /**
  * Call [set flatMap] is equal to call [[set map:...] flatten]
  */
-- (id)flatMap:(U(^)(T obj))mapping;
+- (NSSet *)flatMap:(U(^)(T obj))mapping;
 
 @end
 

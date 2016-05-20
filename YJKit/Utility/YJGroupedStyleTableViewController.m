@@ -169,7 +169,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
         
         _mappedRows = [mappedRows copy];
         _itemTitles = [titles copy];
-        _itemRows = [[titles allKeys] sorted:^BOOL(NSNumber * _Nonnull obj1, NSNumber * _Nonnull obj2) {
+        _itemRows = [[titles allKeys] sort:^BOOL(NSNumber * _Nonnull obj1, NSNumber * _Nonnull obj2) {
             return obj1.unsignedIntegerValue < obj2.unsignedIntegerValue;
         }];
     }

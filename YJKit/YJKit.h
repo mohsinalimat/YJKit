@@ -26,10 +26,13 @@
 #import <YJKit/NSObject+YJCategory_Swizzling.h>
 
 #import <YJKit/NSString+YJSequence.h>
-#import <YJKit/NSArray+YJSequence.h>
-#import <YJKit/NSMutableArray+YJSequence.h>
+#import <YJKit/NSMutableString+YJSequence.h>
 #import <YJKit/NSArray+YJCollection.h>
+#import <YJKit/NSArray+YJSequence.h>
+#import <YJKit/NSMutableArray+YJCollection.h>
+#import <YJKit/NSMutableArray+YJSequence.h>
 #import <YJKit/NSSet+YJCollection.h>
+#import <YJKit/NSMutableSet+YJCollection.h>
 
 #import <YJKit/NSBundle+YJCategory.h>
 #import <YJKit/NSTimer+YJCategory.h>
@@ -75,10 +78,13 @@
 #import "NSObject+YJCategory_Swizzling.h"
 
 #import "NSString+YJSequence.h"
-#import "NSArray+YJSequence.h"
-#import "NSMutableArray+YJSequence.h"
+#import "NSMutableString+YJSequence.h"
 #import "NSArray+YJCollection.h"
+#import "NSArray+YJSequence.h"
+#import "NSMutableArray+YJCollection.h"
+#import "NSMutableArray+YJSequence.h"
 #import "NSSet+YJCollection.h"
+#import "NSMutableSet+YJCollection.h"
 
 #import "NSBundle+YJCategory.h"
 #import "NSTimer+YJCategory.h"
