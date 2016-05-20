@@ -52,11 +52,32 @@ static const void *YJBarButtonItemAssociatedTargetKey = &YJBarButtonItemAssociat
     return objc_getAssociatedObject(self, YJBarButtonItemAssociatedTargetKey);
 }
 
+- (instancetype)initWithImage:(nullable UIImage *)image
+                        style:(UIBarButtonItemStyle)style
+                actionHandler:(nullable void(^)(UIBarButtonItem *sender))actionHandler {
+    self.yj_target = [[_YJBarButtonItemTarget alloc] initWithActionHandler:actionHandler];
+    return [self initWithImage:image style:style target:self.yj_target action:@selector(invokeActionFromBarButtonItem:)];
+}
+
+- (instancetype)initWithImage:(nullable UIImage *)image
+          landscapeImagePhone:(nullable UIImage *)landscapeImagePhone
+                        style:(UIBarButtonItemStyle)style
+                actionHandler:(nullable void(^)(UIBarButtonItem *sender))actionHandler {
+    self.yj_target = [[_YJBarButtonItemTarget alloc] initWithActionHandler:actionHandler];
+    return [self initWithImage:image landscapeImagePhone:landscapeImagePhone style:style target:self.yj_target action:@selector(invokeActionFromBarButtonItem:)];
+}
+
 - (instancetype)initWithTitle:(nullable NSString *)title
                         style:(UIBarButtonItemStyle)style
                   actionHandler:(nullable void(^)(UIBarButtonItem *sender))actionHandler {
     self.yj_target = [[_YJBarButtonItemTarget alloc] initWithActionHandler:actionHandler];
     return [self initWithTitle:title style:style target:self.yj_target action:@selector(invokeActionFromBarButtonItem:)];
+}
+
+- (instancetype)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem
+                              actionHandler:(nullable void(^)(UIBarButtonItem *sender))actionHandler {
+    self.yj_target = [[_YJBarButtonItemTarget alloc] initWithActionHandler:actionHandler];
+    return [self initWithBarButtonSystemItem:systemItem target:self.yj_target action:@selector(invokeActionFromBarButtonItem:)];
 }
 
 - (void)setActionHandler:(nullable YJBarButtonItemActionHandler)actionHandler {

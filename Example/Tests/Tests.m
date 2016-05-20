@@ -6,6 +6,7 @@
 //  Copyright (c) 2016 huang-kun. All rights reserved.
 //
 
+/*
 @import XCTest;
 #import "YJKit.h"
 
@@ -132,5 +133,51 @@
     XCTAssert(correct);
 }
 
-@end
+- (void)testStringSequence {
+    NSString *s = @"hello world and you.";
+    NSMutableString *ms = s.mutableCopy;
+    NSArray *characters = s.characters;
+    
+    NSArray *a = @[@1];
+    NSMutableArray *b = a.mutableCopy;
+    
+    
+    NSString *s1 = [s dropFirst];
+    XCTAssert([s1 isEqualToString:@"ello world and you."]);
+    
+    [ms dropFirst];
+    XCTAssert([ms isEqualToString:@"ello world and you."]);
+    ms = s.mutableCopy;
+    
+    NSString *s2 = [s dropFirst:5];
+    XCTAssert([s2 isEqualToString:@" world and you."]);
+    
+    NSString *s3 = [s dropLast];
+    XCTAssert([s3 isEqualToString:@"hello world and you"]);
+    
+    NSString *s4 = [s dropLast:5];
+    XCTAssert([s4 isEqualToString:@"hello world and"]);
+    
+    NSString *s5 = s.firstCharacter;
+    XCTAssert([s5 isEqualToString:@"h"]);
+    
+    NSString *s6 = s.lastCharacter;
+    XCTAssert([s6 isEqualToString:@"."]);
+    
+    NSString *s7 = [s prefix:5];
+    XCTAssert([s7 isEqualToString:@"hello"]);
+    
+    NSString *s8 = [s prefixUpTo:5];
+    XCTAssert([s8 isEqualToString:@"hello "]);
+    
+    NSString *s9 = [s suffix:5];
+    XCTAssert([s9 isEqualToString:@" you."]);
+    
+    NSString *s10 = [s suffixFrom:15];
+    XCTAssert([s10 isEqualToString:@"d you."]);
+    
+    
+}
 
+@end
+*/

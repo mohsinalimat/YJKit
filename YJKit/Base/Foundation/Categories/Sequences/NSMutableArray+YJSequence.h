@@ -1,5 +1,5 @@
 //
-//  NSMutableArray+YJCollection.h
+//  NSMutableArray+YJSequence.h
 //  YJKit
 //
 //  Created by huang-kun on 16/5/12.
@@ -10,10 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSMutableArray <T> (YJCollection)
-
-
-/* ----------------------------------  Sequence ----------------------------------*/
+@interface NSMutableArray <T> (YJSequence)
 
 /**
  * Removes and returns the first object of collection.

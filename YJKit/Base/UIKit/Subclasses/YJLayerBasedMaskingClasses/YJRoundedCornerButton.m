@@ -14,7 +14,7 @@
 #import "UIColor+YJCategory.h"
 
 @interface YJRoundedCornerButton ()
-@property (nonatomic) YJTitleIndents titleIndents;
+@property (nonatomic) YJContentIndents titleIndents;
 @end
 
 @implementation YJRoundedCornerButton
@@ -25,7 +25,7 @@ YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
 // Add default rounded corner implementations
 YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS_WITH_EXTRA_INIT(
                                                                                   
-    _titleIndentationStyle = YJTitleIndentationStyleDefault;
+    _titleIndentationStyle = YJContentIndentationStyleDefault;
     _borderWidth = 1.0f;
     
     @weakify(self)
@@ -43,7 +43,7 @@ YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS_WITH_EXTRA_INI
     [self removeObservedKeyPath:@"tintColor"];
 }
 
-- (void)setTitleIndentationStyle:(YJTitleIndentationStyle)titleIndentationStyle {
+- (void)setTitleIndentationStyle:(YJContentIndentationStyle)titleIndentationStyle {
     _titleIndentationStyle = titleIndentationStyle;
     [self updateMaskLayer];
 }
@@ -56,29 +56,29 @@ YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS_WITH_EXTRA_INI
 
 - (CGSize)intrinsicContentSize {
     CGSize size = [super intrinsicContentSize];
-    YJTitleIndents indents = [self titleIndentsForIdentationStyle:self.titleIndentationStyle contentSize:size];
+    YJContentIndents indents = [self titleIndentsForIdentationStyle:self.titleIndentationStyle contentSize:size];
     size.width += indents.left + indents.right;
     size.height += indents.top + indents.bottom;
     return size;
 }
 
-- (YJTitleIndents)titleIndents {
+- (YJContentIndents)titleIndents {
     return [self titleIndentsForIdentationStyle:self.titleIndentationStyle contentSize:[super intrinsicContentSize]];
 }
 
-- (YJTitleIndents)titleIndentsForIdentationStyle:(YJTitleIndentationStyle)style
+- (YJContentIndents)titleIndentsForIdentationStyle:(YJContentIndentationStyle)style
                                      contentSize:(CGSize)contentSize {
     CGFloat height = contentSize.height;
-    YJTitleIndents indents = YJTitleIndentsZero;
+    YJContentIndents indents = YJContentIndentsZero;
     
     switch (style) {
-        case YJTitleIndentationStyleNone:
+        case YJContentIndentationStyleNone:
             break;
-        case YJTitleIndentationStyleDefault:
+        case YJContentIndentationStyleDefault:
             indents.left = height / 2;
             indents.right = height / 2;
             break;
-        case YJTitleIndentationStyleLarge:
+        case YJContentIndentationStyleLarge:
             indents.left = height / 2 * 1.8;
             indents.right = height / 2 * 1.8;
             break;

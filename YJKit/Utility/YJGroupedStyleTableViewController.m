@@ -328,8 +328,9 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 // restore nav bar
 - (void)restoreOriginalNavigationBar {
     if (!self.frozenNavBar) return;
-    if ([self.sourceViewController respondsToSelector:@selector(shouldHideNavigationBar)]) {
-        if ([(id)self.sourceViewController shouldHideNavigationBar]) {
+    UIViewController *vc = self.navigationController.viewControllers.lastObject;
+    if ([vc respondsToSelector:@selector(shouldHideNavigationBar)]) {
+        if ([(id)vc shouldHideNavigationBar]) {
             return;
         }
     }
@@ -346,11 +347,12 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 - (void)removeDropBackViewFromNavBarIfPossible {
     // check if pusher has shown nav bar
     BOOL isNavBarShownBeforePushIn = YES;
-    
-    if ([self.sourceViewController respondsToSelector:@selector(shouldHideNavigationBar)]) {
-        isNavBarShownBeforePushIn = ![(id)self.sourceViewController shouldHideNavigationBar];
+    UIViewController *vc = self.navigationController.viewControllers.lastObject;
+    if ([vc respondsToSelector:@selector(shouldHideNavigationBar)]) {
+        isNavBarShownBeforePushIn = ![(id)vc shouldHideNavigationBar];
     }
-    if (!isNavBarShownBeforePushIn) return;
+    if (!isNavBarShownBeforePushIn || !vc) return;
+    
     // remove back drop view
     if (![self shouldHideNavigationBar] && [self shouldMaskNavigationBarBackgroundColor] && [self shouldTranslucentNavigationBar]) {
         NSArray *bgViews = [self.navigationController.navigationBar.subviews.firstObject subviews];
@@ -398,12 +400,6 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 - (NSMutableArray *)navBarBGSubviews {
     if (!_navBarBGSubviews) _navBarBGSubviews = @[].mutableCopy;
     return _navBarBGSubviews;
-}
-
-- (UIViewController *)sourceViewController {
-    NSArray *viewControllers = self.navigationController.viewControllers;
-    NSUInteger count = viewControllers.count;
-    return count >= 2 ? viewControllers[count-2] : (count == 1 ? viewControllers.firstObject : nil);
 }
 
 #pragma mark - UITableViewDataSource

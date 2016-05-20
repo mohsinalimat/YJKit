@@ -7,7 +7,7 @@
 //
 
 #import "YJLayerBasedMasking.h"
-#import "YJTitleIndents.h"
+#import "YJContentIndents.h"
 
 IB_DESIGNABLE
 @interface YJRoundedCornerLabel : UILabel <YJLayerBasedMasking>
@@ -25,10 +25,10 @@ IB_DESIGNABLE
 #if TARGET_INTERFACE_BUILDER
 @property (nonatomic, assign) IBInspectable NSInteger titleIndentationStyle;
 #else
-@property (nonatomic, assign) YJTitleIndentationStyle titleIndentationStyle;
+@property (nonatomic, assign) YJContentIndentationStyle titleIndentationStyle;
 #endif
 
 /// The indentation value for the title;
-@property (nonatomic, readonly) YJTitleIndents titleIndents;
+@property (nonatomic, readonly) YJContentIndents titleIndents;
 
 @end

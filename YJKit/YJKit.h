@@ -13,21 +13,29 @@
 #import <UIKit/UIKit.h>
 
 #if __has_include(<YJKit/YJKit.h>)
+
 #import <YJKit/YJMacros.h>
+
+#import <YJKit/YJContentIndents.h>
+
 #import <YJKit/CGGeometry_YJExtension.h>
-#import <YJKit/YJTitleIndents.h>
+#import <YJKit/CAShapeLayer+YJCategory.h>
+
+#import <YJKit/NSObject+YJMutabilityChecking.h>
 #import <YJKit/NSObject+YJCategory_KVO.h>
 #import <YJKit/NSObject+YJCategory_Swizzling.h>
+
 #import <YJKit/NSString+YJSequence.h>
 #import <YJKit/NSArray+YJSequence.h>
+#import <YJKit/NSMutableArray+YJSequence.h>
 #import <YJKit/NSArray+YJCollection.h>
-#import <YJKit/NSMutableArray+YJCollection.h>
 #import <YJKit/NSSet+YJCollection.h>
+
 #import <YJKit/NSBundle+YJCategory.h>
 #import <YJKit/NSTimer+YJCategory.h>
 #import <YJKit/YJMemoryCache.h>
+
 #import <YJKit/UIBezierPath+YJCategory.h>
-#import <YJKit/CAShapeLayer+YJCategory.h>
 #import <YJKit/UIView+YJCategory.h>
 #import <YJKit/UIImage+YJCategory.h>
 #import <YJKit/UIDevice+YJCategory.h>
@@ -39,30 +47,44 @@
 #import <YJKit/UIBarButtonItem+YJCategory.h>
 #import <YJKit/UIAlertView+YJCategory.h>
 #import <YJKit/UIActionSheet+YJCategory.h>
-#import <YJKit/YJPhotoLibrary.h>
+
 #import <YJKit/YJLayerBasedMasking.h>
 #import <YJKit/YJRoundedCornerView.h>
 #import <YJKit/YJCircularImageView.h>
 #import <YJKit/YJRoundedCornerImageView.h>
 #import <YJKit/YJRoundedCornerButton.h>
 #import <YJKit/YJRoundedCornerLabel.h>
+#import <YJKit/YJSemicircularCornerButton.h>
+#import <YJKit/YJSemicircularCornerLabel.h>
+#import <YJKit/YJRoundedCornerTextView.h>
+
+#import <YJKit/YJPhotoLibrary.h>
 #import <YJKit/YJGroupedStyleTableViewController.h>
+
 #else
+
 #import "YJMacros.h"
+
+#import "YJContentIndents.h"
+
 #import "CGGeometry_YJExtension.h"
-#import "YJTitleIndents.h"
+#import "CAShapeLayer+YJCategory.h"
+
+#import "NSObject+YJMutabilityChecking.h"
 #import "NSObject+YJCategory_KVO.h"
 #import "NSObject+YJCategory_Swizzling.h"
+
 #import "NSString+YJSequence.h"
 #import "NSArray+YJSequence.h"
+#import "NSMutableArray+YJSequence.h"
 #import "NSArray+YJCollection.h"
-#import "NSMutableArray+YJCollection.h"
 #import "NSSet+YJCollection.h"
+
 #import "NSBundle+YJCategory.h"
 #import "NSTimer+YJCategory.h"
 #import "YJMemoryCache.h"
+
 #import "UIBezierPath+YJCategory.h"
-#import "CAShapeLayer+YJCategory.h"
 #import "UIView+YJCategory.h"
 #import "UIImage+YJCategory.h"
 #import "UIDevice+YJCategory.h"
@@ -74,14 +96,20 @@
 #import "UIBarButtonItem+YJCategory.h"
 #import "UIAlertView+YJCategory.h"
 #import "UIActionSheet+YJCategory.h"
-#import "YJPhotoLibrary.h"
+
 #import "YJLayerBasedMasking.h"
 #import "YJRoundedCornerView.h"
 #import "YJCircularImageView.h"
 #import "YJRoundedCornerImageView.h"
 #import "YJRoundedCornerButton.h"
 #import "YJRoundedCornerLabel.h"
+#import "YJSemicircularCornerButton.h"
+#import "YJSemicircularCornerLabel.h"
+#import "YJRoundedCornerTextView.h"
+
+#import "YJPhotoLibrary.h"
 #import "YJGroupedStyleTableViewController.h"
+
 #endif
 
 #endif /* YJKit_h */

@@ -36,6 +36,11 @@
     return [UIColor colorWithHex:hex alpha:alpha];
 }
 
++ (UIColor *)randomRGBColor {
+    CGFloat (^randomColorComponent)() = ^CGFloat{ return (CGFloat)(arc4random_uniform(256) / 255.0); };
+    return [UIColor colorWithRed:randomColorComponent() green:randomColorComponent() blue:randomColorComponent() alpha:1.0];
+}
+
 - (BOOL)isEqualToRGBColor:(UIColor *)color {
     CGFloat r1, g1, b1, a1;
     CGFloat r2, g2, b2, a2;

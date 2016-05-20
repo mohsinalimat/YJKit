@@ -1,14 +1,14 @@
 //
-//  NSMutableArray+YJCollection.m
+//  NSMutableArray+YJSequence.m
 //  YJKit
 //
 //  Created by huang-kun on 16/5/12.
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
 
-#import "NSMutableArray+YJCollection.h"
+#import "NSMutableArray+YJSequence.h"
 
-@implementation NSMutableArray (YJCollection)
+@implementation NSMutableArray (YJSequence)
 
 - (nullable id)removeFirst {
     id first = self.firstObject;
