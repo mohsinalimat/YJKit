@@ -46,22 +46,45 @@
     return [self circularMaskLayerInSize:size fillColor:fillColor strokeWidth:0.0f strokeColor:fillColor];
 }
 
+// default implementation - shape path is offset by 2 pixels from size boundary
 + (instancetype)circularMaskLayerInSize:(CGSize)size fillColor:(CGColorRef)fillColor strokeWidth:(CGFloat)strokeWidth strokeColor:(CGColorRef)strokeColor {
     UIBezierPath *framePath, *circularPath;
     CGSize innerSize = CGSizeMake(size.width - strokeWidth / 2, size.height - strokeWidth / 2);
-    [UIBezierPath bezierPathWithCircleMaskShapeInSize:innerSize outerFramePath:&framePath innerCirclePath:&circularPath];
-    return [self maskLayerForFrameBezierPath:framePath shapeBezierPath:circularPath fillColor:fillColor strokeWidth:strokeWidth strokeColor:strokeColor];
+    CGFloat twoPixelInPoint = 2 / kUIScreenScale;
+    
+    [UIBezierPath bezierPathWithCircleMaskShapeInSize:innerSize
+                                           edgeInsets:(UIEdgeInsets){ twoPixelInPoint, twoPixelInPoint, twoPixelInPoint, twoPixelInPoint }
+                                       outerFramePath:&framePath
+                                      innerCirclePath:&circularPath];
+    
+    return [self maskLayerForFrameBezierPath:framePath
+                             shapeBezierPath:circularPath
+                                   fillColor:fillColor
+                                 strokeWidth:strokeWidth
+                                 strokeColor:strokeColor];
 }
 
 + (instancetype)roundedRectMaskLayerInSize:(CGSize)size cornerRadius:(CGFloat)cornerRadius fillColor:(CGColorRef)fillColor {
     return [self roundedRectMaskLayerInSize:size cornerRadius:cornerRadius fillColor:fillColor strokeWidth:0.0f strokeColor:fillColor];
 }
 
+// default implementation - shape path is offset by 2 pixels from size boundary
 + (instancetype)roundedRectMaskLayerInSize:(CGSize)size cornerRadius:(CGFloat)cornerRadius fillColor:(CGColorRef)fillColor strokeWidth:(CGFloat)strokeWidth strokeColor:(CGColorRef)strokeColor {
     UIBezierPath *framePath, *roundedPath;
     CGSize innerSize = CGSizeMake(size.width - strokeWidth / 2, size.height - strokeWidth / 2);
-    [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:innerSize cornerRadius:cornerRadius outerFramePath:&framePath innerRoundPath:&roundedPath];
-    return [self maskLayerForFrameBezierPath:framePath shapeBezierPath:roundedPath fillColor:fillColor strokeWidth:strokeWidth strokeColor:strokeColor];
+    CGFloat twoPixelInPoint = 2 / kUIScreenScale;
+    
+    [UIBezierPath bezierPathWithRoundedCornerMaskShapeInSize:innerSize
+                                                cornerRadius:cornerRadius
+                                                  edgeInsets:(UIEdgeInsets){ twoPixelInPoint, twoPixelInPoint, twoPixelInPoint, twoPixelInPoint }
+                                              outerFramePath:&framePath
+                                              innerRoundPath:&roundedPath];
+    
+    return [self maskLayerForFrameBezierPath:framePath
+                             shapeBezierPath:roundedPath
+                                   fillColor:fillColor
+                                 strokeWidth:strokeWidth
+                                 strokeColor:strokeColor];
 }
 
 @end

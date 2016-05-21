@@ -21,6 +21,54 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
     YJGroupedStyleTableViewSeparatorStyleHideAll,   // hide all separators
 };
 
+/**
+ *  This is an ABSTRACT table view controller class for providing a grouped style table view.
+ *
+ *  The reason for using this class instead of UITableViewController with a UITableViewStyleGrouped style is it can provide much detail customizations such as translucent navigation bar; new color for cell separators and group background; custom height for group space; convenient separator indentation and its custom appearance; easy to fill-in light-weight data informations for cell displaying and destination controller class name for pushing onto screen when user tap the cell.
+ *
+ *  Only need to make a subclass of YJGroupedStyleTableViewController and override some of these methods if needed to provide the informations you want to customize.
+ *
+ *  @code
+ 
+ // Providing titles for cell content (Required)
+ 
+ - (NSArray <NSArray <NSString *> *> *)titlesForGroupedCells {
+     return @[  @[ @"First item in group A" ],
+                @[ @"First item in group B", @"Second item in group B", @"Third item in group B" ],
+                @[ @"First item in group C", @"Second item in group C" ] ];
+ }
+ 
+ // Providing subtitles for cell content (Optional)
+ 
+ - (nullable NSArray *)subtitlesForItemCells {
+    return @[   @[ @"group A - item 1" ],
+                @[ @"group B - item 1", @"group B - item 2", @"group B - item 3" ],
+                @[ @"group C - item 1", @"group C - item 2" ] ];
+ }
+ 
+ // or you can make it plain array without nesting, but must keep the correct order.
+ 
+ - (nullable NSArray *)subtitlesForItemCells {
+    return @[@"group A - item 1",
+             @"group B - item 1",
+             @"group B - item 2",
+             @"group B - item 3",
+             @"group C - item 1",
+             @"group C - item 2" ];
+ }
+ 
+ // To summarize, only -titlesForGroupedCells MUST return nesting array for grouping data to each section, and the rest of informations can be compatible with both nesting and plain array.
+ 
+ // These methods can return either nested array or plain array
+ 
+ - (nullable NSArray *)subtitlesForItemCells; // Array of NSString, Default nil
+ - (nullable NSArray *)iconImagesForItemCells; // Array of UIImage, Default nil
+ - (nullable NSArray *)iconImageNamesForItemCells; // Array of NSString, Default nil
+ - (nullable NSArray *)classNamesOfDestinationViewControllersForItemCells; // Array of NSString, Default nil
+ - (nullable NSArray *)storyboardIdentifiersOfDestinationViewControllersForItemCells; // Array of NSString, Default nil
+
+ *  @endcode
+ */
 @interface YJGroupedStyleTableViewController : UITableViewController
 
 // custom navigation bar
@@ -52,14 +100,14 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
 
 // custom content for item cells
 - (NSArray <NSArray <NSString *> *> *)titlesForGroupedCells; // Default example placeholder
-- (nullable NSArray <NSString *> *)subtitlesForItemCells; // Default nil
+- (nullable NSArray *)subtitlesForItemCells; // Default nil
 
-- (nullable NSArray <UIImage *> *)iconImagesForItemCells; // Default nil
-- (nullable NSArray <NSString *> *)iconImageNamesForItemCells; // Default nil
+- (nullable NSArray *)iconImagesForItemCells; // Array of UIImage, Default nil
+- (nullable NSArray *)iconImageNamesForItemCells; // Array of NSString, Default nil
 
-- (nullable NSArray <NSString *> *)classNamesOfDestinationViewControllersForItemCells; // Default nil
-- (nullable NSArray <NSString *> *)storyboardIdentifiersOfDestinationViewControllersForItemCells; // Default nil
-- (nullable NSString *)storyboardNameForControllerStoryboardIdentifier:(NSString *)storyboardID; // Default @"Main"
+- (nullable NSArray *)classNamesOfDestinationViewControllersForItemCells; // Array of NSString, Default nil
+- (nullable NSArray *)storyboardIdentifiersOfDestinationViewControllersForItemCells; // Array of NSString, Default nil
+- (nullable NSString *)storyboardNameForControllerStoryboardIdentifier:(NSString *)storyboardID; // Array of NSString, Default @"Main"
 
 - (CGFloat)heightForItemCell; // Default 44.0f
 - (CGFloat)heightForVerticalSpaceBetweenGroups; // Default 40.0f

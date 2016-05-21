@@ -17,6 +17,7 @@
 
 #define YJBlendedLayerCellReuseID @"YJBlendedLayerCellReuseID"
 #define YJMaskedCellReuseID @"YJMaskedCellReuseID"
+#define UITABLEVIEWCELL_DEFAULT_SELECTED_COLOR [UIColor colorWithRed:0.851 green:0.851 blue:0.851 alpha:1.00]
 
 static const CGSize kYJSquareImageSize = (CGSize){ 50.0f, 50.0f };
 static const CGFloat kYJSquareImageCornerRadius = 10.0f;
@@ -58,11 +59,6 @@ static const int kYJSquareImageCountInEachRow = 5;
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // The reason of YJRoundedCornerImageView can make rounded corner without layer blending is to create a shape layer with corner shapes on top of the image view that covers the original corners. The top corners for covering have the same color as the image view's superview's background color. So it's corners have been rounded by visual deception instead of actual rendering.
-        // The most IMPORTANT condition for using YJRoundedCornerImageView to make rounded corner works is to make sure it's superview must has a background color. However the UITableViewCell's contentView does not have a default background color. So in this case, we must superview's background color explicitly.
-        // There will be another issue when the superview doesn't have a background color and we can not set the superview's background color to solve it. e.g. Adding YJRoundedCornerImageView inside of UIStackView will cause the issue and UIStackView is not backed by CALayer for performance reason, so there is no way for setting it's superview's background color. In this case, we can explicitly set color to a property called maskColor of YJRoundedCornerImageView instance. This maskColor comes from the YJLayerBasedMasking protocol and YJMaskedImageView implements it for force using a given color for masking instead of using the default superview's background color.
-        self.contentView.backgroundColor = [UIColor whiteColor];
-
         CGFloat padding = YJGridPaddingInContainerWidth(kUIScreenSize.width, kYJSquareImageSize.width, kYJSquareImageCountInEachRow);
         for (int i = 0; i < kYJSquareImageCountInEachRow; i++) {
             CGFloat offset = YJGridOffsetXAtIndex(i, kYJSquareImageSize.width, padding);
@@ -76,17 +72,6 @@ static const int kYJSquareImageCountInEachRow = 5;
         }
     }
     return self;
-}
-
-// Set "view.maskColor = aColor" will force view's masking color and ignore it's superview's background color.
-// Set "view.maskColor = nil" will reset the mask color to it's superview's background color.
-- (void)prepareForReuse {
-    [super prepareForReuse];
-    for (UIView *subview in self.contentView.subviews) {
-        if ([subview conformsToProtocol:@protocol(YJLayerBasedMasking)]) {
-            [(id)subview setMaskColor:nil];
-        }
-    }
 }
 
 @end
@@ -116,7 +101,7 @@ static const int kYJSquareImageCountInEachRow = 5;
 
 - (void)setupHint {
     perform_once()
-    [[[UIAlertView alloc] initWithTitle:@"Test with CALayer Instrument" message:@"Launch CALayer Instrument, check \"Color Blended Layers\" box, then run this demo. There will be green and red colors on the screen. Red colored region means using layer blending to achieve the rounded corner effect, and green colored region means opaque, which performs faster. Apple software engineers encouraged developers to use approaches to avoid layer blending and offscreen-rendering.\n\nYou can tap the button on the upper right corner to turn on and off layer blending." delegate:nil cancelButtonTitle:@"I've got it" otherButtonTitles:nil, nil] show];
+    [[[UIAlertView alloc] initWithTitle:@"" message:@"Launch CALayer Instrument, check \"Color Blended Layers\" box, then run this demo. (If you use iOS simulator, select simulator menu bar -> debug -> color blended layers) There will be green and red colors on the screen. Red colored region means using layer blending to achieve the rounded corner effect, and green colored region means opaque, which performs faster. Apple software engineers encouraged developers to use approaches to avoid layer blending and offscreen-rendering.\n\nYou can tap the button on the upper right corner to turn on and off layer blending." delegate:nil cancelButtonTitle:@"I've got it" otherButtonTitles:nil, nil] show];
 }
 
 - (void)setupMaskSwitch {
@@ -149,10 +134,15 @@ static const int kYJSquareImageCountInEachRow = 5;
     return 50;
 }
 
+// The reason of YJRoundedCornerImageView can make rounded corner without layer blending is to create a shape layer with corner shapes on top of the image view that covers the original corners. The top corners for covering have the same color as the image view's superview's background color. So it's corners have been rounded by visual deception instead of actual rendering.
+// The most IMPORTANT condition for using YJRoundedCornerImageView to make rounded corner works is to make sure it's superview must has a background color. However the UITableViewCell's contentView does not have a default background color. So in this case, we must superview's background color explicitly.
+// There will be another issue when the superview doesn't have a background color and we can not set the superview's background color to solve it. e.g. Adding YJRoundedCornerImageView inside of UIStackView will cause the issue and UIStackView is not backed by CALayer for performance reason, so there is no way for setting it's superview's background color. In this case, we can explicitly set color to a property called maskColor of YJRoundedCornerImageView instance. This maskColor comes from the YJLayerBasedMasking protocol and YJMaskedImageView implements it for force using a given color for masking instead of using the default superview's background color.
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *reuseID = self.tryYJMask ? YJMaskedCellReuseID : YJBlendedLayerCellReuseID;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseID forIndexPath:indexPath];
+    // change the content view's background color to be a non-nil color
+    cell.contentView.backgroundColor = cell.isSelected ? UITABLEVIEWCELL_DEFAULT_SELECTED_COLOR : [UIColor whiteColor];
     return cell;
 }
 
@@ -162,24 +152,26 @@ static const int kYJSquareImageCountInEachRow = 5;
     return kYJSquareImageSize.height + 4;
 }
 
-// When highlight the cell, the cell's masked images have to match the selected background color
+// When highlight the cell, the cell's mask color has to match the selected background color
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    for (UIView *subview in cell.contentView.subviews) {
-        if ([subview conformsToProtocol:@protocol(YJLayerBasedMasking)]) {
-            [(id)subview setMaskColor:[UIColor colorWithRed:0.851 green:0.851 blue:0.851 alpha:1.00]];
-        }
-    }
+    [self applyColorForCellAtIndexPath:indexPath selected:YES];
 }
 
-// When deselect the cell, cancel the specified mask color
+- (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self applyColorForCellAtIndexPath:indexPath selected:NO];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self applyColorForCellAtIndexPath:indexPath selected:YES];
+}
+
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    for (UIView *subview in cell.contentView.subviews) {
-        if ([subview conformsToProtocol:@protocol(YJLayerBasedMasking)]) {
-            [(id)subview setMaskColor:nil];
-        }
-    }
+    [self applyColorForCellAtIndexPath:indexPath selected:NO];
+}
+
+- (void)applyColorForCellAtIndexPath:(NSIndexPath *)indexPath selected:(BOOL)selected {
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    cell.contentView.backgroundColor = selected ? UITABLEVIEWCELL_DEFAULT_SELECTED_COLOR : [UIColor whiteColor];
 }
 
 @end

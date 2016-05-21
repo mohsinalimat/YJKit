@@ -30,24 +30,6 @@ NSString * _yj_stringKeep(NSString *self, NSInteger fromIndex, NSInteger toIndex
     return [collector copy];
 }
 
-- (NSArray <NSString *> *)characters {
-    NSMutableArray *collector = [NSMutableArray arrayWithCapacity:self.length];
-    for (NSUInteger i = 0; i < self.length; ++i) {
-        unichar character = [self characterAtIndex:i];
-        NSString *charString = [NSString stringWithCharacters:&character length:1];
-        [collector addObject:charString];
-    }
-    return [collector copy];
-}
-
-- (nullable NSString *)firstCharacter {
-    return self.characters.firstObject;
-}
-
-- (nullable NSString *)lastCharacter {
-    return self.characters.lastObject;
-}
-
 - (NSString *)dropFirst {
     return [self dropFirst:1];
 }

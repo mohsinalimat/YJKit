@@ -18,6 +18,11 @@ typedef NS_ENUM(NSInteger, YJPhotoLibraryAuthorizationStatus) {
     YJPhotoLibraryAuthorizationStatusAuthorized         // User has authorized this application to access photos data.
 };
 
+/**
+ *  A convenicent class for saving photo into iOS photo library. 
+ *
+ *  It also provide the convenicent album creation and maybe you can force your album always exists if possible.
+ */
 @interface YJPhotoLibrary : NSObject
 
 /**

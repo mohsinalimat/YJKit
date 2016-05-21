@@ -25,6 +25,7 @@
 #import <YJKit/NSObject+YJCategory_KVO.h>
 #import <YJKit/NSObject+YJCategory_Swizzling.h>
 
+#import <YJKit/NSString+YJCollection.h>
 #import <YJKit/NSString+YJSequence.h>
 #import <YJKit/NSMutableString+YJSequence.h>
 #import <YJKit/NSArray+YJCollection.h>
@@ -77,6 +78,7 @@
 #import "NSObject+YJCategory_KVO.h"
 #import "NSObject+YJCategory_Swizzling.h"
 
+#import "NSString+YJCollection.h"
 #import "NSString+YJSequence.h"
 #import "NSMutableString+YJSequence.h"
 #import "NSArray+YJCollection.h"

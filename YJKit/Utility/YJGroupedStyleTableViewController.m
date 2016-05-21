@@ -732,41 +732,29 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 }
 
 // configure cell contents
-// For cell titles, it needs the nest array for grouping titles.
-
 - (NSArray <NSArray <NSString *> *> *)titlesForGroupedCells {
     return @[ @[ @"First item in group A" ],
               @[ @"First item in group B", @"Second item in group B", @"Third item in group B" ],
               @[ @"First item in group C", @"Second item in group C" ] ];
 }
 
-// There is no need to group cast style for rest of cell content informations, expect for cell titles.
-
-- (nullable NSArray <NSString *> *)subtitlesForItemCells {
-/* Example:
-return
-  @[ @"group A - item 1",
-     @"group B - item 1",
-     @"group B - item 2",
-     @"group B - item 3",
-     @"group C - item 1",
-     @"group C - item 2" ]; */
+- (nullable NSArray *)subtitlesForItemCells {
     return nil;
 }
 
-- (nullable NSArray <UIImage *> *)iconImagesForItemCells {
+- (nullable NSArray *)iconImagesForItemCells {
     return nil;
 }
 
-- (nullable NSArray <NSString *> *)iconImageNamesForItemCells {
+- (nullable NSArray *)iconImageNamesForItemCells {
     return nil;
 }
 
-- (nullable NSArray <NSString *> *)classNamesOfDestinationViewControllersForItemCells {
+- (nullable NSArray *)classNamesOfDestinationViewControllersForItemCells {
     return nil;
 }
 
-- (nullable NSArray <NSString *> *)storyboardIdentifiersOfDestinationViewControllersForItemCells {
+- (nullable NSArray *)storyboardIdentifiersOfDestinationViewControllersForItemCells {
     return nil;
 }
 

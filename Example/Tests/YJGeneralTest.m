@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "UIColor+YJCategory.h"
+#import "NSString+YJCollection.h"
 
 @interface YJGeneralTest : XCTestCase
 
@@ -19,6 +20,11 @@
     __unused UIColor *c1 = [UIColor randomRGBColor];
     __unused UIColor *c2 = [UIColor randomRGBColor];
     __unused UIColor *c3 = [UIColor randomRGBColor];
+    
+    NSLog(@"%@", @"HELLO"[2]);
+    
+//    BOOL equal = [[UIColor whiteColor] isEqualToRGBColor:nil];
+    
     NSLog(@"");
 }
 

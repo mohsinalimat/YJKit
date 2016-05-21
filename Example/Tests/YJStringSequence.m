@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "NSString+YJSequence.h"
+#import "NSString+YJCollection.h"
 #import "NSMutableString+YJSequence.h"
 
 @interface YJStringSequence : XCTestCase

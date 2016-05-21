@@ -13,17 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSString (YJSequence)
 
 /**
- *  @code
- NSArray *chars = @"hello".characters; // @"h", @"e", @"l", @"l", @"o"
- *  @endcode
- */
-@property (nonatomic, readonly) NSArray <NSString *> *characters;
-
-@property (nonatomic, readonly, nullable) NSString *firstCharacter;
-@property (nonatomic, readonly, nullable) NSString *lastCharacter;
-
-
-/**
  *  @code 
  NSString *s1 = [@"hello" dropFirst]; // @"ello"
  *  @endcode
