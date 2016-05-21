@@ -11,7 +11,7 @@
 #import "UIAlertView+YJCategory.h"
 #import "UIActionSheet+YJCategory.h"
 #import "YJPhotoLibrary.h"
-#import "UIDevice+YJCategory.h"
+#import "YJUIMacros.h"
 #import "UIImageView+YJCategory.h"
 #import "YJObjcMacros.h"
 
@@ -52,7 +52,7 @@
                     // If you deny the photo access, saving will be failed.
                     if (YJPhotoLibrary.authorizationStatus != YJPhotoLibraryAuthorizationStatusAuthorized) {
                         // For iOS 8 above, you can jump to setting and get photo access directly.
-                        if (UIDevice.systemVersion > 8.0) {
+                        if (kSystemVersion > 8.0) {
                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed" message:@"You do not have photo access. Tap the Setting button and turn on the photo switch if you'd like to save the image to photo album." cancelButtonTitle:@"Cancel" otherButtonTitles:@"Setting", nil];
                             [alert setActionHandler:^(UIAlertView * _Nonnull alertView, NSInteger buttonIndex, NSString * _Nonnull buttonTitle) {
                                 if (alertView.firstOtherButtonIndex == buttonIndex) {

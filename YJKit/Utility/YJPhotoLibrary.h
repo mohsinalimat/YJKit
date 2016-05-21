@@ -20,7 +20,6 @@ typedef NS_ENUM(NSInteger, YJPhotoLibraryAuthorizationStatus) {
 
 /**
  *  A convenicent class for saving photo into iOS photo library. 
- *
  *  It also provide the convenicent album creation and maybe you can force your album always exists if possible.
  */
 @interface YJPhotoLibrary : NSObject
@@ -40,7 +39,7 @@ typedef NS_ENUM(NSInteger, YJPhotoLibraryAuthorizationStatus) {
 + (YJPhotoLibraryAuthorizationStatus)authorizationStatus;
 
 /**
- *  Whether always create an album after saving a photo data, even user deleted it from photo library. Default is NO.
+ *  Whether always create an album after saving a photo data, even user deleted it from photo library. Default is NO. If set this property to YES, the album will always exists in your photo library every time you save a photo by calling saving APIs from this class.
  *
  *  @note The value is always YES for setting minimum deployment target as iOS 9 and above.
  */

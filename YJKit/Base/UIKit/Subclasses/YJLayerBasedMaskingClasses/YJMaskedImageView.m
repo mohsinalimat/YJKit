@@ -9,7 +9,7 @@
 #import "YJMaskedImageView.h"
 #import "UIView+YJCategory.h"
 #import "CGGeometry_YJExtension.h"
-#import "UIDevice+YJCategory.h"
+#import "YJUIMacros.h"
 #import "YJDebugMacros.h"
 #import "_YJLayerBasedMasking.h"
 
@@ -63,7 +63,7 @@ YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS
 #pragma mark - masking
 
 - (void)updateTransparentFrameIfNeeded {
-    YJViewContentMode mode = [self mappedYJcontentMode];
+    YJViewContentMode mode = [self mappedYJContentMode];
     if (mode == YJViewContentModeUnspecified) return;
     CGRect displayedImageRect = CGRectPositioned((CGRect){ CGPointZero, self.image.size }, self.bounds, mode);
     CGRect finalRect = CGRectIntersection(displayedImageRect, self.bounds);
@@ -81,7 +81,7 @@ YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS
 
 // Quote From WWDC: This is going to be invoked on our view right before it renders into the canvas, and it's a last miniute chance for us to do any additional setup.
 - (void)prepareForInterfaceBuilder {
-    if (!self.image && UIDevice.systemVersion >= 8.0) {
+    if (!self.image && kSystemVersion >= 8.0) {
         NSBundle *bundle = [NSBundle bundleForClass:[self class]];
         self.image = [UIImage imageNamed:@"yj_head_icon" inBundle:bundle compatibleWithTraitCollection:nil];
     }

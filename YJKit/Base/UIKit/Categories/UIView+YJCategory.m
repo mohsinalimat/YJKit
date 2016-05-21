@@ -167,7 +167,7 @@ CGFloat YJGridPaddingInContainerHeight(CGFloat containerHeight, CGFloat gridHeig
 
 #pragma mark - YJContentMode
 
-- (YJViewContentMode)mappedYJcontentMode {
+- (YJViewContentMode)mappedYJContentMode {
     switch (self.contentMode) {
         case UIViewContentModeTop: return YJViewContentModeTop;
         case UIViewContentModeLeft: return YJViewContentModeLeft;

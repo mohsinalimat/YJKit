@@ -21,6 +21,14 @@
 #define kSystemVersion [UIDevice systemVersion]
 #endif
 
+#ifndef isPhone 
+#define isPhone [UIDevice isPhone]
+#endif
+
+#ifndef isPad
+#define isPad [UIDevice isPad]
+#endif
+
 /* ------------------------------------------------------------------------------------------------------------ */
 
 // UIColor

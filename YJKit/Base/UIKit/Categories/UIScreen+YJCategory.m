@@ -7,7 +7,7 @@
 //
 
 #import "UIScreen+YJCategory.h"
-#import "UIDevice+YJCategory.h"
+#import "YJUIMacros.h"
 
 #pragma mark - Convenience Functions
 
@@ -46,7 +46,7 @@ CGFloat YJScreenScale() {
     CGSize tempSize = [self sizeInPixel];
     CGSize pSize = (CGSize){ MIN(tempSize.width, tempSize.height), MAX(tempSize.width, tempSize.height) };
     // iPhone
-    if (UIDevice.isPhone) {
+    if (isPhone) {
         if (CGSizeEqualToSize(pSize, CGSizeMake(320, 480))) {
             resolution = UIScreenDisplayResolutionPixel320x480;
         } else if (CGSizeEqualToSize(pSize, CGSizeMake(640, 960))) {
@@ -62,7 +62,7 @@ CGFloat YJScreenScale() {
         }
     }
     // iPad
-    else if (UIDevice.isPad) {
+    else if (isPad) {
         if (CGSizeEqualToSize(pSize, CGSizeMake(768, 1024))) {
             resolution = UIScreenDisplayResolutionPixel768x1024;
         } else if (CGSizeEqualToSize(pSize, CGSizeMake(1536, 2048))) {

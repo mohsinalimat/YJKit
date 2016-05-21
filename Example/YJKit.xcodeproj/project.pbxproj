@@ -441,8 +441,8 @@
 			children = (
 				32FC75681CDF3477009855B9 /* CAShapeLayer+YJCategory.h */,
 				32FC75691CDF3477009855B9 /* CAShapeLayer+YJCategory.m */,
-				32FC756A1CDF3477009855B9 /* CGGeometry_YJExtension.c */,
 				32FC756B1CDF3477009855B9 /* CGGeometry_YJExtension.h */,
+				32FC756A1CDF3477009855B9 /* CGGeometry_YJExtension.c */,
 			);
 			path = Quartz;
 			sourceTree = "<group>";

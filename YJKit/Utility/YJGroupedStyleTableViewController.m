@@ -93,7 +93,7 @@
 }
 
 - (UIColor *)compensatedColor {
-    return self.backgroundColor;
+    return _indentView.backgroundColor;
 }
 
 @end
@@ -126,7 +126,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 @property (nonatomic, copy, nullable) NSDictionary <NSNumber *, NSString *> *classNamesForDestinationViewControllers;
 @property (nonatomic, copy, nullable) NSDictionary <NSNumber *, NSString *> *storyboardIdentifiersForDestinationViewControllers;
 
-@property (nonatomic, strong) NSData *frozenNavBar;
+@property (nonatomic, strong) NSData *frozenNavBarData;
 @property (nonatomic, strong) NSMutableArray *navBarBGSubviews;
 
 @property (nonatomic, strong) UIColor *backgroundColorForHeaderCell; // @dynamic
@@ -320,14 +320,14 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 
 // save nav bar
 - (void)saveOriginalNavigationBar {
-    if (!self.frozenNavBar) {
-        self.frozenNavBar = [NSKeyedArchiver archivedDataWithRootObject:self.navigationController.navigationBar];
+    if (!self.frozenNavBarData) {
+        self.frozenNavBarData = [NSKeyedArchiver archivedDataWithRootObject:self.navigationController.navigationBar];
     }
 }
 
 // restore nav bar
 - (void)restoreOriginalNavigationBar {
-    if (!self.frozenNavBar) return;
+    if (!self.frozenNavBarData) return;
     UIViewController *vc = self.navigationController.viewControllers.lastObject;
     if ([vc respondsToSelector:@selector(shouldHideNavigationBar)]) {
         if ([(id)vc shouldHideNavigationBar]) {
@@ -336,7 +336,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     }
     
     UINavigationBar *navBar = self.navigationController.navigationBar;
-    UINavigationBar *frozenNavBar = [NSKeyedUnarchiver unarchiveObjectWithData:self.frozenNavBar];
+    UINavigationBar *frozenNavBar = [NSKeyedUnarchiver unarchiveObjectWithData:self.frozenNavBarData];
     navBar.translucent = frozenNavBar.translucent;
     navBar.tintColor = frozenNavBar.tintColor;
     navBar.barTintColor = frozenNavBar.barTintColor;

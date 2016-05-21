@@ -61,6 +61,6 @@ NSUInteger YJGridCountInContainerHeight(CGFloat containerHeight, CGFloat gridHei
 
 // YJContentMode
 
-- (YJViewContentMode)mappedYJcontentMode;
+- (YJViewContentMode)mappedYJContentMode;
 
 @end

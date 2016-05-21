@@ -22,7 +22,7 @@
     return last;
 }
 
-void _yj_mArrayKeep(NSMutableArray *self, NSInteger fromIndex, NSInteger toIndex) {
+static void _yj_mArrayKeep(NSMutableArray *self, NSInteger fromIndex, NSInteger toIndex) {
     
     if (toIndex == NSUIntegerMax) {
         toIndex = -1;

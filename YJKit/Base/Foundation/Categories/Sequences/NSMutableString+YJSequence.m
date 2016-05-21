@@ -11,7 +11,7 @@
 
 @implementation NSMutableString (YJSequence)
 
-void _yj_mStringKeep(NSMutableString *self, NSInteger fromIndex, NSInteger toIndex) {
+static void _yj_mStringKeep(NSMutableString *self, NSInteger fromIndex, NSInteger toIndex) {
     
     if (toIndex == NSUIntegerMax) {
         toIndex = -1;

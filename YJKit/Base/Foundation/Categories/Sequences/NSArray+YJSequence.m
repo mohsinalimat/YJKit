@@ -11,7 +11,7 @@
 
 @implementation NSArray (YJSequence)
 
-NSArray * _yj_arrayKeep(NSArray *self, NSInteger fromIndex, NSInteger toIndex) {
+static NSArray * _yj_arrayKeep(NSArray *self, NSInteger fromIndex, NSInteger toIndex) {
     
     if (toIndex == NSUIntegerMax) {
         toIndex = -1;

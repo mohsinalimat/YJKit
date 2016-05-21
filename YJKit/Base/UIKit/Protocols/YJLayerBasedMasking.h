@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Specify a mask color instead of default color. Normally, a UIView object will take it's superview's background color as it's mask color. If it's superview does not have a background color, then there will be no mask effect, except you can manually specify a UIColor object here.
 /// Notice: Call -[view setMaskColor:aColor] will ignore it's superview's background color changing.
-///         Call -[view setMaskColor:nil] will set back to it's superview's background color.
+///         Call -[view setMaskColor:nil] will set mask color back to it's superview's background color.
 @property (nonatomic, strong, nullable) UIColor *maskColor;
 
 @end
