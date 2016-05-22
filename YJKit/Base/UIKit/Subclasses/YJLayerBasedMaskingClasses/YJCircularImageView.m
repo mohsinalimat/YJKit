@@ -12,14 +12,34 @@
 #import "CAShapeLayer+YJCategory.h"
 #import "YJDebugMacros.h"
 #import "YJUIMacros.h"
+#import "NSCoder+YJCategory.h"
 
 @implementation YJCircularImageView
+
+#pragma mark - life
 
 #if YJ_DEBUG
 - (void)dealloc {
     NSLog(@"%@ dealloc", self.class);
 }
 #endif
+
+- (nullable instancetype)initWithCoder:(NSCoder *)decoder {
+    self = [super initWithCoder:decoder];
+    if (self) {
+        _circleWidth = [decoder decodeCGFloatForKey:@"circleWidth"];
+        _circleColor = [UIColor colorWithRGBColor:[decoder decodeRGBColorForKey:@"circleColor"]];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeCGFloat:_circleWidth forKey:@"circleWidth"];
+    [coder encodeRGBColor:[_circleColor RGBColor] forKey:@"circleColor"];
+    [super encodeWithCoder:coder];
+}
+
+#pragma mark - accessors
 
 - (void)setCircleWidth:(CGFloat)circleWidth {
     if (circleWidth < 0.0) circleWidth = 0.0f;
@@ -31,6 +51,8 @@
     _circleColor = circleColor;
     [self updateMaskLayer];
 }
+
+#pragma mark - YJLayerBasedMasking
 
 - (UIBezierPath *)prepareMaskRegionInSize:(CGSize)size {
     CGFloat twoPixelInPoint = 2 / kUIScreenScale;

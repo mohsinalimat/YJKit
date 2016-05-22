@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YJColorComponents.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,15 +19,41 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable UIColor *)colorWithHexString:(NSString *)hexString;
 + (nullable UIColor *)colorWithHexString:(NSString *)hexString alpha:(CGFloat)alpha;
 
-+ (UIColor *)randomRGBColor;
++ (UIColor *)randomColor;
+
++ (UIColor *)colorWithRGBColor:(RGBColor)rgbColor;
 
 /**
  *  Compare color objects whether they have same red, green, blue and alpha value.
  *  @param color The UIColor object.
  *  @return The result of comparison.
  */
-- (BOOL)isEqualToRGBColor:(UIColor *)color;
+- (BOOL)isEqualToColor:(UIColor *)color;
+
+- (RGBColor)RGBColor;
 
 @end
+
+
+UIKIT_EXTERN NSString *NSStringFromRGBColor(RGBColor rgbColor);
+
+
+@interface NSValue (YJColorExtension)
+
++ (NSValue *)valueWithRGBColor:(RGBColor)rgbColor;
+
+- (RGBColor)RGBColorValue;
+
+@end
+
+
+@interface NSCoder (YJColorExtension)
+
+- (void)encodeRGBColor:(RGBColor)rgbColor forKey:(NSString *)key;
+
+- (RGBColor)decodeRGBColorForKey:(NSString *)key;
+
+@end
+
 
 NS_ASSUME_NONNULL_END

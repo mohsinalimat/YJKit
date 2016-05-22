@@ -45,14 +45,4 @@
 
 /* ------------------------------------------------------------------------------------------------------------ */
 
-// onExit
-
-static inline void YJBlockCleanUp(__strong void(^*block)(void)) { (*block)(); }
-
-#ifndef onExit
-#define onExit _yj_keywordify __strong void(^yj_block_)(void) __attribute__((cleanup(YJBlockCleanUp), unused)) = ^
-#endif
-
-/* ------------------------------------------------------------------------------------------------------------ */
-
 #endif /* YJObjcMacros_h */

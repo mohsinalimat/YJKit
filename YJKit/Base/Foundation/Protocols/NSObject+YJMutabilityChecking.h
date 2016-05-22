@@ -12,6 +12,10 @@
 - (BOOL)isMutable;
 @end
 
-@interface NSObject (YJMutabilityChecking)
+@interface NSString (YJMutabilityChecking)
+@property (nonatomic, readonly) BOOL isMutable;
+@end
+
+@interface NSArray (YJMutabilityChecking)
 @property (nonatomic, readonly) BOOL isMutable;
 @end

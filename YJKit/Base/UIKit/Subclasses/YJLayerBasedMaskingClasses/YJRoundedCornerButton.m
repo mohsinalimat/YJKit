@@ -12,6 +12,7 @@
 #import "NSObject+YJCategory_KVO.h"
 #import "YJObjcMacros.h"
 #import "UIColor+YJCategory.h"
+#import "NSCoder+YJCategory.h"
 
 @interface YJRoundedCornerButton ()
 @property (nonatomic) YJContentIndents titleIndents;
@@ -23,24 +24,72 @@
 YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
 
 // Add default rounded corner implementations
-YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS_WITH_EXTRA_INIT(
-                                                                                  
+YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
+
+/* init from code */   
+- (instancetype)initWithFrame:(CGRect)frame {   
+    self = [super initWithFrame:frame];   
+    if (self) {   
+        [self setup];
+    }   
+    return self;   
+}   
+
+/* init from IB */   
+- (nullable instancetype)initWithCoder:(NSCoder *)decoder {
+    self = [super initWithCoder:decoder];
+    if (self) {
+        _maskLayer = [decoder decodeObjectForKey:@"maskLayer"];
+        _oldMaskValues = [decoder decodeObjectForKey:@"oldMaskValues"];
+        _transparentFrame = [[decoder decodeObjectForKey:@"transparentFrame"] CGRectValue];
+        _didFirstLayout = [decoder decodeBoolForKey:@"didFirstLayout"];
+        _forceMaskColor = [decoder decodeBoolForKey:@"forceMaskColor"];
+        
+        _cornerRadius = [decoder decodeCGFloatForKey:@"cornerRadius"];
+        _borderWidth = [decoder decodeCGFloatForKey:@"borderWidth"];
+        _borderColor = [UIColor colorWithRGBColor:[decoder decodeRGBColorForKey:@"borderColor"]];
+        
+        _titleIndentationStyle = [decoder decodeIntegerForKey:@"titleIndentationStyle"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject:_maskLayer forKey:@"maskLayer"];
+    [coder encodeObject:_oldMaskValues forKey:@"oldMaskValues"];
+    [coder encodeObject:[NSValue valueWithCGRect:_transparentFrame] forKey:@"transparentFrame"];
+    [coder encodeBool:_didFirstLayout forKey:@"didFirstLayout"];
+    [coder encodeBool:_forceMaskColor forKey:@"forceMaskColor"];
+    
+    [coder encodeCGFloat:_cornerRadius forKey:@"cornerRadius"];
+    [coder encodeCGFloat:_borderWidth forKey:@"borderWidth"];
+    [coder encodeRGBColor:[_borderColor RGBColor] forKey:@"borderColor"];
+    
+    [coder encodeInteger:_titleIndentationStyle forKey:@"titleIndentationStyle"];
+    [super encodeWithCoder:coder];
+}
+
+- (void)setup {
+    _cornerRadius = 10.0f;
     _titleIndentationStyle = YJContentIndentationStyleDefault;
     _borderWidth = 1.0f;
-    
+    [self observeTintColor];
+}
+
+- (void)dealloc {
+    [self removeObservedKeyPath:@"tintColor"];
+}
+
+- (void)observeTintColor {
     @weakify(self)
     [self addObservedKeyPath:@"tintColor" handleSetup:^(id  _Nonnull object, id  _Nullable newValue) {
         @strongify(self)
         if (newValue) {
-            if (![self.borderColor isEqualToRGBColor:newValue]) {
+            if (![self.borderColor isEqualToColor:newValue]) {
                 self.borderColor = newValue;
             }
         }
     }];
-)
-
-- (void)dealloc {
-    [self removeObservedKeyPath:@"tintColor"];
 }
 
 - (void)setTitleIndentationStyle:(YJContentIndentationStyle)titleIndentationStyle {

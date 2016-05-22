@@ -6,12 +6,10 @@
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
 
-#ifndef YJContentIndents_h
-#define YJContentIndents_h
-
 #import <UIKit/UIGeometry.h>
+#import "YJClangMacros.h"
 
-typedef struct YJContentIndents {
+typedef struct YJ_BOXABLE {
     CGFloat top, left, bottom, right;
 } YJContentIndents;
 
@@ -22,19 +20,13 @@ typedef NS_ENUM(NSInteger, YJContentIndentationStyle) {
 };
 
 UIKIT_STATIC_INLINE YJContentIndents YJContentIndentsMake(CGFloat top, CGFloat left, CGFloat bottom, CGFloat right) {
-    YJContentIndents indents = { top, left, bottom, right };
-    return indents;
+    return (YJContentIndents){ top, left, bottom, right };
 }
 
 UIKIT_STATIC_INLINE BOOL YJContentIndentsEqualToTitleIndents(YJContentIndents indents1, YJContentIndents indents2) {
-    return indents1.top == indents2.top &&
-            indents1.left == indents2.left &&
-            indents1.bottom == indents2.bottom &&
-            indents1.right == indents2.right;
+    return indents1.top == indents2.top && indents1.left == indents2.left && indents1.bottom == indents2.bottom && indents1.right == indents2.right;
 }
 
 UIKIT_EXTERN const YJContentIndents YJContentIndentsZero;
 
 UIKIT_EXTERN NSString *NSStringFromYJContentIndents(YJContentIndents indents);
-
-#endif /* YJContentIndents_h */

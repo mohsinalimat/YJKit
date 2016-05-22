@@ -8,11 +8,10 @@
 
 #import "NSObject+YJMutabilityChecking.h"
 
-@implementation NSObject (YJMutabilityChecking)
+@implementation NSString (YJMutabilityChecking)
+- (BOOL)isMutable { return self.copy != self; }
+@end
 
-- (BOOL)isMutable {
-    NSAssert([self conformsToProtocol:@protocol(NSCopying)], @"The receiver %@ for message -isMutable MUST conforms to NSCopying.", self);
-    return self.copy == self ? NO : YES;
-}
-
+@implementation NSArray (YJMutabilityChecking)
+- (BOOL)isMutable { return self.copy != self; }
 @end

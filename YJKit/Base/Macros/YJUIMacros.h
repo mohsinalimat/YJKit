@@ -33,8 +33,8 @@
 
 // UIColor
 
-#ifndef RGBColor
-#define RGBColor(hexValue, alphaValue) [UIColor colorWithHex:hexValue alpha:alphaValue]
+#ifndef HexColor
+#define HexColor(hexValue, alphaValue) [UIColor colorWithHex:hexValue alpha:alphaValue]
 #endif
 
 /* ------------------------------------------------------------------------------------------------------------ */

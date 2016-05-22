@@ -21,30 +21,8 @@
     UIColor *borderColor
  
  */
-#ifndef YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS_WITH_EXTRA_INIT
-#define YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS_WITH_EXTRA_INIT(EXTRA_INIT) \
-\
-static const CGFloat kYJRoundedCornerViewDefaultCornerRadius = 10.0f;   \
-\
-/* init from code */   \
-- (instancetype)initWithFrame:(CGRect)frame {   \
-    self = [super initWithFrame:frame];   \
-    if (self) {   \
-        _cornerRadius = kYJRoundedCornerViewDefaultCornerRadius;   \
-        EXTRA_INIT \
-    }   \
-    return self;   \
-}   \
-\
-/* init from IB */   \
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {   \
-    self = [super initWithCoder:aDecoder];   \
-    if (self) {   \
-        _cornerRadius = kYJRoundedCornerViewDefaultCornerRadius;   \
-        EXTRA_INIT \
-    }   \
-    return self;   \
-}   \
+#ifndef YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
+#define YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS \
 \
 - (void)setCornerRadius:(CGFloat)cornerRadius {   \
     if (cornerRadius < 0.0f) cornerRadius = 0.0f;   \
@@ -133,12 +111,6 @@ static const CGFloat kYJRoundedCornerViewDefaultCornerRadius = 10.0f;   \
 \
 
 #endif // YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
-
-
-#ifndef YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
-#define YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS \
-        YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS_WITH_EXTRA_INIT()
-#endif
 
 
 #endif /* _YJRoundedCornerView_h */

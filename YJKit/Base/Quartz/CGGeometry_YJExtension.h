@@ -9,7 +9,7 @@
 #ifndef CGGeometry_YJExtension_h
 #define CGGeometry_YJExtension_h
 
-#include <CoreGraphics/CGGeometry.h>
+#import <CoreGraphics/CGGeometry.h>
 
 typedef enum {
     CGSizeScaleNone         = 0x00,

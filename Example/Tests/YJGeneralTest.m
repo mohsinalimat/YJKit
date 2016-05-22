@@ -17,13 +17,13 @@
 @implementation YJGeneralTest
 
 - (void)testColor {
-    __unused UIColor *c1 = [UIColor randomRGBColor];
-    __unused UIColor *c2 = [UIColor randomRGBColor];
-    __unused UIColor *c3 = [UIColor randomRGBColor];
+    __unused UIColor *c1 = [UIColor randomColor];
+    __unused UIColor *c2 = [UIColor randomColor];
+    __unused UIColor *c3 = [UIColor randomColor];
     
     NSLog(@"%@", @"HELLO"[2]);
     
-//    BOOL equal = [[UIColor whiteColor] isEqualToRGBColor:nil];
+//    BOOL equal = [[UIColor whiteColor] isEqualToColor:nil];
     
     NSLog(@"");
 }

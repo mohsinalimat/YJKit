@@ -70,8 +70,8 @@
     UIColor *whiteColor = RGBColor(0xffffff, 1);
     UIColor *blackColor = [UIColor colorWithHex:0x0 alpha:1.0];
     UIColor *randomColor = [UIColor colorWithHexString:@"0xffffff"];
-    XCTAssert([whiteColor isEqualToRGBColor:[UIColor whiteColor]]);
-    XCTAssert([blackColor isEqualToRGBColor:[UIColor blackColor]]);
+    XCTAssert([whiteColor isEqualToColor:[UIColor whiteColor]]);
+    XCTAssert([blackColor isEqualToColor:[UIColor blackColor]]);
     XCTAssert(randomColor);
 }
 
