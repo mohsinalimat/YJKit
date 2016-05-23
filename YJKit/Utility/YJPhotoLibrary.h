@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, YJPhotoLibraryAuthorizationStatus) {
  *
  *  @note The value is always YES for setting minimum deployment target as iOS 9 and above.
  */
-@property (nonatomic) BOOL forceAlbumCreationAfterUserDeleted YJ_UNAVALIBLE_FOR_IOS_9_ABOVE;
+@property (nonatomic) BOOL forceAlbumCreationAfterUserDeleted YJ_UNAVALIBLE_FOR_MIN_DEPLOYMENT_TARGET_ABOVE_IOS_9;
 
 /**
 *  Saves given UIImage object and metadata to the Photos Album in APP's name.

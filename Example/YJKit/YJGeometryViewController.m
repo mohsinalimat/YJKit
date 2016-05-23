@@ -7,8 +7,8 @@
 //
 
 #import "YJGeometryViewController.h"
-#import "CGGeometry_YJExtension.h"
-#import "UIGestureRecognizer+YJCategory.h"
+#import "YJGeometryExtension.h"
+#import "UIGestureRecognizer+YJBlockBased.h"
 #import "YJObjcMacros.h"
 #import "YJUIMacros.h"
 

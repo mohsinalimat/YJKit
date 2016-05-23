@@ -12,6 +12,8 @@
 - (BOOL)isMutable;
 @end
 
+/// Avoid using introspection for class cluster
+/// e.g. Don't call -[string isKindOfClass:[NSMutableString class]]
 @interface NSString (YJMutabilityChecking)
 @property (nonatomic, readonly) BOOL isMutable;
 @end

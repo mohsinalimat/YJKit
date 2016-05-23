@@ -165,7 +165,10 @@ CGFloat YJGridPaddingInContainerHeight(CGFloat containerHeight, CGFloat gridHeig
     return YJGridPaddingInContainerLength(containerHeight, gridHeight, gridCount);
 }
 
-#pragma mark - YJContentMode
+@end
+
+
+@implementation UIView (YJGeometryExtension)
 
 - (YJViewContentMode)mappedYJContentMode {
     switch (self.contentMode) {

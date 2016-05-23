@@ -15,7 +15,6 @@
 #import <YJKit/QuartzExt.h>
 #import <YJKit/FoundationExt.h>
 #import <YJKit/UIKitExt.h>
-#import <YJKit/YJMaskFamily.h>
 #import <YJKit/YJUtilities.h>
 
 #else
@@ -24,7 +23,6 @@
 #import "QuartzExt.h"
 #import "FoundationExt.h"
 #import "UIKitExt.h"
-#import "YJMaskFamily.h"
 #import "YJUtilities.h"
 
 #endif

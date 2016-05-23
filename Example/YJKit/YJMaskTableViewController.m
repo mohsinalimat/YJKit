@@ -7,7 +7,7 @@
 //
 
 #import "YJMaskTableViewController.h"
-#import "UIBarButtonItem+YJCategory.h"
+#import "UIBarButtonItem+YJBlockBased.h"
 #import "YJObjcMacros.h"
 #import "YJExecutionMacros.h"
 #import "YJRoundedCornerImageView.h"

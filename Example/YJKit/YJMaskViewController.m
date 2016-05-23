@@ -7,7 +7,7 @@
 //
 
 #import "YJMaskViewController.h"
-#import "NSTimer+YJCategory.h"
+#import "NSTimer+YJBlockBased.h"
 
 @interface YJMaskViewController ()
 @property (nonatomic, weak) NSTimer *timer;

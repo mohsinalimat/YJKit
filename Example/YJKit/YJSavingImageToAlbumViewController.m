@@ -7,12 +7,12 @@
 //
 
 #import "YJSavingImageToAlbumViewController.h"
-#import "UIControl+YJCategory.h"
-#import "UIAlertView+YJCategory.h"
-#import "UIActionSheet+YJCategory.h"
+#import "UIControl+YJBlockBased.h"
+#import "UIAlertView+YJBlockBased.h"
+#import "UIActionSheet+YJBlockBased.h"
 #import "YJPhotoLibrary.h"
 #import "YJUIMacros.h"
-#import "UIImageView+YJCategory.h"
+#import "UIImageView+YJGeometryExtension.h"
 #import "YJObjcMacros.h"
 
 @interface YJSavingImageToAlbumViewController ()

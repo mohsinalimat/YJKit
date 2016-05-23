@@ -41,10 +41,6 @@
     return [UIColor colorWithRed:randomValue() green:randomValue() blue:randomValue() alpha:1.0];
 }
 
-+ (UIColor *)colorWithRGBColor:(RGBColor)rgbColor {
-    return [UIColor colorWithRed:rgbColor.red green:rgbColor.green blue:rgbColor.blue alpha:rgbColor.alpha];
-}
-
 - (BOOL)isEqualToColor:(UIColor *)color {
     CGFloat r1, g1, b1, a1;
     CGFloat r2, g2, b2, a2;
@@ -53,46 +49,7 @@
     return (r1 == r2 && g1 == g2 && b1 == b2 && a1 == a2) ? YES : NO;
 }
 
-- (RGBColor)RGBColor {
-    CGFloat r, g, b, a;
-    [self getRed:&r green:&g blue:&b alpha:&a];
-    return RGBColorMake(r, g, b, a);
-}
-
 @end
 
 
-NSString *NSStringFromRGBColor(RGBColor rgbColor) {
-    return [NSString stringWithFormat:@"(RGBColor) { r:%@, g:%@, b:%@, a:%@ }",
-            @(rgbColor.red), @(rgbColor.green), @(rgbColor.blue), @(rgbColor.alpha)];
-}
 
-
-@implementation NSValue (YJColorExtension)
-
-+ (NSValue *)valueWithRGBColor:(RGBColor)rgbColor {
-    return [NSValue value:&rgbColor withObjCType:@encode(RGBColor)];
-}
-
-- (RGBColor)RGBColorValue {
-    RGBColor rgbColor;
-    [self getValue:&rgbColor];
-    return rgbColor;
-}
-
-@end
-
-
-@implementation NSCoder (YJColorExtension)
-
-- (void)encodeRGBColor:(RGBColor)rgbColor forKey:(NSString *)key {
-    NSValue *value = [NSValue valueWithRGBColor:rgbColor];
-    [self encodeObject:value forKey:key];
-}
-
-- (RGBColor)decodeRGBColorForKey:(NSString *)key {
-    NSValue *value = [self decodeObjectForKey:key];
-    return [value RGBColorValue];
-}
-
-@end

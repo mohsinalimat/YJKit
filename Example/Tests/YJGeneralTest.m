@@ -41,6 +41,9 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+    __unused NSString *hello = @"hello";
+    __unused NSArray *arr = @[@1];
+    NSLog(@"");
 }
 
 - (void)testPerformanceExample {
