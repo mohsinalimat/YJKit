@@ -53,7 +53,7 @@ static NSString * _yj_stringKeep(NSString *self, NSInteger fromIndex, NSInteger 
     return _yj_stringKeep(self, 0, count - 1);
 }
 
-- (NSString *)prefixUpTo:(NSUInteger)upToIndex {
+- (NSString *)prefixUpToIndex:(NSUInteger)upToIndex {
     NSAssert(upToIndex < self.length, @"The index %@ of end prefix is beyond of %@ [0...%@].", @(upToIndex), self.class, @(self.length - 1));
     return _yj_stringKeep(self, 0, upToIndex);
 }
@@ -63,7 +63,7 @@ static NSString * _yj_stringKeep(NSString *self, NSInteger fromIndex, NSInteger 
     return _yj_stringKeep(self, self.length - count, self.length - 1);
 }
 
-- (NSString *)suffixFrom:(NSUInteger)fromIndex {
+- (NSString *)suffixFromIndex:(NSUInteger)fromIndex {
     NSAssert(fromIndex < self.length, @"The index %@ of start suffix is beyond of %@ [0...%@].", @(fromIndex), self.class, @(self.length - 1));
     return _yj_stringKeep(self, fromIndex, self.length - 1);
 }

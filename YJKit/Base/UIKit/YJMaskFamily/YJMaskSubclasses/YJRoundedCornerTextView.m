@@ -11,8 +11,7 @@
 #import "_YJRoundedCornerView.h"
 #import "YJObjcMacros.h"
 #import "NSObject+YJBlockBasedKVO.h"
-#import "NSCoder+YJCategory.h"
-#import "NSNumber+YJCategory.h"
+#import "NSValue+YJGeometryExtension.h"
 #import "RGBColor.h"
 
 @implementation YJRoundedCornerTextView

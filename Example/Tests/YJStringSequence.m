@@ -99,7 +99,7 @@
     [ms prefixing:2];
     XCTAssert([ms isEqualToString:@"he"]);
     
-    NSString *s2 = [s prefixUpTo:2];
+    NSString *s2 = [s prefixUpToIndex:2];
     XCTAssert([s2 isEqualToString:@"hel"]);
     
     ms = s.mutableCopy;
@@ -113,7 +113,7 @@
     [ms prefixing:5];
     XCTAssert([ms isEqualToString:@"hello"]);
     
-    NSString *s4 = [s prefixUpTo:s.length-1];
+    NSString *s4 = [s prefixUpToIndex:s.length-1];
     XCTAssert([s4 isEqualToString:@"hello"]);
     
     ms = s.mutableCopy;
@@ -138,7 +138,7 @@
     [ms suffixing:2];
     XCTAssert([ms isEqualToString:@"lo"]);
     
-    NSString *s2 = [s suffixFrom:2];
+    NSString *s2 = [s suffixFromIndex:2];
     XCTAssert([s2 isEqualToString:@"llo"]);
     
     ms = s.mutableCopy;
@@ -152,14 +152,14 @@
     [ms suffixing:5];
     XCTAssert([ms isEqualToString:@"hello"]);
     
-    NSString *s4 = [s suffixFrom:0];
+    NSString *s4 = [s suffixFromIndex:0];
     XCTAssert([s4 isEqualToString:@"hello"]);
     
     ms = s.mutableCopy;
     [ms suffixingFrom:0];
     XCTAssert([ms isEqualToString:@"hello"]);
     
-    NSString *s5 = [s suffixFrom:s.length-1];
+    NSString *s5 = [s suffixFromIndex:s.length-1];
     XCTAssert([s5 isEqualToString:@"o"]);
     
     ms = s.mutableCopy;

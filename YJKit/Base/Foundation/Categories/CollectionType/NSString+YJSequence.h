@@ -54,10 +54,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @code
- NSString *s1 = [@"hello" prefixUpTo:2]; // @"hel"
+ NSString *s1 = [@"hello" prefixUpToIndex:2]; // @"hel"
  *  @endcode
  */
-- (NSString *)prefixUpTo:(NSUInteger)upToIndex;
+- (NSString *)prefixUpToIndex:(NSUInteger)upToIndex;
 
 
 /**
@@ -70,10 +70,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @code
- NSString *s1 = [@"hello" suffixFrom:2]; // @"llo"
+ NSString *s1 = [@"hello" suffixFromIndex:2]; // @"llo"
  *  @endcode
  */
-- (NSString *)suffixFrom:(NSUInteger)fromIndex;
+- (NSString *)suffixFromIndex:(NSUInteger)fromIndex;
 
 @end
 

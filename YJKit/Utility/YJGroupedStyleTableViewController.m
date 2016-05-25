@@ -117,7 +117,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 
 @interface YJGroupedStyleTableViewController ()
 
-@property (nonatomic, copy) NSArray *mappedRows; // @"section,row" or null
+@property (nonatomic, copy) NSArray <NSString *> *mappedRows; // stored information for each row in one section
 @property (nonatomic, copy) NSArray <NSNumber *> *itemRows; // Rows for item cells
 @property (nonatomic, copy) NSDictionary <NSNumber *, NSString *> *itemTitles;
 @property (nonatomic, copy, nullable) NSDictionary <NSNumber *, NSString *> *itemSubtitles;
@@ -137,6 +137,8 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 
 @implementation YJGroupedStyleTableViewController
 
+@dynamic tableView;
+
 - (instancetype)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) [self fetchRequiredDataForLoadingGroupedCells];
@@ -149,7 +151,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     
     if (!_itemRows) {
         NSMutableDictionary <NSNumber *, NSString *> *titles = @{}.mutableCopy;
-        NSMutableArray *mappedRows = @[ YJGSHeaderCell, YJGSGroupSeparator, YJGSLineSeparator].mutableCopy;
+        NSMutableArray *mappedRows = @[ YJGSHeaderCell, YJGSGroupSeparator, YJGSLineSeparator ].mutableCopy;
         NSUInteger row = 3; // row for each UITableViewCell
         NSArray *groups = [self titlesForGroupedCells];
         for (NSUInteger i = 0; i < groups.count; ++i) {
@@ -577,7 +579,10 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     
     NSInteger itemRow, section;
     [self getMappedItemRow:&itemRow inSection:&section forIndexPath:indexPath];
-    if (![self canPushDestinationViewControllerFromItemCellForRow:itemRow inSection:section]) return;
+    [self tableView:self.tableView didSelectItemCellAtRow:itemRow inSection:section];
+    
+    if (![self canPushDestinationViewControllerFromItemCellForRow:itemRow inSection:section])
+        return;
     
     UIViewController *vc = nil;
     // vc from storyboard id
@@ -762,6 +767,10 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     return @"Main";
 }
 
+- (void)tableView:(YJGroupedStyleTableView *)tableView didSelectItemCellAtRow:(NSInteger)row inSection:(NSInteger)section {
+    
+}
+
 - (BOOL)canPushDestinationViewControllerFromItemCellForRow:(NSInteger)row inSection:(NSInteger)section {
     return YES;
 }
@@ -784,12 +793,13 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 NSInteger const YJGroupedStyleTableViewControllerHeaderCellForCompressedSizeCalculation = __LINE__;
 
 
-@implementation UITableView (_YJReloadData)
+@implementation UITableView (YJGroupedStyle)
 
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         [self swizzleInstanceMethodForSelector:@selector(reloadData) toSelector:@selector(yj_reloadData)];
+        [self swizzleInstanceMethodForSelector:@selector(class) toSelector:@selector(yj_tableViewClass)];
     });
 }
 
@@ -800,5 +810,42 @@ NSInteger const YJGroupedStyleTableViewControllerHeaderCellForCompressedSizeCalc
     [self yj_reloadData];
 }
 
+- (Class)yj_tableViewClass {
+    if ([self.delegate respondsToSelector:@selector(fetchRequiredDataForLoadingGroupedCells)]) {
+        return [YJGroupedStyleTableView class];
+    } else {
+        return [UITableView class];
+    }
+}
+
+- (nullable UITableViewCell *)cellForGroupedItemAtRow:(NSInteger)row inSection:(NSInteger)section {
+    if ([self.delegate isKindOfClass:[YJGroupedStyleTableViewController class]]) {
+        NSArray *mappedRows = [(id)self.delegate mappedRows];
+        for (NSUInteger i = 0; i < mappedRows.count; ++i) {
+            NSString *info = mappedRows[i];
+            if ([info hasPrefix:YJGSItemCell]) {
+                NSArray <NSString *> *components = [[info componentsSeparatedByString:@":"].lastObject componentsSeparatedByString:@","];
+                NSInteger itemRow = components.lastObject.integerValue;
+                NSInteger itemSec = components.firstObject.integerValue;
+                if (itemRow == row && section == itemSec) {
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+                    return [self cellForRowAtIndexPath:indexPath];
+                }
+            }
+        }
+        return nil;
+    }
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    return [self cellForRowAtIndexPath:indexPath];
+}
+
 @end
 
+
+@implementation YJGroupedStyleTableView
+
+- (nullable UITableViewCell *)cellForGroupedItemAtRow:(NSInteger)row inSection:(NSInteger)section {
+    return [super cellForGroupedItemAtRow:row inSection:section];
+}
+
+@end

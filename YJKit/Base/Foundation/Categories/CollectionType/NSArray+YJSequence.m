@@ -57,12 +57,12 @@ static NSArray * _yj_arrayKeep(NSArray *self, NSInteger fromIndex, NSInteger toI
     return _yj_arrayKeep(self, self.count - count, self.count - 1);
 }
 
-- (NSArray *)prefixUpTo:(NSUInteger)upToIndex {
+- (NSArray *)prefixUpToIndex:(NSUInteger)upToIndex {
     NSAssert(upToIndex < self.count, @"The index %@ of end prefix is beyond of %@ [0...%@].", @(upToIndex), self.class, @(self.count - 1));
     return _yj_arrayKeep(self, 0, upToIndex);
 }
 
-- (NSArray *)suffixFrom:(NSUInteger)fromIndex {
+- (NSArray *)suffixFromIndex:(NSUInteger)fromIndex {
     NSAssert(fromIndex < self.count, @"The index %@ of start suffix is beyond of %@ [0...%@].", @(fromIndex), self.class, @(self.count - 1));
     return _yj_arrayKeep(self, fromIndex, self.count - 1);
 }

@@ -22,6 +22,8 @@
 #import <YJKit/UIBarButtonItem+YJBlockBased.h>
 #import <YJKit/UIAlertView+YJBlockBased.h>
 #import <YJKit/UIActionSheet+YJBlockBased.h>
+#import <YJKit/UITextView+YJCategory.h>
+#import <YJKit/UITextField+YJCategory.h>
 
 #import <YJKit/YJMaskFamily.h>
 
@@ -41,6 +43,8 @@
 #import "UIBarButtonItem+YJBlockBased.h"
 #import "UIAlertView+YJBlockBased.h"
 #import "UIActionSheet+YJBlockBased.h"
+#import "UITextView+YJCategory.h"
+#import "UITextField+YJCategory.h"
 
 #import "YJMaskFamily.h"
 

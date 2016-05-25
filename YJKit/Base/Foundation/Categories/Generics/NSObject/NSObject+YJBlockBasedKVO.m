@@ -90,7 +90,7 @@ static void _yj_registerKVOForObject(NSObject *self, NSString *keyPath, NSKeyVal
     NSMutableDictionary *observers = [self yj_observers];
     if (!observers) {
         observers = [NSMutableDictionary new];
-        [self setYj_observers:observers];
+        self.yj_observers = observers;
     }
     NSMutableSet *observersForKeyPath = observers[keyPath];
     if (!observersForKeyPath) {

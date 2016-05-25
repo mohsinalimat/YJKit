@@ -69,19 +69,19 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  @code
  NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = [arr prefixUpTo:2]; // @[@1, @2, @3]
+ NSMutableArray *arr1 = [arr prefixUpToIndex:2]; // @[@1, @2, @3]
  *  @endcode
  */
-- (NSArray *)prefixUpTo:(NSUInteger)upToIndex;
+- (NSArray *)prefixUpToIndex:(NSUInteger)upToIndex;
 
 
 /**
  *  @code
  NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = [arr suffixFrom:2]; // @[@3, @4, @5]
+ NSMutableArray *arr1 = [arr suffixFromIndex:2]; // @[@3, @4, @5]
  *  @endcode
  */
-- (NSArray *)suffixFrom:(NSUInteger)fromIndex;
+- (NSArray *)suffixFromIndex:(NSUInteger)fromIndex;
 
 
 /**

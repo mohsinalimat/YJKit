@@ -12,7 +12,7 @@
 #import "NSObject+YJBlockBasedKVO.h"
 #import "YJObjcMacros.h"
 #import "RGBColor.h"
-#import "NSCoder+YJCategory.h"
+#import "NSValue+YJGeometryExtension.h"
 
 @implementation YJRoundedCornerLabel
 

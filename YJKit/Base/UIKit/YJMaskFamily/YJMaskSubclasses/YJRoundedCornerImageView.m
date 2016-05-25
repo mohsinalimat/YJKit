@@ -8,7 +8,7 @@
 
 #import "YJRoundedCornerImageView.h"
 #import "_YJRoundedCornerView.h"
-#import "NSCoder+YJCategory.h"
+#import "NSValue+YJGeometryExtension.h"
 #import "RGBColor.h"
 
 @implementation YJRoundedCornerImageView

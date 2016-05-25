@@ -1,12 +1,25 @@
 //
-//  NSCoder+YJCategory.m
+//  NSValue+YJGeometryExtension.m
 //  YJKit
 //
-//  Created by huang-kun on 16/5/22.
+//  Created by huang-kun on 16/5/25.
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
 
-#import "NSCoder+YJCategory.h"
+#import "NSValue+YJGeometryExtension.h"
+
+@implementation NSNumber (YJGeometryExtension)
+
+- (CGFloat)CGFloatValue {
+#if CGFLOAT_IS_DOUBLE
+    return (CGFloat)[self doubleValue];
+#else
+    return (CGFloat)[self floatValue];
+#endif
+}
+
+@end
+
 
 @implementation NSCoder (YJGeometryExtension)
 

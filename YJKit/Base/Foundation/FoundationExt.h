@@ -10,10 +10,11 @@
 
 #import <YJKit/NSObject+YJMutabilityChecking.h>
 #import <YJKit/NSObject+YJCategory_Swizzling.h>
+#import <YJKit/NSObject+YJAssociatedIdentifier.h>
+#import <YJKit/NSObject+YJTaggedPointerChecking.h>
 #import <YJKit/NSObject+YJBlockBasedKVO.h>
 
-#import <YJKit/NSCoder+YJCategory.h>
-#import <YJKit/NSNumber+YJCategory.h>
+#import <YJKit/NSValue+YJGeometryExtension.h>
 
 #import <YJKit/NSString+YJCollection.h>
 #import <YJKit/NSString+YJSequence.h>
@@ -32,10 +33,11 @@
 
 #import "NSObject+YJMutabilityChecking.h"
 #import "NSObject+YJCategory_Swizzling.h"
+#import "NSObject+YJAssociatedIdentifier.h"
+#import "NSObject+YJTaggedPointerChecking.h"
 #import "NSObject+YJBlockBasedKVO.h"
 
-#import "NSCoder+YJCategory.h"
-#import "NSNumber+YJCategory.h"
+#import "NSValue+YJGeometryExtension.h"
 
 #import "NSString+YJCollection.h"
 #import "NSString+YJSequence.h"

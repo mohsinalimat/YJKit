@@ -110,13 +110,13 @@
     NSString *s7 = [s prefix:5];
     XCTAssert([s7 isEqualToString:@"hello"]);
     
-    NSString *s8 = [s prefixUpTo:5];
+    NSString *s8 = [s prefixUpToIndex:5];
     XCTAssert([s8 isEqualToString:@"hello "]);
     
     NSString *s9 = [s suffix:5];
     XCTAssert([s9 isEqualToString:@" you."]);
     
-    NSString *s10 = [s suffixFrom:15];
+    NSString *s10 = [s suffixFromIndex:15];
     XCTAssert([s10 isEqualToString:@"d you."]);
     
     

@@ -9,24 +9,16 @@
 #import <XCTest/XCTest.h>
 #import "UIColor+YJCategory.h"
 #import "NSString+YJCollection.h"
+#import "NSString+YJSequence.h"
+#import "NSObject+YJAssociatedIdentifier.h"
+#import "NSObject+YJTaggedPointerChecking.h"
+#import <objc/runtime.h>
 
 @interface YJGeneralTest : XCTestCase
 
 @end
 
 @implementation YJGeneralTest
-
-- (void)testColor {
-    __unused UIColor *c1 = [UIColor randomColor];
-    __unused UIColor *c2 = [UIColor randomColor];
-    __unused UIColor *c3 = [UIColor randomColor];
-    
-    NSLog(@"%@", @"HELLO"[2]);
-    
-//    BOOL equal = [[UIColor whiteColor] isEqualToColor:nil];
-    
-    NSLog(@"");
-}
 
 - (void)setUp {
     [super setUp];
@@ -41,9 +33,6 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-    __unused NSString *hello = @"hello";
-    __unused NSArray *arr = @[@1];
-    NSLog(@"");
 }
 
 - (void)testPerformanceExample {

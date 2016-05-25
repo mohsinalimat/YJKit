@@ -12,7 +12,7 @@
 #import "CAShapeLayer+YJLayerBasedMasking.h"
 #import "YJDebugMacros.h"
 #import "YJUIMacros.h"
-#import "NSCoder+YJCategory.h"
+#import "NSValue+YJGeometryExtension.h"
 #import "RGBColor.h"
 
 @implementation YJCircularImageView

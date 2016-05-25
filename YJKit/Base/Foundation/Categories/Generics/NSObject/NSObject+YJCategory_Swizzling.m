@@ -11,8 +11,8 @@
 
 @implementation NSObject (YJCategory_Swizzling)
 
-- (void)swizzleInstanceMethodForSelector:(SEL)selector toSelector:(SEL)toSelector {
-    Class class = [self class];
++ (void)swizzleInstanceMethodForSelector:(SEL)selector toSelector:(SEL)toSelector {
+    Class class = self;
     Method method = class_getInstanceMethod(class, selector);
     Method toMethod = class_getInstanceMethod(class, toSelector);
     BOOL added = class_addMethod(class, selector, method_getImplementation(toMethod), method_getTypeEncoding(toMethod));
