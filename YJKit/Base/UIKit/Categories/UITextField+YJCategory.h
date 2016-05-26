@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  The extension for UITextView class
+ *
+ *  . Automatic dismissing when user taps the background.
+ */
+
 @interface UITextField (YJCategory)
 
 @end
