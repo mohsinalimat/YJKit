@@ -85,20 +85,20 @@
     NSMutableArray *b = a.mutableCopy;
     
     
-    NSString *s1 = [s dropFirst];
+    NSString *s1 = [s droppingFirst];
     XCTAssert([s1 isEqualToString:@"ello world and you."]);
     
-    [ms dropFirst];
+    [ms droppingFirst];
     XCTAssert([ms isEqualToString:@"ello world and you."]);
     ms = s.mutableCopy;
     
-    NSString *s2 = [s dropFirst:5];
+    NSString *s2 = [s droppingFirst:5];
     XCTAssert([s2 isEqualToString:@" world and you."]);
     
-    NSString *s3 = [s dropLast];
+    NSString *s3 = [s droppingLast];
     XCTAssert([s3 isEqualToString:@"hello world and you"]);
     
-    NSString *s4 = [s dropLast:5];
+    NSString *s4 = [s droppingLast:5];
     XCTAssert([s4 isEqualToString:@"hello world and"]);
     
     NSString *s5 = s.firstCharacter;
@@ -107,16 +107,16 @@
     NSString *s6 = s.lastCharacter;
     XCTAssert([s6 isEqualToString:@"."]);
     
-    NSString *s7 = [s prefix:5];
+    NSString *s7 = [s prefixed:5];
     XCTAssert([s7 isEqualToString:@"hello"]);
     
-    NSString *s8 = [s prefixUpToIndex:5];
+    NSString *s8 = [s prefixingUpToIndex:5];
     XCTAssert([s8 isEqualToString:@"hello "]);
     
-    NSString *s9 = [s suffix:5];
+    NSString *s9 = [s suffixed:5];
     XCTAssert([s9 isEqualToString:@" you."]);
     
-    NSString *s10 = [s suffixFromIndex:15];
+    NSString *s10 = [s suffixingFromIndex:15];
     XCTAssert([s10 isEqualToString:@"d you."]);
     
     

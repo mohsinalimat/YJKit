@@ -11,23 +11,23 @@
 
 @implementation NSMutableSet (YJCollection)
 
-- (void)mapping:(U  _Nonnull (^)(id _Nonnull))mapping {
-    NSSet *mapped = [self map:mapping];
+- (void)mapEachObject:(U  _Nonnull (^)(id _Nonnull))mapping {
+    NSSet *mapped = [self mapped:mapping];
     [self setSet:mapped];
 }
 
-- (void)filtering:(BOOL (^)(id _Nonnull))condition {
-    NSSet *filtered = [self filter:condition];
+- (void)filterWithCondition:(BOOL (^)(id _Nonnull))condition {
+    NSSet *filtered = [self filtered:condition];
     [self setSet:filtered];
 }
 
-- (void)flattening {
-    NSSet *flattened = [self flatten];
+- (void)flattenRecursively {
+    NSSet *flattened = [self flattened];
     [self setSet:flattened];
 }
 
-- (void)flatMapping:(U  _Nonnull (^)(id _Nonnull))mapping {
-    NSSet *flatMapped = [self flatMap:mapping];
+- (void)flatMapEachObject:(U  _Nonnull (^)(id _Nonnull))mapping {
+    NSSet *flatMapped = [self flatMapped:mapping];
     [self setSet:flatMapped];
 }
 

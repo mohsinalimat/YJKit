@@ -179,18 +179,18 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
         
         _mappedRows = [mappedRows copy];
         _itemTitles = [titles copy];
-        _itemRows = [[titles allKeys] sort:^BOOL(NSNumber * _Nonnull obj1, NSNumber * _Nonnull obj2) {
+        _itemRows = [[titles allKeys] arrayBySortingWithCondition:^BOOL(NSNumber * _Nonnull obj1, NSNumber * _Nonnull obj2) {
             return obj1.unsignedIntegerValue < obj2.unsignedIntegerValue;
         }];
     }
     
     if (!list.count) return nil;
     
-    NSArray *flattenList = [list flatten];
-    NSAssert(_itemRows.count == flattenList.count, @"%@ - Grouped cell itemRows has different count with given list. \nitemRows:%@, \nlist:%@", self.class, _itemRows, flattenList);
-    NSMutableDictionary *contents = [NSMutableDictionary dictionaryWithCapacity:flattenList.count];
-    for (NSUInteger i = 0; i < flattenList.count; ++i) {
-        contents[_itemRows[i]] = flattenList[i];
+    NSArray *flattenedList = [list arrayByFlatteningRecursively];
+    NSAssert(_itemRows.count == flattenedList.count, @"%@ - Grouped cell itemRows has different count with given list. \nitemRows:%@, \nlist:%@", self.class, _itemRows, flattenedList);
+    NSMutableDictionary *contents = [NSMutableDictionary dictionaryWithCapacity:flattenedList.count];
+    for (NSUInteger i = 0; i < flattenedList.count; ++i) {
+        contents[_itemRows[i]] = flattenedList[i];
     }
     return [contents copy];
 }

@@ -15,89 +15,104 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  @code
  NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = [arr dropFirst]; // @[@2, @3, @4, @5]
+ NSArray *arr1 = [arr arrayByDroppingFirstObject]; // @[@2, @3, @4, @5]
  *  @endcode
  */
-- (NSArray *)dropFirst;
+- (NSArray *)arrayByDroppingFirstObject;
+
+- (NSArray *)droppingFirst OBJC_SWIFT_UNAVAILABLE("use Swift dropFirst() instead");
 
 
 /**
  *  @code
  NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = [arr dropFirst:2]; // @[@3, @4, @5]
+ NSArray *arr1 = [arr arrayByDroppingFirstObjectsWithCount:2]; // @[@3, @4, @5]
  *  @endcode
  */
-- (NSArray *)dropFirst:(NSUInteger)count;
+- (NSArray *)arrayByDroppingFirstObjectsWithCount:(NSUInteger)count;
+
+- (NSArray *)droppingFirst:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift dropFirst() instead");
 
 
 /**
  *  @code
  NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = [arr dropLast]; // @[@1, @2, @3, @4]
+ NSArray *arr1 = [arr arrayByDroppingLastObject]; // @[@1, @2, @3, @4]
  *  @endcode
  */
-- (NSArray *)dropLast;
+- (NSArray *)arrayByDroppingLastObject;
+
+- (NSArray *)droppingLast OBJC_SWIFT_UNAVAILABLE("use Swift dropLast() instead");
 
 
 /**
  *  @code
  NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = [arr dropLast:2]; // @[@1, @2, @3]
+ NSArray *arr1 = [arr arrayByDroppingLastObjectsWithCount:2]; // @[@1, @2, @3]
  *  @endcode
  */
-- (NSArray *)dropLast:(NSUInteger)count;
+- (NSArray *)arrayByDroppingLastObjectsWithCount:(NSUInteger)count;
+
+- (NSArray *)droppingLast:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift dropLast() instead");
 
 
 /**
  *  @code
  NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = [arr prefix:2]; // @[@1, @2]
+ NSArray *arr1 = [arr arrayByPrefixingObjectsWithCount:2]; // @[@1, @2]
  *  @endcode
  */
-- (NSArray *)prefix:(NSUInteger)count;
+- (NSArray *)arrayByPrefixingObjectsWithCount:(NSUInteger)count;
+
+- (NSArray *)prefixed:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift prefix() instead");
 
 
 /**
  *  @code
  NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = [arr suffix:2]; // @[@4, @5]
+ NSArray *arr1 = [arr arrayBySuffixingObjectsWithCount:2]; // @[@4, @5]
  *  @endcode
  */
-- (NSArray *)suffix:(NSUInteger)count;
+- (NSArray *)arrayBySuffixingObjectsWithCount:(NSUInteger)count;
+
+- (NSArray *)suffixed:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift suffix() instead");
 
 
 /**
  *  @code
  NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = [arr prefixUpToIndex:2]; // @[@1, @2, @3]
+ NSArray *arr1 = [arr arrayByPrefixingObjectsUpToIndex:2]; // @[@1, @2, @3]
  *  @endcode
  */
-- (NSArray *)prefixUpToIndex:(NSUInteger)upToIndex;
+- (NSArray *)arrayByPrefixingObjectsUpToIndex:(NSUInteger)upToIndex;
 
+- (NSArray *)prefixingUpToIndex:(NSUInteger)upToIndex OBJC_SWIFT_UNAVAILABLE("use Swift prefix(upTo:) instead");
 
 /**
  *  @code
  NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = [arr suffixFromIndex:2]; // @[@3, @4, @5]
+ NSArray *arr1 = [arr arrayBySuffixingObjectsFromIndex:2]; // @[@3, @4, @5]
  *  @endcode
  */
-- (NSArray *)suffixFromIndex:(NSUInteger)fromIndex;
+- (NSArray *)arrayBySuffixingObjectsFromIndex:(NSUInteger)fromIndex;
+
+- (NSArray *)suffixingFromIndex:(NSUInteger)fromIndex OBJC_SWIFT_UNAVAILABLE("use Swift suffix(from:) instead");
 
 
 /**
  *  @code
- 
  NSArray <NSNumber *> *a = @[ @3, @1, @2, @5, @4 ];
- NSArray *a1 = [a sort:^BOOL(NSNumber *obj1, NSNumber *obj2) { return obj1.intValue > obj2.intValue; }]; // 5, 4, 3, 2, 1
- NSArray *a2 = [a sort:^BOOL(NSNumber *obj1, NSNumber *obj2) { return obj1.intValue < obj2.intValue; }]; // 1, 2, 3, 4, 5
+ NSArray *a1 = [a arrayBySortingWithCondition:^BOOL(NSNumber *obj1, NSNumber *obj2) { return obj1.intValue > obj2.intValue; }]; // 5, 4, 3, 2, 1
+ NSArray *a2 = [a arrayBySortingWithCondition:^BOOL(NSNumber *obj1, NSNumber *obj2) { return obj1.intValue < obj2.intValue; }]; // 1, 2, 3, 4, 5
  
  NSArray <NSString *> *s = @[ @"hello", @"Jack", @"world", @"Alice", @"Tim" ];
- NSArray *s1 = [s sort:^BOOL(NSString *obj1, NSString *obj2) { return obj1.hash > obj2.hash; }]; // world, hello, Alice, Jack, Tim
- NSArray *s2 = [s sort:^BOOL(NSString *obj1, NSString *obj2) { return obj1.hash < obj2.hash; }]; // Tim, Jack, Alice, hello, world
- 
+ NSArray *s1 = [s arrayBySortingWithCondition:^BOOL(NSString *obj1, NSString *obj2) { return obj1.hash > obj2.hash; }]; // world, hello, Alice, Jack, Tim
+ NSArray *s2 = [s arrayBySortingWithCondition:^BOOL(NSString *obj1, NSString *obj2) { return obj1.hash < obj2.hash; }]; // Tim, Jack, Alice, hello, world
  *  @endcode
  */
-- (NSArray <T> *)sort:(BOOL(^)(T obj1, T obj2))condition;
+- (NSArray <T> *)arrayBySortingWithCondition:(BOOL(^)(T obj1, T obj2))condition;
+
+- (NSArray <T> *)sorted:(BOOL(^)(T obj1, T obj2))condition OBJC_SWIFT_UNAVAILABLE("use Swift sort() instead");
 
 @end
 

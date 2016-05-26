@@ -12,73 +12,71 @@
 
 /**
  *  @code
- NSMutableString *s1 = [@"hello" mutableCopy];
- [s1 droppingFirst]; // @"ello"
+ NSMutableString *mstr = [@"hello" mutableCopy];
+ [mstr dropFirstCharacter]; // @"ello"
  *  @endcode
  */
-- (void)droppingFirst;
+- (void)dropFirstCharacter OBJC_SWIFT_UNAVAILABLE("use Swift dropFirst() instead");
+
+/**
+ *  @code
+ NSMutableString *mstr = [@"hello" mutableCopy];
+ [mstr dropFirstCharactersWithCount:3]; // @"lo"
+ *  @endcode
+ */
+- (void)dropFirstCharactersWithCount:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift dropFirst() instead");
+
+/**
+ *  @code
+ NSMutableString *mstr = [@"hello" mutableCopy];
+ [mstr dropLastCharacter]; // @"hell"
+ *  @endcode
+ */
+- (void)dropLastCharacter OBJC_SWIFT_UNAVAILABLE("use Swift dropLast() instead");
 
 
 /**
  *  @code
- NSMutableString *s1 = [@"hello" mutableCopy];
- [s1 droppingFirst:3]; // @"lo"
+ NSMutableString *mstr = [@"hello" mutableCopy];
+ [mstr dropLastCharactersWithCount:3]; // @"he"
  *  @endcode
  */
-- (void)droppingFirst:(NSUInteger)count;
+- (void)dropLastCharactersWithCount:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift dropLast() instead");
 
 
 /**
  *  @code
- NSMutableString *s1 = [@"hello" mutableCopy];
- [s1 droppingLast]; // @"hell"
+ NSMutableString *mstr = [@"hello" mutableCopy];
+ [mstr prefixCharactersWithCount:2]; // @"he"
  *  @endcode
  */
-- (void)droppingLast;
+- (void)prefixCharactersWithCount:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift prefix() instead");
 
 
 /**
  *  @code
- NSMutableString *s1 = [@"hello" mutableCopy];
- [s1 droppingLast:3]; // @"he"
+ NSMutableString *mstr = [@"hello" mutableCopy];
+ [mstr prefixCharactersUpToIndex:2]; // @"hel"
  *  @endcode
  */
-- (void)droppingLast:(NSUInteger)count;
+- (void)prefixCharactersUpToIndex:(NSUInteger)upToIndex OBJC_SWIFT_UNAVAILABLE("use Swift prefix(upTo:) instead");
 
 
 /**
  *  @code
- NSMutableString *s1 = [@"hello" mutableCopy];
- [s1 prefixing:2]; // @"he"
+ NSMutableString *mstr = [@"hello" mutableCopy];
+ [mstr suffixCharactersWithCount:2]; // @"lo"
  *  @endcode
  */
-- (void)prefixing:(NSUInteger)count;
+- (void)suffixCharactersWithCount:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift suffix() instead");
 
 
 /**
  *  @code
- NSMutableString *s1 = [@"hello" mutableCopy];
- [s1 prefixingUpTo:2]; // @"hel"
+ NSMutableString *mstr = [@"hello" mutableCopy];
+ [mstr suffixCharactersFromIndex:2]; // @"llo"
  *  @endcode
  */
-- (void)prefixingUpTo:(NSUInteger)upToIndex;
-
-
-/**
- *  @code
- NSMutableString *s1 = [@"hello" mutableCopy];
- [s1 suffixing:2]; // @"lo"
- *  @endcode
- */
-- (void)suffixing:(NSUInteger)count;
-
-
-/**
- *  @code
- NSMutableString *s1 = [@"hello" mutableCopy];
- [s1 suffixingFrom:2]; // @"llo"
- *  @endcode
- */
-- (void)suffixingFrom:(NSUInteger)fromIndex;
+- (void)suffixCharactersFromIndex:(NSUInteger)fromIndex OBJC_SWIFT_UNAVAILABLE("use Swift suffix(from:) instead");
 
 @end

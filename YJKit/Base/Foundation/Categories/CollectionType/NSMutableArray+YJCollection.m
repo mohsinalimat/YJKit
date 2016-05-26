@@ -11,23 +11,23 @@
 
 @implementation NSMutableArray (YJCollection)
 
-- (void)mapping:(U  _Nonnull (^)(id _Nonnull))mapping {
-    NSArray *mapped = [self map:mapping];
+- (void)mapEachObject:(id(^)(id obj))mapping {
+    NSArray *mapped = [self mapped:mapping];
     [self setArray:mapped];
 }
 
-- (void)filtering:(BOOL (^)(id _Nonnull))condition {
-    NSArray *filtered = [self filter:condition];
+- (void)filterWithCondition:(BOOL(^)(id obj))condition {
+    NSArray *filtered = [self filtered:condition];
     [self setArray:filtered];
 }
 
-- (void)flattening {
-    NSArray *flattened = [self flatten];
+- (void)flattenRecursively {
+    NSArray *flattened = [self flattened];
     [self setArray:flattened];
 }
 
-- (void)flatMapping:(U  _Nonnull (^)(id _Nonnull))mapping {
-    NSArray *flatMapped = [self flatMap:mapping];
+- (void)flatMapEachObject:(id(^)(id obj))mapping {
+    NSArray *flatMapped = [self flatMapped:mapping];
     [self setArray:flatMapped];
 }
 

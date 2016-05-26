@@ -15,109 +15,98 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Removes and returns the first object of collection.
  */
-- (nullable T)removeFirst;
+- (nullable T)poppedFirstObject;
+
 
 /**
  * Removes and returns the last object of collection.
  */
-- (nullable T)removeLast;
+- (nullable T)poppedLastObject;
 
 
 /**
  *  @code
- NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = arr.mutableCopy;
- [arr1 droppingFirst]; // [ @2, @3, @4, @5 ]
+ NSMutableArray *marr = @[@1, @2, @3, @4, @5].mutableCopy;
+ [marr dropFirstObject]; // [ @2, @3, @4, @5 ]
  *  @endcode
  */
-- (void)droppingFirst;
+- (void)dropFirstObject OBJC_SWIFT_UNAVAILABLE("use Swift dropFirst() instead");
 
 
 /**
  *  @code
- NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = arr.mutableCopy;
- [arr1 droppingFirst:2]; // [ @3, @4, @5 ]
+ NSMutableArray *marr = @[@1, @2, @3, @4, @5].mutableCopy;
+ [marr dropFirstObjectsWithCount:2]; // [ @3, @4, @5 ]
  *  @endcode
  */
-- (void)droppingFirst:(NSUInteger)count;
+- (void)dropFirstObjectsWithCount:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift dropFirst() instead");
 
 
 /**
  *  @code
- NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = arr.mutableCopy;
- [arr1 droppingLast]; // [ @1, @2, @3, @4 ]
+ NSMutableArray *marr = @[@1, @2, @3, @4, @5].mutableCopy;
+ [marr dropLastObject]; // [ @1, @2, @3, @4 ]
  *  @endcode
  */
-- (void)droppingLast;
+- (void)dropLastObject OBJC_SWIFT_UNAVAILABLE("use Swift dropLast() instead");
 
 
 /**
  *  @code
- NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = arr.mutableCopy;
- [arr1 droppingLast:2]; // [ @1, @2, @3 ]
+ NSMutableArray *marr = @[@1, @2, @3, @4, @5].mutableCopy;
+ [marr dropLastObjectsWithCount:2]; // [ @1, @2, @3 ]
  *  @endcode
  */
-- (void)droppingLast:(NSUInteger)count;
+- (void)dropLastObjectsWithCount:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift dropLast() instead");
 
 
 /**
  *  @code
- NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = arr.mutableCopy;
- [arr1 prefixing:2]; // [ @1, @2 ]
+ NSMutableArray *marr = @[@1, @2, @3, @4, @5].mutableCopy;
+ [marr prefixObjectsWithCount:2]; // [ @1, @2 ]
  *  @endcode
  */
-- (void)prefixing:(NSUInteger)count;
+- (void)prefixObjectsWithCount:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift prefix() instead");
 
 
 /**
  *  @code
- NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = arr.mutableCopy;
- [arr1 suffixing:2]; // [ @4, @5 ]
+ NSMutableArray *marr = @[@1, @2, @3, @4, @5].mutableCopy;
+ [marr suffixObjectsWithCount:2]; // [ @4, @5 ]
  *  @endcode
  */
-- (void)suffixing:(NSUInteger)count;
+- (void)suffixObjectsWithCount:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift suffix() instead");
 
 
 /**
  *  @code
- NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = arr.mutableCopy;
- [arr1 prefixingUpTo:2]; // [ @1, @2, @3 ]
+ NSMutableArray *marr = @[@1, @2, @3, @4, @5].mutableCopy;
+ [marr prefixObjectsUpToIndex:2]; // [ @1, @2, @3 ]
  *  @endcode
  */
-- (void)prefixingUpTo:(NSUInteger)upToIndex;
-
+- (void)prefixObjectsUpToIndex:(NSUInteger)upToIndex OBJC_SWIFT_UNAVAILABLE("use Swift prefix(upTo:) instead");
 
 /**
  *  @code
- NSArray *arr = @[@1, @2, @3, @4, @5];
- NSMutableArray *arr1 = arr.mutableCopy;
- [arr1 suffixingFrom:2]; // [ @3, @4, @5 ]
+ NSMutableArray *marr = @[@1, @2, @3, @4, @5].mutableCopy;
+ [marr suffixObjectsFromIndex:2]; // [ @3, @4, @5 ]
  *  @endcode
  */
-- (void)suffixingFrom:(NSUInteger)fromIndex;
+- (void)suffixObjectsFromIndex:(NSUInteger)upToIndex OBJC_SWIFT_UNAVAILABLE("use Swift suffix(from:) instead");
 
 
 /**
  *  @code
+ NSMutableArray <NSNumber *> *ma = @[ @3, @1, @2, @5, @4 ].mutableCopy;
+ [ma sortWithCondition:^BOOL(NSNumber *obj1, NSNumber *obj2) { return obj1.intValue > obj2.intValue; }]; // 5, 4, 3, 2, 1
+ [ma sortWithCondition:^BOOL(NSNumber *obj1, NSNumber *obj2) { return obj1.intValue < obj2.intValue; }]; // 1, 2, 3, 4, 5
  
- NSMutableArray <NSNumber *> *a = @[ @3, @1, @2, @5, @4 ].mutableCopy;
- [a sorting:^BOOL(NSNumber *obj1, NSNumber *obj2) { return obj1.intValue > obj2.intValue; }]; // 5, 4, 3, 2, 1
- [a sorting:^BOOL(NSNumber *obj1, NSNumber *obj2) { return obj1.intValue < obj2.intValue; }]; // 1, 2, 3, 4, 5
- 
- NSMutableArray <NSString *> *s = @[ @"hello", @"Jack", @"world", @"Alice", @"Tim" ].mutableCopy;
- [s sorting:^BOOL(NSString *obj1, NSString *obj2) { return obj1.hash > obj2.hash; }]; // world, hello, Alice, Jack, Tim
- [s sorting:^BOOL(NSString *obj1, NSString *obj2) { return obj1.hash < obj2.hash; }]; // Tim, Jack, Alice, hello, world
- 
+ NSMutableArray <NSString *> *ma1 = @[ @"hello", @"Jack", @"world", @"Alice", @"Tim" ].mutableCopy;
+ [ma1 sortWithCondition:^BOOL(NSString *obj1, NSString *obj2) { return obj1.hash > obj2.hash; }]; // world, hello, Alice, Jack, Tim
+ [ma1 sortWithCondition:^BOOL(NSString *obj1, NSString *obj2) { return obj1.hash < obj2.hash; }]; // Tim, Jack, Alice, hello, world
  *  @endcode
  */
-- (void)sorting:(BOOL(^)(T obj1, T obj2))condition;
-
+- (void)sortWithCondition:(BOOL(^)(T obj1, T obj2))condition OBJC_SWIFT_UNAVAILABLE("use Swift sort() instead");
 
 @end
 

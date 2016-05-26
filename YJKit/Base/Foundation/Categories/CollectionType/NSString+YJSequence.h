@@ -14,66 +14,82 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @code 
- NSString *s1 = [@"hello" dropFirst]; // @"ello"
+ NSString *str = [@"hello" stringByDroppingFirstCharacter]; // @"ello"
  *  @endcode
  */
-- (NSString *)dropFirst;
+- (NSString *)stringByDroppingFirstCharacter;
+
+- (NSString *)droppingFirst OBJC_SWIFT_UNAVAILABLE("use Swift dropFirst() instead");
 
 
 /**
  *  @code
- NSString *s1 = [@"hello" dropFirst:3]; // @"lo"
+ NSString *str = [@"hello" stringByDroppingFirstCharactersWithCount:3]; // @"lo"
  *  @endcode
  */
-- (NSString *)dropFirst:(NSUInteger)count;
+- (NSString *)stringByDroppingFirstCharactersWithCount:(NSUInteger)count;
+
+- (NSString *)droppingFirst:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift dropFirst() instead");
 
 
 /**
  *  @code
- NSString *s1 = [@"hello" dropLast]; // @"hell"
+ NSString *str = [@"hello" stringByDroppingLastCharacter]; // @"hell"
  *  @endcode
  */
-- (NSString *)dropLast;
+- (NSString *)stringByDroppingLastCharacter;
+
+- (NSString *)droppingLast OBJC_SWIFT_UNAVAILABLE("use Swift dropLast() instead");
 
 
 /**
  *  @code
- NSString *s1 = [@"hello" dropLast:3]; // @"he"
+ NSString *str = [@"hello" stringByDroppingLastCharactersWithCount:3]; // @"he"
  *  @endcode
  */
-- (NSString *)dropLast:(NSUInteger)count;
+- (NSString *)stringByDroppingLastCharactersWithCount:(NSUInteger)count;
+
+- (NSString *)droppingLast:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift dropLast() instead");
 
 
 /**
  *  @code
- NSString *s1 = [@"hello" prefix:2]; // @"he"
+ NSString *str = [@"hello" stringByPrefixingCharactersWithCount:2]; // @"he"
  *  @endcode
  */
-- (NSString *)prefix:(NSUInteger)count;
+- (NSString *)stringByPrefixingCharactersWithCount:(NSUInteger)count;
+
+- (NSString *)prefixed:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift prefix() instead");
 
 
 /**
  *  @code
- NSString *s1 = [@"hello" prefixUpToIndex:2]; // @"hel"
+ NSString *str = [@"hello" stringByPrefixingCharactersUpToIndex:2]; // @"hel"
  *  @endcode
  */
-- (NSString *)prefixUpToIndex:(NSUInteger)upToIndex;
+- (NSString *)stringByPrefixingCharactersUpToIndex:(NSUInteger)upToIndex;
+
+- (NSString *)prefixingUpToIndex:(NSUInteger)upToIndex OBJC_SWIFT_UNAVAILABLE("use Swift prefix(upTo:) instead");
 
 
 /**
  *  @code
- NSString *s1 = [@"hello" suffix:2]; // @"lo"
+ NSString *str = [@"hello" stringBySuffixingCharactersWithCount:2]; // @"lo"
  *  @endcode
  */
-- (NSString *)suffix:(NSUInteger)count;
+- (NSString *)stringBySuffixingCharactersWithCount:(NSUInteger)count;
+
+- (NSString *)suffixed:(NSUInteger)count OBJC_SWIFT_UNAVAILABLE("use Swift suffix() instead");
 
 
 /**
  *  @code
- NSString *s1 = [@"hello" suffixFromIndex:2]; // @"llo"
+ NSString *str = [@"hello" stringBySuffixingCharactersFromIndex:2]; // @"llo"
  *  @endcode
  */
-- (NSString *)suffixFromIndex:(NSUInteger)fromIndex;
+- (NSString *)stringBySuffixingCharactersFromIndex:(NSUInteger)fromIndex;
+
+- (NSString *)suffixingFromIndex:(NSUInteger)fromIndex OBJC_SWIFT_UNAVAILABLE("use Swift suffix(from:) instead");
 
 @end
 

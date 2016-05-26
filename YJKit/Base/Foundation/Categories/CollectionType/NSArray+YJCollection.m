@@ -7,11 +7,10 @@
 //
 
 #import "NSArray+YJCollection.h"
-#import "NSObject+YJMutabilityChecking.h"
 
 @implementation NSArray (YJCollection)
 
-- (NSArray *)map:(id(^)(id obj))mapping {
+- (NSArray *)mapped:(id(^)(id obj))mapping {
     if (!mapping) return @[];
     NSMutableArray *collector = [NSMutableArray arrayWithCapacity:self.count];
     for (id elem in self) {
@@ -24,7 +23,11 @@
     return [collector copy];
 }
 
-- (NSArray *)filter:(BOOL(^)(id obj))condition {
+- (NSArray *)arrayByMappingEachObject:(U(^)(id obj))mapping {
+    return [self mapped:mapping];
+}
+
+- (NSArray *)filtered:(BOOL(^)(id obj))condition {
     if (!condition) return @[];
     NSMutableArray *collector = [NSMutableArray arrayWithCapacity:self.count];
     for (id elem in self) {
@@ -35,7 +38,11 @@
     return [collector copy];
 }
 
-- (nullable id)reduce:(nullable id)initial combine:(id(^)(id result, id obj))combine {
+- (NSArray *)arrayByFilteringWithCondition:(BOOL(^)(id obj))condition {
+    return [self filtered:condition];
+}
+
+- (nullable id)reduced:(nullable id)initial combine:(id(^)(id result, id obj))combine {
     if (self.count < 2) return self.firstObject;
     NSUInteger startIndex = initial ? [self indexOfObject:initial] : 0;
     NSAssert(startIndex != NSNotFound, @"The initial object %@ for reducing is not in the %@: %@.", initial, self.class, self);
@@ -49,23 +56,35 @@
     return result;
 }
 
-- (nullable id)reduce:(id(^)(id result, id obj))combine {
-    return [self reduce:nil combine:combine];
+- (nullable id)objectByReducingArrayFromInitialObject:(nullable id)initial combinedWithObject:(id(^)(id result, id obj))combine {
+    return [self reduced:initial combine:combine];
 }
 
-- (NSArray *)flatten {
-    return [self deepFlatten];
+- (nullable id)reduced:(id(^)(id result, id obj))combine {
+    return [self reduced:nil combine:combine];
 }
 
-// Recursively flatten each level of collections with light-weight type compatible
-- (NSArray *)deepFlatten {
+- (nullable id)objectByReducingArrayCombinedWithObject:(id(^)(id result, id obj))combine {
+    return [self reduced:combine];
+}
+
+- (NSArray *)flattened {
+    return [self deepFlattened];
+}
+
+- (NSArray *)arrayByFlatteningRecursively {
+    return [self deepFlattened];
+}
+
+// Recursively flattened each level of collections with light-weight type compatible
+- (NSArray *)deepFlattened {
     NSMutableArray *collector = [NSMutableArray arrayWithCapacity:self.count];
     for (id elem in self) {
         if ([elem conformsToProtocol:@protocol(NSFastEnumeration)]) {
             if ([elem isKindOfClass:[NSArray class]]) {
-                [collector addObjectsFromArray:[elem deepFlatten]];
+                [collector addObjectsFromArray:[elem deepFlattened]];
             } else if ([elem isKindOfClass:[NSSet class]]) {
-                [collector addObjectsFromArray:[[elem allObjects] deepFlatten]];
+                [collector addObjectsFromArray:[[elem allObjects] deepFlattened]];
             } else {
                 NSAssert([elem isKindOfClass:[NSArray class]] || [elem isKindOfClass:[NSSet class]], @"The nested collection type %@ is not much unified for using -[%@ %@].", [elem class], self.class, NSStringFromSelector(_cmd));
             }
@@ -76,8 +95,12 @@
     return [collector copy];
 }
 
-- (NSArray *)flatMap:(id(^)(id obj))mapping {
-    return [[self map:mapping] flatten];
+- (NSArray *)flatMapped:(id(^)(id obj))mapping {
+    return [[self mapped:mapping] flattened];
+}
+
+- (NSArray *)arrayByFlatMappingEachObject:(id(^)(id obj))mapping {
+    return [self flatMapped:mapping];
 }
 
 @end

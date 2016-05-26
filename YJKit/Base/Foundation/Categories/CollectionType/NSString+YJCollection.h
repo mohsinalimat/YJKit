@@ -14,18 +14,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @code
- NSArray *chars = @"hello".characters; // @"h", @"e", @"l", @"l", @"o"
+ NSArray *charObjs = @"hello".characters; // @"h", @"e", @"l", @"l", @"o"
  *  @endcode
  */
 @property (nonatomic, readonly) NSArray <NSString *> *characters;
 
-
 @property (nonatomic, readonly, nullable) NSString *firstCharacter;
+
 @property (nonatomic, readonly, nullable) NSString *lastCharacter;
 
 
 /**
- * e.g. @"hello"[1] // @"e"
+ *  @code
+ NSString *charObj = @"hello"[1]; // @"e"
+ *  @endcode
  */
 - (NSString *)objectAtIndexedSubscript:(NSUInteger)idx;
 

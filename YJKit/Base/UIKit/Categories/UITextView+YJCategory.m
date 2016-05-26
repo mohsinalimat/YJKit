@@ -91,9 +91,7 @@ static const void *YJTextViewAssociatedPlaceholderColorKey = &YJTextViewAssociat
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    NSArray *taps = [self.superview.gestureRecognizers filter:^BOOL(__kindof UIGestureRecognizer * _Nonnull obj) {
-        return [obj isKindOfClass:[UITapGestureRecognizer class]];
-    }];
+    NSArray *taps = [self.superview.gestureRecognizers arrayByFilteringWithCondition:^BOOL(__kindof UIGestureRecognizer * _Nonnull obj) { return [obj isKindOfClass:[UITapGestureRecognizer class]]; }];
     
     if (!taps.count) {
         UITapGestureRecognizer *dismissTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(yj_dismissTextView)];

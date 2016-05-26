@@ -10,7 +10,7 @@
 
 @implementation NSSet (YJCollection)
 
-- (NSSet *)map:(id(^)(id obj))mapping {
+- (NSSet *)mapped:(id(^)(id obj))mapping {
     if (!mapping) return [NSSet set];
     NSMutableSet *collector = [NSMutableSet setWithCapacity:self.count];
     for (id elem in self) {
@@ -20,7 +20,11 @@
     return [collector copy];
 }
 
-- (NSSet *)filter:(BOOL(^)(id obj))condition {
+- (NSSet *)setByMappingEachObject:(id(^)(id obj))mapping {
+    return [self mapped:mapping];
+}
+
+- (NSSet *)filtered:(BOOL(^)(id obj))condition {
     if (!condition) return [NSSet set];
     NSMutableSet *collector = [NSMutableSet setWithCapacity:self.count];
     for (id elem in self) {
@@ -31,7 +35,11 @@
     return [collector copy];
 }
 
-- (nullable id)reduce:(id(^)(id result, id obj))combine {
+- (NSSet *)setByFilteringWithCondition:(BOOL(^)(id obj))condition {
+    return [self filtered:condition];
+}
+
+- (nullable id)reduced:(id(^)(id result, id obj))combine {
     id result = [self anyObject];
     for (id obj in self) {
         if (combine && ![obj isEqual:result]) {
@@ -42,18 +50,26 @@
     return result;
 }
 
-- (NSSet *)flatten {
-    return [self deepFlatten];
+- (nullable id)objectByReducingSetCombinedWithObject:(id(^)(id result, id obj))combine {
+    return [self reduced:combine];
 }
 
-- (NSSet *)deepFlatten {
+- (NSSet *)flattened {
+    return [self deepFlattened];
+}
+
+- (NSSet *)setByFlatteningRecursively {
+    return [self deepFlattened];
+}
+
+- (NSSet *)deepFlattened {
     NSMutableSet *collector = [NSMutableSet setWithCapacity:self.count];
     for (id elem in self) {
         if ([elem conformsToProtocol:@protocol(NSFastEnumeration)]) {
             if ([elem isKindOfClass:[NSArray class]]) {
-                [collector addObjectsFromArray:(id)[elem deepFlatten]];
+                [collector addObjectsFromArray:(id)[elem deepFlattened]];
             } else if ([elem isKindOfClass:[NSSet class]]) {
-                [collector unionSet:[elem deepFlatten]];
+                [collector unionSet:[elem deepFlattened]];
             } else {
                 NSAssert([elem isKindOfClass:[NSArray class]] || [elem isKindOfClass:[NSSet class]], @"The nested collection type %@ is not much unified for using -[%@ %@].", [elem class], self.class, NSStringFromSelector(_cmd));
             }
@@ -64,8 +80,12 @@
     return [collector copy];
 }
 
-- (NSSet *)flatMap:(id(^)(id obj))mapping {
-    return [[self map:mapping] flatten];
+- (NSSet *)flatMapped:(id(^)(id obj))mapping {
+    return [[self mapped:mapping] flattened];
+}
+
+- (NSSet *)setByFlatMappingEachObject:(id(^)(id obj))mapping {
+    return [self flatMapped:mapping];
 }
 
 @end

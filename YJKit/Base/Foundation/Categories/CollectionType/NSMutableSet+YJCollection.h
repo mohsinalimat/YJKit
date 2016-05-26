@@ -14,13 +14,38 @@ typedef id U;
 
 @interface NSMutableSet <T> (YJCollection)
 
-- (void)mapping:(U(^)(T obj))mapping;
+/**
+ *  @remark The implementation of -mapEachObject: will prevent crashing from sending message to NSNull object.
+ *  @code
+ NSMutableSet *mset = [NSSet setWithArray:@[@"hello", @"world", [NSNull null], @"and", @"you"]].mutableCopy;
+ [mset mapEachObject:^id(id obj) { return [obj uppercaseString]; }]; // [ @"HELLO", @"WORLD", [NSNull null], @"AND", @"YOU" ]
+ *  @endcode
+ */
+- (void)mapEachObject:(U(^)(T obj))mapping;
 
-- (void)filtering:(BOOL(^)(T obj))condition;
 
-- (void)flattening;
+/**
+ *  @code
+ NSMutableSet *mset = [NSSet setWithArray:@[@1, @2, [NSNull null], @3, [NSNull null], @"hello"]].mutableCopy;
+ [mset filterWithCondition:^BOOL(id obj) { return [obj isKindOfClass:[NSNumber class]]; }]; // [ @3, @2, @1 ]; (no order)
+ *  @endcode
+ */
+- (void)filterWithCondition:(BOOL(^)(T obj))condition;
 
-- (void)flatMapping:(U(^)(T obj))mapping;
+
+/**
+ *  @code
+ NSMutableSet *mset = [NSSet setWithArray:@[@1, @[ @2, @3, ], @[ @4, @[ @[ @5, @6 ] ] ] ]].mutableCopy;
+ [mset flattenRecursively]; // [ @3, @6, @2, @5, @1, @4 ] (no order)
+ *  @endcode
+ */
+- (void)flattenRecursively;
+
+
+/**
+ * Call [mset flatMapEachObject:] is equal to call [[mset mapEachObject:...] flattenRecursively]
+ */
+- (void)flatMapEachObject:(U(^)(T obj))mapping;
 
 @end
 
