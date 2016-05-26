@@ -7,12 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "UIColor+YJCategory.h"
-#import "NSString+YJCollection.h"
-#import "NSString+YJSequence.h"
-#import "NSObject+YJAssociatedIdentifier.h"
-#import "NSObject+YJTaggedPointerChecking.h"
 #import <objc/runtime.h>
+#import "NSBundle+YJCategory.h"
 
 @interface YJGeneralTest : XCTestCase
 
@@ -33,7 +29,6 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-
     NSLog(@"");
 }
 

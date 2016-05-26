@@ -8,6 +8,7 @@
 //  Reference: https://github.com/ibireme/YYKit
 
 #import "NSBundle+YJCategory.h"
+#import "YJUIMacros.h"
 
 @implementation NSBundle (YJCategory)
 
@@ -43,18 +44,18 @@
 #pragma mark - Returns a bundle path
 
 + (nullable NSString *)pathForScaledResource:(nullable NSString *)name ofType:(nullable NSString *)ext inDirectory:(NSString *)bundlePath {
-    return _yj_pathForScaledResouceForNSBundle(self, name, ext, bundlePath);
+    return _yj_pathForScaledResouceForObject(self, name, ext, bundlePath);
 }
 
 - (nullable NSString *)pathForScaledResource:(nullable NSString *)name ofType:(nullable NSString *)ext inDirectory:(nullable NSString *)subpath {
-    return _yj_pathForScaledResouceForNSBundle(self, name, ext, subpath);
+    return _yj_pathForScaledResouceForObject(self, name, ext, subpath);
 }
 
 - (nullable NSString *)pathForScaledResource:(nullable NSString *)name ofType:(nullable NSString *)ext {
-    return _yj_pathForScaledResouceForNSBundle(self, name, ext, nil);
+    return _yj_pathForScaledResouceForObject(self, name, ext, nil);
 }
 
-static NSString *_yj_pathForScaledResouceForNSBundle(id object, NSString *name, NSString *ext, NSString *dir) {
+static NSString *_yj_pathForScaledResouceForObject(id object, NSString *name, NSString *ext, NSString *dir) {
     NSString *path = nil;
     BOOL objectIsClass;
     if (object == [NSBundle class]) objectIsClass = YES;
@@ -62,10 +63,10 @@ static NSString *_yj_pathForScaledResouceForNSBundle(id object, NSString *name, 
     else return nil;
     if (objectIsClass && !dir.length) return nil;
     if (!name.length) return [object pathForResource:name ofType:ext inDirectory:dir];
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0
-    if ([name containsString:@"."]) return [object pathForResource:name ofType:nil inDirectory:dir];
-    if ([name containsString:@"@"]) return [object pathForResource:name ofType:ext inDirectory:dir];
-#endif
+    if (kSystemVersion >= 8.0) {
+        if ([name containsString:@"."]) return [object pathForResource:name ofType:nil inDirectory:dir];
+        if ([name containsString:@"@"]) return [object pathForResource:name ofType:ext inDirectory:dir];
+    }
     NSArray *preferredScales = objectIsClass ? [object preferredScales] : [[object class] preferredScales];
     for (int i = 0; i < preferredScales.count; i++) {
         NSString *scaledName = [NSString stringWithFormat:@"%@@%@x", name, preferredScales[i]];
