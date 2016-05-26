@@ -7,6 +7,7 @@
 #
 
 Pod::Spec.new do |s|
+
   s.name             = "YJKit"
   s.version          = "0.1.48"
   s.license          = 'MIT'
@@ -20,6 +21,5 @@ Pod::Spec.new do |s|
 
   s.source_files = 'YJKit/**/*'
   s.public_header_files = 'YJKit/**/*.h'
-  s.frameworks = 'UIKit', 'Foundation', 'CoreGraphics', 'AVFoundation'
 
 end

@@ -338,11 +338,11 @@
 		326388931CF2B3390026BED8 /* Macros */ = {
 			isa = PBXGroup;
 			children = (
+				326388981CF2B3390026BED8 /* YJMacros.h */,
 				326388941CF2B3390026BED8 /* YJClangMacros.h */,
 				326388951CF2B3390026BED8 /* YJConfigureMacros.h */,
 				326388961CF2B3390026BED8 /* YJDebugMacros.h */,
 				326388971CF2B3390026BED8 /* YJExecutionMacros.h */,
-				326388981CF2B3390026BED8 /* YJMacros.h */,
 				326388991CF2B3390026BED8 /* YJMathMacros.h */,
 				3263889A1CF2B3390026BED8 /* YJObjcMacros.h */,
 				3263889B1CF2B3390026BED8 /* YJUIMacros.h */,
@@ -366,7 +366,6 @@
 				326388C31CF2B3390026BED8 /* UIKitExt.h */,
 				326388A11CF2B3390026BED8 /* Categories */,
 				326388B81CF2B3390026BED8 /* Privates */,
-				326388BB1CF2B3390026BED8 /* Protocols */,
 				326388BC1CF2B3390026BED8 /* Structures */,
 				326388C41CF2B3390026BED8 /* YJMaskFamily */,
 			);
@@ -413,13 +412,6 @@
 				326388BA1CF2B3390026BED8 /* _YJAlertDelegate.m */,
 			);
 			path = Privates;
-			sourceTree = "<group>";
-		};
-		326388BB1CF2B3390026BED8 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		326388BC1CF2B3390026BED8 /* Structures */ = {
@@ -533,24 +525,24 @@
 		326F34981CF5C20F00B2FF75 /* CollectionType */ = {
 			isa = PBXGroup;
 			children = (
-				326F34991CF5C20F00B2FF75 /* NSArray+YJCollection.h */,
-				326F349A1CF5C20F00B2FF75 /* NSArray+YJCollection.m */,
-				326F349B1CF5C20F00B2FF75 /* NSArray+YJSequence.h */,
-				326F349C1CF5C20F00B2FF75 /* NSArray+YJSequence.m */,
-				326F349D1CF5C20F00B2FF75 /* NSMutableArray+YJCollection.h */,
-				326F349E1CF5C20F00B2FF75 /* NSMutableArray+YJCollection.m */,
-				326F349F1CF5C20F00B2FF75 /* NSMutableArray+YJSequence.h */,
-				326F34A01CF5C20F00B2FF75 /* NSMutableArray+YJSequence.m */,
-				326F34A11CF5C20F00B2FF75 /* NSMutableSet+YJCollection.h */,
-				326F34A21CF5C20F00B2FF75 /* NSMutableSet+YJCollection.m */,
-				326F34A31CF5C20F00B2FF75 /* NSMutableString+YJSequence.h */,
-				326F34A41CF5C20F00B2FF75 /* NSMutableString+YJSequence.m */,
-				326F34A51CF5C20F00B2FF75 /* NSSet+YJCollection.h */,
-				326F34A61CF5C20F00B2FF75 /* NSSet+YJCollection.m */,
 				326F34A71CF5C20F00B2FF75 /* NSString+YJCollection.h */,
 				326F34A81CF5C20F00B2FF75 /* NSString+YJCollection.m */,
 				326F34A91CF5C20F00B2FF75 /* NSString+YJSequence.h */,
 				326F34AA1CF5C20F00B2FF75 /* NSString+YJSequence.m */,
+				326F34A31CF5C20F00B2FF75 /* NSMutableString+YJSequence.h */,
+				326F34A41CF5C20F00B2FF75 /* NSMutableString+YJSequence.m */,
+				326F34991CF5C20F00B2FF75 /* NSArray+YJCollection.h */,
+				326F349A1CF5C20F00B2FF75 /* NSArray+YJCollection.m */,
+				326F349D1CF5C20F00B2FF75 /* NSMutableArray+YJCollection.h */,
+				326F349E1CF5C20F00B2FF75 /* NSMutableArray+YJCollection.m */,
+				326F349B1CF5C20F00B2FF75 /* NSArray+YJSequence.h */,
+				326F349C1CF5C20F00B2FF75 /* NSArray+YJSequence.m */,
+				326F349F1CF5C20F00B2FF75 /* NSMutableArray+YJSequence.h */,
+				326F34A01CF5C20F00B2FF75 /* NSMutableArray+YJSequence.m */,
+				326F34A51CF5C20F00B2FF75 /* NSSet+YJCollection.h */,
+				326F34A61CF5C20F00B2FF75 /* NSSet+YJCollection.m */,
+				326F34A11CF5C20F00B2FF75 /* NSMutableSet+YJCollection.h */,
+				326F34A21CF5C20F00B2FF75 /* NSMutableSet+YJCollection.m */,
 			);
 			path = CollectionType;
 			sourceTree = "<group>";
