@@ -14,13 +14,14 @@ FOUNDATION_EXTERN const NSInteger YJAssociatedTagInvalid;
 FOUNDATION_EXTERN const NSInteger YJAssociatedTagNone;
 
 @interface NSObject (YJAssociatedIdentifier)
-@property (nonatomic, copy, nullable) NSString *associatedIdentifier;
-@property (nonatomic, assign) NSInteger associatedTag; // Maybe returned as YJAssociatedTagNone or YJAssociatedTagInvalid
+@property (nonatomic, copy, nullable) NSString *associatedIdentifier; // Maybe returns nil
+@property (nonatomic, assign) NSInteger associatedTag; // Maybe returns YJAssociatedTagNone or YJAssociatedTagInvalid
 @end
 
 
 @interface NSArray <ObjectType> (YJAssociatedIdentifier)
 - (BOOL)containsObjectWithAssociatedIdentifier:(NSString *)associatedIdentifier;
+- (BOOL)containsObjectWithAssociatedTag:(NSInteger)associatedTag;
 - (void)enumerateAssociatedObjectsUsingBlock:(void (^)(ObjectType obj, NSUInteger idx, BOOL *stop))block;
 @end
 

@@ -43,10 +43,20 @@ static const void * YJObjectAssociatedTagKey = &YJObjectAssociatedTagKey;
 @implementation NSArray (YJAssociatedIdentifier)
 
 - (BOOL)containsObjectWithAssociatedIdentifier:(NSString *)associatedIdentifier {
-    if (!associatedIdentifier.length) return NO;
     BOOL contains = NO;
     for (NSObject *obj in self) {
         if ([obj.associatedIdentifier isEqualToString:associatedIdentifier]) {
+            contains = YES;
+            break;
+        }
+    }
+    return contains;
+}
+
+- (BOOL)containsObjectWithAssociatedTag:(NSInteger)associatedTag {
+    BOOL contains = NO;
+    for (NSObject *obj in self) {
+        if (obj.associatedTag == associatedTag) {
             contains = YES;
             break;
         }

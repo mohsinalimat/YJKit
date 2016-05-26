@@ -10,6 +10,7 @@
 
 @interface NSObject (YJCategory_Swizzling)
 
-+ (void)swizzleInstanceMethodForSelector:(SEL)fromSelector toSelector:(SEL)toSelector;
++ (void)swizzleInstanceMethodForSelector:(SEL)selector toSelector:(SEL)toSelector;
++ (void)swizzleClassMethodForSelector:(SEL)selector toSelector:(SEL)toSelector;
 
 @end

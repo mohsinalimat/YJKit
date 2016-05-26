@@ -7,7 +7,46 @@
 //
 
 #import "UITextField+YJCategory.h"
+#import "NSObject+YJCategory_Swizzling.h"
+#import "NSArray+YJCollection.h"
 
 @implementation UITextField (YJCategory)
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self swizzleInstanceMethodForSelector:@selector(removeFromSuperview) toSelector:@selector(yj_textFieldRemoveFromSuperview)];
+    });
+}
+
+#pragma mark - modifying life cycle
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    NSArray *taps = [self.superview.gestureRecognizers filter:^BOOL(__kindof UIGestureRecognizer * _Nonnull obj) {
+        return [obj isKindOfClass:[UITapGestureRecognizer class]];
+    }];
+    
+    if (!taps.count) {
+        UITapGestureRecognizer *dismissTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(yj_dismissTextField)];
+        [self.superview addGestureRecognizer:dismissTap];
+    } else {
+        UITapGestureRecognizer *tap = taps.lastObject;
+        [tap removeTarget:self action:@selector(yj_dismissTextField)];
+        [tap addTarget:self action:@selector(yj_dismissTextField)];
+    }
+}
+
+- (void)yj_textFieldRemoveFromSuperview {
+    for (UITapGestureRecognizer *tap in self.superview.gestureRecognizers) {
+        [tap removeTarget:self action:@selector(yj_dismissTextField)];
+    }
+    [self yj_textFieldRemoveFromSuperview];
+}
+
+- (void)yj_dismissTextField {
+    [self resignFirstResponder];
+}
 
 @end

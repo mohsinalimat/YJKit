@@ -69,7 +69,6 @@ static const void *YJTextViewAssociatedPlaceholderColorKey = &YJTextViewAssociat
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(yj_beginTextEditing) name:UITextViewTextDidBeginEditingNotification object:self];
     [nc addObserver:self selector:@selector(yj_endTextEditing) name:UITextViewTextDidEndEditingNotification object:self];
-    [nc addObserver:self selector:@selector(yj_handleTextChange) name:UITextViewTextDidChangeNotification object:self];
     
     return textView;
 }
@@ -85,10 +84,6 @@ static const void *YJTextViewAssociatedPlaceholderColorKey = &YJTextViewAssociat
 
 - (void)yj_endTextEditing {
     [self _displayPlaceholderIfNeeded];
-}
-
-- (void)yj_handleTextChange {
-    NSLog(@"");
 }
 
 #pragma mark - observing life cycle

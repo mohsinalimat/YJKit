@@ -145,6 +145,14 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     return self;
 }
 
+- (void)loadView {
+    YJGroupedStyleTableView *tableView = [[YJGroupedStyleTableView alloc] initWithFrame:kUIScreenBounds style:UITableViewStylePlain];
+    tableView.backgroundColor = [UIColor whiteColor];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    self.view = tableView;
+}
+
 #pragma mark - Mapping
 
 - (nullable NSDictionary *)itemCellContentsFromList:(NSArray *)list {
@@ -799,7 +807,6 @@ NSInteger const YJGroupedStyleTableViewControllerHeaderCellForCompressedSizeCalc
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         [self swizzleInstanceMethodForSelector:@selector(reloadData) toSelector:@selector(yj_reloadData)];
-        [self swizzleInstanceMethodForSelector:@selector(class) toSelector:@selector(yj_tableViewClass)];
     });
 }
 
@@ -810,13 +817,10 @@ NSInteger const YJGroupedStyleTableViewControllerHeaderCellForCompressedSizeCalc
     [self yj_reloadData];
 }
 
-- (Class)yj_tableViewClass {
-    if ([self.delegate respondsToSelector:@selector(fetchRequiredDataForLoadingGroupedCells)]) {
-        return [YJGroupedStyleTableView class];
-    } else {
-        return [UITableView class];
-    }
-}
+@end
+
+
+@implementation YJGroupedStyleTableView
 
 - (nullable UITableViewCell *)cellForGroupedItemAtRow:(NSInteger)row inSection:(NSInteger)section {
     if ([self.delegate isKindOfClass:[YJGroupedStyleTableViewController class]]) {
@@ -837,15 +841,6 @@ NSInteger const YJGroupedStyleTableViewControllerHeaderCellForCompressedSizeCalc
     }
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
     return [self cellForRowAtIndexPath:indexPath];
-}
-
-@end
-
-
-@implementation YJGroupedStyleTableView
-
-- (nullable UITableViewCell *)cellForGroupedItemAtRow:(NSInteger)row inSection:(NSInteger)section {
-    return [super cellForGroupedItemAtRow:row inSection:section];
 }
 
 @end
