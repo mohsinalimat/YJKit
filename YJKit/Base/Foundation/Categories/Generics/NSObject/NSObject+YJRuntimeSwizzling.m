@@ -1,5 +1,5 @@
 //
-//  NSObject+YJCategory_Swizzling.m
+//  NSObject+YJRuntimeSwizzling.m
 //  YJKit
 //
 //  Created by huang-kun on 16/5/13.
@@ -7,9 +7,9 @@
 //
 
 #import <objc/runtime.h>
-#import "NSObject+YJCategory_Swizzling.h"
+#import "NSObject+YJRuntimeSwizzling.h"
 
-@implementation NSObject (YJCategory_Swizzling)
+@implementation NSObject (YJRuntimeSwizzling)
 
 static void _yj_swizzleMethodForClass(id class, SEL selector, SEL toSelector) {
     Method method = class_getInstanceMethod(class, selector);

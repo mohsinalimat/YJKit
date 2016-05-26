@@ -11,7 +11,7 @@
 #import <objc/message.h>
 #import "NSObject+YJBlockBasedKVO.h"
 #import "YJDebugMacros.h"
-#import "NSObject+YJCategory_Swizzling.h"
+#import "NSObject+YJRuntimeSwizzling.h"
 
 @interface _YJKVOModifiedClassesRecorder : NSObject
 + (instancetype)recorder;

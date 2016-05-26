@@ -8,7 +8,7 @@
 
 #import <objc/runtime.h>
 #import "UITextView+YJCategory.h"
-#import "NSObject+YJCategory_Swizzling.h"
+#import "NSObject+YJRuntimeSwizzling.h"
 #import "NSObject+YJAssociatedIdentifier.h"
 #import "NSArray+YJCollection.h"
 #import "RGBColor.h"

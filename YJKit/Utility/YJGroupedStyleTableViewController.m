@@ -7,7 +7,7 @@
 //
 
 #import "YJGroupedStyleTableViewController.h"
-#import "NSObject+YJCategory_Swizzling.h"
+#import "NSObject+YJRuntimeSwizzling.h"
 #import "NSArray+YJSequence.h"
 #import "NSArray+YJCollection.h"
 #import "YJUIMacros.h"

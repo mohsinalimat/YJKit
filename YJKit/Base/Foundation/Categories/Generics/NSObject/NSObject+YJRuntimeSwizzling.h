@@ -1,5 +1,5 @@
 //
-//  NSObject+YJCategory_Swizzling.h
+//  NSObject+YJRuntimeSwizzling.h
 //  YJKit
 //
 //  Created by huang-kun on 16/5/13.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (YJCategory_Swizzling)
+@interface NSObject (YJRuntimeSwizzling)
 
 + (void)swizzleInstanceMethodForSelector:(SEL)selector toSelector:(SEL)toSelector;
 + (void)swizzleClassMethodForSelector:(SEL)selector toSelector:(SEL)toSelector;

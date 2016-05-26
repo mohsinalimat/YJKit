@@ -7,7 +7,7 @@
 //
 
 #import "UITextField+YJCategory.h"
-#import "NSObject+YJCategory_Swizzling.h"
+#import "NSObject+YJRuntimeSwizzling.h"
 #import "NSArray+YJCollection.h"
 
 @implementation UITextField (YJCategory)
