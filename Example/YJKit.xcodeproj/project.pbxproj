@@ -63,7 +63,7 @@
 		326F34CA1CF5C20F00B2FF75 /* NSObject+YJBlockBasedKVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 326F34B61CF5C20F00B2FF75 /* NSObject+YJBlockBasedKVO.m */; };
 		326F34CB1CF5C20F00B2FF75 /* NSObject+YJCategory_Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 326F34B81CF5C20F00B2FF75 /* NSObject+YJCategory_Swizzling.m */; };
 		326F34CC1CF5C20F00B2FF75 /* NSObject+YJMutabilityChecking.m in Sources */ = {isa = PBXBuildFile; fileRef = 326F34BA1CF5C20F00B2FF75 /* NSObject+YJMutabilityChecking.m */; };
-		326F34CD1CF5C20F00B2FF75 /* NSTimer+ YJBlockBased.m in Sources */ = {isa = PBXBuildFile; fileRef = 326F34BB1CF5C20F00B2FF75 /* NSTimer+ YJBlockBased.m */; };
+		326F34CD1CF5C20F00B2FF75 /* NSTimer+YJBlockBased.m in Sources */ = {isa = PBXBuildFile; fileRef = 326F34BB1CF5C20F00B2FF75 /* NSTimer+YJBlockBased.m */; };
 		326F34D01CF5C2BD00B2FF75 /* NSValue+YJGeometryExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 326F34CF1CF5C2BD00B2FF75 /* NSValue+YJGeometryExtension.m */; };
 		326F34D31CF5C9C100B2FF75 /* NSObject+YJTaggedPointerChecking.m in Sources */ = {isa = PBXBuildFile; fileRef = 326F34D21CF5C9C100B2FF75 /* NSObject+YJTaggedPointerChecking.m */; };
 		326F34D61CF5F70300B2FF75 /* UITextField+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 326F34D51CF5F70300B2FF75 /* UITextField+YJCategory.m */; };
@@ -224,7 +224,7 @@
 		326F34B81CF5C20F00B2FF75 /* NSObject+YJCategory_Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YJCategory_Swizzling.m"; sourceTree = "<group>"; };
 		326F34B91CF5C20F00B2FF75 /* NSObject+YJMutabilityChecking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YJMutabilityChecking.h"; sourceTree = "<group>"; };
 		326F34BA1CF5C20F00B2FF75 /* NSObject+YJMutabilityChecking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YJMutabilityChecking.m"; sourceTree = "<group>"; };
-		326F34BB1CF5C20F00B2FF75 /* NSTimer+ YJBlockBased.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+ YJBlockBased.m"; sourceTree = "<group>"; };
+		326F34BB1CF5C20F00B2FF75 /* NSTimer+YJBlockBased.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+YJBlockBased.m"; sourceTree = "<group>"; };
 		326F34BC1CF5C20F00B2FF75 /* NSTimer+YJBlockBased.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+YJBlockBased.h"; sourceTree = "<group>"; };
 		326F34CE1CF5C2BD00B2FF75 /* NSValue+YJGeometryExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+YJGeometryExtension.h"; sourceTree = "<group>"; };
 		326F34CF1CF5C2BD00B2FF75 /* NSValue+YJGeometryExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+YJGeometryExtension.m"; sourceTree = "<group>"; };
@@ -563,8 +563,8 @@
 				326F34AD1CF5C20F00B2FF75 /* NSBundle+YJCategory.m */,
 				326F34CE1CF5C2BD00B2FF75 /* NSValue+YJGeometryExtension.h */,
 				326F34CF1CF5C2BD00B2FF75 /* NSValue+YJGeometryExtension.m */,
-				326F34BB1CF5C20F00B2FF75 /* NSTimer+ YJBlockBased.m */,
 				326F34BC1CF5C20F00B2FF75 /* NSTimer+YJBlockBased.h */,
+				326F34BB1CF5C20F00B2FF75 /* NSTimer+YJBlockBased.m */,
 			);
 			path = Generics;
 			sourceTree = "<group>";
@@ -823,7 +823,7 @@
 				326389151CF2B3390026BED8 /* YJRoundedCornerButton.m in Sources */,
 				326F34D01CF5C2BD00B2FF75 /* NSValue+YJGeometryExtension.m in Sources */,
 				32B8C1931CEE110F00E2639B /* Tests.m in Sources */,
-				326F34CD1CF5C20F00B2FF75 /* NSTimer+ YJBlockBased.m in Sources */,
+				326F34CD1CF5C20F00B2FF75 /* NSTimer+YJBlockBased.m in Sources */,
 				324AB0A01CD1C6EE00A9DCF0 /* YJMaskViewController.m in Sources */,
 				326F34C61CF5C20F00B2FF75 /* NSBundle+YJCategory.m in Sources */,
 				32CB4AAB1CCA3C880050C01B /* YJSavingImageToAlbumViewController.m in Sources */,
