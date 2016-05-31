@@ -51,9 +51,11 @@
 
 
 @interface _YJGroupedStyleLineSeparatorCell : UITableViewCell
+
 @property (nonatomic) CGFloat leftIndentation;
 @property (nonatomic, strong) UIColor *lineColor; // It's dangerous to name "separatorColor" if you override it's setter because it replaces system internal method -setSeparatorColor: for UITableViewCell
 @property (nonatomic, strong) UIColor *compensatedColor;
+
 @end
 
 @implementation _YJGroupedStyleLineSeparatorCell {
@@ -98,6 +100,7 @@
 
 @end
 
+
 #define YJGSTVC_HEADER_CELL_REUSE_ID @"_YJGSTVC_HEADER_CELL_REUSE_ID"
 #define YJGSTVC_ITEM_CELL_REUSE_ID @"_YJGSTVC_ITEM_CELL_REUSE_ID"
 #define YJGSTVC_GROUP_SEPARATOR_CELL_REUSE_ID @"_YJGSTVC_GROUP_SEPARATOR_CELL_REUSE_ID"
@@ -118,21 +121,10 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 @interface YJGroupedStyleTableViewController ()
 
 @property (nonatomic, copy) NSArray <NSString *> *mappedRows; // stored information for each row in one section
-@property (nonatomic, copy) NSArray <NSNumber *> *itemRows; // Rows for item cells
-@property (nonatomic, copy) NSDictionary <NSNumber *, NSString *> *itemTitles;
-@property (nonatomic, copy, nullable) NSDictionary <NSNumber *, NSString *> *itemSubtitles;
-@property (nonatomic, copy, nullable) NSDictionary <NSNumber *, UIImage *> *itemIconImages;
-@property (nonatomic, copy, nullable) NSDictionary <NSNumber *, NSString *> *itemIconImageNames;
-@property (nonatomic, copy, nullable) NSDictionary <NSNumber *, NSString *> *classNamesForDestinationViewControllers;
-@property (nonatomic, copy, nullable) NSDictionary <NSNumber *, NSString *> *storyboardIdentifiersForDestinationViewControllers;
-
-@property (nonatomic, strong) NSData *frozenNavBarData;
-@property (nonatomic, strong) NSMutableArray *navBarBGSubviews;
-
 @property (nonatomic, strong) UIColor *backgroundColorForHeaderCell; // @dynamic
 @property (nonatomic, assign) CGFloat heightForHeaderCell;
-@property (nonatomic, assign) BOOL shouldAnimateNavigationBar;
 @property (nonatomic, assign) BOOL didRegisterHeaderCell;
+
 @end
 
 @implementation YJGroupedStyleTableViewController
@@ -141,104 +133,69 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 
 - (instancetype)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:UITableViewStylePlain];
-    if (self) [self fetchRequiredDataForLoadingGroupedCells];
+    if (self) [self _mapDataFromYJGroupedStyleTableViewDataSource];
     return self;
 }
 
 - (void)loadView {
     YJGroupedStyleTableView *tableView = [[YJGroupedStyleTableView alloc] initWithFrame:kUIScreenBounds style:UITableViewStylePlain];
-    tableView.backgroundColor = [UIColor whiteColor];
-    tableView.delegate = self;
-    tableView.dataSource = self;
+    
+    tableView.backgroundColor = YJGSTVC_DEFAULT_TABLE_BACKGROUND_COLOR;
+    tableView.contentInset = (UIEdgeInsets){ 0, 0, kYJGSTVCBottomSpaceFromLastCell - kYJGSTVCLastGroupSeparatorCellHeight, 0 };
+   
+    tableView.lineSeparatorStyle = YJGroupedStyleTableViewSeparatorStyleDefault;
+    tableView.lineSeparatorColor = YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
+    
+    tableView.sectionVerticalSpace = 40.0;
+    
+    tableView.itemCellStyle = UITableViewCellStyleDefault;
+    tableView.itemCellIndentationStyle = YJGroupedStyleTableViewCellIndentationStyleAlignTitle;
+    tableView.itemCellBackgroundColor = YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR;
+    tableView.itemCellHeight = 44.0f;
+    
+    // hide default separators
+    tableView.separatorColor = [UIColor clearColor];
+    tableView.separatorInset = UIEdgeInsetsMake(0, 9999, 0, 0);
+    
+    tableView.delegate = (id)self;
+    tableView.dataSource = (id)self;
+    
     self.view = tableView;
 }
 
 #pragma mark - Mapping
 
-- (nullable NSDictionary *)itemCellContentsFromList:(NSArray *)list {
+- (void)_mapDataFromYJGroupedStyleTableViewDataSource {
+    NSMutableArray *mappedRows = @[ YJGSHeaderCell, YJGSGroupSeparator, YJGSLineSeparator ].mutableCopy;
+    NSUInteger row = 3; // row for each UITableViewCell
+    NSInteger sections = 1;
     
-    if (!_itemRows) {
-        NSMutableDictionary <NSNumber *, NSString *> *titles = @{}.mutableCopy;
-        NSMutableArray *mappedRows = @[ YJGSHeaderCell, YJGSGroupSeparator, YJGSLineSeparator ].mutableCopy;
-        NSUInteger row = 3; // row for each UITableViewCell
-        NSArray *groups = [self titlesForGroupedCells];
-        for (NSUInteger i = 0; i < groups.count; ++i) {
-            NSArray *group = groups[i];
-            NSAssert([group isKindOfClass:[NSArray class]], @"The titles for %@ item cells must be nested as a group, e.g. @[ @[ @\"Item 1\", @\"Item 2\", ... ] ].", self.class);
-            for (NSUInteger j = 0; j < group.count; ++j) {
-                NSString *title = group[j];
-                titles[@(row)] = title;
-                mappedRows[row++] = [NSString stringWithFormat:@"%@:%@,%@", YJGSItemCell, @(i), @(j)];
-                mappedRows[row++] = [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatingItemCell];
-            }
-            mappedRows[row-1] = [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatingGroup];
-            mappedRows[row++] = YJGSGroupSeparator;
-            mappedRows[row++] = [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatingGroup];
+    if ([self.tableView.dataSource respondsToSelector:@selector(numberOfSectionsInGroupedStyleTableView:)]) {
+        sections = [self.tableView.dataSource numberOfSectionsInGroupedStyleTableView:self.tableView];
+    }
+    
+    for (NSUInteger i = 0; i < sections; ++i) {
+        NSInteger rowsInSection = [self.tableView.dataSource tableView:self.tableView numberOfGroupedItemRowsInSection:i];
+        for (NSUInteger j = 0; j < rowsInSection; ++j) {
+            mappedRows[row++] = [NSString stringWithFormat:@"%@:%@,%@", YJGSItemCell, @(i), @(j)];
+            mappedRows[row++] = [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatingItemCell];
         }
-        [mappedRows removeLastObject];
-        
-        _mappedRows = [mappedRows copy];
-        _itemTitles = [titles copy];
-        _itemRows = [[titles allKeys] arrayBySortingWithCondition:^BOOL(NSNumber * _Nonnull obj1, NSNumber * _Nonnull obj2) {
-            return obj1.unsignedIntegerValue < obj2.unsignedIntegerValue;
-        }];
+        mappedRows[row-1] = [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatingGroup];
+        mappedRows[row++] = [NSString stringWithFormat:@"%@:%@", YJGSGroupSeparator, @(i)];
+        mappedRows[row++] = [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatingGroup];
     }
+    [mappedRows removeLastObject];
     
-    if (!list.count) return nil;
-    
-    NSArray *flattenedList = [list arrayByFlatteningRecursively];
-    NSAssert(_itemRows.count == flattenedList.count, @"%@ - Grouped cell itemRows has different count with given list. \nitemRows:%@, \nlist:%@", self.class, _itemRows, flattenedList);
-    NSMutableDictionary *contents = [NSMutableDictionary dictionaryWithCapacity:flattenedList.count];
-    for (NSUInteger i = 0; i < flattenedList.count; ++i) {
-        contents[_itemRows[i]] = flattenedList[i];
-    }
-    return [contents copy];
+    _mappedRows = [mappedRows copy];
 }
 
-- (void)fetchRequiredDataForLoadingGroupedCells {
-    
-    self.itemSubtitles = [self itemCellContentsFromList:[self subtitlesForItemCells]];
-    self.itemIconImages = [self itemCellContentsFromList:[self iconImagesForItemCells]];
-    self.itemIconImageNames = [self itemCellContentsFromList:[self iconImageNamesForItemCells]];
-    self.classNamesForDestinationViewControllers = [self itemCellContentsFromList:[self classNamesOfDestinationViewControllersForItemCells]];
-    self.storyboardIdentifiersForDestinationViewControllers = [self itemCellContentsFromList:[self storyboardIdentifiersOfDestinationViewControllersForItemCells]];
-    
-    self.tableView.backgroundColor = [self backgroundColorForTableView];
-    
-    // hide default separators
-    self.tableView.separatorColor = [UIColor clearColor];
-    self.tableView.separatorInset = UIEdgeInsetsMake(0, 9999, 0, 0);
-    
-    UIEdgeInsets insets = UIEdgeInsetsZero;
-    insets.top = [self topEdgeInsetForTableView];
-    insets.bottom = kYJGSTVCBottomSpaceFromLastCell - kYJGSTVCLastGroupSeparatorCellHeight;
-    self.tableView.contentInset = insets;
-    
-    self.edgesForExtendedLayout = [self shouldHideNavigationBar] ? UIRectEdgeNone : UIRectEdgeTop;
-    self.extendedLayoutIncludesOpaqueBars = YES;
-}
-
-- (NSUInteger)totalCellCount {
-    return self.mappedRows.count;
-}
-
-- (void)getMappedItemRow:(NSInteger *)rowPtr inSection:(NSInteger *)sectionPtr forIndexPath:(NSIndexPath *)indexPath {
-    NSString *info = self.mappedRows[indexPath.row];
-    if ([info hasPrefix:YJGSItemCell]) {
-        NSArray <NSString *> *components = [[info componentsSeparatedByString:@":"].lastObject componentsSeparatedByString:@","];
-        NSInteger row = components.lastObject.integerValue;
-        NSInteger section = components.firstObject.integerValue;
-        if (rowPtr) *rowPtr = row;
-        if (sectionPtr) *sectionPtr = section;
-    }
+- (nullable NSIndexPath *)indexPathForGroupedItemCellFromRawIndexPath:(NSIndexPath *)rawIndexPath {
+    if (![self.mappedRows[rawIndexPath.row] hasPrefix:YJGSItemCell]) return nil;
+    NSArray *indexPathInfo = [[self.mappedRows[rawIndexPath.row] componentsSeparatedByString:@":"].lastObject componentsSeparatedByString:@","];
+    return [NSIndexPath indexPathForRow:[indexPathInfo.lastObject integerValue] inSection:[indexPathInfo.firstObject integerValue]];
 }
 
 #pragma mark - Life cycle
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    self.itemIconImages = nil;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -246,170 +203,52 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     [self.tableView registerClass:[_YJGroupedStyleGroupSeparatorCell class] forCellReuseIdentifier:YJGSTVC_GROUP_SEPARATOR_CELL_REUSE_ID];
     // registering line separator
     [self.tableView registerClass:[_YJGroupedStyleLineSeparatorCell class] forCellReuseIdentifier:YJGSTVC_LINE_SEPARATOR_CELL_REUSE_ID];
-    // registering header cell
-    NSString *nibName = [self nibNameForRegisteringHeaderCell];
-    Class HCClass = [self classForRegisteringHeaderCell];
-    if (!HCClass && [self classNameForRegisteringHeaderCell].length) {
-        HCClass = NSClassFromString([self classNameForRegisteringHeaderCell]);
-    }
-    if (nibName.length) {
-        [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
-             forCellReuseIdentifier:[self reuseIdentifierForHeaderCell] ?: YJGSTVC_HEADER_CELL_REUSE_ID];
-        self.didRegisterHeaderCell = YES;
-    } else if (HCClass) {
-        [self.tableView registerClass:HCClass
-               forCellReuseIdentifier:[self reuseIdentifierForHeaderCell] ?: YJGSTVC_HEADER_CELL_REUSE_ID];
-        self.didRegisterHeaderCell = YES;
-    }
+    // set table view below status bar
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [self removeDropBackViewFromNavBarIfPossible];
-    [self saveOriginalNavigationBar];
-    [self setNavigationBarTranslucentIfPossible:NO];
-    
-    if ([self shouldHideNavigationBar]) {
-        [self.navigationController setNavigationBarHidden:YES animated:self.shouldAnimateNavigationBar];
-        [self updateNavigationBarAnimationState];
-    } else {
-        [self hideNavigationBarShadowIfPossible];
-    }
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [self setNavigationBarTranslucentIfPossible:YES];
-    if ([self shouldMaskNavigationBarBackgroundColor]) {
-        self.navigationController.navigationBar.barTintColor = self.backgroundColorForHeaderCell;
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    if ([self shouldHideNavigationBar]) {
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
-        [self updateNavigationBarAnimationState];
-    }
-    
-    [self restoreOriginalNavigationBar];
-    [self addDropBackViewToNavBarIfNeeded];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
-    if ([self shouldHideNavigationBar]) {
-        [self updateNavigationBarAnimationState];
-    }
-}
-
-#pragma mark - Update status bar and navigation bar
-
-- (void)updateNavigationBarAnimationState {
-    self.shouldAnimateNavigationBar = (self.navigationController.viewControllers.count == 1) ? NO : YES;
-}
-
-// hide 1px shadow image
-- (void)hideNavigationBarShadowIfPossible {
-    if ([self shouldHideNavigationBarShadow]) {
-        UIImage *emptyShadow = [UIImage new];
-        self.navigationController.navigationBar.shadowImage = emptyShadow;
-        [self.navigationController.navigationBar setBackgroundImage:emptyShadow forBarMetrics:UIBarMetricsDefault];
-    }
-}
-
-- (void)setNavigationBarTranslucentIfPossible:(BOOL)translucent {
-    if ([self shouldTranslucentNavigationBar]) {
-        self.navigationController.navigationBar.translucent = [self shouldOpaqueNavBarIfNeeded] ? NO : translucent;
-    }
-}
-
-// save nav bar
-- (void)saveOriginalNavigationBar {
-    if (!self.frozenNavBarData) {
-        self.frozenNavBarData = [NSKeyedArchiver archivedDataWithRootObject:self.navigationController.navigationBar];
-    }
-}
-
-// restore nav bar
-- (void)restoreOriginalNavigationBar {
-    if (!self.frozenNavBarData) return;
-    UIViewController *vc = self.navigationController.viewControllers.lastObject;
-    if ([vc respondsToSelector:@selector(shouldHideNavigationBar)]) {
-        if ([(id)vc shouldHideNavigationBar]) {
-            return;
-        }
-    }
-    
-    UINavigationBar *navBar = self.navigationController.navigationBar;
-    UINavigationBar *frozenNavBar = [NSKeyedUnarchiver unarchiveObjectWithData:self.frozenNavBarData];
-    navBar.translucent = frozenNavBar.translucent;
-    navBar.tintColor = frozenNavBar.tintColor;
-    navBar.barTintColor = frozenNavBar.barTintColor;
-    navBar.shadowImage = frozenNavBar.shadowImage;
-}
-
-// remove back drop view from subviews of navigation back ground if possible
-- (void)removeDropBackViewFromNavBarIfPossible {
-    // check if pusher has shown nav bar
-    BOOL isNavBarShownBeforePushIn = YES;
-    UIViewController *vc = self.navigationController.viewControllers.lastObject;
-    if ([vc respondsToSelector:@selector(shouldHideNavigationBar)]) {
-        isNavBarShownBeforePushIn = ![(id)vc shouldHideNavigationBar];
-    }
-    if (!isNavBarShownBeforePushIn || !vc) return;
-    
-    // remove back drop view
-    if (![self shouldHideNavigationBar] && [self shouldMaskNavigationBarBackgroundColor] && [self shouldTranslucentNavigationBar]) {
-        NSArray *bgViews = [self.navigationController.navigationBar.subviews.firstObject subviews];
-        if (bgViews.count > 1) {
-            for (UIView *subview in bgViews) {
-                if (![subview isKindOfClass:[UIImageView class]]) {
-                    [self.navBarBGSubviews addObject:subview]; //
-                    [subview removeFromSuperview];
-                }
-            }
-        }
-    }
-}
-
-// reset back drop view back to nav bar if needed
-- (void)addDropBackViewToNavBarIfNeeded {
-    if (!self.navBarBGSubviews.count) return;
-    UIView *bgView = self.navigationController.navigationBar.subviews.firstObject;
-    for (UIView *subview in self.navBarBGSubviews) {
-        if (![bgView.subviews containsObject:subview]) {
-            [bgView addSubview:subview];
-        }
+    if (self.shouldHideNavigationBar) {
+        [self.navigationController setNavigationBarHidden:YES animated:animated];
     }
 }
 
 #pragma mark - Accessors
 
+// make table view's background color as same as the header cell,
+// so when user pulls down the table view, the color looks uniformed.
 - (void)setBackgroundColorForHeaderCell:(UIColor *)backgroundColorForHeaderCell {
     self.tableView.backgroundColor = backgroundColorForHeaderCell;
     self.tableView.superview.backgroundColor = backgroundColorForHeaderCell;
-    if ([self shouldMaskNavigationBarBackgroundColor]) {
-        self.navigationController.navigationBar.barTintColor = backgroundColorForHeaderCell;
-    }
 }
 
 - (UIColor *)backgroundColorForHeaderCell {
     return self.tableView.backgroundColor;
 }
 
-- (NSDictionary <NSNumber *, UIImage *> *)itemIconImages {
-    if (!_itemIconImages) _itemIconImages = [self itemCellContentsFromList:[self iconImagesForItemCells]];
-    return _itemIconImages;
+- (void)setClassNameForRegisteringHeaderCell:(NSString *)classNameForRegisteringHeaderCell {
+    _classNameForRegisteringHeaderCell = classNameForRegisteringHeaderCell;
+    
+    // registering header cell
+    NSString *className = _classNameForRegisteringHeaderCell;
+    if (className.length) {
+        if (self.hasNibFileForHeaderCellClass) {
+            [self.tableView registerNib:[UINib nibWithNibName:className bundle:nil] forCellReuseIdentifier:className];
+            self.didRegisterHeaderCell = YES;
+        } else {
+            [self.tableView registerClass:NSClassFromString(className) forCellReuseIdentifier:className];
+            self.didRegisterHeaderCell = YES;
+        }
+    }
 }
 
-- (NSMutableArray *)navBarBGSubviews {
-    if (!_navBarBGSubviews) _navBarBGSubviews = @[].mutableCopy;
-    return _navBarBGSubviews;
+- (BOOL)hasNibFileForHeaderCellClass {
+    if (!_classNameForRegisteringHeaderCell.length) return NO;
+    NSString *path = [[NSBundle mainBundle] pathForResource:_classNameForRegisteringHeaderCell ofType:@"nib"]; // not "xib" !
+    return path.length ? YES : NO;
 }
 
 #pragma mark - UITableViewDataSource
@@ -419,67 +258,82 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.totalCellCount;
+    return self.mappedRows.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(YJGroupedStyleTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger row = indexPath.row;
-    BOOL isItemRow = [self.itemRows containsObject:@(row)] ? YES : NO;
     UITableViewCell *cell = nil;
-    UIColor *tableBGColor = [self backgroundColorForTableView] ?: YJGSTVC_DEFAULT_TABLE_BACKGROUND_COLOR;
-    UIColor *itemBGColor = [self backgroundColorForItemCell] ?: YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR;
+    
+    UIColor *tableBGColor = tableView.sectionBackgroundColor;
+    UIColor *itemBGColor = tableView.itemCellBackgroundColor;
+    
     // header cell
     if (row == 0) {
-        NSString *headerCellReuseID = [self reuseIdentifierForHeaderCell] ?: YJGSTVC_HEADER_CELL_REUSE_ID;
+        NSString *className = self.classNameForRegisteringHeaderCell;
+        NSString *headerCellReuseID = className.length ? className : YJGSTVC_HEADER_CELL_REUSE_ID;
         if (self.didRegisterHeaderCell) {
             cell = [tableView dequeueReusableCellWithIdentifier:headerCellReuseID forIndexPath:indexPath];
             cell.backgroundColor = cell.contentView.backgroundColor;
-            [self configureHeaderCell:cell];
+            if ([tableView.delegate respondsToSelector:@selector(tableView:configureHeaderCell:)]) {
+                [tableView.delegate tableView:tableView configureHeaderCell:cell];
+            }
         } else {
             cell = [tableView dequeueReusableCellWithIdentifier:headerCellReuseID];
             if (!cell) {
                 cell = [[_YJGroupedStyleGroupSeparatorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:headerCellReuseID];
                 cell.contentView.backgroundColor = tableBGColor;
                 cell.backgroundColor = tableBGColor;
-                [self configureGroupSeparatorCell:cell];
+                if ([tableView.delegate respondsToSelector:@selector(tableView:configureSectionBackgroundCell:inSection:)]) {
+                    [tableView.delegate tableView:tableView configureSectionBackgroundCell:cell inSection:-1];
+                }
             }
         }
-        self.backgroundColorForHeaderCell = cell.contentView.backgroundColor ?: (cell.backgroundColor ?: [self backgroundColorForTableView]);
+        self.backgroundColorForHeaderCell = cell.contentView.backgroundColor ?: (cell.backgroundColor ?: tableBGColor);
     }
+    
     // item cell
-    else if (isItemRow) {
+    else if ([self.mappedRows[row] hasPrefix:YJGSItemCell]) {
         cell = [tableView dequeueReusableCellWithIdentifier:YJGSTVC_ITEM_CELL_REUSE_ID];
-        if (!cell) cell = [[_YJGroupedStyleItemCell alloc] initWithStyle:[self styleForItemCell] reuseIdentifier:YJGSTVC_ITEM_CELL_REUSE_ID];
-        cell.accessoryType = [self hasDestinationViewControllerForItemCellAtIndexPath:indexPath] ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
+        if (!cell) cell = [[_YJGroupedStyleItemCell alloc] initWithStyle:tableView.itemCellStyle reuseIdentifier:YJGSTVC_ITEM_CELL_REUSE_ID];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.contentView.backgroundColor = itemBGColor;
         cell.backgroundColor = itemBGColor;
-        [self configureItemCell:(id)cell atIndexPath:indexPath];
+        
+        NSIndexPath *newIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
+        [tableView.delegate tableView:tableView configureItemCell:(id)cell atIndexPath:newIndexPath];
     }
-    // group separator cell
+    
+    // group separator cell (i.e. section)
     else if ([self.mappedRows[row] hasPrefix:YJGSGroupSeparator]) {
         cell = [tableView dequeueReusableCellWithIdentifier:YJGSTVC_GROUP_SEPARATOR_CELL_REUSE_ID forIndexPath:indexPath];
         cell.contentView.backgroundColor = tableBGColor;
         cell.backgroundColor = tableBGColor;
-        [self configureGroupSeparatorCell:cell];
+        if ([tableView.delegate respondsToSelector:@selector(tableView:configureSectionBackgroundCell:inSection:)]) {
+            NSInteger section = [[self.mappedRows[row] componentsSeparatedByString:@":"].lastObject integerValue];
+            [tableView.delegate tableView:tableView configureSectionBackgroundCell:cell inSection:section];
+        }
     }
+    
     // line separator cell
     else {
         cell = [tableView dequeueReusableCellWithIdentifier:YJGSTVC_LINE_SEPARATOR_CELL_REUSE_ID forIndexPath:indexPath];
         _YJGroupedStyleLineSeparatorCell *lineSeparator = (_YJGroupedStyleLineSeparatorCell *)cell;
-        UIColor *specifiedLineColor = [self lineSeparatorColorForTableView] ?: YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
+        UIColor *specifiedLineColor = tableView.lineSeparatorColor;
+        
         // line separator for separating item cell
         if ([[self.mappedRows[row] componentsSeparatedByString:@":"].lastObject isEqualToString:YJGSLineSeparatingItemCell]) {
             // set left indentation
             CGFloat indent = 0.0f;
-            BOOL hasIcon = (self.iconImagesForItemCells.count || self.iconImageNamesForItemCells.count) ? YES : NO;
-            switch ([self indentationStyleForItemCell]) {
+            BOOL hasIcon = [tableView.dataSource willProvideIconImageForEachItemCellInGroupedStyleTableView:tableView];
+            switch (tableView.itemCellIndentationStyle) {
                 case YJGroupedStyleTableViewCellIndentationStyleAlignTitle: indent = hasIcon ? 54.0f : 16.0f; break;
                 case YJGroupedStyleTableViewCellIndentationStyleFixedMargin: indent = 16.0f; break;
             }
             lineSeparator.leftIndentation = indent;
             // set line separator color
             UIColor *separatorColor = specifiedLineColor;
-            switch ([self lineSeparatorStyleForTableView]) {
+            switch (tableView.lineSeparatorStyle) {
                 case YJGroupedStyleTableViewSeparatorStyleDefault: break;
                 case YJGroupedStyleTableViewSeparatorStyleHideAll: separatorColor = itemBGColor; break;
                 case YJGroupedStyleTableViewSeparatorStyleHideGroup: break;
@@ -487,83 +341,76 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
             lineSeparator.lineColor = separatorColor;
             lineSeparator.compensatedColor = itemBGColor;
         }
+        
         // line separator for separating group
         else {
             // set left indentation
             lineSeparator.leftIndentation = 0.0f;
             // set line separator color
             UIColor *separatorColor = specifiedLineColor;
-            switch ([self lineSeparatorStyleForTableView]) {
+            switch (tableView.lineSeparatorStyle) {
                 case YJGroupedStyleTableViewSeparatorStyleDefault: break;
                 case YJGroupedStyleTableViewSeparatorStyleHideAll: separatorColor = tableBGColor; break;
                 case YJGroupedStyleTableViewSeparatorStyleHideGroup: separatorColor = tableBGColor; break;
             }
             lineSeparator.lineColor = separatorColor;
-            lineSeparator.compensatedColor = [self backgroundColorForTableView];
+            lineSeparator.compensatedColor = tableBGColor;
         }
     }
+    
     // hide default separator
     cell.separatorInset = UIEdgeInsetsMake(0, 9999, 0, 0);
     cell.indentationWidth = -9999;
     cell.indentationLevel = 1;
+    
     // returns
     return cell;
 }
 
-- (void)configureItemCell:(_YJGroupedStyleItemCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    NSInteger row = indexPath.row;
-    cell.textLabel.text = self.itemTitles[@(row)];
-    cell.detailTextLabel.text = self.itemSubtitles[@(row)];
-    UIImage *image = self.itemIconImages[@(row)];
-    NSString *imageName = self.itemIconImageNames[@(row)];
-    if (!image && imageName.length) image = [UIImage imageNamed:imageName];
-    if (image) cell.imageView.image = image;
-    
-    NSInteger itemRow, section;
-    [self getMappedItemRow:&itemRow inSection:&section forIndexPath:indexPath];
-    [self configureItemCell:cell forRow:itemRow inSection:section];
-}
-
 #pragma mark - UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(YJGroupedStyleTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger row = indexPath.row;
+    
     // header cell
     if (row == 0) {
         if (self.didRegisterHeaderCell) {
             if (self.heightForHeaderCell) return self.heightForHeaderCell;
             UITableViewCell *cell = nil;
-            if ([self nibNameForRegisteringHeaderCell].length) {
-                cell = [[NSBundle mainBundle] loadNibNamed:[self nibNameForRegisteringHeaderCell] owner:self options:nil].firstObject;
+            
+            if (self.hasNibFileForHeaderCellClass) {
+                cell = [[NSBundle mainBundle] loadNibNamed:self.classNameForRegisteringHeaderCell owner:self options:nil].firstObject;
             } else {
-                Class HCClass = [self classForRegisteringHeaderCell];
-                if (!HCClass && [self classNameForRegisteringHeaderCell].length) {
-                    HCClass = NSClassFromString([self classNameForRegisteringHeaderCell]);
-                }
-                cell = [HCClass new];
-                if (!cell) return 0.0f;
+                cell = [NSClassFromString(self.classNameForRegisteringHeaderCell) new];
             }
-            cell.tag = YJGroupedStyleTableViewControllerHeaderCellForCompressedSizeCalculation;
-            [self configureHeaderCell:cell];
+            
+            cell.tag = YJGroupedStyleTableViewControllerHeaderCellTagForCompressedSizeCalculation;
+            if ([tableView.delegate respondsToSelector:@selector(tableView:configureHeaderCell:)]) {
+                [tableView.delegate tableView:tableView configureHeaderCell:cell];
+            }
             self.heightForHeaderCell = [self cellHeightFittingInCompressedSizeForCell:cell];
+            
             return self.heightForHeaderCell;
         } else {
-            return [self shouldHideNavigationBar] ? kUIStatusBarHeight + kUINavigationBarHeight : kUIStatusBarHeight;
+            return self.shouldHideNavigationBar ? kUIStatusBarHeight + kUINavigationBarHeight : kUIStatusBarHeight;
         }
     }
+    
     // item cell
-    else if ([self.itemRows containsObject:@(row)]) {
-        return [self heightForItemCell];
+    else if ([self.mappedRows[row] hasPrefix:YJGSItemCell]) {
+        return tableView.itemCellHeight;
     }
+    
     // group sperator
     else if ([self.mappedRows[row] hasPrefix:YJGSGroupSeparator]) {
         // last big group sperator cell
-        if (row == self.totalCellCount - 1) {
+        if (row == self.mappedRows.count - 1) {
             return kYJGSTVCLastGroupSeparatorCellHeight;
         } else {
-            return [self heightForVerticalSpaceBetweenGroups];
+            return tableView.sectionVerticalSpace;
         }
     }
+    
     // line sperator
     else {
         return 1.0f;
@@ -581,224 +428,27 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     return cellSize.height;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger row = indexPath.row;
-    if (![self.itemRows containsObject:@(row)]) return;
-    
-    NSInteger itemRow, section;
-    [self getMappedItemRow:&itemRow inSection:&section forIndexPath:indexPath];
-    [self tableView:self.tableView didSelectItemCellAtRow:itemRow inSection:section];
-    
-    if (![self canPushDestinationViewControllerFromItemCellForRow:itemRow inSection:section])
-        return;
-    
-    UIViewController *vc = nil;
-    // vc from storyboard id
-    NSString *storyboardID = self.storyboardIdentifiersForDestinationViewControllers[@(row)];
-    if (storyboardID.length) {
-        NSString *storyboardName = [self storyboardNameForControllerStoryboardIdentifier:storyboardID] ?: @"Main";
-        vc = [[UIStoryboard storyboardWithName:storyboardName bundle:nil] instantiateViewControllerWithIdentifier:storyboardID];
-    }
-    // vc from code
-    if (!vc) {
-        NSString *className = self.classNamesForDestinationViewControllers[@(row)];
-        if (className.length) {
-            Class VCClass = NSClassFromString(className);
-            if (VCClass) vc = [VCClass new];
-        }
-    }
-    if (!vc) return;
-    
-    vc.hidesBottomBarWhenPushed = YES;
-    [self configureDestinationViewControllerBeforePushing:vc forRow:itemRow inSection:section];
-    
-    [self setNavigationBarTranslucentIfPossible:NO];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger itemRow, section;
-    [self getMappedItemRow:&itemRow inSection:&section forIndexPath:indexPath];
-    
-    if (indexPath.row == 0 ||
-        ![self.itemRows containsObject:@(indexPath.row)] ||
-        ![self hasDestinationViewControllerForItemCellAtIndexPath:indexPath] ||
-        ![self canPushDestinationViewControllerFromItemCellForRow:itemRow inSection:section]) {
-        return NO;
-    }
-    return YES;
-}
-
-- (BOOL)hasDestinationViewControllerForItemCellAtIndexPath:(NSIndexPath *)indexPath {
-    return self.classNamesForDestinationViewControllers[@(indexPath.row)].length ||
-    self.storyboardIdentifiersForDestinationViewControllers[@(indexPath.row)].length;
-}
-
-// WARNING: Using legacy cell layout due to delegate implementation of tableView:accessoryTypeForRowWithIndexPath: in <XXX: 0x14db2d40>.  Please remove your implementation of this method and set the cell properties accessoryType and/or editingAccessoryType to move to the new cell layout behavior.  This method will no longer be called in a future release.
-
-//- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath {
-//    if (![self hasDestinationViewControllerForItemCellAtIndexPath:indexPath]) {
-//        return UITableViewCellAccessoryNone;
-//    }
-//    return UITableViewCellAccessoryDisclosureIndicator;
-//}
-
-#pragma mark - UIScrollViewDelegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    BOOL navBarIsTranslucent = self.navigationController.navigationBar.isTranslucent;
-    if ([self shouldOpaqueNavBarIfNeeded]) {
-        if (navBarIsTranslucent) {
-            self.navigationController.navigationBar.translucent = NO;
-        }
-    } else {
-        if (!navBarIsTranslucent && [self shouldTranslucentNavigationBar]) {
-            self.navigationController.navigationBar.translucent = YES;
-        }
+- (void)tableView:(YJGroupedStyleTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSIndexPath *newIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
+    if (newIndexPath && [tableView.delegate respondsToSelector:@selector(tableView:didSelectGroupedItemRowAtIndexPath:)]) {
+        [tableView.delegate tableView:tableView didSelectGroupedItemRowAtIndexPath:newIndexPath];
     }
 }
 
-- (BOOL)shouldOpaqueNavBarIfNeeded {
-    return self.tableView.contentOffset.y >= (self.heightForHeaderCell - kUINavigationBarHeight - kUIStatusBarHeight) ? YES : NO;
-}
+#pragma mark - YJGroupedStyleTableViewDataSource
 
-#pragma mark - default implementations
+- (NSInteger)numberOfSectionsInGroupedStyleTableView:(UITableView *)tableView { return 1; }
+- (NSInteger)tableView:(YJGroupedStyleTableView *)tableView numberOfGroupedItemRowsInSection:(NSInteger)section { return 0; }
+- (BOOL)willProvideIconImageForEachItemCellInGroupedStyleTableView:(YJGroupedStyleTableView *)tableView { return NO; }
 
-// navigation bar
-- (BOOL)shouldHideNavigationBar {
-    return NO;
-}
+#pragma mark - YJGroupedStyleTableViewDelegate
 
-- (BOOL)shouldMaskNavigationBarBackgroundColor {
-    return YES;
-}
-
-- (BOOL)shouldHideNavigationBarShadow {
-    return YES;
-}
-
-- (BOOL)shouldTranslucentNavigationBar {
-    return YES;
-}
-
-// table view
-- (UIColor *)backgroundColorForTableView {
-    return YJGSTVC_DEFAULT_TABLE_BACKGROUND_COLOR;
-}
-
-- (CGFloat)topEdgeInsetForTableView {
-    return 0.0f;
-}
-
-- (YJGroupedStyleTableViewSeparatorStyle)lineSeparatorStyleForTableView {
-    return YJGroupedStyleTableViewSeparatorStyleDefault;
-}
-
-- (UIColor *)lineSeparatorColorForTableView {
-    return YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
-}
-
-- (UIEdgeInsets)separatorInsetsForTableView {
-    return UIEdgeInsetsZero;
-}
-
-// register header cell
-- (nullable NSString *)nibNameForRegisteringHeaderCell {
-    return nil;
-}
-
-- (nullable Class)classForRegisteringHeaderCell {
-    return nil;
-}
-
-- (nullable NSString *)classNameForRegisteringHeaderCell {
-    return nil;
-}
-
-- (nullable NSString *)reuseIdentifierForHeaderCell {
-    return nil;
-}
-
-- (UITableViewCellStyle)styleForItemCell {
-    return UITableViewCellStyleDefault;
-}
-
-- (YJGroupedStyleTableViewCellIndentationStyle)indentationStyleForItemCell {
-    return YJGroupedStyleTableViewCellIndentationStyleAlignTitle;
-}
-
-- (UIColor *)backgroundColorForItemCell {
-    return YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR;
-}
-
-// configure cell
-- (void)configureHeaderCell:(UITableViewCell *)cell {
-    
-}
-
-- (void)configureItemCell:(UITableViewCell *)cell forRow:(NSInteger)row inSection:(NSInteger)section {
-    
-}
-
-- (void)configureGroupSeparatorCell:(UITableViewCell *)cell {
-    
-}
-
-// configure cell contents
-- (NSArray <NSArray <NSString *> *> *)titlesForGroupedCells {
-    return @[ @[ @"First item in group A" ],
-              @[ @"First item in group B", @"Second item in group B", @"Third item in group B" ],
-              @[ @"First item in group C", @"Second item in group C" ] ];
-}
-
-- (nullable NSArray *)subtitlesForItemCells {
-    return nil;
-}
-
-- (nullable NSArray *)iconImagesForItemCells {
-    return nil;
-}
-
-- (nullable NSArray *)iconImageNamesForItemCells {
-    return nil;
-}
-
-- (nullable NSArray *)classNamesOfDestinationViewControllersForItemCells {
-    return nil;
-}
-
-- (nullable NSArray *)storyboardIdentifiersOfDestinationViewControllersForItemCells {
-    return nil;
-}
-
-- (nullable NSString *)storyboardNameForControllerStoryboardIdentifier:(NSString *)storyboardID {
-    return @"Main";
-}
-
-- (void)tableView:(YJGroupedStyleTableView *)tableView didSelectItemCellAtRow:(NSInteger)row inSection:(NSInteger)section {
-    
-}
-
-- (BOOL)canPushDestinationViewControllerFromItemCellForRow:(NSInteger)row inSection:(NSInteger)section {
-    return YES;
-}
-
-- (void)configureDestinationViewControllerBeforePushing:(__kindof UIViewController *)viewController forRow:(NSInteger)row inSection:(NSInteger)section {
-    
-}
-
-- (CGFloat)heightForItemCell {
-    return 44.0f;
-}
-
-- (CGFloat)heightForVerticalSpaceBetweenGroups {
-    return 40.0f;
-}
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {}
 
 @end
 
 
-NSInteger const YJGroupedStyleTableViewControllerHeaderCellForCompressedSizeCalculation = __LINE__;
+NSInteger const YJGroupedStyleTableViewControllerHeaderCellTagForCompressedSizeCalculation = __LINE__;
 
 
 @implementation UITableView (YJGroupedStyle)
@@ -811,8 +461,8 @@ NSInteger const YJGroupedStyleTableViewControllerHeaderCellForCompressedSizeCalc
 }
 
 - (void)yj_reloadData {
-    if ([self.delegate respondsToSelector:@selector(fetchRequiredDataForLoadingGroupedCells)]) {
-        [(id)self.delegate fetchRequiredDataForLoadingGroupedCells];
+    if ([self.delegate respondsToSelector:@selector(_mapDataFromYJGroupedStyleTableViewDataSource)]) {
+        [(id)self.delegate _mapDataFromYJGroupedStyleTableViewDataSource];
     }
     [self yj_reloadData];
 }
@@ -822,25 +472,39 @@ NSInteger const YJGroupedStyleTableViewControllerHeaderCellForCompressedSizeCalc
 
 @implementation YJGroupedStyleTableView
 
-- (nullable UITableViewCell *)cellForGroupedItemAtRow:(NSInteger)row inSection:(NSInteger)section {
+@dynamic delegate;
+@dynamic dataSource;
+
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
+    return [super initWithFrame:frame style:UITableViewStylePlain];
+}
+
+- (UIColor *)sectionBackgroundColor {
+    if (!_sectionBackgroundColor) _sectionBackgroundColor = YJGSTVC_DEFAULT_TABLE_BACKGROUND_COLOR;
+    return _sectionBackgroundColor;
+}
+
+- (UIColor *)lineSeparatorColor {
+    if (!_lineSeparatorColor) _lineSeparatorColor = YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
+    return _lineSeparatorColor;
+}
+
+- (UIColor *)itemCellBackgroundColor {
+    if (!_itemCellBackgroundColor) _itemCellBackgroundColor = YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR;
+    return _itemCellBackgroundColor;
+}
+
+- (nullable UITableViewCell *)cellForGroupedItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.delegate isKindOfClass:[YJGroupedStyleTableViewController class]]) {
-        NSArray *mappedRows = [(id)self.delegate mappedRows];
-        for (NSUInteger i = 0; i < mappedRows.count; ++i) {
-            NSString *info = mappedRows[i];
-            if ([info hasPrefix:YJGSItemCell]) {
-                NSArray <NSString *> *components = [[info componentsSeparatedByString:@":"].lastObject componentsSeparatedByString:@","];
-                NSInteger itemRow = components.lastObject.integerValue;
-                NSInteger itemSec = components.firstObject.integerValue;
-                if (itemRow == row && section == itemSec) {
-                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-                    return [self cellForRowAtIndexPath:indexPath];
-                }
-            }
+        YJGroupedStyleTableViewController *gstvc = (YJGroupedStyleTableViewController *)self.delegate;
+        NSString *info = [NSString stringWithFormat:@"%@:%@,%@", YJGSItemCell, @(indexPath.section), @(indexPath.row)];
+        if ([gstvc.mappedRows containsObject:info]) {
+            NSUInteger index = [gstvc.mappedRows indexOfObject:info];
+            NSIndexPath *rawIndexPath = [NSIndexPath indexPathForRow:index inSection:0];
+            return [self cellForRowAtIndexPath:rawIndexPath];
         }
-        return nil;
     }
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-    return [self cellForRowAtIndexPath:indexPath];
+    return nil;
 }
 
 @end

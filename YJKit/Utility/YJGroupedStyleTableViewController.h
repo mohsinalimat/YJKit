@@ -10,15 +10,53 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// YJGroupedStyleTableView
+@class YJGroupedStyleTableView;
 
-@interface YJGroupedStyleTableView : UITableView
+// --------------------------------------------------------------------
+//                   YJGroupedStyleTableViewDataSource
+// --------------------------------------------------------------------
 
-- (nullable UITableViewCell *)cellForGroupedItemAtRow:(NSInteger)row inSection:(NSInteger)section;
+@protocol YJGroupedStyleTableViewDataSource <UITableViewDataSource>
+
+/// The number of item cells in each section.
+- (NSInteger)tableView:(YJGroupedStyleTableView *)tableView numberOfGroupedItemRowsInSection:(NSInteger)section;
+
+/// Indicating if you'd like to provide an icon image for each item cell.
+- (BOOL)willProvideIconImageForEachItemCellInGroupedStyleTableView:(YJGroupedStyleTableView *)tableView;
+
+@optional
+
+/// The number of sections for YJGroupedStyleTableView.
+- (NSInteger)numberOfSectionsInGroupedStyleTableView:(YJGroupedStyleTableView *)tableView;
 
 @end
 
-// YJGroupedStyleTableViewController
+// --------------------------------------------------------------------
+//                    YJGroupedStyleTableViewDelegate
+// --------------------------------------------------------------------
+
+@protocol YJGroupedStyleTableViewDelegate <UITableViewDelegate>
+
+/// Configure the item cell at index path. MUST implement this method to fill the data for each item cell presenting on screen.
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+
+@optional
+
+/// Configure the registered header cell if needed.
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureHeaderCell:(__kindof UITableViewCell *)headerCell;
+
+/// Configure the section background cell for each section if needed.
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionBackgroundCell:(UITableViewCell *)cell inSection:(NSInteger)section;
+
+/// Select item cell at indexPath
+/// @note The indexPath parameter has being converted.
+- (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtIndexPath:(nonnull NSIndexPath *)indexPath;
+
+@end
+
+// --------------------------------------------------------------------
+//                        YJGroupedStyleTableView
+// --------------------------------------------------------------------
 
 typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewCellIndentationStyle) {
     YJGroupedStyleTableViewCellIndentationStyleAlignTitle,
@@ -31,109 +69,84 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
     YJGroupedStyleTableViewSeparatorStyleHideAll,   // hide all separators
 };
 
-/**
-    *  This is an ABSTRACT table view controller class for providing a grouped style table view.
-    *
-    *  The reason for using this class instead of UITableViewController with a UITableViewStyleGrouped style is it can provide much detail customizations such as translucent navigation bar; new color for cell separators and group background; custom height for group space; convenient separator indentation and its custom appearance; easy to fill-in light-weight data informations for cell displaying and destination controller class name for pushing onto screen when user tap the cell.
-    *
-    *  Only need to make a subclass of YJGroupedStyleTableViewController and override some of these methods if needed to provide the informations you want to customize.
-    *
-    *  @code
+@interface YJGroupedStyleTableView : UITableView
 
-    // Providing titles for cell content (Required)
+@property (nonatomic, weak, nullable) id <YJGroupedStyleTableViewDelegate> delegate;
+@property (nonatomic, weak, nullable) id <YJGroupedStyleTableViewDataSource> dataSource;
 
-    - (NSArray <NSArray <NSString *> *> *)titlesForGroupedCells {
-        return @[  @[ @"First item in group A" ],
-                   @[ @"First item in group B", @"Second item in group B", @"Third item in group B" ],
-                   @[ @"First item in group C", @"Second item in group C" ] ];
-    }
+// customize separator
 
-    // Providing subtitles for cell content (Optional)
+/// The separator style of table view
+/// @remark Do not set tableView.separatorStyle directly, Using this instead.
+@property (nonatomic) YJGroupedStyleTableViewSeparatorStyle lineSeparatorStyle;
 
-    - (nullable NSArray *)subtitlesForItemCells {
-        return @[   @[ @"group A - item 1" ],
-                    @[ @"group B - item 1", @"group B - item 2", @"group B - item 3" ],
-                    @[ @"group C - item 1", @"group C - item 2" ] ];
-    }
+/// The separator color
+@property (nonatomic, strong, null_resettable) UIColor *lineSeparatorColor;
 
-    // or you can make it plain array without nesting, but must keep the correct order.
+// customize section
 
-    - (nullable NSArray *)subtitlesForItemCells {
-        return @[@"group A - item 1",
-                 @"group B - item 1",
-                 @"group B - item 2",
-                 @"group B - item 3",
-                 @"group C - item 1",
-                 @"group C - item 2" ];
-    }
+/// The background color for section.
+/// @remark Do not set tableView.backgroundColor directly, Using this instead.
+@property (nonatomic, strong, null_resettable) UIColor *sectionBackgroundColor;
 
-    // To summarize, only -titlesForGroupedCells MUST return nesting array for grouping data to each section, and the rest of informations can be compatible with both nesting and plain array.
+/// The vertical space between each section.
+@property (nonatomic) CGFloat sectionVerticalSpace;
 
-    // These methods can return either nested array or plain array
+// customize item cell
 
-    - (nullable NSArray *)subtitlesForItemCells; // Array of NSString, Default nil
-    - (nullable NSArray *)iconImagesForItemCells; // Array of UIImage, Default nil
-    - (nullable NSArray *)iconImageNamesForItemCells; // Array of NSString, Default nil
-    - (nullable NSArray *)classNamesOfDestinationViewControllersForItemCells; // Array of NSString, Default nil
-    - (nullable NSArray *)storyboardIdentifiersOfDestinationViewControllersForItemCells; // Array of NSString, Default nil
+/// The style of item cell.
+@property (nonatomic) UITableViewCellStyle itemCellStyle;
 
-    *  @endcode
- */
-@interface YJGroupedStyleTableViewController : UITableViewController
+/// The indentation for item cell.
+@property (nonatomic) YJGroupedStyleTableViewCellIndentationStyle itemCellIndentationStyle;
 
-// the table view property
-@property (nonatomic, strong, null_resettable) YJGroupedStyleTableView *tableView;
+/// The background color for item cell.
+/// @remark Using this property instead of set cell.contentView.backgroundColor directly.
+@property (nonatomic, strong, null_resettable) UIColor *itemCellBackgroundColor;
 
-// custom navigation bar
-- (BOOL)shouldHideNavigationBar; // Default NO
+/// The height for each item cell.
+@property (nonatomic) CGFloat itemCellHeight;
 
-// custom table view
-- (UIColor *)backgroundColorForTableView; // Default is the same color as Settings App table view background color.
-- (CGFloat)topEdgeInsetForTableView; // Default 0.0f, If navigation bar is displaying, the table view will below (not underneath) the navigation bar.
-
-// custom line separator
-- (YJGroupedStyleTableViewSeparatorStyle)lineSeparatorStyleForTableView;
-- (UIColor *)lineSeparatorColorForTableView; // Default is the same color as Settings App separator color.
-
-// custom group separator
-- (void)configureGroupSeparatorCell:(UITableViewCell *)cell; // Default do nothing
-
-// custom header cell
-- (nullable NSString *)reuseIdentifierForHeaderCell; // Default nil
-- (nullable NSString *)nibNameForRegisteringHeaderCell; // Default nil
-- (nullable Class)classForRegisteringHeaderCell; // Default nil
-- (nullable NSString *)classNameForRegisteringHeaderCell; // Default nil
-- (void)configureHeaderCell:(__kindof UITableViewCell *)cell; // Default do nothing
-
-// custom item cells
-- (UITableViewCellStyle)styleForItemCell; // Default UITableViewCellStyleDefault
-- (YJGroupedStyleTableViewCellIndentationStyle)indentationStyleForItemCell; // Default YJGroupedStyleTableViewCellIndentationStyleAlignTitle
-- (UIColor *)backgroundColorForItemCell; // Default [UIColor whiteColor];
-- (void)configureItemCell:(UITableViewCell *)cell forRow:(NSInteger)row inSection:(NSInteger)section; // Default do nothing
-
-// custom content for item cells
-- (NSArray <NSArray <NSString *> *> *)titlesForGroupedCells; // Default example placeholder
-- (nullable NSArray *)subtitlesForItemCells; // Default nil
-
-- (nullable NSArray *)iconImagesForItemCells; // Array of UIImage, Default nil
-- (nullable NSArray *)iconImageNamesForItemCells; // Array of NSString, Default nil
-
-- (nullable NSArray *)classNamesOfDestinationViewControllersForItemCells; // Array of NSString, Default nil
-- (nullable NSArray *)storyboardIdentifiersOfDestinationViewControllersForItemCells; // Array of NSString, Default nil
-- (nullable NSString *)storyboardNameForControllerStoryboardIdentifier:(NSString *)storyboardID; // Array of NSString, Default @"Main"
-
-- (CGFloat)heightForItemCell; // Default 44.0f
-- (CGFloat)heightForVerticalSpaceBetweenGroups; // Default 40.0f
-
-// tap action
-- (void)tableView:(YJGroupedStyleTableView *)tableView didSelectItemCellAtRow:(NSInteger)row inSection:(NSInteger)section; // Default do nothing
-
-// push action
-- (BOOL)canPushDestinationViewControllerFromItemCellForRow:(NSInteger)row inSection:(NSInteger)section; // Default YES
-- (void)configureDestinationViewControllerBeforePushing:(__kindof UIViewController *)viewController forRow:(NSInteger)row inSection:(NSInteger)section; // Default do nothing
+/// Get a item cell for specified section and row.
+/// @remark Using this method instead of -[UITableView cellForRowAtIndexPath:]
+/// @note The indexPath parameter has being converted.
+- (nullable UITableViewCell *)cellForGroupedItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
-FOUNDATION_EXPORT NSInteger const YJGroupedStyleTableViewControllerHeaderCellForCompressedSizeCalculation;
+// --------------------------------------------------------------------
+//                    YJGroupedStyleTableViewController
+// --------------------------------------------------------------------
+
+/**
+ *  This is an ABSTRACT table view controller class for providing a custom grouped style table view.
+ */
+@interface YJGroupedStyleTableViewController : UITableViewController <YJGroupedStyleTableViewDataSource, YJGroupedStyleTableViewDelegate>
+
+/// The grouped style table view
+@property (nonatomic, strong, null_resettable) YJGroupedStyleTableView *tableView;
+
+/// Should hide navigation bar for table view displaying.
+@property (nonatomic) BOOL shouldHideNavigationBar;
+
+/// The class name for registering header cell.
+/// @note If the header cell class contains a nib file, the nib file name MUST be the same as it's class name. e.g. "MyHeaderCell.h", "MyHeaderCell.m", "MyHeaderCell.xib"
+@property (nonatomic, copy) NSString *classNameForRegisteringHeaderCell;
+
+/// Get NSIndexPath for item cell from raw index path object;
+/// @warning If you implementing one of the UITableViewDelegate method, convert the indexPath before use it.
+/**
+ @code
+ - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+     NSIndexPath *itemIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
+     // use converted indexPath (itemIndexPath) rather than raw indexPath ...
+ }
+ @endcode
+ */
+- (nullable NSIndexPath *)indexPathForGroupedItemCellFromRawIndexPath:(NSIndexPath *)rawIndexPath;
+
+@end
+
+FOUNDATION_EXTERN NSInteger const YJGroupedStyleTableViewControllerHeaderCellTagForCompressedSizeCalculation;
 
 NS_ASSUME_NONNULL_END

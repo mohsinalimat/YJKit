@@ -13,9 +13,17 @@
 
 @implementation YJStaticTableViewController
 
-- (nullable NSString *)nibNameForRegisteringHeaderCell {
-    return @"YJStaticHeaderCell";
+- (void)viewDidLoad {
+    [super viewDidLoad];
+//    self.tableView.lineSeparatorStyle = YJGroupedStyleTableViewSeparatorStyleHideGroup;
+//    self.tableView.lineSeparatorColor = [UIColor redColor];
+    self.classNameForRegisteringHeaderCell = @"YJStaticHeaderCell";
+    self.shouldHideNavigationBar = YES;
 }
+
+//- (nullable NSString *)nibNameForRegisteringHeaderCell {
+//    return @"YJStaticHeaderCell";
+//}
 
 - (NSArray <NSArray <NSString *> *> *)titlesForGroupedCells {
     return @[ @[ @"hello", @"world" ],
@@ -25,8 +33,22 @@
               ];
 }
 
-- (YJGroupedStyleTableViewCellIndentationStyle)indentationStyleForItemCell {
-    return YJGroupedStyleTableViewCellIndentationStyleAlignTitle;
+- (NSInteger)numberOfSectionsInGroupedStyleTableView:(YJGroupedStyleTableView *)tableView {
+    return self.titlesForGroupedCells.count;
+}
+
+- (NSInteger)tableView:(YJGroupedStyleTableView *)tableView numberOfGroupedItemRowsInSection:(NSInteger)section {
+    return self.titlesForGroupedCells[section].count;
+}
+
+- (BOOL)willProvideIconImageForEachItemCellInGroupedStyleTableView:(YJGroupedStyleTableView *)tableView {
+    return NO;
+}
+
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    NSArray *titles = self.titlesForGroupedCells[indexPath.section];
+    NSString *title = titles[indexPath.row];
+    cell.textLabel.text = title;
 }
 
 @end
