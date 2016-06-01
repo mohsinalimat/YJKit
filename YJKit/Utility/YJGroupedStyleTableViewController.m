@@ -199,7 +199,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     _mappedRows = [mappedRows copy];
 }
 
-- (nullable NSIndexPath *)indexPathForGroupedItemCellFromRawIndexPath:(NSIndexPath *)rawIndexPath {
+- (nullable NSIndexPath *)indexPathForGroupedItemConvertedFromRawIndexPath:(NSIndexPath *)rawIndexPath {
     if (![self.mappedRows[rawIndexPath.row] hasPrefix:YJGSItemCell]) return nil;
     NSArray *indexPathInfo = [[self.mappedRows[rawIndexPath.row] componentsSeparatedByString:@":"].lastObject componentsSeparatedByString:@","];
     return [NSIndexPath indexPathForRow:[indexPathInfo.lastObject integerValue] inSection:[indexPathInfo.firstObject integerValue]];
@@ -309,7 +309,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
         cell.contentView.backgroundColor = itemBGColor;
         cell.backgroundColor = itemBGColor;
         
-        NSIndexPath *itemIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
+        NSIndexPath *itemIndexPath = [self indexPathForGroupedItemConvertedFromRawIndexPath:indexPath];
         [tableView.delegate tableView:tableView configureItemCell:(id)cell atIndexPath:itemIndexPath];
         
         // check if item cell has icon image after configuration
@@ -468,14 +468,14 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 }
 
 - (void)tableView:(YJGroupedStyleTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSIndexPath *itemIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
+    NSIndexPath *itemIndexPath = [self indexPathForGroupedItemConvertedFromRawIndexPath:indexPath];
     if (itemIndexPath && [tableView.delegate respondsToSelector:@selector(tableView:didSelectGroupedItemRowAtIndexPath:)]) {
         [tableView.delegate tableView:tableView didSelectGroupedItemRowAtIndexPath:itemIndexPath];
     }
 }
 
 - (BOOL)tableView:(YJGroupedStyleTableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSIndexPath *itemIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
+    NSIndexPath *itemIndexPath = [self indexPathForGroupedItemConvertedFromRawIndexPath:indexPath];
     if (itemIndexPath && [tableView.delegate respondsToSelector:@selector(tableView:shouldHighlightGroupedItemRowAtIndexPath:)]) {
         return [tableView.delegate tableView:tableView shouldHighlightGroupedItemRowAtIndexPath:itemIndexPath];
     }

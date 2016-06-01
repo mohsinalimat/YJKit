@@ -70,11 +70,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Select item cell at indexPath
 /// @note The indexPath parameter has being converted.
-- (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtIndexPath:(nonnull NSIndexPath *)indexPath;
+- (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath;
 
 /// @remark Using this method instead of -tableView:shouldHighlightRowAtIndexPath:
 /// @note The indexPath parameter has being converted.
-- (BOOL)tableView:(YJGroupedStyleTableView *)tableView shouldHighlightGroupedItemRowAtIndexPath:(nonnull NSIndexPath *)indexPath;
+- (BOOL)tableView:(YJGroupedStyleTableView *)tableView shouldHighlightGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -168,12 +168,12 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 /**
  @code
  - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-     NSIndexPath *itemIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
+     NSIndexPath *itemIndexPath = [self indexPathForGroupedItemConvertedFromRawIndexPath:indexPath];
      // use converted itemIndexPath rather than raw indexPath parameter ...
  }
  @endcode
  */
-- (nullable NSIndexPath *)indexPathForGroupedItemCellFromRawIndexPath:(NSIndexPath *)rawIndexPath;
+- (nullable NSIndexPath *)indexPathForGroupedItemConvertedFromRawIndexPath:(NSIndexPath *)rawIndexPath;
 
 @end
 
