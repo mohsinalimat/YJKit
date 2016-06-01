@@ -38,14 +38,14 @@
     return self.titlesForGroupedCells[section].count;
 }
 
-- (BOOL)willProvideIconImageForEachItemCellInGroupedStyleTableView:(YJGroupedStyleTableView *)tableView {
-    return NO;
-}
-
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSArray *titles = self.titlesForGroupedCells[indexPath.section];
     NSString *title = titles[indexPath.row];
     cell.textLabel.text = title;
+}
+
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureSupplementaryRegionCell:(UITableViewCell *)cell inSection:(NSInteger)section {
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", @(section)];
 }
 
 @end

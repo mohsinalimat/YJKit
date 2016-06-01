@@ -183,7 +183,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
             mappedRows[row++] = [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatingItemCell];
         }
         mappedRows[row-1] = [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatingGroup];
-        mappedRows[row++] = [NSString stringWithFormat:@"%@:%@", YJGSGroupSeparator, @(i)];
+        mappedRows[row++] = [NSString stringWithFormat:@"%@:%@", YJGSGroupSeparator, @(i+1)];
         mappedRows[row++] = [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatingGroup];
     }
     [mappedRows removeLastObject];
@@ -286,8 +286,8 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
                 cell = [[_YJGroupedStyleGroupSeparatorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:headerCellReuseID];
                 cell.contentView.backgroundColor = tableBGColor;
                 cell.backgroundColor = tableBGColor;
-                if ([tableView.delegate respondsToSelector:@selector(tableView:configureSectionBackgroundCell:inSection:)]) {
-                    [tableView.delegate tableView:tableView configureSectionBackgroundCell:cell inSection:-1];
+                if ([tableView.delegate respondsToSelector:@selector(tableView:configureSupplementaryRegionCell:inSection:)]) {
+                    [tableView.delegate tableView:tableView configureSupplementaryRegionCell:cell inSection:-1];
                 }
             }
         }
@@ -314,9 +314,9 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
         cell = [tableView dequeueReusableCellWithIdentifier:YJGSTVC_GROUP_SEPARATOR_CELL_REUSE_ID forIndexPath:indexPath];
         cell.contentView.backgroundColor = tableBGColor;
         cell.backgroundColor = tableBGColor;
-        if ([tableView.delegate respondsToSelector:@selector(tableView:configureSectionBackgroundCell:inSection:)]) {
+        if ([tableView.delegate respondsToSelector:@selector(tableView:configureSupplementaryRegionCell:inSection:)]) {
             NSInteger section = [[self.mappedRows[row] componentsSeparatedByString:@":"].lastObject integerValue];
-            [tableView.delegate tableView:tableView configureSectionBackgroundCell:cell inSection:section];
+            [tableView.delegate tableView:tableView configureSupplementaryRegionCell:cell inSection:section];
         }
     }
     

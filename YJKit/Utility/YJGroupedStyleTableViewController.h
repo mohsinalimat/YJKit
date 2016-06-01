@@ -43,9 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Configure the registered header cell if needed.
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureHeaderCell:(__kindof UITableViewCell *)headerCell;
 
-/// Configure the section background cell for each section if needed.
-/// @note If you not provide a header cell by registering, a section background cell will replace the header and the section parameter is -1.
-- (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionBackgroundCell:(UITableViewCell *)cell inSection:(NSInteger)section;
+/// Configure the supplementary region cell which is above the specified section if needed. It behaves like the section header.
+/// @note If you not provide a header cell by registering, a supplementary region cell will replace the header and the section parameter is -1.
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureSupplementaryRegionCell:(UITableViewCell *)cell inSection:(NSInteger)section;
 
 
 // method replacement from UITableViewDelegate
