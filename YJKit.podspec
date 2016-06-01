@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name             = "YJKit"
-  s.version          = "0.1.51"
+  s.version          = "0.1.52"
   s.license          = 'MIT'
   s.summary          = "YJKit is a simple wrapper for iOS library."
   s.homepage         = "https://github.com/huang-kun/YJKit"
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
-
+s
   s.source_files = 'YJKit/**/*'
   s.public_header_files = 'YJKit/**/*.h'
 

@@ -64,15 +64,15 @@ NS_ASSUME_NONNULL_BEGIN
 //                        YJGroupedStyleTableView
 // --------------------------------------------------------------------
 
-typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewCellIndentationStyle) {
-    YJGroupedStyleTableViewCellIndentationStyleAlignTitle,
-    YJGroupedStyleTableViewCellIndentationStyleFixedMargin,
+typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorIndentationStyle) {
+    YJGroupedStyleTableViewSeparatorIndentationStyleAlignItemCellTitle, // always align the title of the cell
+    YJGroupedStyleTableViewSeparatorIndentationStyleFixedMinimumMargin, // always keep the fixed minimum distance as left margin
 };
 
-typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
-    YJGroupedStyleTableViewSeparatorStyleDefault,   // draw all separators
-    YJGroupedStyleTableViewSeparatorStyleHideGroup, // hide group separators
-    YJGroupedStyleTableViewSeparatorStyleHideAll,   // hide all separators
+typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
+    YJGroupedStyleTableViewSeparatorDisplayModeDefault,   // show all separators
+    YJGroupedStyleTableViewSeparatorDisplayModeHideGroup, // hide group separators
+    YJGroupedStyleTableViewSeparatorDisplayModeHideAll,   // hide all separators
 };
 
 @interface YJGroupedStyleTableView : UITableView
@@ -82,21 +82,26 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
 
 // customize separator
 
-/// The separator style of table view. Default is YJGroupedStyleTableViewSeparatorStyleDefault.
-/// @remark Do not set tableView.separatorStyle directly, Using this instead.
-@property (nonatomic) YJGroupedStyleTableViewSeparatorStyle lineSeparatorStyle;
+/// The separator display option of table view. Default is YJGroupedStyleTableViewSeparatorDisplayModeDefault.
+/// @remark Do not set tableView.separatorStyle directly.
+@property (nonatomic) YJGroupedStyleTableViewSeparatorDisplayMode lineSeparatorDisplayMode;
+
+/// The indentation for separator. Default is YJGroupedStyleTableViewSeparatorIndentationStyleAlignItemCellTitle.
+/// @discussion If you provide icon image for each item cell, the item cell's title will be shifted to the right and makes room for icon image. So the .AlignItemCellTitle option will make sure the separator will always align the title of the item cell, and the .FixedMinimumMargin option will make sure the separator has fixed indentation, which means it will align the icon image if has one, or align the title if cell does not has icon image.
+/// @remark Do not set tableView.separatorStyle directly.
+@property (nonatomic) YJGroupedStyleTableViewSeparatorIndentationStyle lineSeparatorIndentationStyle;
 
 /// The separator color.
 @property (nonatomic, strong, null_resettable) UIColor *lineSeparatorColor;
 
-// customize background space between sections
+// customize supplementary region between sections
 
-/// The background color for section, same meaning as tableView.backgroundColor.
+/// The background color for supplementary region between sections, same meaning as tableView.backgroundColor.
 /// @remark Do not set tableView.backgroundColor directly, Using this instead.
-@property (nonatomic, strong, null_resettable) UIColor *sectionBackgroundColor;
+@property (nonatomic, strong, null_resettable) UIColor *supplementaryRegionBackgroundColor;
 
 /// The vertical space between each section.
-@property (nonatomic) CGFloat sectionVerticalSpace;
+@property (nonatomic) CGFloat supplementaryRegionVerticalSpace;
 
 // customize item cell
 
@@ -105,9 +110,6 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
 
 /// The accessory type for item cell. Default is UITableViewCellAccessoryNone.
 @property (nonatomic) UITableViewCellAccessoryType itemCellAccessoryType;
-
-/// The indentation for item cell. Default is YJGroupedStyleTableViewCellIndentationStyleAlignTitle.
-@property (nonatomic) YJGroupedStyleTableViewCellIndentationStyle itemCellIndentationStyle;
 
 /// The background color for item cell.
 /// @remark Using this property instead of set cell.contentView.backgroundColor directly.

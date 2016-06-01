@@ -15,15 +15,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.tableView.lineSeparatorStyle = YJGroupedStyleTableViewSeparatorStyleHideGroup;
-//    self.tableView.lineSeparatorColor = [UIColor redColor];
+    
     self.classNameForRegisteringHeaderCell = @"YJStaticHeaderCell";
     self.shouldHideNavigationBar = YES;
+    
+    self.tableView.lineSeparatorColor = [UIColor redColor];
 }
-
-//- (nullable NSString *)nibNameForRegisteringHeaderCell {
-//    return @"YJStaticHeaderCell";
-//}
 
 - (NSArray <NSArray <NSString *> *> *)titlesForGroupedCells {
     return @[ @[ @"hello", @"world" ],
