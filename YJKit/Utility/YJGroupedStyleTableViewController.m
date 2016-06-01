@@ -148,7 +148,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     tableView.lineSeparatorDisplayMode = YJGroupedStyleTableViewSeparatorDisplayModeDefault;
     tableView.lineSeparatorColor = YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
     
-    tableView.supplementaryRegionVerticalSpace = 40.0;
+    tableView.supplementaryRegionHeight = 40.0;
     
     tableView.itemCellStyle = UITableViewCellStyleDefault;
     tableView.itemCellAccessoryType = UITableViewCellAccessoryNone;
@@ -415,7 +415,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
         if (row == self.mappedRows.count - 1) {
             return kYJGSTVCLastGroupSeparatorCellHeight;
         } else {
-            return tableView.supplementaryRegionVerticalSpace;
+            return tableView.supplementaryRegionHeight;
         }
     }
     

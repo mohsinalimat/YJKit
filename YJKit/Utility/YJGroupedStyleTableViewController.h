@@ -100,8 +100,8 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 /// @remark Do not set tableView.backgroundColor directly, Using this instead.
 @property (nonatomic, strong, null_resettable) UIColor *supplementaryRegionBackgroundColor;
 
-/// The vertical space between each section.
-@property (nonatomic) CGFloat supplementaryRegionVerticalSpace;
+/// The vertical distance between each section.
+@property (nonatomic) CGFloat supplementaryRegionHeight;
 
 // customize item cell
 
