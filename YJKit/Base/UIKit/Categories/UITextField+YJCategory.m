@@ -15,14 +15,15 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        [self swizzleInstanceMethodForSelector:@selector(layoutSubviews) toSelector:@selector(yj_textFieldLayoutSubviews)];
         [self swizzleInstanceMethodForSelector:@selector(removeFromSuperview) toSelector:@selector(yj_textFieldRemoveFromSuperview)];
     });
 }
 
 #pragma mark - modifying life cycle
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
+- (void)yj_textFieldLayoutSubviews {
+    [self yj_textFieldLayoutSubviews];
     
     NSArray *taps = [self.superview.gestureRecognizers arrayByFilteringWithCondition:^BOOL(__kindof UIGestureRecognizer * _Nonnull obj) { return [obj isKindOfClass:[UITapGestureRecognizer class]]; }];
     

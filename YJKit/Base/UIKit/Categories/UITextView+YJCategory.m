@@ -29,8 +29,13 @@ static const void *YJTextViewAssociatedPlaceholderColorKey = &YJTextViewAssociat
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [self swizzleInstanceMethodForSelector:@selector(initWithFrame:) toSelector:@selector(yj_initTextViewWithFrame:)];
+        // exchange init
+        [self swizzleInstanceMethodForSelector:@selector(initWithFrame:) toSelector:@selector(yj_textViewInitWithFrame:)];
+        [self swizzleInstanceMethodForSelector:@selector(initWithCoder:) toSelector:@selector(yj_textViewInitWithCoder:)];
+        // exchange dealloc
         [self swizzleInstanceMethodForSelector:NSSelectorFromString(@"dealloc") toSelector:@selector(yj_textViewDealloc)];
+        // exchange life cycle
+        [self swizzleInstanceMethodForSelector:@selector(layoutSubviews) toSelector:@selector(yj_textViewLayoutSubviews)];
         [self swizzleInstanceMethodForSelector:@selector(removeFromSuperview) toSelector:@selector(yj_textViewRemoveFromSuperview)];
     });
 }
@@ -47,7 +52,8 @@ static const void *YJTextViewAssociatedPlaceholderColorKey = &YJTextViewAssociat
 }
 
 - (NSAttributedString *)_attributedPlaceholder:(NSString *)placeholder {
-    NSDictionary *attributes = @{ NSForegroundColorAttributeName : self.placeholderColor };
+    NSDictionary *attributes = @{ NSForegroundColorAttributeName : self.placeholderColor,
+                                  NSFontAttributeName : self.font };
     return [[NSAttributedString alloc] initWithString:placeholder attributes:attributes];
 }
 
@@ -63,14 +69,22 @@ static const void *YJTextViewAssociatedPlaceholderColorKey = &YJTextViewAssociat
 
 #pragma mark - observing text editing
 
-- (instancetype)yj_initTextViewWithFrame:(CGRect)frame {
-    id textView = [self yj_initTextViewWithFrame:frame];
-    
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(yj_beginTextEditing) name:UITextViewTextDidBeginEditingNotification object:self];
-    [nc addObserver:self selector:@selector(yj_endTextEditing) name:UITextViewTextDidEndEditingNotification object:self];
-    
+- (instancetype)yj_textViewInitWithFrame:(CGRect)frame {
+    id textView = [self yj_textViewInitWithFrame:frame];
+    [self yj_notificationObservingTextView:textView];
     return textView;
+}
+
+- (nullable instancetype)yj_textViewInitWithCoder:(NSCoder *)coder {
+    id textView = [self yj_textViewInitWithCoder:coder];
+    [self yj_notificationObservingTextView:textView];
+    return textView;
+}
+
+- (void)yj_notificationObservingTextView:(UITextView *)textView {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(yj_beginTextEditing) name:UITextViewTextDidBeginEditingNotification object:textView];
+    [nc addObserver:self selector:@selector(yj_endTextEditing) name:UITextViewTextDidEndEditingNotification object:textView];
 }
 
 - (void)yj_textViewDealloc {
@@ -88,8 +102,8 @@ static const void *YJTextViewAssociatedPlaceholderColorKey = &YJTextViewAssociat
 
 #pragma mark - observing life cycle
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
+- (void)yj_textViewLayoutSubviews {
+    [self yj_textViewLayoutSubviews];
     
     NSArray *taps = [self.superview.gestureRecognizers arrayByFilteringWithCondition:^BOOL(__kindof UIGestureRecognizer * _Nonnull obj) { return [obj isKindOfClass:[UITapGestureRecognizer class]]; }];
     
