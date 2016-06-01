@@ -43,9 +43,27 @@ NS_ASSUME_NONNULL_BEGIN
 /// Configure the registered header cell if needed.
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureHeaderCell:(__kindof UITableViewCell *)headerCell;
 
-/// Configure the supplementary region cell which is above the specified section if needed. It behaves like the section header.
-/// @note If you never provide a header cell by registering, a supplementary region cell will take place and the section parameter is -1.
-- (void)tableView:(YJGroupedStyleTableView *)tableView configureSupplementaryRegionCell:(UITableViewCell *)cell inSection:(NSInteger)section;
+/// Configure section header cell if needed.
+/// @note the attributes parameter can be set to NSAttributedString.
+/** @code
+ - (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionHeaderCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {
+     NSString *text = [NSString stringWithFormat:@"Header: %@", @(section)];
+     cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+ }
+ *  @endcode
+ */
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionHeaderCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes;
+
+/// Configure section footer cell if needed.
+/// @note the attributes parameter can be set to NSAttributedString.
+/** @code
+ - (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionFooterCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {
+     NSString *text = [NSString stringWithFormat:@"Footer: %@", @(section)];
+     cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+ }
+ *  @endcode
+ */
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionFooterCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes;
 
 
 // method replacement from UITableViewDelegate

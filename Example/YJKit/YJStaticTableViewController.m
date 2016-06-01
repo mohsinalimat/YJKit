@@ -44,8 +44,19 @@
     cell.textLabel.text = title;
 }
 
-- (void)tableView:(YJGroupedStyleTableView *)tableView configureSupplementaryRegionCell:(UITableViewCell *)cell inSection:(NSInteger)section {
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", @(section)];
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionHeaderCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {
+    NSString *text = [NSString stringWithFormat:@"Header: %@", @(section)];
+    cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionFooterCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {
+    NSString *text = [NSString stringWithFormat:@"Footer: %@", @(section)];
+    cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForGroupedItemAtIndexPath:indexPath];
+    NSLog(@"%@", cell);
 }
 
 @end

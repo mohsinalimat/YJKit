@@ -15,6 +15,7 @@
 #define YJGSTVC_DEFAULT_TABLE_BACKGROUND_COLOR [UIColor colorWithRed:0.937 green:0.937 blue:0.957 alpha:1.00]
 #define YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR [UIColor whiteColor]
 #define YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR [UIColor colorWithRed:0.784 green:0.780 blue:0.800 alpha:1.00]
+#define YJGSTVC_DEFAULT_SUPPLEMENTARY_TEXT_COLOR [UIColor colorWithRed:0.427 green:0.427 blue:0.447 alpha:1.00]
 
 @interface _YJGroupedStyleItemCell : UITableViewCell
 @end
@@ -112,8 +113,11 @@
 #define YJGSGroupSeparator @"_YJGSGroupSeparator"
 #define YJGSLineSeparator @"_YJGSLineSeparator"
 
-#define YJGSLineSeparatingGroup @"_YJGSLineSeparatingGroup"
-#define YJGSLineSeparatingItemCell @"_YJGSLineSeparatingItemCell"
+#define YJGSLineSeparatorForSeparatingGroup @"_YJGSLineSeparatorForSeparatingGroup"
+#define YJGSLineSeparatorForSeparatingItemCell @"_YJGSLineSeparatorForSeparatingItemCell"
+
+#define YJGSGroupSeparatorAsSectionHeader @"_YJGSGroupSeparatorAsSectionHeader"
+#define YJGSGroupSeparatorAsSectionFooter @"_YJGSGroupSeparatorAsSectionFooter"
 
 static const CGFloat kYJGSTVCLastGroupSeparatorCellHeight = 999.0f;
 static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
@@ -168,8 +172,11 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 #pragma mark - Mapping
 
 - (void)_mapDataFromYJGroupedStyleTableViewDataSource {
-    NSMutableArray *mappedRows = @[ YJGSHeaderCell, YJGSGroupSeparator, YJGSLineSeparator ].mutableCopy;
-    NSUInteger row = 3; // row for each UITableViewCell
+    NSMutableArray *mappedRows = @[ YJGSHeaderCell,
+                                    YJGSGroupSeparator,
+                                    [NSString stringWithFormat:@"%@:%@,%@", YJGSGroupSeparator, YJGSGroupSeparatorAsSectionHeader, @0],
+                                    YJGSLineSeparator ].mutableCopy;
+    NSUInteger rowIdx = mappedRows.count;
     NSInteger sections = 1;
     
     if ([self.tableView.dataSource respondsToSelector:@selector(numberOfSectionsInGroupedStyleTableView:)]) {
@@ -179,14 +186,15 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     for (NSUInteger i = 0; i < sections; ++i) {
         NSInteger rowsInSection = [self.tableView.dataSource tableView:self.tableView numberOfGroupedItemRowsInSection:i];
         for (NSUInteger j = 0; j < rowsInSection; ++j) {
-            mappedRows[row++] = [NSString stringWithFormat:@"%@:%@,%@", YJGSItemCell, @(i), @(j)];
-            mappedRows[row++] = [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatingItemCell];
+            mappedRows[rowIdx++] = [NSString stringWithFormat:@"%@:%@,%@", YJGSItemCell, @(i), @(j)];
+            mappedRows[rowIdx++] = [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatorForSeparatingItemCell];
         }
-        mappedRows[row-1] = [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatingGroup];
-        mappedRows[row++] = [NSString stringWithFormat:@"%@:%@", YJGSGroupSeparator, @(i+1)];
-        mappedRows[row++] = [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatingGroup];
+        mappedRows[rowIdx-1] = [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatorForSeparatingGroup];
+        mappedRows[rowIdx++] = [NSString stringWithFormat:@"%@:%@,%@", YJGSGroupSeparator, YJGSGroupSeparatorAsSectionFooter, @(i)];
+        mappedRows[rowIdx++] = [NSString stringWithFormat:@"%@:%@,%@", YJGSGroupSeparator, YJGSGroupSeparatorAsSectionHeader, @(i+1)];
+        mappedRows[rowIdx++] = [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatorForSeparatingGroup];
     }
-    [mappedRows removeLastObject];
+    [mappedRows removeLastObject]; // keep the last section header cell as the last big supplementary cell
     
     _mappedRows = [mappedRows copy];
 }
@@ -267,6 +275,8 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     NSInteger row = indexPath.row;
     UITableViewCell *cell = nil;
     
+    NSString *rowInfo = self.mappedRows[row];
+    
     UIColor *tableBGColor = tableView.supplementaryRegionBackgroundColor;
     UIColor *itemBGColor = tableView.itemCellBackgroundColor;
     
@@ -286,16 +296,13 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
                 cell = [[_YJGroupedStyleGroupSeparatorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:headerCellReuseID];
                 cell.contentView.backgroundColor = tableBGColor;
                 cell.backgroundColor = tableBGColor;
-                if ([tableView.delegate respondsToSelector:@selector(tableView:configureSupplementaryRegionCell:inSection:)]) {
-                    [tableView.delegate tableView:tableView configureSupplementaryRegionCell:cell inSection:-1];
-                }
             }
         }
         self.backgroundColorForHeaderCell = cell.contentView.backgroundColor ?: (cell.backgroundColor ?: tableBGColor);
     }
     
     // item cell
-    else if ([self.mappedRows[row] hasPrefix:YJGSItemCell]) {
+    else if ([rowInfo hasPrefix:YJGSItemCell]) {
         cell = [tableView dequeueReusableCellWithIdentifier:YJGSTVC_ITEM_CELL_REUSE_ID];
         if (!cell) cell = [[_YJGroupedStyleItemCell alloc] initWithStyle:tableView.itemCellStyle reuseIdentifier:YJGSTVC_ITEM_CELL_REUSE_ID];
         cell.accessoryType = tableView.itemCellAccessoryType;
@@ -310,13 +317,37 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     }
     
     // group separator cell (i.e. section)
-    else if ([self.mappedRows[row] hasPrefix:YJGSGroupSeparator]) {
+    else if ([rowInfo hasPrefix:YJGSGroupSeparator]) {
         cell = [tableView dequeueReusableCellWithIdentifier:YJGSTVC_GROUP_SEPARATOR_CELL_REUSE_ID forIndexPath:indexPath];
         cell.contentView.backgroundColor = tableBGColor;
         cell.backgroundColor = tableBGColor;
-        if ([tableView.delegate respondsToSelector:@selector(tableView:configureSupplementaryRegionCell:inSection:)]) {
-            NSInteger section = [[self.mappedRows[row] componentsSeparatedByString:@":"].lastObject integerValue];
-            [tableView.delegate tableView:tableView configureSupplementaryRegionCell:cell inSection:section];
+        
+        // set default text attributes
+        NSDictionary *attrs = @{ NSForegroundColorAttributeName : YJGSTVC_DEFAULT_SUPPLEMENTARY_TEXT_COLOR,
+                                 NSFontAttributeName : [UIFont systemFontOfSize:[UIFont smallSystemFontSize]] };
+        
+        // section header
+        NSString *detailInfo = [rowInfo componentsSeparatedByString:@":"].lastObject;
+        if ([detailInfo hasPrefix:YJGSGroupSeparatorAsSectionHeader] && row != self.mappedRows.count - 1) {
+            if ([tableView.delegate respondsToSelector:@selector(tableView:configureSectionHeaderCell:inSection:withDefaultTextAttributes:)]) {
+                NSInteger section = [[detailInfo componentsSeparatedByString:@","].lastObject integerValue];
+                [tableView.delegate tableView:tableView configureSectionHeaderCell:cell inSection:section withDefaultTextAttributes:attrs];
+            }
+        }
+        
+        // section footer
+        else if ([detailInfo hasPrefix:YJGSGroupSeparatorAsSectionFooter]) {
+            if ([tableView.delegate respondsToSelector:@selector(tableView:configureSectionFooterCell:inSection:withDefaultTextAttributes:)]) {
+                NSInteger section = [[detailInfo componentsSeparatedByString:@","].lastObject integerValue];
+                [tableView.delegate tableView:tableView configureSectionFooterCell:cell inSection:section withDefaultTextAttributes:attrs];
+            }
+        }
+        
+        // reset to empty cell, so it can be reused to other places (not for section header and section footer)
+        else {
+            cell.textLabel.text = nil;
+            cell.textLabel.attributedText = nil;
+            cell.imageView.image = nil;
         }
     }
     
@@ -327,7 +358,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
         UIColor *specifiedLineColor = tableView.lineSeparatorColor;
         
         // line separator for separating item cell
-        if ([[self.mappedRows[row] componentsSeparatedByString:@":"].lastObject isEqualToString:YJGSLineSeparatingItemCell]) {
+        if ([[rowInfo componentsSeparatedByString:@":"].lastObject isEqualToString:YJGSLineSeparatorForSeparatingItemCell]) {
             // set left indentation
             CGFloat indent = 0.0f;
             switch (tableView.lineSeparatorIndentationStyle) {
@@ -415,7 +446,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
         if (row == self.mappedRows.count - 1) {
             return kYJGSTVCLastGroupSeparatorCellHeight;
         } else {
-            return tableView.supplementaryRegionHeight;
+            return tableView.supplementaryRegionHeight / 2;
         }
     }
     
@@ -459,6 +490,8 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 #pragma mark - YJGroupedStyleTableViewDelegate
 
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {}
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionHeaderCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {}
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionFooterCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {}
 - (BOOL)tableView:(YJGroupedStyleTableView *)tableView shouldHighlightGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath { return YES; }
 
 @end
