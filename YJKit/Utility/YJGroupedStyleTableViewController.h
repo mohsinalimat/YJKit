@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureHeaderCell:(__kindof UITableViewCell *)headerCell;
 
 /// Configure the supplementary region cell which is above the specified section if needed. It behaves like the section header.
-/// @note If you not provide a header cell by registering, a supplementary region cell will replace the header and the section parameter is -1.
+/// @note If you never provide a header cell by registering, a supplementary region cell will take place and the section parameter is -1.
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureSupplementaryRegionCell:(UITableViewCell *)cell inSection:(NSInteger)section;
 
 
