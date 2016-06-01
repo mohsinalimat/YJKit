@@ -142,13 +142,14 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     
     tableView.backgroundColor = YJGSTVC_DEFAULT_TABLE_BACKGROUND_COLOR;
     tableView.contentInset = (UIEdgeInsets){ 0, 0, kYJGSTVCBottomSpaceFromLastCell - kYJGSTVCLastGroupSeparatorCellHeight, 0 };
-   
+    
     tableView.lineSeparatorStyle = YJGroupedStyleTableViewSeparatorStyleDefault;
     tableView.lineSeparatorColor = YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
     
     tableView.sectionVerticalSpace = 40.0;
     
     tableView.itemCellStyle = UITableViewCellStyleDefault;
+    tableView.itemCellAccessoryType = UITableViewCellAccessoryNone;
     tableView.itemCellIndentationStyle = YJGroupedStyleTableViewCellIndentationStyleAlignTitle;
     tableView.itemCellBackgroundColor = YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR;
     tableView.itemCellHeight = 44.0f;
@@ -296,12 +297,12 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     else if ([self.mappedRows[row] hasPrefix:YJGSItemCell]) {
         cell = [tableView dequeueReusableCellWithIdentifier:YJGSTVC_ITEM_CELL_REUSE_ID];
         if (!cell) cell = [[_YJGroupedStyleItemCell alloc] initWithStyle:tableView.itemCellStyle reuseIdentifier:YJGSTVC_ITEM_CELL_REUSE_ID];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = tableView.itemCellAccessoryType;
         cell.contentView.backgroundColor = itemBGColor;
         cell.backgroundColor = itemBGColor;
         
-        NSIndexPath *newIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
-        [tableView.delegate tableView:tableView configureItemCell:(id)cell atIndexPath:newIndexPath];
+        NSIndexPath *itemIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
+        [tableView.delegate tableView:tableView configureItemCell:(id)cell atIndexPath:itemIndexPath];
     }
     
     // group separator cell (i.e. section)
@@ -429,10 +430,18 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 }
 
 - (void)tableView:(YJGroupedStyleTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSIndexPath *newIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
-    if (newIndexPath && [tableView.delegate respondsToSelector:@selector(tableView:didSelectGroupedItemRowAtIndexPath:)]) {
-        [tableView.delegate tableView:tableView didSelectGroupedItemRowAtIndexPath:newIndexPath];
+    NSIndexPath *itemIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
+    if (itemIndexPath && [tableView.delegate respondsToSelector:@selector(tableView:didSelectGroupedItemRowAtIndexPath:)]) {
+        [tableView.delegate tableView:tableView didSelectGroupedItemRowAtIndexPath:itemIndexPath];
     }
+}
+
+- (BOOL)tableView:(YJGroupedStyleTableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSIndexPath *itemIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
+    if (itemIndexPath && [tableView.delegate respondsToSelector:@selector(tableView:shouldHighlightGroupedItemRowAtIndexPath:)]) {
+        return [tableView.delegate tableView:tableView shouldHighlightGroupedItemRowAtIndexPath:itemIndexPath];
+    }
+    return NO;
 }
 
 #pragma mark - YJGroupedStyleTableViewDataSource
@@ -444,6 +453,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 #pragma mark - YJGroupedStyleTableViewDelegate
 
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {}
+- (BOOL)tableView:(YJGroupedStyleTableView *)tableView shouldHighlightGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath { return YES; }
 
 @end
 

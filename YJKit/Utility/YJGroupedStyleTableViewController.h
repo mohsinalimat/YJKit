@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol YJGroupedStyleTableViewDelegate <UITableViewDelegate>
 
 /// Configure the item cell at index path. MUST implement this method to fill the data for each item cell presenting on screen.
+/// @note The indexPath parameter has being converted.
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 @optional
@@ -46,11 +47,19 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureHeaderCell:(__kindof UITableViewCell *)headerCell;
 
 /// Configure the section background cell for each section if needed.
+/// @note If you not provide a header cell by registering, a section background cell will replace the header and the section parameter is -1.
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionBackgroundCell:(UITableViewCell *)cell inSection:(NSInteger)section;
+
+
+// method replacement from UITableViewDelegate
 
 /// Select item cell at indexPath
 /// @note The indexPath parameter has being converted.
 - (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtIndexPath:(nonnull NSIndexPath *)indexPath;
+
+/// @remark Using this method instead of -tableView:shouldHighlightRowAtIndexPath:
+/// @note The indexPath parameter has being converted.
+- (BOOL)tableView:(YJGroupedStyleTableView *)tableView shouldHighlightGroupedItemRowAtIndexPath:(nonnull NSIndexPath *)indexPath;
 
 @end
 
@@ -76,11 +85,11 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
 
 // customize separator
 
-/// The separator style of table view
+/// The separator style of table view. Default is YJGroupedStyleTableViewSeparatorStyleDefault.
 /// @remark Do not set tableView.separatorStyle directly, Using this instead.
 @property (nonatomic) YJGroupedStyleTableViewSeparatorStyle lineSeparatorStyle;
 
-/// The separator color
+/// The separator color.
 @property (nonatomic, strong, null_resettable) UIColor *lineSeparatorColor;
 
 // customize section
@@ -94,10 +103,13 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
 
 // customize item cell
 
-/// The style of item cell.
+/// The style of item cell. Default is UITableViewCellStyleDefault.
 @property (nonatomic) UITableViewCellStyle itemCellStyle;
 
-/// The indentation for item cell.
+/// The accessory type for item cell. Default is UITableViewCellAccessoryNone.
+@property (nonatomic) UITableViewCellAccessoryType itemCellAccessoryType;
+
+/// The indentation for item cell. Default is YJGroupedStyleTableViewCellIndentationStyleAlignTitle.
 @property (nonatomic) YJGroupedStyleTableViewCellIndentationStyle itemCellIndentationStyle;
 
 /// The background color for item cell.
@@ -123,14 +135,15 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
  */
 @interface YJGroupedStyleTableViewController : UITableViewController <YJGroupedStyleTableViewDataSource, YJGroupedStyleTableViewDelegate>
 
-/// The grouped style table view
+/// The custom grouped style table view.
 @property (nonatomic, strong, null_resettable) YJGroupedStyleTableView *tableView;
 
-/// Should hide navigation bar for table view displaying.
+/// Should hide navigation bar for table view displaying. Default is NO.
 @property (nonatomic) BOOL shouldHideNavigationBar;
 
 /// The class name for registering header cell.
-/// @note If the header cell class contains a nib file, the nib file name MUST be the same as it's class name. e.g. "MyHeaderCell.h", "MyHeaderCell.m", "MyHeaderCell.xib"
+/// @warning If the header cell class contains a nib file, the nib file name MUST be the same as it's class name. e.g. "MyHeaderCell.h", "MyHeaderCell.m", "MyHeaderCell.xib"
+/// @warning It's not necessary to provide a reuse id for header cell. If you want to provide a reuse id (normally set in IB), make the reuse id as same as header cell's class name. However if you provide a different name for reuse id, an exception will be thrown.
 @property (nonatomic, copy) NSString *classNameForRegisteringHeaderCell;
 
 /// Get NSIndexPath for item cell from raw index path object;
@@ -138,8 +151,8 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
 /**
  @code
  - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-     NSIndexPath *itemIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
-     // use converted indexPath (itemIndexPath) rather than raw indexPath ...
+ NSIndexPath *itemIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
+ // use converted indexPath (itemIndexPath) rather than raw indexPath ...
  }
  @endcode
  */
