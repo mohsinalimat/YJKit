@@ -82,8 +82,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// @note The indexPath parameter has being converted.
 - (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath;
 
-@required
-
 /// @remark Implementing this method instead of -tableView:shouldHighlightRowAtIndexPath:
 /// @note The indexPath parameter has being converted.
 - (BOOL)tableView:(YJGroupedStyleTableView *)tableView shouldHighlightGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath;
