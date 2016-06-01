@@ -92,9 +92,9 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
 /// The separator color.
 @property (nonatomic, strong, null_resettable) UIColor *lineSeparatorColor;
 
-// customize section
+// customize background space between sections
 
-/// The background color for section.
+/// The background color for section, same meaning as tableView.backgroundColor.
 /// @remark Do not set tableView.backgroundColor directly, Using this instead.
 @property (nonatomic, strong, null_resettable) UIColor *sectionBackgroundColor;
 
@@ -151,8 +151,8 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorStyle) {
 /**
  @code
  - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
- NSIndexPath *itemIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
- // use converted indexPath (itemIndexPath) rather than raw indexPath ...
+     NSIndexPath *itemIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
+     // use converted itemIndexPath rather than raw indexPath parameter ...
  }
  @endcode
  */
