@@ -490,8 +490,6 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 #pragma mark - YJGroupedStyleTableViewDelegate
 
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {}
-- (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionHeaderCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {}
-- (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionFooterCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {}
 - (BOOL)tableView:(YJGroupedStyleTableView *)tableView shouldHighlightGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath { return YES; }
 
 @end

@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol YJGroupedStyleTableViewDataSource <UITableViewDataSource>
 
+@required
+
 /// The number of item cells in each section.
 - (NSInteger)tableView:(YJGroupedStyleTableView *)tableView numberOfGroupedItemRowsInSection:(NSInteger)section;
 
@@ -33,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 // --------------------------------------------------------------------
 
 @protocol YJGroupedStyleTableViewDelegate <UITableViewDelegate>
+
+@required
 
 /// Configure the item cell at index path. MUST implement this method to fill the data for each item cell presenting on screen.
 /// @note The indexPath parameter has being converted.
@@ -77,6 +81,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Select item cell at indexPath
 /// @note The indexPath parameter has being converted.
 - (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath;
+
+@required
 
 /// @remark Implementing this method instead of -tableView:shouldHighlightRowAtIndexPath:
 /// @note The indexPath parameter has being converted.
