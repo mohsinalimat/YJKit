@@ -124,6 +124,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 @property (nonatomic, strong) UIColor *backgroundColorForHeaderCell; // @dynamic
 @property (nonatomic, assign) CGFloat heightForHeaderCell;
 @property (nonatomic, assign) BOOL didRegisterHeaderCell;
+@property (nonatomic, assign) BOOL hasProvidedIconForItemCell;
 
 @end
 
@@ -303,6 +304,9 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
         
         NSIndexPath *itemIndexPath = [self indexPathForGroupedItemCellFromRawIndexPath:indexPath];
         [tableView.delegate tableView:tableView configureItemCell:(id)cell atIndexPath:itemIndexPath];
+        
+        // check if item cell has icon image after configuration
+        self.hasProvidedIconForItemCell = cell.imageView.image ? YES : NO;
     }
     
     // group separator cell (i.e. section)
@@ -326,9 +330,8 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
         if ([[self.mappedRows[row] componentsSeparatedByString:@":"].lastObject isEqualToString:YJGSLineSeparatingItemCell]) {
             // set left indentation
             CGFloat indent = 0.0f;
-            BOOL hasIcon = [tableView.dataSource willProvideIconImageForEachItemCellInGroupedStyleTableView:tableView];
             switch (tableView.itemCellIndentationStyle) {
-                case YJGroupedStyleTableViewCellIndentationStyleAlignTitle: indent = hasIcon ? 54.0f : 16.0f; break;
+                case YJGroupedStyleTableViewCellIndentationStyleAlignTitle: indent = self.hasProvidedIconForItemCell ? 54.0f : 16.0f; break;
                 case YJGroupedStyleTableViewCellIndentationStyleFixedMargin: indent = 16.0f; break;
             }
             lineSeparator.leftIndentation = indent;
@@ -448,7 +451,6 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 
 - (NSInteger)numberOfSectionsInGroupedStyleTableView:(UITableView *)tableView { return 1; }
 - (NSInteger)tableView:(YJGroupedStyleTableView *)tableView numberOfGroupedItemRowsInSection:(NSInteger)section { return 0; }
-- (BOOL)willProvideIconImageForEachItemCellInGroupedStyleTableView:(YJGroupedStyleTableView *)tableView { return NO; }
 
 #pragma mark - YJGroupedStyleTableViewDelegate
 

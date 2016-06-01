@@ -21,9 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// The number of item cells in each section.
 - (NSInteger)tableView:(YJGroupedStyleTableView *)tableView numberOfGroupedItemRowsInSection:(NSInteger)section;
 
-/// Indicating if you'd like to provide an icon image for each item cell.
-- (BOOL)willProvideIconImageForEachItemCellInGroupedStyleTableView:(YJGroupedStyleTableView *)tableView;
-
 @optional
 
 /// The number of sections for YJGroupedStyleTableView.
