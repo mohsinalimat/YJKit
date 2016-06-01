@@ -16,16 +16,42 @@ NS_ASSUME_NONNULL_BEGIN
 //                   YJGroupedStyleTableViewDataSource
 // --------------------------------------------------------------------
 
+/**
+ * Implementing YJGroupedStyleTableViewDataSource methods instead of their original version from UITableViewDataSource.
+ */
 @protocol YJGroupedStyleTableViewDataSource <UITableViewDataSource>
 
 @required
 
 /// The number of item cells in each section.
+/**
+ * @code
+ - (NSArray <NSArray <NSString *> *> *)groupedTitles {
+     return @[ @[ @"hello", @"world" ], @[ @"and", @"you" ] ];
+ }
+ 
+ - (NSInteger)numberOfSectionsInGroupedStyleTableView:(YJGroupedStyleTableView *)tableView {
+     return self.groupedTitles.count;
+ }
+ * @endcode
+ */
 - (NSInteger)tableView:(YJGroupedStyleTableView *)tableView numberOfGroupedItemRowsInSection:(NSInteger)section;
+
 
 @optional
 
 /// The number of sections for YJGroupedStyleTableView.
+/**
+ * @code
+ - (NSArray <NSArray <NSString *> *> *)groupedTitles {
+     return @[ @[ @"hello", @"world" ], @[ @"and", @"you" ] ];
+ }
+ 
+ - (NSInteger)tableView:(YJGroupedStyleTableView *)tableView numberOfGroupedItemRowsInSection:(NSInteger)section {
+     return self.groupedTitles[section].count;
+ }
+ * @endcode
+ */
 - (NSInteger)numberOfSectionsInGroupedStyleTableView:(YJGroupedStyleTableView *)tableView;
 
 @end
@@ -34,18 +60,48 @@ NS_ASSUME_NONNULL_BEGIN
 //                    YJGroupedStyleTableViewDelegate
 // --------------------------------------------------------------------
 
+/**
+ * Implementing YJGroupedStyleTableViewDelegate methods instead of their original version from UITableViewDelegate if needed.
+ */
 @protocol YJGroupedStyleTableViewDelegate <UITableViewDelegate>
 
 @required
 
 /// Configure the item cell at index path. MUST implement this method to fill the data for each item cell presenting on screen.
 /// @note The indexPath parameter has being converted.
+/**
+ * @code
+ - (NSArray <NSArray <NSString *> *> *)groupedTitles { 
+     return @[ @[ @"hello", @"world" ], @[ @"and", @"you" ] ];
+ }
+ 
+ - (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+     cell.textLabel.text = self.groupedTitles[indexPath.section][indexPath.row];
+ }
+ * @endcode
+ */
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+
 
 @optional
 
 /// Configure the registered header cell if needed.
+/// @note If the headerCell parameter is tagged with YJGroupedStyleTableViewControllerHeaderCellTagForCompressedSizeCalculation,
+/// which means this headerCell is not going to be displayed on screen.
+/**
+ * @code
+ - (void)tableView:(YJGroupedStyleTableView *)tableView configureHeaderCell:(__kindof UITableViewCell *)headerCell {
+     MyHeaderCell *cell = (MyHeaderCell *)headerCell;
+     if (cell.tag != YJGroupedStyleTableViewControllerHeaderCellTagForCompressedSizeCalculation) {
+         // This cell will be displayed on screen. You can set targer/action pair if needed.
+     } else {
+         // This cell is only for size calculation, and will never be shown on screen.
+     }
+ }
+ * @endcode
+ */
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureHeaderCell:(__kindof UITableViewCell *)headerCell;
+
 
 /// Configure section header cell if needed.
 /// @note the attributes parameter can be set to NSAttributedString.
@@ -57,6 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @endcode
  */
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionHeaderCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes;
+
 
 /// Configure section footer cell if needed.
 /// @note the attributes parameter can be set to NSAttributedString.
@@ -70,8 +127,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionFooterCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes;
 
 
-// Implementing these methods instead of original methods from UITableViewDelegate if needed.
-
 // WARNING: If you implementing any of the raw UITableViewDelegate method, you must convert the indexPath
 // parameter first before using it. e.g. If you have the YJGroupedStyleTableViewController subclass, then call
 // -[groupedTableViewController indexPathForGroupedItemConvertedFromRawIndexPath:indexPath] inside of the
@@ -81,6 +136,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Select item cell at indexPath
 /// @note The indexPath parameter has being converted.
 - (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath;
+
 
 /// @remark Implementing this method instead of -tableView:shouldHighlightRowAtIndexPath:
 /// @note The indexPath parameter has being converted.
@@ -170,10 +226,11 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 /// Should hide navigation bar for table view displaying. Default is NO.
 @property (nonatomic) BOOL shouldHideNavigationBar;
 
-/// The class name for registering header cell.
+/// The class name for registering header cell. Default is nil, which means it can be no header cell.
 /// @warning If the header cell class contains a nib file, the nib file name MUST be the same as it's class name. e.g. "MyHeaderCell.h", "MyHeaderCell.m", "MyHeaderCell.xib"
 /// @warning It's not necessary to provide a reuse id for header cell. If you want to provide a reuse id (normally set in IB), make the reuse id as same as header cell's class name. However if you provide a different name for reuse id, an exception will be thrown.
-@property (nonatomic, copy) NSString *classNameForRegisteringHeaderCell;
+@property (nonatomic, copy, nullable) NSString *classNameForRegisteringHeaderCell;
+
 
 /// Get NSIndexPath for item cell from raw index path object;
 /// @warning If you implementing one of the UITableViewDelegate method, convert the indexPath before use it.
@@ -189,6 +246,9 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 
 @end
 
+/// If you register a header cell, the configuration process for header cell can be performed for both
+/// size calculation and final displaying. This tag is for specifying the cell is only for size calculation,
+/// which means this tagged cell is not going to be displayed on screen eventually.
 FOUNDATION_EXTERN NSInteger const YJGroupedStyleTableViewControllerHeaderCellTagForCompressedSizeCalculation;
 
 NS_ASSUME_NONNULL_END

@@ -22,26 +22,23 @@
     self.tableView.lineSeparatorColor = [UIColor redColor];
 }
 
-- (NSArray <NSArray <NSString *> *> *)titlesForGroupedCells {
+- (NSArray <NSArray <NSString *> *> *)groupedTitles {
     return @[ @[ @"hello", @"world" ],
               @[ @"and", @"you" ],
               @[ @"1", @"2", @"3", @"4" ],
-              @[ @"hi" ]
-              ];
+              @[ @"hi" ] ];
 }
 
 - (NSInteger)numberOfSectionsInGroupedStyleTableView:(YJGroupedStyleTableView *)tableView {
-    return self.titlesForGroupedCells.count;
+    return self.groupedTitles.count;
 }
 
 - (NSInteger)tableView:(YJGroupedStyleTableView *)tableView numberOfGroupedItemRowsInSection:(NSInteger)section {
-    return self.titlesForGroupedCells[section].count;
+    return self.groupedTitles[section].count;
 }
 
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell forConvertedIndexPath:(NSIndexPath *)indexPath {
-    NSArray *titles = self.titlesForGroupedCells[indexPath.section];
-    NSString *title = titles[indexPath.row];
-    cell.textLabel.text = title;
+    cell.textLabel.text = self.groupedTitles[indexPath.section][indexPath.row];
 }
 
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionHeaderCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {
