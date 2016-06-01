@@ -38,7 +38,7 @@
     return self.titlesForGroupedCells[section].count;
 }
 
-- (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell forConvertedIndexPath:(NSIndexPath *)indexPath {
     NSArray *titles = self.titlesForGroupedCells[indexPath.section];
     NSString *title = titles[indexPath.row];
     cell.textLabel.text = title;
@@ -54,7 +54,7 @@
     cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
-- (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtConvertedIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForGroupedItemAtIndexPath:indexPath];
     NSLog(@"%@", cell);
 }

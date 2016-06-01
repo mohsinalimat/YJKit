@@ -66,13 +66,19 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionFooterCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes;
 
 
-// method replacement from UITableViewDelegate
+// Implementing these methods instead of original methods from UITableViewDelegate if needed.
+
+// WARNING: If you implementing any of the raw UITableViewDelegate method, you must convert the indexPath
+// parameter first before using it. e.g. If you have the YJGroupedStyleTableViewController subclass, then call
+// -[groupedTableViewController indexPathForGroupedItemConvertedFromRawIndexPath:indexPath] inside of the
+// UITableViewDelegate raw method implementation to get the index path for item cell, then use the converted
+// index path rather then default parameter for your implementation.
 
 /// Select item cell at indexPath
 /// @note The indexPath parameter has being converted.
 - (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath;
 
-/// @remark Using this method instead of -tableView:shouldHighlightRowAtIndexPath:
+/// @remark Implementing this method instead of -tableView:shouldHighlightRowAtIndexPath:
 /// @note The indexPath parameter has being converted.
 - (BOOL)tableView:(YJGroupedStyleTableView *)tableView shouldHighlightGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath;
 
@@ -83,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 // --------------------------------------------------------------------
 
 typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorIndentationStyle) {
-    YJGroupedStyleTableViewSeparatorIndentationStyleAlignItemCellTitle, // always align the title of the cell
+    YJGroupedStyleTableViewSeparatorIndentationStyleAlignItemCellTitle, // always align the title of the item cell
     YJGroupedStyleTableViewSeparatorIndentationStyleFixedMinimumMargin, // always keep the fixed minimum distance as left margin
 };
 
@@ -98,7 +104,7 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 @property (nonatomic, weak, nullable) id <YJGroupedStyleTableViewDelegate> delegate;
 @property (nonatomic, weak, nullable) id <YJGroupedStyleTableViewDataSource> dataSource;
 
-// customize separator
+// Customize separator
 
 /// The separator display option of table view. Default is YJGroupedStyleTableViewSeparatorDisplayModeDefault.
 /// @remark Do not set tableView.separatorStyle directly.
@@ -112,7 +118,7 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 /// The separator color.
 @property (nonatomic, strong, null_resettable) UIColor *lineSeparatorColor;
 
-// customize supplementary region between sections
+// Customize supplementary region between sections
 
 /// The background color for supplementary region between sections, same meaning as tableView.backgroundColor.
 /// @remark Do not set tableView.backgroundColor directly, Using this instead.
@@ -121,7 +127,7 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 /// The vertical distance between each section.
 @property (nonatomic) CGFloat supplementaryRegionHeight;
 
-// customize item cell
+// Customize item cell
 
 /// The style of item cell. Default is UITableViewCellStyleDefault.
 @property (nonatomic) UITableViewCellStyle itemCellStyle;
@@ -135,6 +141,8 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 
 /// The height for each item cell.
 @property (nonatomic) CGFloat itemCellHeight;
+
+// Get item cell by specifying item indexPath
 
 /// Get a item cell for specified section and row.
 /// @remark Using this method instead of -[UITableView cellForRowAtIndexPath:]
