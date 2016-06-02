@@ -7,10 +7,7 @@
 //
 
 #import "YJGroupedStyleTableViewController.h"
-#import "NSObject+YJRuntimeSwizzling.h"
 #import "NSValue+YJGeometryExtension.h"
-#import "NSArray+YJCollection.h"
-#import "NSArray+YJSequence.h"
 #import "YJUIMacros.h"
 
 #define YJGSTVC_DEFAULT_TABLE_BACKGROUND_COLOR [UIColor colorWithRed:0.937 green:0.937 blue:0.957 alpha:1.00]
@@ -239,8 +236,8 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 @interface YJGroupedStyleTableViewController ()
 
 @property (nonatomic, strong) UIColor *backgroundColorForHeaderCell; // @dynamic
-@property (nonatomic, assign) CGFloat heightForHeaderCell;
 @property (nonatomic, strong) NSMutableDictionary <NSNumber *, NSNumber *> *heightsForCustomItemCells;
+@property (nonatomic, assign) CGFloat heightForHeaderCell;
 @property (nonatomic, assign) BOOL hasProvidedIconForItemCell;
 
 @end
@@ -290,6 +287,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
                                     YJGSGroupSeparator,
                                     [NSString stringWithFormat:@"%@:%@,%@", YJGSGroupSeparator, YJGSGroupSeparatorAsSectionHeader, @0],
                                     YJGSLineSeparator ].mutableCopy;
+    
     NSUInteger rowIdx = mappedRows.count;
     NSInteger sections = 1;
     
@@ -444,9 +442,11 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     
     // custom item cell
     else if ([typeInfo isEqualToString:YJGSCustomItemCell]) {
-        NSArray *components = [detailInfo componentsSeparatedByString:@"|"];
-        NSString *className = components.firstObject;
-        NSIndexPath *customItemIndexPath = [self indexPathForGroupedItemConvertedFromRawIndexPath:indexPath];
+        NSArray *hybridComponents = [detailInfo componentsSeparatedByString:@"|"];
+        NSString *className = hybridComponents.firstObject;
+        NSArray *indexPathComponents = [hybridComponents.lastObject componentsSeparatedByString:@","];
+        NSIndexPath *customItemIndexPath = [NSIndexPath indexPathForRow:[indexPathComponents.lastObject integerValue]
+                                                              inSection:[indexPathComponents.firstObject integerValue]];
         
         cell = [tableView dequeueReusableCellWithIdentifier:className forIndexPath:indexPath];
         cell.backgroundColor = cell.contentView.backgroundColor;
@@ -587,10 +587,11 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
         if (cellHeight) return cellHeight;
         
         NSString *detailInfo = [self.mappedRows[row] componentsSeparatedByString:@":"].lastObject;
-        NSArray *components = [detailInfo componentsSeparatedByString:@"|"];
-        NSString *className = components.firstObject;
-//        NSInteger customItemSection = [[components.lastObject componentsSeparatedByString:@","].firstObject integerValue];
-        NSIndexPath *customItemIndexPath = [self indexPathForGroupedItemConvertedFromRawIndexPath:indexPath];
+        NSArray *hybridComponents = [detailInfo componentsSeparatedByString:@"|"];
+        NSString *className = hybridComponents.firstObject;
+        NSArray *indexPathComponents = [hybridComponents.lastObject componentsSeparatedByString:@","];
+        NSIndexPath *customItemIndexPath = [NSIndexPath indexPathForRow:[indexPathComponents.lastObject integerValue]
+                                                              inSection:[indexPathComponents.firstObject integerValue]];
         
         static UITableViewCell *cell = nil;
         if (!cell) {
