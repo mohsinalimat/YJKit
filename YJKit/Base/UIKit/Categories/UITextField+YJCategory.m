@@ -64,8 +64,10 @@
 }
 
 - (void)yj_removeResignFirstResponderTapGestureFromSuperview {
-    for (UITapGestureRecognizer *tap in self.superview.gestureRecognizers) {
-        [tap removeTarget:self action:@selector(yj_handleResignFirstResponderTap)];
+    for (UIGestureRecognizer *gesture in self.superview.gestureRecognizers) {
+        if ([gesture isKindOfClass:[UITapGestureRecognizer class]]) {
+            [gesture removeTarget:self action:@selector(yj_handleResignFirstResponderTap)];
+        }
     }
 }
 

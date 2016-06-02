@@ -115,8 +115,8 @@ static const void *YJTextViewAssociatedPlaceholderColorKey = &YJTextViewAssociat
         }];
         
         if (!taps.count) {
-            UITapGestureRecognizer *dismissTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(yj_handleResignFirstResponderTap)];
-            [self.superview addGestureRecognizer:dismissTap];
+            UITapGestureRecognizer *resignFirstResponderTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(yj_handleResignFirstResponderTap)];
+            [self.superview addGestureRecognizer:resignFirstResponderTap];
         } else {
             UITapGestureRecognizer *tap = taps.lastObject;
             [tap removeTarget:self action:@selector(yj_handleResignFirstResponderTap)];
@@ -133,8 +133,10 @@ static const void *YJTextViewAssociatedPlaceholderColorKey = &YJTextViewAssociat
 }
 
 - (void)yj_removeResignFirstResponderTapGestureFromSuperview {
-    for (UITapGestureRecognizer *tap in self.superview.gestureRecognizers) {
-        [tap removeTarget:self action:@selector(yj_handleResignFirstResponderTap)];
+    for (UIGestureRecognizer *gesture in self.superview.gestureRecognizers) {
+        if ([gesture isKindOfClass:[UITapGestureRecognizer class]]) {
+            [gesture removeTarget:self action:@selector(yj_handleResignFirstResponderTap)];
+        }
     }
 }
 
