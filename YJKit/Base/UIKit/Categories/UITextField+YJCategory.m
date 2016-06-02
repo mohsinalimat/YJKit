@@ -27,7 +27,7 @@
     objc_setAssociatedObject(self, @selector(autoResignFirstResponder), @(autoResignFirstResponder), OBJC_ASSOCIATION_COPY_NONATOMIC);
     
     if (!autoResignFirstResponder) {
-        [self yj_removeResignFirstResponderTapGestureFromSuperview];
+        [self yj_removeResignFirstResponderTapActionFromSuperview];
     }
 }
 
@@ -58,12 +58,12 @@
 
 - (void)yj_textFieldRemoveFromSuperview {
     if (self.autoResignFirstResponder) {
-        [self yj_removeResignFirstResponderTapGestureFromSuperview];
+        [self yj_removeResignFirstResponderTapActionFromSuperview];
     }
     [self yj_textFieldRemoveFromSuperview];
 }
 
-- (void)yj_removeResignFirstResponderTapGestureFromSuperview {
+- (void)yj_removeResignFirstResponderTapActionFromSuperview {
     for (UIGestureRecognizer *gesture in self.superview.gestureRecognizers) {
         if ([gesture isKindOfClass:[UITapGestureRecognizer class]]) {
             [gesture removeTarget:self action:@selector(yj_handleResignFirstResponderTap)];

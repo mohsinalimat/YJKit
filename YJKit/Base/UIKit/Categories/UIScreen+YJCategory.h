@@ -8,26 +8,26 @@
 
 #import <UIKit/UIScreen.h>
 
-typedef NS_ENUM(NSInteger, UIScreenDisplayResolution) {
-    UIScreenDisplayResolutionUndefined,
+typedef NS_ENUM(NSInteger, YJScreenDisplayResolution) {
+    YJScreenDisplayResolutionUndefined,
     // iPhone (includes iPod Touch)
-    UIScreenDisplayResolutionPixel320x480,       // older type
-    UIScreenDisplayResolutionPixel640x960,       // 4, 4s
-    UIScreenDisplayResolutionPixel640x1136,      // 5, 5s, 6(display zoom), 6s(display zoom), SE 1
-    UIScreenDisplayResolutionPixel750x1334,      // 6, 6s
-    UIScreenDisplayResolutionPixel1125x2001,     // 6+(display zoom), 6s+(display zoom)
-    UIScreenDisplayResolutionPixel1242x2208,     // 6+, 6s+
+    YJScreenDisplayResolutionPixel320x480,       // older type
+    YJScreenDisplayResolutionPixel640x960,       // 4, 4s
+    YJScreenDisplayResolutionPixel640x1136,      // 5, 5s, 6(display zoom), 6s(display zoom), SE 1
+    YJScreenDisplayResolutionPixel750x1334,      // 6, 6s
+    YJScreenDisplayResolutionPixel1125x2001,     // 6+(display zoom), 6s+(display zoom)
+    YJScreenDisplayResolutionPixel1242x2208,     // 6+, 6s+
     // iPad
-    UIScreenDisplayResolutionPixel768x1024,      // 1, 2, mini 1
-    UIScreenDisplayResolutionPixel1536x2048,     // 3, 4, Air(1, 2) mini(2, 3, 4), Pro 2<9.7-inch>
-    UIScreenDisplayResolutionPixel2048x2732,     // Pro (1, 2<12.9-inch>)
+    YJScreenDisplayResolutionPixel768x1024,      // 1, 2, mini 1
+    YJScreenDisplayResolutionPixel1536x2048,     // 3, 4, Air(1, 2) mini(2, 3, 4), Pro 2<9.7-inch>
+    YJScreenDisplayResolutionPixel2048x2732,     // Pro (1, 2<12.9-inch>)
 };
 
-typedef NS_ENUM(NSInteger, UIScreenDisplayAspectRatio) {
-    UIScreenDisplayAspectRatioUndefined,
-    UIScreenDisplayAspectRatio_3_2,             // 3:2
-    UIScreenDisplayAspectRatio_4_3,             // 4:3
-    UIScreenDisplayAspectRatio_16_9,            // 16:9
+typedef NS_ENUM(NSInteger, YJScreenDisplayAspectRatio) {
+    YJScreenDisplayAspectRatioUndefined,
+    YJScreenDisplayAspectRatio_3_2,             // 3:2
+    YJScreenDisplayAspectRatio_4_3,             // 4:3
+    YJScreenDisplayAspectRatio_16_9,            // 16:9
 };
 
 /// Convenience function for acquiring [UIScreen mainScreen].bounds
@@ -44,9 +44,9 @@ CGFloat YJScreenScale();
 @property (nonatomic, readonly) CGSize sizeInPixel;
 
 /// The display resolution of the device screen.
-@property (nonatomic, readonly) UIScreenDisplayResolution displayResolution;
+@property (nonatomic, readonly) YJScreenDisplayResolution displayResolution;
 
 /// The display aspect ratio of the device screen.
-@property (nonatomic, readonly) UIScreenDisplayAspectRatio displayAspectRatio;
+@property (nonatomic, readonly) YJScreenDisplayAspectRatio displayAspectRatio;
 
 @end

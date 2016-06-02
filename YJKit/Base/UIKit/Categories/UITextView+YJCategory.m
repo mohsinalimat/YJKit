@@ -98,7 +98,7 @@ static const void *YJTextViewAssociatedPlaceholderColorKey = &YJTextViewAssociat
     objc_setAssociatedObject(self, @selector(autoResignFirstResponder), @(autoResignFirstResponder), OBJC_ASSOCIATION_COPY_NONATOMIC);
     
     if (!autoResignFirstResponder) {
-        [self yj_removeResignFirstResponderTapGestureFromSuperview];
+        [self yj_removeResignFirstResponderTapActionFromSuperview];
     }
 }
 
@@ -127,12 +127,12 @@ static const void *YJTextViewAssociatedPlaceholderColorKey = &YJTextViewAssociat
 
 - (void)yj_textViewRemoveFromSuperview {
     if (self.autoResignFirstResponder) {
-        [self yj_removeResignFirstResponderTapGestureFromSuperview];
+        [self yj_removeResignFirstResponderTapActionFromSuperview];
     }
     [self yj_textViewRemoveFromSuperview];
 }
 
-- (void)yj_removeResignFirstResponderTapGestureFromSuperview {
+- (void)yj_removeResignFirstResponderTapActionFromSuperview {
     for (UIGestureRecognizer *gesture in self.superview.gestureRecognizers) {
         if ([gesture isKindOfClass:[UITapGestureRecognizer class]]) {
             [gesture removeTarget:self action:@selector(yj_handleResignFirstResponderTap)];

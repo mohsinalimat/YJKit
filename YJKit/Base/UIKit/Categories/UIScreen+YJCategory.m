@@ -41,41 +41,41 @@ CGFloat YJScreenScale() {
     return [[[UIScreen mainScreen] currentMode] size];
 }
 
-- (UIScreenDisplayResolution)displayResolution {
-    UIScreenDisplayResolution resolution = UIScreenDisplayResolutionUndefined;
+- (YJScreenDisplayResolution)displayResolution {
+    YJScreenDisplayResolution resolution = YJScreenDisplayResolutionUndefined;
     CGSize tempSize = [self sizeInPixel];
     CGSize pSize = (CGSize){ MIN(tempSize.width, tempSize.height), MAX(tempSize.width, tempSize.height) };
     // iPhone
     if (isPhone) {
         if (CGSizeEqualToSize(pSize, CGSizeMake(320, 480))) {
-            resolution = UIScreenDisplayResolutionPixel320x480;
+            resolution = YJScreenDisplayResolutionPixel320x480;
         } else if (CGSizeEqualToSize(pSize, CGSizeMake(640, 960))) {
-            resolution = UIScreenDisplayResolutionPixel640x960;
+            resolution = YJScreenDisplayResolutionPixel640x960;
         } else if (CGSizeEqualToSize(pSize, CGSizeMake(640, 1136))) {
-            resolution = UIScreenDisplayResolutionPixel640x1136;
+            resolution = YJScreenDisplayResolutionPixel640x1136;
         } else if (CGSizeEqualToSize(pSize, CGSizeMake(750, 1334))) {
-            resolution = UIScreenDisplayResolutionPixel750x1334;
+            resolution = YJScreenDisplayResolutionPixel750x1334;
         } else if (CGSizeEqualToSize(pSize, CGSizeMake(1125, 2001))) {
-            resolution = UIScreenDisplayResolutionPixel1125x2001;
+            resolution = YJScreenDisplayResolutionPixel1125x2001;
         } else if (CGSizeEqualToSize(pSize, CGSizeMake(1242, 2208))) {
-            resolution = UIScreenDisplayResolutionPixel1242x2208;
+            resolution = YJScreenDisplayResolutionPixel1242x2208;
         }
     }
     // iPad
     else if (isPad) {
         if (CGSizeEqualToSize(pSize, CGSizeMake(768, 1024))) {
-            resolution = UIScreenDisplayResolutionPixel768x1024;
+            resolution = YJScreenDisplayResolutionPixel768x1024;
         } else if (CGSizeEqualToSize(pSize, CGSizeMake(1536, 2048))) {
-            resolution = UIScreenDisplayResolutionPixel1536x2048;
+            resolution = YJScreenDisplayResolutionPixel1536x2048;
         } else if (CGSizeEqualToSize(pSize, CGSizeMake(2048, 2732))) {
-            resolution = UIScreenDisplayResolutionPixel2048x2732;
+            resolution = YJScreenDisplayResolutionPixel2048x2732;
         }
     }
     return resolution;
 }
 
-- (UIScreenDisplayAspectRatio)displayAspectRatio {
-    UIScreenDisplayAspectRatio ratio = UIScreenDisplayAspectRatioUndefined;
+- (YJScreenDisplayAspectRatio)displayAspectRatio {
+    YJScreenDisplayAspectRatio ratio = YJScreenDisplayAspectRatioUndefined;
     CGSize pSize = [self sizeInPixel];
     
     BOOL (^equalRatio)(CGSize, CGSize) = ^(CGSize pSize, CGSize rSize) {
@@ -89,11 +89,11 @@ CGFloat YJScreenScale() {
     };
     
     if (equalRatio(pSize,(CGSize){16,9})) {
-        ratio = UIScreenDisplayAspectRatio_16_9;
+        ratio = YJScreenDisplayAspectRatio_16_9;
     } else if (equalRatio(pSize,(CGSize){4,3})) {
-        ratio = UIScreenDisplayAspectRatio_4_3;
+        ratio = YJScreenDisplayAspectRatio_4_3;
     } else if (equalRatio(pSize,(CGSize){3,2})) {
-        ratio = UIScreenDisplayAspectRatio_3_2;
+        ratio = YJScreenDisplayAspectRatio_3_2;
     }
     
     return ratio;

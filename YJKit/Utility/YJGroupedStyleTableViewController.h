@@ -107,7 +107,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @note the attributes parameter can be set to NSAttributedString.
 /** @code
  - (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionHeaderCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {
-     NSString *text = [NSString stringWithFormat:@"Header: %@", @(section)];
+     NSString *text = [NSString stringWithFormat:@"Section Header: %@", @(section)];
      cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
  }
  *  @endcode
@@ -119,7 +119,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @note the attributes parameter can be set to NSAttributedString.
 /** @code
  - (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionFooterCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {
-     NSString *text = [NSString stringWithFormat:@"Footer: %@", @(section)];
+     NSString *text = [NSString stringWithFormat:@"Section Footer: %@", @(section)];
      cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
  }
  *  @endcode
@@ -127,18 +127,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionFooterCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes;
 
 
-// WARNING: If you implementing any of the raw UITableViewDelegate method, you must convert the indexPath
-// parameter first before using it. e.g. If you have the YJGroupedStyleTableViewController subclass, then call
-// -[groupedTableViewController indexPathForGroupedItemConvertedFromRawIndexPath:indexPath] inside of the
-// UITableViewDelegate raw method implementation to get the index path for item cell, then use the converted
-// index path rather then default parameter for your implementation.
-
 /// Select item cell at indexPath
 /// @note The indexPath parameter has being converted.
 - (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath;
 
 
-/// @remark Implementing this method instead of -tableView:shouldHighlightRowAtIndexPath:
+/// @warning For grouped style table view, implementing -tableView:shouldHighlightRowAtIndexPath: directly from UITableViewDelegate will get unexpected behavior. If you do need so, then implement this method instead.
 /// @note The indexPath parameter has being converted.
 - (BOOL)tableView:(YJGroupedStyleTableView *)tableView shouldHighlightGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath;
 
@@ -227,10 +221,16 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 @property (nonatomic) BOOL shouldHideNavigationBar;
 
 /// The class name for registering header cell. Default is nil, which means it can be no header cell.
+/// @note The header cell class must be a subclass of UITableViewCell. It will be displayed on top of the table view.
 /// @warning If the header cell class contains a nib file, the nib file name MUST be the same as it's class name. e.g. "MyHeaderCell.h", "MyHeaderCell.m", "MyHeaderCell.xib"
-/// @warning It's not necessary to provide a reuse id for header cell. If you want to provide a reuse id (normally set in IB), make the reuse id as same as header cell's class name. However if you provide a different name for reuse id, an exception will be thrown.
+/// @warning It's not necessary to provide a reuse id for header cell. If you want to provide a reuse id (normally set in IB), make sure the reuse id is also the same as header cell's class name. However if you provide a different name for reuse id, an exception will be thrown.
 @property (nonatomic, copy, nullable) NSString *classNameForRegisteringHeaderCell;
 
+// WARNING: If you implementing any of the raw UITableViewDelegate method, you must convert the indexPath
+// parameter first before using it. e.g. If you have the YJGroupedStyleTableViewController subclass, then call
+// -[groupedTableViewController indexPathForGroupedItemConvertedFromRawIndexPath:indexPath] inside of the
+// UITableViewDelegate raw method implementation to get the index path for item cell, then use the converted
+// index path rather then default parameter for your implementation.
 
 /// Get NSIndexPath for item cell from raw index path object;
 /// @warning If you implementing one of the UITableViewDelegate method, convert the indexPath before use it.
