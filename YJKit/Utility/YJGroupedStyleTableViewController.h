@@ -10,6 +10,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+UIKIT_EXTERN NSString *const YJGroupedStyleTableViewSupplementarySectionHeader;
+UIKIT_EXTERN NSString *const YJGroupedStyleTableViewSupplementarySectionFooter;
+UIKIT_EXTERN NSString *const YJGroupedStyleTableViewSupplementaryTopLine;  // at the top-line of table view.
+
+/// If you register a header cell, the configuration process for header cell can be performed for both
+/// size calculation and final displaying. This tag is for specifying the cell is only for size calculation,
+/// which means this tagged cell is not going to be displayed on screen eventually.
+UIKIT_EXTERN NSInteger const YJGroupedStyleTableViewControllerHeaderCellTagForCompressedSizeCalculation;
+UIKIT_EXTERN NSInteger const YJGroupedStyleTableViewControllerCustomItemCellTagForCompressedSizeCalculation;
+
 @class YJGroupedStyleTableView;
 
 // --------------------------------------------------------------------
@@ -24,37 +34,19 @@ NS_ASSUME_NONNULL_BEGIN
 @required
 
 /// The number of item cells in each section.
-/**
- * @code
- - (NSArray <NSArray <NSString *> *> *)groupedTitles {
-     return @[ @[ @"hello", @"world" ], @[ @"and", @"you" ] ];
- }
- 
- - (NSInteger)numberOfSectionsInGroupedStyleTableView:(YJGroupedStyleTableView *)tableView {
-     return self.groupedTitles.count;
- }
- * @endcode
- */
 - (NSInteger)tableView:(YJGroupedStyleTableView *)tableView numberOfGroupedItemRowsInSection:(NSInteger)section;
-
 
 @optional
 
 /// The number of sections for YJGroupedStyleTableView.
-/**
- * @code
- - (NSArray <NSArray <NSString *> *> *)groupedTitles {
-     return @[ @[ @"hello", @"world" ], @[ @"and", @"you" ] ];
- }
- 
- - (NSInteger)tableView:(YJGroupedStyleTableView *)tableView numberOfGroupedItemRowsInSection:(NSInteger)section {
-     return self.groupedTitles[section].count;
- }
- * @endcode
- */
 - (NSInteger)numberOfSectionsInGroupedStyleTableView:(YJGroupedStyleTableView *)tableView;
 
+/// The UITableViewCellStyle for cells at specified section.
+/// @note If you implement this method, the itemCellStyle property for YJGroupedStyleTableView will be ignored.
+- (UITableViewCellStyle)tableView:(YJGroupedStyleTableView *)tableView groupedItemCellStyleInSection:(NSInteger)section;
+
 @end
+
 
 // --------------------------------------------------------------------
 //                    YJGroupedStyleTableViewDelegate
@@ -69,17 +61,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Configure the item cell at index path. MUST implement this method to fill the data for each item cell presenting on screen.
 /// @note The indexPath parameter has being converted.
-/**
- * @code
- - (NSArray <NSArray <NSString *> *> *)groupedTitles { 
-     return @[ @[ @"hello", @"world" ], @[ @"and", @"you" ] ];
- }
- 
- - (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-     cell.textLabel.text = self.groupedTitles[indexPath.section][indexPath.row];
- }
- * @endcode
- */
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 
@@ -103,28 +84,26 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureHeaderCell:(__kindof UITableViewCell *)headerCell;
 
 
-/// Configure section header cell if needed.
+/// Configure the registered custom item cell for specific section if needed.
+/// @note If the customItemCell parameter is tagged with YJGroupedStyleTableViewControllerCustomItemCellTagForCompressedSizeCalculation,
+/// which means this customItemCell is not going to be displayed on screen.
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureCustomItemCell:(__kindof UITableViewCell *)customItemCell atIndexPath:(NSIndexPath *)indexPath;
+
+
+/// Configure supplementary cell if needed.
+/// @note the elementKind can be one of these: YJGroupedStyleTableViewSupplementarySectionHeader, YJGroupedStyleTableViewSupplementarySectionFooter, YJGroupedStyleTableViewSupplementaryTopLine.
 /// @note the attributes parameter can be set to NSAttributedString.
 /** @code
- - (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionHeaderCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {
-     NSString *text = [NSString stringWithFormat:@"Section Header: %@", @(section)];
-     cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+ - (void)tableView:(YJGroupedStyleTableView *)tableView configureSupplementaryCell:(UITableViewCell *)cell forElementOfKind:(NSString *)elementKind inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {
+     // configure section header
+     if (elementKind == YJGroupedStyleTableViewSupplementarySectionHeader) {
+         NSString *text = [NSString stringWithFormat:@"Header: %@", @(section)];
+         cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+     }
  }
  *  @endcode
  */
-- (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionHeaderCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes;
-
-
-/// Configure section footer cell if needed.
-/// @note the attributes parameter can be set to NSAttributedString.
-/** @code
- - (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionFooterCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {
-     NSString *text = [NSString stringWithFormat:@"Section Footer: %@", @(section)];
-     cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
- }
- *  @endcode
- */
-- (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionFooterCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes;
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureSupplementaryCell:(UITableViewCell *)cell forElementOfKind:(NSString *)elementKind inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes;
 
 
 /// Select item cell at indexPath
@@ -137,6 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)tableView:(YJGroupedStyleTableView *)tableView shouldHighlightGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
+
 
 // --------------------------------------------------------------------
 //                        YJGroupedStyleTableView
@@ -158,6 +138,22 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 @property (nonatomic, weak, nullable) id <YJGroupedStyleTableViewDelegate> delegate;
 @property (nonatomic, weak, nullable) id <YJGroupedStyleTableViewDataSource> dataSource;
 
+
+// Register nib or cell class
+
+/// Register header cell class. If it contains a .xib file, it will register the nib instead.
+/// @note The cell class must be a subclass of UITableViewCell. It will be displayed on top of the table view.
+/// @warning If the cell class contains a nib file, the nib file name MUST be the same as it's class name. e.g. "MyCell.h", "MyCell.m", "MyCell.xib".
+/// @warning It's not necessary to provide a reuse id for cell. If you want to provide a reuse id (normally set in IB), make sure the reuse id is also the same as cell's class name. However if you provide a different name for reuse id, an exception will be thrown.
+- (void)registerHeaderCellForClassName:(NSString *)className;
+
+/// Register custom item cell class for specified section. If it contains a .xib file, it will register the nib instead.
+/// @note The cell class must be a subclass of UITableViewCell. It will be displayed on top of the table view.
+/// @warning If the cell class contains a nib file, the nib file name MUST be the same as it's class name. e.g. "MyCell.h", "MyCell.m", "MyCell.xib".
+/// @warning It's not necessary to provide a reuse id for cell. If you want to provide a reuse id (normally set in IB), make sure the reuse id is also the same as cell's class name. However if you provide a different name for reuse id, an exception will be thrown.
+- (void)registerCustomItemCellForClassName:(NSString *)className inSection:(NSInteger)section;
+
+
 // Customize separator
 
 /// The separator display option of table view. Default is YJGroupedStyleTableViewSeparatorDisplayModeDefault.
@@ -172,6 +168,7 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 /// The separator color.
 @property (nonatomic, strong, null_resettable) UIColor *lineSeparatorColor;
 
+
 // Customize supplementary region between sections
 
 /// The background color for supplementary region between sections, same meaning as tableView.backgroundColor.
@@ -181,29 +178,38 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 /// The vertical distance between each section.
 @property (nonatomic) CGFloat supplementaryRegionHeight;
 
+
 // Customize item cell
 
-/// The style of item cell. Default is UITableViewCellStyleDefault.
+/// The style of all item cell. Default is UITableViewCellStyleDefault.
+/// @note If you implement -tableView:groupedItemCellStyleInSection:
+/// from YJGroupedStyleTableViewDataSource, this property will be ignored.
+/// @note This property is not effective for custom item cell.
 @property (nonatomic) UITableViewCellStyle itemCellStyle;
 
 /// The accessory type for item cell. Default is UITableViewCellAccessoryNone.
+/// @note This property is not effective for custom item cell.
 @property (nonatomic) UITableViewCellAccessoryType itemCellAccessoryType;
 
 /// The background color for item cell.
 /// @remark Using this property instead of set cell.contentView.backgroundColor directly.
+/// @note This property is not effective for custom item cell.
 @property (nonatomic, strong, null_resettable) UIColor *itemCellBackgroundColor;
 
 /// The height for each item cell.
+/// @note This property is not effective for custom item cell.
 @property (nonatomic) CGFloat itemCellHeight;
+
 
 // Get item cell by specifying item indexPath
 
 /// Get a item cell for specified section and row.
 /// @remark Using this method instead of -[UITableView cellForRowAtIndexPath:]
-/// @note The indexPath parameter has being converted.
+/// @note MUST use the converted index path as a vaild parameter.
 - (nullable UITableViewCell *)cellForGroupedItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
+
 
 // --------------------------------------------------------------------
 //                    YJGroupedStyleTableViewController
@@ -219,12 +225,6 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 
 /// Should hide navigation bar for table view displaying. Default is NO.
 @property (nonatomic) BOOL shouldHideNavigationBar;
-
-/// The class name for registering header cell. Default is nil, which means it can be no header cell.
-/// @note The header cell class must be a subclass of UITableViewCell. It will be displayed on top of the table view.
-/// @warning If the header cell class contains a nib file, the nib file name MUST be the same as it's class name. e.g. "MyHeaderCell.h", "MyHeaderCell.m", "MyHeaderCell.xib"
-/// @warning It's not necessary to provide a reuse id for header cell. If you want to provide a reuse id (normally set in IB), make sure the reuse id is also the same as header cell's class name. However if you provide a different name for reuse id, an exception will be thrown.
-@property (nonatomic, copy, nullable) NSString *classNameForRegisteringHeaderCell;
 
 // WARNING: If you implementing any of the raw UITableViewDelegate method, you must convert the indexPath
 // parameter first before using it. e.g. If you have the YJGroupedStyleTableViewController subclass, then call
@@ -245,10 +245,5 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 - (nullable NSIndexPath *)indexPathForGroupedItemConvertedFromRawIndexPath:(NSIndexPath *)rawIndexPath;
 
 @end
-
-/// If you register a header cell, the configuration process for header cell can be performed for both
-/// size calculation and final displaying. This tag is for specifying the cell is only for size calculation,
-/// which means this tagged cell is not going to be displayed on screen eventually.
-FOUNDATION_EXTERN NSInteger const YJGroupedStyleTableViewControllerHeaderCellTagForCompressedSizeCalculation;
 
 NS_ASSUME_NONNULL_END

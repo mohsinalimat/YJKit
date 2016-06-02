@@ -35,16 +35,27 @@
                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="01H-dn-u6u">
+                        <rect key="frame" x="208" y="113" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
+                    <constraint firstItem="01H-dn-u6u" firstAttribute="centerY" secondItem="7Bq-vm-yah" secondAttribute="centerY" id="7Ke-WZ-eXY"/>
                     <constraint firstAttribute="bottom" secondItem="7Bq-vm-yah" secondAttribute="bottom" constant="20" id="AWM-qv-xgX"/>
                     <constraint firstItem="Ey9-mW-mib" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="28" id="Lx5-cS-3j2"/>
+                    <constraint firstItem="01H-dn-u6u" firstAttribute="leading" secondItem="7Bq-vm-yah" secondAttribute="trailing" constant="8" id="Ov5-Wb-5uG"/>
                     <constraint firstItem="7Bq-vm-yah" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="hPf-iH-FV8"/>
                     <constraint firstItem="Ey9-mW-mib" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="wb8-zr-kve"/>
                     <constraint firstItem="7Bq-vm-yah" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" priority="999" constant="62" id="x4G-3Q-bW8"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="label" destination="01H-dn-u6u" id="CgL-Gy-Eia"/>
+            </connections>
             <point key="canvasLocation" x="437" y="286.5"/>
         </tableViewCell>
     </objects>

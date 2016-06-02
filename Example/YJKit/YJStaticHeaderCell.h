@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface YJStaticHeaderCell : UITableViewCell
-
+@property (nonatomic, strong) IBOutlet UILabel *label;
 @end

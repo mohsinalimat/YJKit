@@ -7,6 +7,7 @@
 //
 
 #import "YJStaticTableViewController.h"
+#import "YJStaticHeaderCell.h"
 
 @interface YJStaticTableViewController ()
 @end
@@ -16,15 +17,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.classNameForRegisteringHeaderCell = @"YJStaticHeaderCell";
+    [self.tableView registerHeaderCellForClassName:@"YJStaticHeaderCell"];
+    [self.tableView registerCustomItemCellForClassName:@"YJStaticHeaderCell" inSection:0];
+    [self.tableView registerCustomItemCellForClassName:@"YJStaticHeaderCell" inSection:3];
+    
     self.shouldHideNavigationBar = YES;
+    self.tableView.itemCellStyle = UITableViewCellStyleSubtitle;
     
     self.tableView.lineSeparatorColor = [UIColor redColor];
 }
 
 - (NSArray <NSArray <NSString *> *> *)groupedTitles {
-    return @[ @[ @"hello", @"world" ],
+    return @[ @[ @""/*Custom Cell*/],
+              @[ @"hello", @"world" ],
               @[ @"and", @"you" ],
+              @[ @"hello", @"hi" ],
+              @[ @"haha", @"hoho" ],
+              @[ @"haha", @"hoho" ],
+              @[ @"haha", @"hoho" ],
+              @[ @"haha", @"hoho" ],
               @[ @"1", @"2", @"3", @"4" ],
               @[ @"hi" ] ];
 }
@@ -37,23 +48,36 @@
     return self.groupedTitles[section].count;
 }
 
-- (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell forConvertedIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureItemCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     cell.textLabel.text = self.groupedTitles[indexPath.section][indexPath.row];
+    cell.detailTextLabel.text = self.groupedTitles[indexPath.section][indexPath.row];
 }
 
-- (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionHeaderCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {
-    NSString *text = [NSString stringWithFormat:@"Header: %@", @(section)];
-    cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureSupplementaryCell:(UITableViewCell *)cell forElementOfKind:(NSString *)elementKind inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {
+    // configure section header
+    if (elementKind == YJGroupedStyleTableViewSupplementaryTopLine) {
+        NSString *text = [NSString stringWithFormat:@"top: %@", @(section)];
+        cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+    }
 }
 
-- (void)tableView:(YJGroupedStyleTableView *)tableView configureSectionFooterCell:(UITableViewCell *)cell inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {
-    NSString *text = [NSString stringWithFormat:@"Footer: %@", @(section)];
-    cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
-}
-
-- (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtConvertedIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForGroupedItemAtIndexPath:indexPath];
     NSLog(@"%@", cell);
+}
+
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureCustomItemCell:(__kindof UITableViewCell *)customItemCell atIndexPath:(NSIndexPath *)indexPath {
+    YJStaticHeaderCell *cell = (YJStaticHeaderCell *)customItemCell;
+    cell.label.text = [NSString stringWithFormat:@"%@, %@", @(indexPath.section), @(indexPath.row)];
+}
+
+- (UITableViewCellStyle)tableView:(YJGroupedStyleTableView *)tableView groupedItemCellStyleInSection:(NSInteger)section {
+    if (section == 5) {
+        return UITableViewCellStyleValue1;
+    } else if (section == 1) {
+        return UITableViewCellStyleSubtitle;
+    }
+    return UITableViewCellStyleDefault;
 }
 
 @end
