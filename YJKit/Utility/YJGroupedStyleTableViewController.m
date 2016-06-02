@@ -593,13 +593,11 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
         NSIndexPath *customItemIndexPath = [NSIndexPath indexPathForRow:[indexPathComponents.lastObject integerValue]
                                                               inSection:[indexPathComponents.firstObject integerValue]];
         
-        static UITableViewCell *cell = nil;
-        if (!cell) {
-            if ([tableView hasNibFileForClassNamed:className]) {
-                cell = [[NSBundle mainBundle] loadNibNamed:className owner:self options:nil].firstObject;
-            } else {
-                cell = [NSClassFromString(className) new];
-            }
+        UITableViewCell *cell = nil;
+        if ([tableView hasNibFileForClassNamed:className]) {
+            cell = [[NSBundle mainBundle] loadNibNamed:className owner:self options:nil].firstObject;
+        } else {
+            cell = [NSClassFromString(className) new];
         }
         cell.tag = YJGroupedStyleTableViewControllerCustomItemCellTagForCompressedSizeCalculation;
         if ([tableView.delegate respondsToSelector:@selector(tableView:configureCustomItemCell:atIndexPath:)]) {
