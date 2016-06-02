@@ -8,12 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-/**
- *  The extension for UITextView class
- *
- *  . Automatic dismissing when user taps the background.
- */
-
 @interface UITextField (YJCategory)
+
+/// Whether resign first responder when user tap the background (textField's superview). Default is NO.
+@property (nonatomic) IBInspectable BOOL autoResignFirstResponder;
 
 @end

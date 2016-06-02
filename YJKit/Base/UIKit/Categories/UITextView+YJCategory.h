@@ -8,16 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-/**
- *  The extension for UITextView class
- *
- *  1. Add placeholder support, just like -[UITextField placeholder]
- *  2. Automatic dismissing when user taps the background.
- */
-
 @interface UITextView (YJCategory)
 
+/// Whether resign first responder when user tap the background (textView's superview). Default is NO.
+@property (nonatomic) IBInspectable BOOL autoResignFirstResponder;
+
+/// The placeholder text for displaying when text view has no content.
+/// @note Setting the placeholder text is actually setting the textView.attributedText
 @property (nonatomic, copy, nullable) IBInspectable NSString *placeholder;
-@property (nonatomic, strong, null_resettable) IBInspectable UIColor *placeholderColor; // default is [UIColor lightGrayColor]
+
+/// The color for placeholder text, default is [UIColor lightGrayColor].
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *placeholderColor;
 
 @end

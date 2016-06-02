@@ -51,12 +51,6 @@ static const void *YJTextViewAssociatedPlaceholderColorKey = &YJTextViewAssociat
     return objc_getAssociatedObject(self, YJTextViewAssociatedPlaceholderKey);
 }
 
-- (NSAttributedString *)_attributedPlaceholder:(NSString *)placeholder {
-    NSDictionary *attributes = @{ NSForegroundColorAttributeName : self.placeholderColor,
-                                  NSFontAttributeName : self.font };
-    return [[NSAttributedString alloc] initWithString:placeholder attributes:attributes];
-}
-
 - (void)setPlaceholderColor:(UIColor *)placeholderColor {
     objc_setAssociatedObject(self, YJTextViewAssociatedPlaceholderColorKey, placeholderColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
@@ -66,8 +60,6 @@ static const void *YJTextViewAssociatedPlaceholderColorKey = &YJTextViewAssociat
     if (!placeholderColor) placeholderColor = [UIColor lightGrayColor];
     return placeholderColor;
 }
-
-#pragma mark - observing text editing
 
 - (instancetype)yj_textViewInitWithFrame:(CGRect)frame {
     id textView = [self yj_textViewInitWithFrame:frame];
@@ -100,31 +92,53 @@ static const void *YJTextViewAssociatedPlaceholderColorKey = &YJTextViewAssociat
     [self _displayPlaceholderIfNeeded];
 }
 
-#pragma mark - observing life cycle
+#pragma mark - auto resign first responder
+
+- (void)setAutoResignFirstResponder:(BOOL)autoResignFirstResponder {
+    objc_setAssociatedObject(self, @selector(autoResignFirstResponder), @(autoResignFirstResponder), OBJC_ASSOCIATION_COPY_NONATOMIC);
+    
+    if (!autoResignFirstResponder) {
+        [self yj_removeResignFirstResponderTapGestureFromSuperview];
+    }
+}
+
+- (BOOL)autoResignFirstResponder {
+    return [objc_getAssociatedObject(self, _cmd) boolValue];
+}
 
 - (void)yj_textViewLayoutSubviews {
     [self yj_textViewLayoutSubviews];
     
-    NSArray *taps = [self.superview.gestureRecognizers arrayByFilteringWithCondition:^BOOL(__kindof UIGestureRecognizer * _Nonnull obj) { return [obj isKindOfClass:[UITapGestureRecognizer class]]; }];
-    
-    if (!taps.count) {
-        UITapGestureRecognizer *dismissTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(yj_dismissTextView)];
-        [self.superview addGestureRecognizer:dismissTap];
-    } else {
-        UITapGestureRecognizer *tap = taps.lastObject;
-        [tap removeTarget:self action:@selector(yj_dismissTextView)];
-        [tap addTarget:self action:@selector(yj_dismissTextView)];
+    if (self.autoResignFirstResponder) {
+        NSArray *taps = [self.superview.gestureRecognizers arrayByFilteringWithCondition:^BOOL(__kindof UIGestureRecognizer * _Nonnull obj) {
+            return [obj isKindOfClass:[UITapGestureRecognizer class]];
+        }];
+        
+        if (!taps.count) {
+            UITapGestureRecognizer *dismissTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(yj_handleResignFirstResponderTap)];
+            [self.superview addGestureRecognizer:dismissTap];
+        } else {
+            UITapGestureRecognizer *tap = taps.lastObject;
+            [tap removeTarget:self action:@selector(yj_handleResignFirstResponderTap)];
+            [tap addTarget:self action:@selector(yj_handleResignFirstResponderTap)];
+        }
     }
 }
 
 - (void)yj_textViewRemoveFromSuperview {
-    for (UITapGestureRecognizer *tap in self.superview.gestureRecognizers) {
-        [tap removeTarget:self action:@selector(yj_dismissTextView)];
+    if (self.autoResignFirstResponder) {
+        [self yj_removeResignFirstResponderTapGestureFromSuperview];
     }
     [self yj_textViewRemoveFromSuperview];
 }
 
-- (void)yj_dismissTextView {
+- (void)yj_removeResignFirstResponderTapGestureFromSuperview {
+    for (UITapGestureRecognizer *tap in self.superview.gestureRecognizers) {
+        [tap removeTarget:self action:@selector(yj_handleResignFirstResponderTap)];
+    }
+}
+
+- (void)yj_handleResignFirstResponderTap {
     [self resignFirstResponder];
 }
 
@@ -142,6 +156,12 @@ static const void *YJTextViewAssociatedPlaceholderColorKey = &YJTextViewAssociat
         self.attributedText = nil;
         self.textColor = [UIColor colorWithRGBColor:self.yj_originalTextColor];
     }
+}
+
+- (NSAttributedString *)_attributedPlaceholder:(NSString *)placeholder {
+    NSDictionary *attributes = @{ NSForegroundColorAttributeName : self.placeholderColor,
+                                  NSFontAttributeName : self.font };
+    return [[NSAttributedString alloc] initWithString:placeholder attributes:attributes];
 }
 
 - (void)setYj_originalTextColor:(RGBColor)yj_originalTextColor {

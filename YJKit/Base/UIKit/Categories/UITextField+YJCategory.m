@@ -6,6 +6,7 @@
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
 
+#import <objc/runtime.h>
 #import "UITextField+YJCategory.h"
 #import "NSObject+YJRuntimeSwizzling.h"
 #import "NSArray+YJCollection.h"
@@ -20,31 +21,55 @@
     });
 }
 
-#pragma mark - modifying life cycle
+#pragma mark - accessor
+
+- (void)setAutoResignFirstResponder:(BOOL)autoResignFirstResponder {
+    objc_setAssociatedObject(self, @selector(autoResignFirstResponder), @(autoResignFirstResponder), OBJC_ASSOCIATION_COPY_NONATOMIC);
+    
+    if (!autoResignFirstResponder) {
+        [self yj_removeResignFirstResponderTapGestureFromSuperview];
+    }
+}
+
+- (BOOL)autoResignFirstResponder {
+    return [objc_getAssociatedObject(self, _cmd) boolValue];
+}
+
+#pragma mark - life cycle
 
 - (void)yj_textFieldLayoutSubviews {
     [self yj_textFieldLayoutSubviews];
     
-    NSArray *taps = [self.superview.gestureRecognizers arrayByFilteringWithCondition:^BOOL(__kindof UIGestureRecognizer * _Nonnull obj) { return [obj isKindOfClass:[UITapGestureRecognizer class]]; }];
-    
-    if (!taps.count) {
-        UITapGestureRecognizer *dismissTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(yj_dismissTextField)];
-        [self.superview addGestureRecognizer:dismissTap];
-    } else {
-        UITapGestureRecognizer *tap = taps.lastObject;
-        [tap removeTarget:self action:@selector(yj_dismissTextField)];
-        [tap addTarget:self action:@selector(yj_dismissTextField)];
+    if (self.autoResignFirstResponder) {
+        NSArray *taps = [self.superview.gestureRecognizers arrayByFilteringWithCondition:^BOOL(__kindof UIGestureRecognizer * _Nonnull obj) {
+            return [obj isKindOfClass:[UITapGestureRecognizer class]];
+        }];
+        
+        if (!taps.count) {
+            UITapGestureRecognizer *resignFirstResponderTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(yj_handleResignFirstResponderTap)];
+            [self.superview addGestureRecognizer:resignFirstResponderTap];
+        } else {
+            UITapGestureRecognizer *tap = taps.lastObject;
+            [tap removeTarget:self action:@selector(yj_handleResignFirstResponderTap)];
+            [tap addTarget:self action:@selector(yj_handleResignFirstResponderTap)];
+        }
     }
 }
 
 - (void)yj_textFieldRemoveFromSuperview {
-    for (UITapGestureRecognizer *tap in self.superview.gestureRecognizers) {
-        [tap removeTarget:self action:@selector(yj_dismissTextField)];
+    if (self.autoResignFirstResponder) {
+        [self yj_removeResignFirstResponderTapGestureFromSuperview];
     }
     [self yj_textFieldRemoveFromSuperview];
 }
 
-- (void)yj_dismissTextField {
+- (void)yj_removeResignFirstResponderTapGestureFromSuperview {
+    for (UITapGestureRecognizer *tap in self.superview.gestureRecognizers) {
+        [tap removeTarget:self action:@selector(yj_handleResignFirstResponderTap)];
+    }
+}
+
+- (void)yj_handleResignFirstResponderTap {
     [self resignFirstResponder];
 }
 
