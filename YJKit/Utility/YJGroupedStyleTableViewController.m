@@ -7,8 +7,6 @@
 //
 
 #import "YJGroupedStyleTableViewController.h"
-#import "NSValue+YJGeometryExtension.h"
-#import "YJUIMacros.h"
 
 #define YJGSTVC_DEFAULT_TABLE_BACKGROUND_COLOR [UIColor colorWithRed:0.937 green:0.937 blue:0.957 alpha:1.00]
 #define YJGSTVC_DEFAULT_ITEM_CELL_BACKGROUND_COLOR [UIColor whiteColor]
@@ -69,7 +67,9 @@
 
 - (void)registerHeaderCellForClassName:(NSString *)className {
     self.registeredClassNameForHeaderCell = className;
-    [self yj_registerCellForClassName:className];
+    if ([self yj_registerCellForClassName:className]) {
+        self.didRegisterHeaderCell = YES;
+    }
 }
 
 - (void)registerCustomItemCellForClassName:(NSString *)className inSection:(NSInteger)section {
@@ -77,20 +77,21 @@
     [self yj_registerCellForClassName:className];
 }
 
-- (void)yj_registerCellForClassName:(NSString *)className {
-    if (!className.length) return;
+- (BOOL)yj_registerCellForClassName:(NSString *)className {
+    if (!className.length) return NO;
     
     if ([self hasNibFileForClassNamed:className]) {
         [self registerNib:[UINib nibWithNibName:className bundle:nil] forCellReuseIdentifier:className];
-        self.didRegisterHeaderCell = YES;
+        return YES;
     } else {
         [self registerClass:NSClassFromString(className) forCellReuseIdentifier:className];
-        self.didRegisterHeaderCell = YES;
+        return YES;
     }
+    return NO;
 }
 
 - (BOOL)hasNibFileForClassNamed:(NSString *)className {
-    if (!_registeredClassNameForHeaderCell.length) return NO;
+    if (!className.length) return NO;
     NSString *path = [[NSBundle mainBundle] pathForResource:className ofType:@"nib"]; // not "xib" !
     return path.length ? YES : NO;
 }
@@ -98,6 +99,11 @@
 - (UIColor *)supplementaryRegionBackgroundColor {
     if (!_supplementaryRegionBackgroundColor) _supplementaryRegionBackgroundColor = YJGSTVC_DEFAULT_TABLE_BACKGROUND_COLOR;
     return _supplementaryRegionBackgroundColor;
+}
+
+- (CGFloat)supplementaryRegionHeight {
+    if (!_supplementaryRegionHeight) _supplementaryRegionHeight = 40.0;
+    return _supplementaryRegionHeight;
 }
 
 - (UIColor *)lineSeparatorColor {
@@ -251,16 +257,14 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 }
 
 - (void)loadView {
-    YJGroupedStyleTableView *tableView = [[YJGroupedStyleTableView alloc] initWithFrame:kUIScreenBounds style:UITableViewStylePlain];
-    
+    YJGroupedStyleTableView *tableView = [[YJGroupedStyleTableView alloc] initWithFrame:[UIScreen mainScreen].bounds
+                                                                                  style:UITableViewStylePlain];
     tableView.backgroundColor = YJGSTVC_DEFAULT_TABLE_BACKGROUND_COLOR;
     tableView.contentInset = (UIEdgeInsets){ 0, 0, kYJGSTVCBottomSpaceFromLastCell - kYJGSTVCLastGroupSeparatorCellHeight, 0 };
     
     tableView.lineSeparatorIndentationStyle = YJGroupedStyleTableViewSeparatorIndentationStyleAlignItemCellTitle;
     tableView.lineSeparatorDisplayMode = YJGroupedStyleTableViewSeparatorDisplayModeDefault;
     tableView.lineSeparatorColor = YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
-    
-    tableView.supplementaryRegionHeight = 40.0;
     
     tableView.itemCellStyle = UITableViewCellStyleDefault;
     tableView.itemCellAccessoryType = UITableViewCellAccessoryNone;
@@ -351,9 +355,6 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (self.shouldHideNavigationBar) {
-        [self.navigationController setNavigationBarHidden:YES animated:animated];
-    }
     [self mapDataFromDataSourceAfterTableViewLoaded];
 }
 
@@ -403,6 +404,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
         if (tableView.didRegisterHeaderCell) {
             cell = [tableView dequeueReusableCellWithIdentifier:headerCellReuseID forIndexPath:indexPath];
             cell.backgroundColor = cell.contentView.backgroundColor;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             if ([tableView.delegate respondsToSelector:@selector(tableView:configureHeaderCell:)]) {
                 [tableView.delegate tableView:tableView configureHeaderCell:cell];
             }
@@ -450,6 +452,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
         
         cell = [tableView dequeueReusableCellWithIdentifier:className forIndexPath:indexPath];
         cell.backgroundColor = cell.contentView.backgroundColor;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if ([tableView.delegate respondsToSelector:@selector(tableView:configureCustomItemCell:atIndexPath:)]) {
             [tableView.delegate tableView:tableView configureCustomItemCell:cell atIndexPath:customItemIndexPath];
         }
@@ -518,8 +521,8 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
             lineSeparator.compensatedColor = itemBGColor;
         }
         
-        // line separator for separating group / custom item cell
-        else {
+        // line separator for separating group
+        else if ([detailInfo isEqualToString:YJGSLineSeparatorForSeparatingGroup]) {
             // set left indentation
             lineSeparator.leftIndentation = 0.0f;
             // set line separator color
@@ -528,6 +531,21 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
                 case YJGroupedStyleTableViewSeparatorDisplayModeDefault: break;
                 case YJGroupedStyleTableViewSeparatorDisplayModeHideAll: separatorColor = tableBGColor; break;
                 case YJGroupedStyleTableViewSeparatorDisplayModeHideGroup: separatorColor = tableBGColor; break;
+            }
+            lineSeparator.lineColor = separatorColor;
+            lineSeparator.compensatedColor = tableBGColor;
+        }
+        
+        // line separator for separating custom item cell
+        else {
+            // set left indentation
+            lineSeparator.leftIndentation = 0.0f;
+            // set line separator color
+            UIColor *separatorColor = specifiedLineColor;
+            switch (tableView.lineSeparatorDisplayMode) {
+                case YJGroupedStyleTableViewSeparatorDisplayModeDefault: break;
+                case YJGroupedStyleTableViewSeparatorDisplayModeHideAll: separatorColor = tableBGColor; break;
+                case YJGroupedStyleTableViewSeparatorDisplayModeHideGroup: break;
             }
             lineSeparator.lineColor = separatorColor;
             lineSeparator.compensatedColor = tableBGColor;
@@ -563,8 +581,12 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
                     cell = [NSClassFromString(tableView.registeredClassNameForHeaderCell) new];
                 }
             }
-            
+            if (!cell) {
+                self.heightForHeaderCell = 44.0;
+                return self.heightForHeaderCell;
+            }
             cell.tag = YJGroupedStyleTableViewControllerHeaderCellTagForCompressedSizeCalculation;
+            
             if ([tableView.delegate respondsToSelector:@selector(tableView:configureHeaderCell:)]) {
                 [tableView.delegate tableView:tableView configureHeaderCell:cell];
             }
@@ -572,7 +594,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
             
             return self.heightForHeaderCell;
         } else {
-            return self.shouldHideNavigationBar ? kUINavigationBarHeight : 0.0;
+            return tableView.extraTopMargin;
         }
     }
     
@@ -583,7 +605,11 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     
     // custom item cell
     else if ([typeInfo isEqualToString:YJGSCustomItemCell]) {
-        CGFloat cellHeight = [self.heightsForCustomItemCells[@(indexPath.section)] CGFloatValue];
+#if CGFLOAT_IS_DOUBLE
+        CGFloat cellHeight = [self.heightsForCustomItemCells[@(indexPath.section)] doubleValue];
+#else
+        CGFloat cellHeight = [self.heightsForCustomItemCells[@(indexPath.section)] floatValue];
+#endif
         if (cellHeight) return cellHeight;
         
         NSString *detailInfo = [self.mappedRows[row] componentsSeparatedByString:@":"].lastObject;
@@ -638,16 +664,29 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 
 - (void)tableView:(YJGroupedStyleTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSIndexPath *itemIndexPath = [self indexPathForGroupedItemConvertedFromRawIndexPath:indexPath];
+    // select item cell or custom item cell
     if (itemIndexPath && [tableView.delegate respondsToSelector:@selector(tableView:didSelectGroupedItemRowAtIndexPath:)]) {
         [tableView.delegate tableView:tableView didSelectGroupedItemRowAtIndexPath:itemIndexPath];
+    }
+    // select header cell
+    else if (tableView.didRegisterHeaderCell && indexPath.section == 0 && indexPath.row == 0 &&
+             [tableView.delegate respondsToSelector:@selector(tableView:didSelectHeaderCell:)]) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if (cell) [tableView.delegate tableView:tableView didSelectHeaderCell:cell];
     }
 }
 
 - (BOOL)tableView:(YJGroupedStyleTableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     NSIndexPath *itemIndexPath = [self indexPathForGroupedItemConvertedFromRawIndexPath:indexPath];
+    // can select item cell or custom item cell
     if (itemIndexPath && [tableView.delegate respondsToSelector:@selector(tableView:shouldHighlightGroupedItemRowAtIndexPath:)]) {
         return [tableView.delegate tableView:tableView shouldHighlightGroupedItemRowAtIndexPath:itemIndexPath];
     }
+    // can select header cell if has
+    else if (tableView.didRegisterHeaderCell && indexPath.section == 0 && indexPath.row == 0) {
+        return YES;
+    }
+    // forbid others
     return NO;
 }
 

@@ -106,9 +106,13 @@ UIKIT_EXTERN NSInteger const YJGroupedStyleTableViewControllerCustomItemCellTagF
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureSupplementaryCell:(UITableViewCell *)cell forElementOfKind:(NSString *)elementKind inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes;
 
 
-/// Select item cell at indexPath
+/// Select item cell or custom item cell at indexPath
 /// @note The indexPath parameter has being converted.
 - (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath;
+
+
+/// Select header cell.
+- (void)tableView:(YJGroupedStyleTableView *)tableView didSelectHeaderCell:(__kindof UITableViewCell *)headerCell;
 
 
 /// @warning For grouped style table view, implementing -tableView:shouldHighlightRowAtIndexPath: directly from UITableViewDelegate will get unexpected behavior. If you do need so, then implement this method instead.
@@ -153,6 +157,9 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 /// @warning It's not necessary to provide a reuse id for cell. If you want to provide a reuse id (normally set in IB), make sure the reuse id is also the same as cell's class name. However if you provide a different name for reuse id, an exception will be thrown.
 - (void)registerCustomItemCellForClassName:(NSString *)className inSection:(NSInteger)section;
 
+/// This value will be applied if no header cell is registered. Default is 0.
+@property (nonatomic) CGFloat extraTopMargin;
+
 
 // Customize separator
 
@@ -163,6 +170,7 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 /// The indentation for separator. Default is YJGroupedStyleTableViewSeparatorIndentationStyleAlignItemCellTitle.
 /// @discussion If you provide icon image for each item cell, the item cell's title will be shifted to the right and makes room for icon image. So the .AlignItemCellTitle option will make sure the separator will always align the title of the item cell, and the .FixedMinimumMargin option will make sure the separator has fixed indentation, which means it will align the icon image if has one, or align the title if cell does not has icon image.
 /// @remark Do not set tableView.separatorStyle directly.
+/// @note This property is not effective for custom item cell.
 @property (nonatomic) YJGroupedStyleTableViewSeparatorIndentationStyle lineSeparatorIndentationStyle;
 
 /// The separator color.
@@ -223,8 +231,6 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 /// The custom grouped style table view.
 @property (nonatomic, strong, null_resettable) YJGroupedStyleTableView *tableView;
 
-/// Should hide navigation bar for table view displaying. Default is NO.
-@property (nonatomic) BOOL shouldHideNavigationBar;
 
 // WARNING: If you implementing any of the raw UITableViewDelegate method, you must convert the indexPath
 // parameter first before using it. e.g. If you have the YJGroupedStyleTableViewController subclass, then call

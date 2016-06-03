@@ -14,15 +14,21 @@
 
 @implementation YJStaticTableViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView registerHeaderCellForClassName:@"YJStaticHeaderCell"];
+//    [self.tableView registerHeaderCellForClassName:@"YJStaticHeaderCell"];
+    
     [self.tableView registerCustomItemCellForClassName:@"YJStaticHeaderCell" inSection:0];
     [self.tableView registerCustomItemCellForClassName:@"YJStaticHeaderCell" inSection:3];
     
-    self.shouldHideNavigationBar = YES;
     self.tableView.itemCellStyle = UITableViewCellStyleSubtitle;
+//    self.tableView.lineSeparatorDisplayMode = YJGroupedStyleTableViewSeparatorDisplayModeHideAll;
     
     self.tableView.lineSeparatorColor = [UIColor redColor];
 }
@@ -64,6 +70,10 @@
 - (void)tableView:(YJGroupedStyleTableView *)tableView didSelectGroupedItemRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForGroupedItemAtIndexPath:indexPath];
     NSLog(@"%@", cell);
+}
+
+- (void)tableView:(YJGroupedStyleTableView *)tableView didSelectHeaderCell:(__kindof UITableViewCell *)headerCell {
+    NSLog(@"%@", headerCell);
 }
 
 - (void)tableView:(YJGroupedStyleTableView *)tableView configureCustomItemCell:(__kindof UITableViewCell *)customItemCell atIndexPath:(NSIndexPath *)indexPath {
