@@ -20,7 +20,6 @@
 #import <YJKit/YJRoundedCornerLabel.h>
 #import <YJKit/YJSemicircularCornerButton.h>
 #import <YJKit/YJSemicircularCornerLabel.h>
-#import <YJKit/YJRoundedCornerTextView.h>
 
 #else
 
@@ -36,6 +35,5 @@
 #import "YJRoundedCornerLabel.h"
 #import "YJSemicircularCornerButton.h"
 #import "YJSemicircularCornerLabel.h"
-#import "YJRoundedCornerTextView.h"
 
 #endif
