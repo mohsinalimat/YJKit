@@ -25,7 +25,7 @@
              @"Rounded corner views",
              @"Rounded corner views with content",
              @"Layer blending demo",
-             @"Static Table View"];
+             @"Custom Grouped Table View"];
 }
 
 - (NSArray <NSString *> *)classNamesForControllers {
@@ -34,7 +34,7 @@
              @"YJMaskViewController",
              @"YJMaskContentViewController",
              @"YJMaskTableViewController",
-             @"YJStaticTableViewController"];
+             @"YJTableViewController"];
 }
 
 - (void)loadView {

@@ -71,10 +71,17 @@
 		32B8C1651CED731400E2639B /* YJMaskContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32B8C1631CED731400E2639B /* YJMaskContentViewController.xib */; };
 		32B8C1911CEE109700E2639B /* YJStringSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B8C1901CEE109700E2639B /* YJStringSequence.m */; };
 		32B8C1931CEE110F00E2639B /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B8C1921CEE110F00E2639B /* Tests.m */; };
+		32C1EB561D01708300E595EF /* YJTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C1EB551D01708300E595EF /* YJTableViewController.m */; };
+		32C1EB5B1D01798400E595EF /* YJDefaultSettingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C1EB5A1D01798400E595EF /* YJDefaultSettingDemoViewController.m */; };
+		32C1EB5D1D017C8D00E595EF /* YJSettingIcons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 32C1EB5C1D017C8D00E595EF /* YJSettingIcons.bundle */; };
+		32C1EB601D017E6000E595EF /* YJHeaderSettingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C1EB5F1D017E6000E595EF /* YJHeaderSettingDemoViewController.m */; };
+		32C1EB641D017EEC00E595EF /* YJHeaderDemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C1EB621D017EEC00E595EF /* YJHeaderDemoCell.m */; };
+		32C1EB651D017EEC00E595EF /* YJHeaderDemoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32C1EB631D017EEC00E595EF /* YJHeaderDemoCell.xib */; };
+		32C1EB681D01831A00E595EF /* YJTargetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C1EB671D01831A00E595EF /* YJTargetDemoViewController.m */; };
+		32C1EB6B1D01890200E595EF /* YJCustomCellSettingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C1EB6A1D01890200E595EF /* YJCustomCellSettingDemoViewController.m */; };
+		32C1EB6F1D01899000E595EF /* YJCustomDemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C1EB6D1D01899000E595EF /* YJCustomDemoCell.m */; };
+		32C1EB701D01899000E595EF /* YJCustomDemoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32C1EB6E1D01899000E595EF /* YJCustomDemoCell.xib */; };
 		32CB4AAB1CCA3C880050C01B /* YJSavingImageToAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CB4AAA1CCA3C880050C01B /* YJSavingImageToAlbumViewController.m */; };
-		32DE8AA31CEB22EE00E63005 /* YJStaticTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32DE8AA21CEB22EE00E63005 /* YJStaticTableViewController.m */; };
-		32DE8AA71CEB5E0B00E63005 /* YJStaticHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32DE8AA51CEB5E0B00E63005 /* YJStaticHeaderCell.m */; };
-		32DE8AA81CEB5E0B00E63005 /* YJStaticHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32DE8AA61CEB5E0B00E63005 /* YJStaticHeaderCell.xib */; };
 		32E5D29F1CDC7DEE0070B96D /* yj_head_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 32E5D29E1CDC7DEE0070B96D /* yj_head_icon.png */; };
 		32F0C7B61CEF2E2A00234ECF /* YJCollectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F0C7B51CEF2E2A00234ECF /* YJCollectionTest.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -237,13 +244,25 @@
 		32B8C1631CED731400E2639B /* YJMaskContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YJMaskContentViewController.xib; sourceTree = "<group>"; };
 		32B8C1901CEE109700E2639B /* YJStringSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJStringSequence.m; sourceTree = "<group>"; };
 		32B8C1921CEE110F00E2639B /* Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
+		32C1EB541D01708300E595EF /* YJTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJTableViewController.h; sourceTree = "<group>"; };
+		32C1EB551D01708300E595EF /* YJTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJTableViewController.m; sourceTree = "<group>"; };
+		32C1EB591D01798400E595EF /* YJDefaultSettingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJDefaultSettingDemoViewController.h; sourceTree = "<group>"; };
+		32C1EB5A1D01798400E595EF /* YJDefaultSettingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJDefaultSettingDemoViewController.m; sourceTree = "<group>"; };
+		32C1EB5C1D017C8D00E595EF /* YJSettingIcons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YJSettingIcons.bundle; sourceTree = "<group>"; };
+		32C1EB5E1D017E6000E595EF /* YJHeaderSettingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJHeaderSettingDemoViewController.h; sourceTree = "<group>"; };
+		32C1EB5F1D017E6000E595EF /* YJHeaderSettingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJHeaderSettingDemoViewController.m; sourceTree = "<group>"; };
+		32C1EB611D017EEC00E595EF /* YJHeaderDemoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJHeaderDemoCell.h; sourceTree = "<group>"; };
+		32C1EB621D017EEC00E595EF /* YJHeaderDemoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJHeaderDemoCell.m; sourceTree = "<group>"; };
+		32C1EB631D017EEC00E595EF /* YJHeaderDemoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YJHeaderDemoCell.xib; sourceTree = "<group>"; };
+		32C1EB661D01831A00E595EF /* YJTargetDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJTargetDemoViewController.h; sourceTree = "<group>"; };
+		32C1EB671D01831A00E595EF /* YJTargetDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJTargetDemoViewController.m; sourceTree = "<group>"; };
+		32C1EB691D01890200E595EF /* YJCustomCellSettingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJCustomCellSettingDemoViewController.h; sourceTree = "<group>"; };
+		32C1EB6A1D01890200E595EF /* YJCustomCellSettingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJCustomCellSettingDemoViewController.m; sourceTree = "<group>"; };
+		32C1EB6C1D01899000E595EF /* YJCustomDemoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJCustomDemoCell.h; sourceTree = "<group>"; };
+		32C1EB6D1D01899000E595EF /* YJCustomDemoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJCustomDemoCell.m; sourceTree = "<group>"; };
+		32C1EB6E1D01899000E595EF /* YJCustomDemoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YJCustomDemoCell.xib; sourceTree = "<group>"; };
 		32CB4AA91CCA3C880050C01B /* YJSavingImageToAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJSavingImageToAlbumViewController.h; sourceTree = "<group>"; };
 		32CB4AAA1CCA3C880050C01B /* YJSavingImageToAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJSavingImageToAlbumViewController.m; sourceTree = "<group>"; };
-		32DE8AA11CEB22EE00E63005 /* YJStaticTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJStaticTableViewController.h; sourceTree = "<group>"; };
-		32DE8AA21CEB22EE00E63005 /* YJStaticTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJStaticTableViewController.m; sourceTree = "<group>"; };
-		32DE8AA41CEB5E0B00E63005 /* YJStaticHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJStaticHeaderCell.h; sourceTree = "<group>"; };
-		32DE8AA51CEB5E0B00E63005 /* YJStaticHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJStaticHeaderCell.m; sourceTree = "<group>"; };
-		32DE8AA61CEB5E0B00E63005 /* YJStaticHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YJStaticHeaderCell.xib; sourceTree = "<group>"; };
 		32E5D29E1CDC7DEE0070B96D /* yj_head_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yj_head_icon.png; sourceTree = "<group>"; };
 		32F0C7B51CEF2E2A00234ECF /* YJCollectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJCollectionTest.m; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* YJKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YJKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -578,6 +597,30 @@
 			path = NSObject;
 			sourceTree = "<group>";
 		};
+		32C1EB501D016FD000E595EF /* YJGroupTableViewDemo */ = {
+			isa = PBXGroup;
+			children = (
+				32C1EB541D01708300E595EF /* YJTableViewController.h */,
+				32C1EB551D01708300E595EF /* YJTableViewController.m */,
+				32C1EB661D01831A00E595EF /* YJTargetDemoViewController.h */,
+				32C1EB671D01831A00E595EF /* YJTargetDemoViewController.m */,
+				32C1EB591D01798400E595EF /* YJDefaultSettingDemoViewController.h */,
+				32C1EB5A1D01798400E595EF /* YJDefaultSettingDemoViewController.m */,
+				32C1EB5E1D017E6000E595EF /* YJHeaderSettingDemoViewController.h */,
+				32C1EB5F1D017E6000E595EF /* YJHeaderSettingDemoViewController.m */,
+				32C1EB691D01890200E595EF /* YJCustomCellSettingDemoViewController.h */,
+				32C1EB6A1D01890200E595EF /* YJCustomCellSettingDemoViewController.m */,
+				32C1EB611D017EEC00E595EF /* YJHeaderDemoCell.h */,
+				32C1EB621D017EEC00E595EF /* YJHeaderDemoCell.m */,
+				32C1EB631D017EEC00E595EF /* YJHeaderDemoCell.xib */,
+				32C1EB6C1D01899000E595EF /* YJCustomDemoCell.h */,
+				32C1EB6D1D01899000E595EF /* YJCustomDemoCell.m */,
+				32C1EB6E1D01899000E595EF /* YJCustomDemoCell.xib */,
+				32C1EB5C1D017C8D00E595EF /* YJSettingIcons.bundle */,
+			);
+			path = YJGroupTableViewDemo;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -629,11 +672,7 @@
 				32B8C1631CED731400E2639B /* YJMaskContentViewController.xib */,
 				3238B26C1CE1FDF50018D1F0 /* YJMaskTableViewController.h */,
 				3238B26D1CE1FDF50018D1F0 /* YJMaskTableViewController.m */,
-				32DE8AA11CEB22EE00E63005 /* YJStaticTableViewController.h */,
-				32DE8AA21CEB22EE00E63005 /* YJStaticTableViewController.m */,
-				32DE8AA41CEB5E0B00E63005 /* YJStaticHeaderCell.h */,
-				32DE8AA51CEB5E0B00E63005 /* YJStaticHeaderCell.m */,
-				32DE8AA61CEB5E0B00E63005 /* YJStaticHeaderCell.xib */,
+				32C1EB501D016FD000E595EF /* YJGroupTableViewDemo */,
 				324AB0A71CD1EE8C00A9DCF0 /* Puppy.jpg */,
 				3204F0BF1CACA98D006282DF /* Octocat.png */,
 				32E5D29E1CDC7DEE0070B96D /* yj_head_icon.png */,
@@ -770,11 +809,13 @@
 				3204F0D41CACBF1C006282DF /* LaunchScreen.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				32E5D29F1CDC7DEE0070B96D /* yj_head_icon.png in Resources */,
-				32DE8AA81CEB5E0B00E63005 /* YJStaticHeaderCell.xib in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				32C1EB701D01899000E595EF /* YJCustomDemoCell.xib in Resources */,
 				320A97EF1CA9493800485B9A /* AFTCameraUI.bundle in Resources */,
 				32B8C1651CED731400E2639B /* YJMaskContentViewController.xib in Resources */,
+				32C1EB5D1D017C8D00E595EF /* YJSettingIcons.bundle in Resources */,
 				324AB0A81CD1EE8C00A9DCF0 /* Puppy.jpg in Resources */,
+				32C1EB651D017EEC00E595EF /* YJHeaderDemoCell.xib in Resources */,
 				3204F0C01CACA98D006282DF /* Octocat.png in Resources */,
 				32058DCB1CDDC4FC006AE929 /* YJMaskViewController.xib in Resources */,
 			);
@@ -800,11 +841,15 @@
 				3263890A1CF2B3390026BED8 /* UIScreen+YJCategory.m in Sources */,
 				3263891D1CF2B3390026BED8 /* YJMemoryCache.m in Sources */,
 				326389031CF2B3390026BED8 /* UIBarButtonItem+YJBlockBased.m in Sources */,
+				32C1EB681D01831A00E595EF /* YJTargetDemoViewController.m in Sources */,
 				326389021CF2B3390026BED8 /* UIAlertView+YJBlockBased.m in Sources */,
+				32C1EB601D017E6000E595EF /* YJHeaderSettingDemoViewController.m in Sources */,
+				32C1EB6B1D01890200E595EF /* YJCustomCellSettingDemoViewController.m in Sources */,
 				326389131CF2B3390026BED8 /* YJMaskedImageView.m in Sources */,
 				326389161CF2B3390026BED8 /* YJRoundedCornerImageView.m in Sources */,
 				326F34C31CF5C20F00B2FF75 /* NSSet+YJCollection.m in Sources */,
 				326F34CA1CF5C20F00B2FF75 /* NSObject+YJBlockBasedKVO.m in Sources */,
+				32C1EB5B1D01798400E595EF /* YJDefaultSettingDemoViewController.m in Sources */,
 				3263890D1CF2B3390026BED8 /* RGBColor.m in Sources */,
 				32B8C1641CED731400E2639B /* YJMaskContentViewController.m in Sources */,
 				326F34C51CF5C20F00B2FF75 /* NSString+YJSequence.m in Sources */,
@@ -813,6 +858,7 @@
 				3263891C1CF2B3390026BED8 /* YJGroupedStyleTableViewController.m in Sources */,
 				326389071CF2B3390026BED8 /* UIGestureRecognizer+YJBlockBased.m in Sources */,
 				326389151CF2B3390026BED8 /* YJRoundedCornerButton.m in Sources */,
+				32C1EB561D01708300E595EF /* YJTableViewController.m in Sources */,
 				326F34D01CF5C2BD00B2FF75 /* NSValue+YJGeometryExtension.m in Sources */,
 				32B8C1931CEE110F00E2639B /* Tests.m in Sources */,
 				326F34CD1CF5C20F00B2FF75 /* NSTimer+YJBlockBased.m in Sources */,
@@ -820,8 +866,9 @@
 				326F34C61CF5C20F00B2FF75 /* NSBundle+YJCategory.m in Sources */,
 				32CB4AAB1CCA3C880050C01B /* YJSavingImageToAlbumViewController.m in Sources */,
 				3238B26E1CE1FDF50018D1F0 /* YJMaskTableViewController.m in Sources */,
-				32DE8AA71CEB5E0B00E63005 /* YJStaticHeaderCell.m in Sources */,
 				326F34D61CF5F70300B2FF75 /* UITextField+YJCategory.m in Sources */,
+				32C1EB641D017EEC00E595EF /* YJHeaderDemoCell.m in Sources */,
+				32C1EB6F1D01899000E595EF /* YJCustomDemoCell.m in Sources */,
 				6003F59E195388D20070C39A /* YJAppDelegate.m in Sources */,
 				326389041CF2B3390026BED8 /* UIColor+YJCategory.m in Sources */,
 				326F34D31CF5C9C100B2FF75 /* NSObject+YJTaggedPointerChecking.m in Sources */,
@@ -849,7 +896,6 @@
 				326F34C21CF5C20F00B2FF75 /* NSMutableString+YJSequence.m in Sources */,
 				3263891E1CF2B3390026BED8 /* YJPhotoLibrary.m in Sources */,
 				3268A1D41CA83F5300B71E50 /* YJGeometryViewController.m in Sources */,
-				32DE8AA31CEB22EE00E63005 /* YJStaticTableViewController.m in Sources */,
 				3263891B1CF2B3390026BED8 /* YJSemicircularCornerLabel.m in Sources */,
 				326F34C41CF5C20F00B2FF75 /* NSString+YJCollection.m in Sources */,
 				326389191CF2B3390026BED8 /* YJRoundedCornerView.m in Sources */,

@@ -126,15 +126,20 @@ UIKIT_EXTERN NSInteger const YJGroupedStyleTableViewControllerCustomItemCellTagF
 //                        YJGroupedStyleTableView
 // --------------------------------------------------------------------
 
+typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
+    YJGroupedStyleTableViewSeparatorDisplayModeDefault,   // show all separators
+    YJGroupedStyleTableViewSeparatorDisplayModeHideGroup, // hide group separators
+    YJGroupedStyleTableViewSeparatorDisplayModeHideAll,   // hide all separators
+};
+
 typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorIndentationStyle) {
     YJGroupedStyleTableViewSeparatorIndentationStyleAlignItemCellTitle, // always align the title of the item cell
     YJGroupedStyleTableViewSeparatorIndentationStyleFixedMinimumMargin, // always keep the fixed minimum distance as left margin
 };
 
-typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
-    YJGroupedStyleTableViewSeparatorDisplayModeDefault,   // show all separators
-    YJGroupedStyleTableViewSeparatorDisplayModeHideGroup, // hide group separators
-    YJGroupedStyleTableViewSeparatorDisplayModeHideAll,   // hide all separators
+typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorThicknessLevel) {
+    YJGroupedStyleTableViewSeparatorThicknessLevelNormal,
+    YJGroupedStyleTableViewSeparatorThicknessLevelThicker,
 };
 
 @interface YJGroupedStyleTableView : UITableView
@@ -157,7 +162,7 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 /// @warning It's not necessary to provide a reuse id for cell. If you want to provide a reuse id (normally set in IB), make sure the reuse id is also the same as cell's class name. However if you provide a different name for reuse id, an exception will be thrown.
 - (void)registerCustomItemCellForClassName:(NSString *)className inSection:(NSInteger)section;
 
-/// This value will be applied if no header cell is registered. Default is 0.
+/// This value will be applied on top of table view for extra inset. Default is 0.
 @property (nonatomic) CGFloat extraTopMargin;
 
 
@@ -172,6 +177,9 @@ typedef NS_ENUM(NSInteger, YJGroupedStyleTableViewSeparatorDisplayMode) {
 /// @remark Do not set tableView.separatorStyle directly.
 /// @note This property is not effective for custom item cell.
 @property (nonatomic) YJGroupedStyleTableViewSeparatorIndentationStyle lineSeparatorIndentationStyle;
+
+/// The thickness of the separator. Default is Normal.
+@property (nonatomic) YJGroupedStyleTableViewSeparatorThicknessLevel lineSeparatorThicknessLevel;
 
 /// The separator color.
 @property (nonatomic, strong, null_resettable) UIColor *lineSeparatorColor;

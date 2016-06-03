@@ -32,6 +32,7 @@
 #define YJGSGroupSeparatorAsSectionHeader @"_YJGSGroupSeparatorAsSectionHeader"
 #define YJGSGroupSeparatorAsSectionFooter @"_YJGSGroupSeparatorAsSectionFooter"
 
+
 // --------------------------------------------
 //             forward declaration
 // --------------------------------------------
@@ -102,7 +103,7 @@
 }
 
 - (CGFloat)supplementaryRegionHeight {
-    if (!_supplementaryRegionHeight) _supplementaryRegionHeight = 40.0;
+    if (!_supplementaryRegionHeight) _supplementaryRegionHeight = 36.0;
     return _supplementaryRegionHeight;
 }
 
@@ -263,6 +264,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     tableView.contentInset = (UIEdgeInsets){ 0, 0, kYJGSTVCBottomSpaceFromLastCell - kYJGSTVCLastGroupSeparatorCellHeight, 0 };
     
     tableView.lineSeparatorIndentationStyle = YJGroupedStyleTableViewSeparatorIndentationStyleAlignItemCellTitle;
+    tableView.lineSeparatorThicknessLevel = YJGroupedStyleTableViewSeparatorThicknessLevelNormal;
     tableView.lineSeparatorDisplayMode = YJGroupedStyleTableViewSeparatorDisplayModeDefault;
     tableView.lineSeparatorColor = YJGSTVC_DEFAULT_LINE_SEPARATOR_COLOR;
     
@@ -590,7 +592,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
             if ([tableView.delegate respondsToSelector:@selector(tableView:configureHeaderCell:)]) {
                 [tableView.delegate tableView:tableView configureHeaderCell:cell];
             }
-            self.heightForHeaderCell = [self cellHeightFittingInCompressedSizeForCell:cell];
+            self.heightForHeaderCell = tableView.extraTopMargin + [self cellHeightFittingInCompressedSizeForCell:cell];
             
             return self.heightForHeaderCell;
         } else {
@@ -647,7 +649,10 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     
     // line sperator
     else {
-        return 1.0f;
+        switch (tableView.lineSeparatorThicknessLevel) {
+            case YJGroupedStyleTableViewSeparatorThicknessLevelNormal: return 0.5;
+            case YJGroupedStyleTableViewSeparatorThicknessLevelThicker: return 1.0;
+        }
     }
 }
 

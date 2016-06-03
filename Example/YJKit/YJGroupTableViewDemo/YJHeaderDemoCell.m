@@ -1,14 +1,14 @@
 //
-//  YJStaticHeaderCell.m
+//  YJHeaderDemoCell.m
 //  YJKit
 //
-//  Created by huang-kun on 16/5/17.
+//  Created by Jack Huang on 16/6/3.
 //  Copyright © 2016年 huang-kun. All rights reserved.
 //
 
-#import "YJStaticHeaderCell.h"
+#import "YJHeaderDemoCell.h"
 
-@implementation YJStaticHeaderCell
+@implementation YJHeaderDemoCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
