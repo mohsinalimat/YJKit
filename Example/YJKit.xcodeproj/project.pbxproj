@@ -40,7 +40,6 @@
 		326389151CF2B3390026BED8 /* YJRoundedCornerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 326388D81CF2B3390026BED8 /* YJRoundedCornerButton.m */; };
 		326389161CF2B3390026BED8 /* YJRoundedCornerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 326388DA1CF2B3390026BED8 /* YJRoundedCornerImageView.m */; };
 		326389171CF2B3390026BED8 /* YJRoundedCornerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 326388DC1CF2B3390026BED8 /* YJRoundedCornerLabel.m */; };
-		326389181CF2B3390026BED8 /* YJRoundedCornerTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 326388DE1CF2B3390026BED8 /* YJRoundedCornerTextView.m */; };
 		326389191CF2B3390026BED8 /* YJRoundedCornerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 326388E01CF2B3390026BED8 /* YJRoundedCornerView.m */; };
 		3263891A1CF2B3390026BED8 /* YJSemicircularCornerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 326388E21CF2B3390026BED8 /* YJSemicircularCornerButton.m */; };
 		3263891B1CF2B3390026BED8 /* YJSemicircularCornerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 326388E41CF2B3390026BED8 /* YJSemicircularCornerLabel.m */; };
@@ -183,8 +182,6 @@
 		326388DA1CF2B3390026BED8 /* YJRoundedCornerImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJRoundedCornerImageView.m; sourceTree = "<group>"; };
 		326388DB1CF2B3390026BED8 /* YJRoundedCornerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJRoundedCornerLabel.h; sourceTree = "<group>"; };
 		326388DC1CF2B3390026BED8 /* YJRoundedCornerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJRoundedCornerLabel.m; sourceTree = "<group>"; };
-		326388DD1CF2B3390026BED8 /* YJRoundedCornerTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJRoundedCornerTextView.h; sourceTree = "<group>"; };
-		326388DE1CF2B3390026BED8 /* YJRoundedCornerTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJRoundedCornerTextView.m; sourceTree = "<group>"; };
 		326388DF1CF2B3390026BED8 /* YJRoundedCornerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJRoundedCornerView.h; sourceTree = "<group>"; };
 		326388E01CF2B3390026BED8 /* YJRoundedCornerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJRoundedCornerView.m; sourceTree = "<group>"; };
 		326388E11CF2B3390026BED8 /* YJSemicircularCornerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJSemicircularCornerButton.h; sourceTree = "<group>"; };
@@ -499,8 +496,6 @@
 				326388DA1CF2B3390026BED8 /* YJRoundedCornerImageView.m */,
 				326388DB1CF2B3390026BED8 /* YJRoundedCornerLabel.h */,
 				326388DC1CF2B3390026BED8 /* YJRoundedCornerLabel.m */,
-				326388DD1CF2B3390026BED8 /* YJRoundedCornerTextView.h */,
-				326388DE1CF2B3390026BED8 /* YJRoundedCornerTextView.m */,
 				326388DF1CF2B3390026BED8 /* YJRoundedCornerView.h */,
 				326388E01CF2B3390026BED8 /* YJRoundedCornerView.m */,
 				326388E11CF2B3390026BED8 /* YJSemicircularCornerButton.h */,
@@ -837,7 +832,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				326389141CF2B3390026BED8 /* YJMaskedView.m in Sources */,
-				326389181CF2B3390026BED8 /* YJRoundedCornerTextView.m in Sources */,
 				3263890A1CF2B3390026BED8 /* UIScreen+YJCategory.m in Sources */,
 				3263891D1CF2B3390026BED8 /* YJMemoryCache.m in Sources */,
 				326389031CF2B3390026BED8 /* UIBarButtonItem+YJBlockBased.m in Sources */,
