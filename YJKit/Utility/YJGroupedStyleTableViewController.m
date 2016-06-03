@@ -694,7 +694,6 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
 
 - (NSInteger)numberOfSectionsInGroupedStyleTableView:(UITableView *)tableView { return 1; }
 - (NSInteger)tableView:(YJGroupedStyleTableView *)tableView numberOfGroupedItemRowsInSection:(NSInteger)section { return 0; }
-- (UITableViewCellStyle)tableView:(YJGroupedStyleTableView *)tableView groupedItemCellStyleInSection:(NSInteger)section { return UITableViewCellStyleDefault; };
 
 #pragma mark - YJGroupedStyleTableViewDelegate
 
