@@ -582,7 +582,7 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
                 }
             }
             if (!cell) {
-                self.heightForHeaderCell = 44.0;
+                self.heightForHeaderCell = tableView.extraTopMargin;
                 return self.heightForHeaderCell;
             }
             cell.tag = YJGroupedStyleTableViewControllerHeaderCellTagForCompressedSizeCalculation;
