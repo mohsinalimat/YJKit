@@ -68,6 +68,18 @@
     }
 }
 
+- (void)tableView:(YJGroupedStyleTableView *)tableView configureSupplementaryCell:(UITableViewCell *)cell forElementOfKind:(NSString *)elementKind inSection:(NSInteger)section withDefaultTextAttributes:(NSDictionary *)attributes {
+    if (elementKind == YJGroupedStyleTableViewSupplementarySectionFooter) {
+        NSString *text = nil;
+        switch (section) {
+            case 0: text = @"The section above is loaded a custom item cell."; break;
+            case 1: text = @"The section above is using subtitle cell style."; break;
+            case 2: text = @"The section above is using value1 cell style."; break;
+        }
+        if (text) cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+    }
+}
+
 // If you implemented one of the raw UITableViewDelegate method with indexPath parameter, you
 // should convert the indexPath first, then use the converted indexPath, not the method parameter.
 // For any method from YJGroupedStyleTableViewDataSource / Delegate, the indexPath parameter is converted.

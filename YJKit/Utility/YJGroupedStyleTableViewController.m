@@ -292,7 +292,8 @@ static const CGFloat kYJGSTVCBottomSpaceFromLastCell = 50.0f;
     NSMutableArray *mappedRows = @[ YJGSHeaderCell,
                                     YJGSGroupSeparator,
                                     [NSString stringWithFormat:@"%@:%@,%@", YJGSGroupSeparator, YJGSGroupSeparatorAsSectionHeader, @0],
-                                    YJGSLineSeparator ].mutableCopy;
+                                    [NSString stringWithFormat:@"%@:%@", YJGSLineSeparator, YJGSLineSeparatorForSeparatingGroup]
+                                    ].mutableCopy;
     
     NSUInteger rowIdx = mappedRows.count;
     NSInteger sections = 1;
