@@ -13,6 +13,7 @@
 #import <YJKit/NSObject+YJAssociatedIdentifier.h>
 #import <YJKit/NSObject+YJTaggedPointerChecking.h>
 #import <YJKit/NSObject+YJBlockBasedKVO.h>
+#import <YJKit/NSObject+YJCodingExtension.h>
 
 #import <YJKit/NSValue+YJGeometryExtension.h>
 
@@ -36,6 +37,7 @@
 #import "NSObject+YJAssociatedIdentifier.h"
 #import "NSObject+YJTaggedPointerChecking.h"
 #import "NSObject+YJBlockBasedKVO.h"
+#import "NSObject+YJCodingExtension.h"
 
 #import "NSValue+YJGeometryExtension.h"
 

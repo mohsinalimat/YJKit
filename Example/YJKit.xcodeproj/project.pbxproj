@@ -66,6 +66,7 @@
 		326F34D01CF5C2BD00B2FF75 /* NSValue+YJGeometryExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 326F34CF1CF5C2BD00B2FF75 /* NSValue+YJGeometryExtension.m */; };
 		326F34D31CF5C9C100B2FF75 /* NSObject+YJTaggedPointerChecking.m in Sources */ = {isa = PBXBuildFile; fileRef = 326F34D21CF5C9C100B2FF75 /* NSObject+YJTaggedPointerChecking.m */; };
 		326F34D61CF5F70300B2FF75 /* UITextField+YJCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 326F34D51CF5F70300B2FF75 /* UITextField+YJCategory.m */; };
+		3285BB9D1D03E14D00EB2749 /* NSObject+YJCodingExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285BB9C1D03E14D00EB2749 /* NSObject+YJCodingExtension.m */; };
 		32B8C1641CED731400E2639B /* YJMaskContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B8C1621CED731400E2639B /* YJMaskContentViewController.m */; };
 		32B8C1651CED731400E2639B /* YJMaskContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32B8C1631CED731400E2639B /* YJMaskContentViewController.xib */; };
 		32B8C1911CEE109700E2639B /* YJStringSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B8C1901CEE109700E2639B /* YJStringSequence.m */; };
@@ -236,6 +237,8 @@
 		326F34D21CF5C9C100B2FF75 /* NSObject+YJTaggedPointerChecking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YJTaggedPointerChecking.m"; sourceTree = "<group>"; };
 		326F34D41CF5F70300B2FF75 /* UITextField+YJCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+YJCategory.h"; sourceTree = "<group>"; };
 		326F34D51CF5F70300B2FF75 /* UITextField+YJCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+YJCategory.m"; sourceTree = "<group>"; };
+		3285BB9B1D03E14D00EB2749 /* NSObject+YJCodingExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YJCodingExtension.h"; sourceTree = "<group>"; };
+		3285BB9C1D03E14D00EB2749 /* NSObject+YJCodingExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YJCodingExtension.m"; sourceTree = "<group>"; };
 		32B8C1611CED731400E2639B /* YJMaskContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJMaskContentViewController.h; sourceTree = "<group>"; };
 		32B8C1621CED731400E2639B /* YJMaskContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJMaskContentViewController.m; sourceTree = "<group>"; };
 		32B8C1631CED731400E2639B /* YJMaskContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YJMaskContentViewController.xib; sourceTree = "<group>"; };
@@ -588,6 +591,8 @@
 				326F34BA1CF5C20F00B2FF75 /* NSObject+YJMutabilityChecking.m */,
 				326F34D11CF5C9C100B2FF75 /* NSObject+YJTaggedPointerChecking.h */,
 				326F34D21CF5C9C100B2FF75 /* NSObject+YJTaggedPointerChecking.m */,
+				3285BB9B1D03E14D00EB2749 /* NSObject+YJCodingExtension.h */,
+				3285BB9C1D03E14D00EB2749 /* NSObject+YJCodingExtension.m */,
 			);
 			path = NSObject;
 			sourceTree = "<group>";
@@ -883,6 +888,7 @@
 				326389121CF2B3390026BED8 /* YJCircularImageView.m in Sources */,
 				326F34CB1CF5C20F00B2FF75 /* NSObject+YJRuntimeSwizzling.m in Sources */,
 				326389051CF2B3390026BED8 /* UIControl+YJBlockBased.m in Sources */,
+				3285BB9D1D03E14D00EB2749 /* NSObject+YJCodingExtension.m in Sources */,
 				326389101CF2B3390026BED8 /* CAShapeLayer+YJLayerBasedMasking.m in Sources */,
 				3263890B1CF2B3390026BED8 /* UIView+YJCategory.m in Sources */,
 				326389081CF2B3390026BED8 /* UIImage+YJCategory.m in Sources */,

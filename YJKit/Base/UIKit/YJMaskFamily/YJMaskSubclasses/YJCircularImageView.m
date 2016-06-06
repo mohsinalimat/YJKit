@@ -10,10 +10,9 @@
 #import "YJCircularImageView.h"
 #import "UIBezierPath+YJLayerBasedMasking.h"
 #import "CAShapeLayer+YJLayerBasedMasking.h"
+#import "NSObject+YJCodingExtension.h"
 #import "YJDebugMacros.h"
 #import "YJUIMacros.h"
-#import "NSValue+YJGeometryExtension.h"
-#import "RGBColor.h"
 
 @implementation YJCircularImageView
 
@@ -27,16 +26,12 @@
 
 - (nullable instancetype)initWithCoder:(NSCoder *)decoder {
     self = [super initWithCoder:decoder];
-    if (self) {
-        _circleWidth = [decoder decodeCGFloatForKey:@"circleWidth"];
-        _circleColor = [UIColor colorWithRGBColor:[decoder decodeRGBColorForKey:@"circleColor"]];
-    }
+    if (self) [self decodeIvarListWithCoder:decoder];
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
-    [coder encodeCGFloat:_circleWidth forKey:@"circleWidth"];
-    [coder encodeRGBColor:[_circleColor RGBColor] forKey:@"circleColor"];
+    [self encodeIvarListWithCoder:coder];
     [super encodeWithCoder:coder];
 }
 

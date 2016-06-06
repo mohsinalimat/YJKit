@@ -9,7 +9,7 @@
 #import "YJRoundedCornerView.h"
 #import "_YJRoundedCornerView.h"
 #import "NSValue+YJGeometryExtension.h"
-#import "RGBColor.h"
+#import "NSObject+YJCodingExtension.h"
 
 @implementation YJRoundedCornerView
 
@@ -28,16 +28,12 @@ YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS
 /* init from IB */
 - (nullable instancetype)initWithCoder:(NSCoder *)decoder {
     self = [super initWithCoder:decoder];
-    if (self) {
-        _borderWidth = [decoder decodeCGFloatForKey:@"borderWidth"];
-        _borderColor = [UIColor colorWithRGBColor:[decoder decodeRGBColorForKey:@"borderColor"]];
-    }
+    if (self) [self decodeIvarListWithCoder:decoder];
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
-    [coder encodeCGFloat:_borderWidth forKey:@"borderWidth"];
-    [coder encodeRGBColor:[_borderColor RGBColor] forKey:@"borderColor"];
+    [self encodeIvarListWithCoder:coder];
     [super encodeWithCoder:coder];
 }
 

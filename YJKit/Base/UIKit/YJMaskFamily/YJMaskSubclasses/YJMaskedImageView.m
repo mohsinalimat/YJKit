@@ -9,10 +9,9 @@
 #import "YJMaskedImageView.h"
 #import "UIView+YJCategory.h"
 #import "YJGeometryExtension.h"
-#import "YJUIMacros.h"
 #import "YJDebugMacros.h"
 #import "_YJLayerBasedMasking.h"
-#import "RGBColor.h"
+#import "NSObject+YJCodingExtension.h"
 
 @implementation YJMaskedImageView
 
@@ -25,22 +24,12 @@ YJ_LAYER_BASED_MASKING_PROTOCOL_DEFAULT_IMPLEMENTATION_FOR_YJMASKEDVIEW_SUBCLASS
 // init from IB
 - (nullable instancetype)initWithCoder:(NSCoder *)decoder {
     self = [super initWithCoder:decoder];
-    if (self) {
-        _maskLayer = [decoder decodeObjectForKey:@"maskLayer"];
-        _oldMaskValues = [decoder decodeObjectForKey:@"oldMaskValues"];
-        _transparentFrame = [[decoder decodeObjectForKey:@"transparentFrame"] CGRectValue];
-        _didFirstLayout = [decoder decodeBoolForKey:@"didFirstLayout"];
-        _forceMaskColor = [decoder decodeBoolForKey:@"forceMaskColor"];
-    }
+    if (self) [self decodeIvarListWithCoder:decoder forClass:YJMaskedImageView.self];
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
-    [coder encodeObject:_maskLayer forKey:@"maskLayer"];
-    [coder encodeObject:_oldMaskValues forKey:@"oldMaskValues"];
-    [coder encodeObject:[NSValue valueWithCGRect:_transparentFrame] forKey:@"transparentFrame"];  
-    [coder encodeBool:_didFirstLayout forKey:@"didFirstLayout"];
-    [coder encodeBool:_forceMaskColor forKey:@"forceMaskColor"];
+    [self encodeIvarListWithCoder:coder];
     [super encodeWithCoder:coder];
 }
 

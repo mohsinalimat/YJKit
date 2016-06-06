@@ -10,9 +10,9 @@
 #import "_YJLayerBasedMasking.h"
 #import "_YJRoundedCornerView.h"
 #import "NSObject+YJBlockBasedKVO.h"
-#import "YJObjcMacros.h"
-#import "RGBColor.h"
+#import "NSObject+YJCodingExtension.h"
 #import "NSValue+YJGeometryExtension.h"
+#import "YJObjcMacros.h"
 
 @implementation YJRoundedCornerLabel
 
@@ -34,34 +34,12 @@ YJ_ROUNDED_CORNER_VIEW_DEFAULT_IMPLEMENTATION_FOR_UIVIEW_SUBCLASS
 /* init from IB */
 - (nullable instancetype)initWithCoder:(NSCoder *)decoder {
     self = [super initWithCoder:decoder];
-    if (self) {
-        _maskLayer = [decoder decodeObjectForKey:@"maskLayer"];
-        _oldMaskValues = [decoder decodeObjectForKey:@"oldMaskValues"];
-        _transparentFrame = [[decoder decodeObjectForKey:@"transparentFrame"] CGRectValue];
-        _didFirstLayout = [decoder decodeBoolForKey:@"didFirstLayout"];
-        _forceMaskColor = [decoder decodeBoolForKey:@"forceMaskColor"];
-        
-        _cornerRadius = [decoder decodeCGFloatForKey:@"cornerRadius"];
-        _borderWidth = [decoder decodeCGFloatForKey:@"borderWidth"];
-        _borderColor = [UIColor colorWithRGBColor:[decoder decodeRGBColorForKey:@"borderColor"]];
-        
-        _titleIndentationStyle = [decoder decodeIntegerForKey:@"titleIndentationStyle"];
-    }
+    if (self) [self decodeIvarListWithCoder:decoder];
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
-    [coder encodeObject:_maskLayer forKey:@"maskLayer"];
-    [coder encodeObject:_oldMaskValues forKey:@"oldMaskValues"];
-    [coder encodeObject:[NSValue valueWithCGRect:_transparentFrame] forKey:@"transparentFrame"];
-    [coder encodeBool:_didFirstLayout forKey:@"didFirstLayout"];
-    [coder encodeBool:_forceMaskColor forKey:@"forceMaskColor"];
-    
-    [coder encodeCGFloat:_cornerRadius forKey:@"cornerRadius"];
-    [coder encodeCGFloat:_borderWidth forKey:@"borderWidth"];
-    [coder encodeRGBColor:[_borderColor RGBColor] forKey:@"borderColor"];
-    
-    [coder encodeInteger:_titleIndentationStyle forKey:@"titleIndentationStyle"];
+    [self encodeIvarListWithCoder:coder];
     [super encodeWithCoder:coder];
 }
 

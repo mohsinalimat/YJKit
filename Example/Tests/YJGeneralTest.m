@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import <objc/runtime.h>
-#import "NSBundle+YJCategory.h"
+#import "YJCircularImageView.h"
 
 @interface YJGeneralTest : XCTestCase
 
@@ -29,6 +29,17 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    YJCircularImageView *imageView = [[YJCircularImageView alloc] initWithFrame:CGRectMake(0,0,100,100)];
+    imageView.circleColor = [UIColor redColor];
+    imageView.circleWidth = 5.0;
+    [imageView setValue:@YES forKey:@"_didFirstLayout"];
+    [imageView setValue:@NO forKey:@"_forceMaskColor"];
+    [imageView setValue:[NSValue valueWithCGRect:(CGRect){1,2,3,4}] forKey:@"_transparentFrame"];
+    
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:imageView];
+    id newView = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
     NSLog(@"");
 }
 
